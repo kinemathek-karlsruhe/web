@@ -1,241 +1,180 @@
 # Kinemathek — Implementation State
 
-Status of the first backend pass against `SPEC.md`. Built on **Kirby 5.4.3** (flat-file),
-PHP 8.4, package manager **Bun**. Design is deliberately deferred (SPEC §10) — templates
-are primitive (structure only). Date of this pass: 2026-06-09.
+Current state of the Kinemathek Karlsruhe website rebuild. Built on **Kirby 5.4.3**
+(flat-file), PHP 8.4, package manager **Bun**. Replaces a WordPress + ACF site.
+Spec: [`SPEC.md`](SPEC.md). Design is deliberately deferred (SPEC §10) — public
+templates are primitive; the **Panel/admin UI is fully designed**. Last updated 2026-06-10.
 
 ---
 
-## 1. How to run
+## 1. Run / build
 
 ```bash
-bun install              # installs deps + vendors jQuery/Fancybox into assets/vendor
-bun run build            # vendor + build minified Tailwind CSS -> assets/css/styles.css
-bun run dev              # vendor + Tailwind --watch
-php -S localhost:8000 kirby/router.php   # or: composer start
+php -S localhost:8000 kirby/router.php   # dev server (composer start)
+                                          # (Ruby runs the site via IndigoStack)
+bun install                               # deps + vendors jQuery/Fancybox + builds nothing
+bun run build                             # vendor assets + minified Tailwind -> assets/css/styles.css
+bun run dev                               # vendor + Tailwind --watch
 ```
 
-The built CSS (`assets/css/styles.css`) and `assets/vendor/` are committed so the site
-runs without `node_modules`. TMDB needs a key in `site/config/config.php`
-(`kinemathek.tmdb.key` or `.token`) — without it the public site is unaffected; only the
-Panel lookup is disabled.
+The built CSS (`assets/css/styles.css`) and `assets/vendor/` are committed, so the site
+runs without `node_modules`. TMDB credentials live in a gitignored `.env` (see §7).
 
 ---
 
-## 2. Content model (SPEC §2)
+## 2. Content model (SPEC §2) — three types, three containers
 
-Three first-class page types under three container pages, plus a clean
-placement-vs-facets taxonomy.
-
-### Page tree
 ```
-films/      (template: films)    → children are Film pages        [permanent archive]
-program/    (template: program)  → children are Showing pages      [the Spielplan]
-events/     (template: events)   → children are Event pages        [non-film programming]
-home        (template: home)
+content/
+├── films/      (template films)    → Film pages        [permanent archive]
+├── program/    (template program)  → Showing pages      [the Spielplan]
+├── events/     (template events)   → Event pages        [non-film programming]
+└── home/ + default pages           [editorial/static]
 ```
-Showings live under `program/` as siblings (NOT under their film), so the site-wide
-chronological program is a single sort and showings/events interleave by date.
 
-### Film — `site/blueprints/pages/film.yml`
-Canonical, permanent record. Fields: `title`, `originalTitle`, **structured**
-`directors` (name + tmdbpersonid) and `cast` (name + role + tmdbpersonid),
-`synopsis`, `year`, `runtime`, `country`/`language`/`genre`/`series`/`keywords`
-(tags = facets), `poster` (files, max 1) + `stills` (files), `tmdbId`,
-`manualOverride` (locks TMDB sync), and a `tmdblookup` Panel field. A Film exists
-independently of any showing (SPEC §3).
+- **Film** — the canonical, permanent record. No screening data on it.
+- **Showing** (Vorstellung) — a dated screening of **one** Film. The relation lives
+  **only here**, in the `film` pages field. Sibling of all other showings under
+  `program/` (not nested under its film), so the site-wide program is a single sort.
+- **Event** (Veranstaltung) — standalone non-film programming. **No `film` field**;
+  separate template + parent ⇒ can never enter the film archive.
+- A Film discovers its screenings by **reverse lookup** (`FilmPage::showings()` →
+  `upcomingShowings()`/`pastShowings()`), memoised per request.
+- **Categories** (multiselect: spielplan/koop/festival/filmbildung) = *placement/routing*;
+  **tags** (country/language/genre/series/keywords) = *descriptive facets*. Kept distinct
+  per SPEC §2.4. Directors/cast stored **structurally** (with a `tmdbpersonid` column) for
+  the deferred director search (SPEC §5).
 
-### Showing — `site/blueprints/pages/showing.yml`
-A dated screening of **one** Film. Fields: `film` (single-select pages relation,
-required), optional `title` (falls back to film title), `date` (date+time, required),
-`venue`, `subtitles` (multiselect OmU/OmeU/…), `hasDiscussion` (toggle),
-`categories` (multiselect placement), `keywords`, `sonderinfo`, `ticketUrl` (Mars EDV).
-`num` encodes date+time for chronological Panel ordering.
-
-### Event — `site/blueprints/pages/event.yml`
-Standalone non-film programming. Reuses the occurrence mechanics (`date`, `endDate`,
-`venue`, `categories`, `subtitles`, `hasDiscussion`, `keywords`, `ticketUrl`, `text`,
-`image`) but has **no film field** and lives under `events/`, so it can never enter the
-film archive (the archive query is template/parent-scoped).
-
-### Taxonomy distinction (SPEC §2.4)
-- **Categories** = placement/routing — `multiselect` (spielplan / koop / festival /
-  filmbildung), multiple allowed.
-- **Tags/keywords** = descriptive facets for filtering — individually typed tag fields,
-  retiring the old single "Schlagwort".
-
-### File blueprints
-`files/poster.yml` (alt, source=TMDB) and `files/still.yml` (alt, caption, source) —
-required so the TMDB poster download (`createFile(template: 'poster')`) and the Film
-file fields work.
+**Authoritative field contract** — see [`CLAUDE.md`](CLAUDE.md). The backend logic, TMDB
+sync and ICS export all depend on these exact names; do not rename/retype them.
 
 ---
 
-## 3. Backend logic — `site/plugins/kinemathek/`
+## 3. Backend logic — `site/plugins/kinemathek/` (plugin `kinemathek/core`)
 
-One plugin (`kinemathek/core`) registers everything; sets `date_default_timezone_set`
-to the configured venue zone so "today", program ordering and ICS local time agree.
-
-- **`classes/Kinemathek.php`** — static, side-effect-free logic:
-  - `program(opts)` — merges all showings + events, future-only (optionally incl.
-    today), optional category restriction, sorted soonest-first. The unified "what's on".
-  - `films()` — the archive source (`page('films')->children()`); events excluded.
-  - `filterByFacets(pages, facets)` — AND across facets, OR within a multi-value facet;
-    absent facets don't constrain; returns ALL matches (no pagination). Plus boolean
-    facets `discussion` (→ `hasDiscussion`) and `hasSubtitles`.
-  - `availableFacets(pages)` — derives facet values + counts from the data.
-  - `FACETS` map with a `self` / `film` / `both` source indirection:
-    `country`/`language`/`genre`/`series` live on the film, `subtitles` on the
-    occurrence, `keywords` on **both** (a showing matches its own and its film's
-    keywords). For a Showing, film facets hop to the linked Film; an Event yields nothing
-    for film facets; a Film page in the archive reads itself.
-  - `listValues(field)` — tolerant reader for tags/multiselect stored as either
-    comma-separated or YAML list.
-- **`models/FilmPage.php`** — `showings()` (reverse lookup), `upcomingShowings()` /
-  `pastShowings()` (sorted; upcoming asc, past desc), `hasUpcoming()`,
-  `hasDiscussionShowing()` / `hasSubtitledShowing()` (archive facets across a film's
-  screenings), `directors()`, `posterFile()`.
-- **`models/ShowingPage.php`** — `film()` (resolves the linked Film), `timestamp()`
-  (reads `date`), `isPast()`, `displayTitle()` (reads the raw content title to avoid
-  Kirby's slug fallback, else the film title).
-- **`models/EventPage.php`** — `film()` returns null (uniform interface), `timestamp()`,
-  `isPast()`, `displayTitle()`.
-- **`fieldMethods.commaList`** — renders tags/multiselect cleanly (case-preserving).
-- **`pageMethods`** — `icsUid` (stable, UUID-anchored), `icsFilename`
-  (uses `displayTitle`), `icsStart` (DateTime in venue zone).
-- **`siteMethods`** — `program`, `films`, `nextOnProgram`.
-
-### Controllers (`site/controllers/`)
-`program` (Spielplan: facets from query string → filtered program + available facets),
-`films` (archive: descriptive facets + the two per-showing archive facets, upcoming-first
-then newest year), `film` (upcoming/past/directors), `showing` (linked film, other
-showings), `event`, `home` (next / featured = festival OR Filmgespräch / overview).
-
-### Templates (`site/templates/`)
-Primitive HTML wrapped in header/footer: `program`, `films`, `film` (poster + stills via
-Fancybox; upcoming clickable, past non-clickable per SPEC §3), `showing`, `event`,
-`home`, `default`, plus the two `.ics` representations. Shared snippets:
-`header`, `footer`, `program-item`, `add-to-calendar`.
+- **`classes/Kinemathek.php`** — `program()` (merge showings+events, future-only,
+  soonest-first, optional category restriction); `films()` (archive, films-only);
+  `filterByFacets()`/`availableFacets()` (AND across facets, OR within; computed on the
+  filtered set); the `FACETS` map (`country/language/genre/series` on the film,
+  `subtitles` per-occurrence, `keywords` on both) with a `self`/`film`/`both` indirection;
+  `splitField()`/`listValues()` (tolerant of comma- **or** YAML-stored tags/multiselect).
+- **`models/`** — `FilmPage` (reverse-lookup + memo, `hasUpcoming`,
+  `hasDiscussionShowing`/`hasSubtitledShowing` for archive facets, `posterFile`),
+  `ShowingPage` (`film()`, `displayTitle()`), `EventPage`, and `OccurrenceTrait`
+  (`timestamp`/`isPast`/default `film()=null`, shared by Showing+Event).
+- **`src/Ics.php`** — RFC 5545 builder (octet-aware 75-char folding, TEXT escaping,
+  Europe/Berlin `VTIMEZONE`, `Ics::respond()` shared header tail).
+- **`index.php`** — registers page models, the `.ics` fileType, site methods
+  (`program`/`films`/`nextOnProgram`), the `commaList` field method, and the
+  `icsUid`/`icsFilename`/`icsStart` page methods; pins `Europe/Berlin` at load.
+- **Controllers/templates** (`site/controllers`, `site/templates`) — program (Spielplan),
+  films archive, film, showing, event, home + the `.ics` representations
+  (`/<page>.ics`). Primitive HTML (Tailwind utility classes only), wrapped in
+  `header`/`footer` snippets.
 
 ---
 
 ## 4. TMDB integration — `site/plugins/kinemathek-tmdb/` (SPEC §4, §7)
 
-- **`src/Client.php`** — server-side v3 client. `search()` returns **multiple
-  candidates** (editor confirms, never auto-accept); `movie()` fetches detail + credits;
-  `mapToFilm()` maps to Film fields (genre/language keys reconciled, structured
-  directors/cast); `attachPoster()` downloads the poster server-side into a real
-  first-party file; thumbnails cached server-side. All responses cached via
-  `kirby()->cache('kinemathek/tmdb')` (TTLs: search 1d, movie 30d, config 7d).
-- **`index.php`** — Panel API routes (`/api/kinemathek/tmdb/{search,apply,thumb}`),
-  auth-protected by Kirby's API layer. `apply` honours `manualOverride` and **authorizes
-  the real caller** (`update` / `createFile` permission) before any privileged work.
-  `thumb` is a first-party proxy so the browser never contacts image.tmdb.org.
-  Required attribution via the `tmdbAttribution` site method.
-- **`index.js` / `index.css`** — the `tmdblookup` Panel field (inline Vue template, no
-  build step needed; German labels).
+Server-side, cached, **Panel-only**. `src/Client.php`: multi-candidate `search()`,
+`movie()` (+credits), `mapToFilm()`, `attachPoster()` (downloads the poster into a local
+first-party file), a first-party thumbnail proxy, and TMDB `attribution()`. Auth-protected
+API routes `/api/kinemathek/tmdb/{search,apply,thumb}`; `apply` authorises the real caller
+(`permissions()->can('update')`/`createFile`) **before** `impersonate('kirby')`, and
+respects `manualOverride`. `index.js`/`index.css`: the `tmdblookup` Panel field — no-build
+inline Vue, loading/empty/error states, candidate cards, German microcopy, theme-aware CSS.
 
 ---
 
-## 5. ICS / add-to-calendar — (SPEC §6, §7)
+## 5. Panel / admin UI
 
-- **`src/Ics.php`** — RFC 5545 builder: octet-aware 75-char line folding, TEXT escaping,
-  UTC `DTSTAMP`, local `DTSTART`/`DTEND` with `TZID=Europe/Berlin` + a matching
-  `VTIMEZONE`.
-- **`templates/showing.ics.php`** — `DTEND` from the film's runtime (fallback to
-  `kinemathek.ics.defaultDuration`); SUMMARY from the linked film; description from
-  Sonderinfo + Fassung + ticket link.
-- **`templates/event.ics.php`** — `DTEND` from `endDate` if present, else default;
-  description from `text` + ticket link.
-- Both set `text/calendar` + a `Content-Disposition` attachment filename. First-party,
-  no cookies. Reachable as `/<page>.ics` (the `add-to-calendar` snippet links to it).
+- **Film** — three tabs: **Stammdaten** (TMDB-Suche → titles → structured Regie/Besetzung →
+  synopsis; sidebar of Eckdaten, grouped *Facetten*, TMDB controls), **Medien** (poster +
+  stills card galleries), **Vorführungen** (read-only `page.upcomingShowings`/`pastShowings`
+  lists, `create: false`).
+- **Showing / Event** — 2/3 + 1/3 column forms; header surfaces the film poster + date.
+- **Containers** — table layouts (Filmarchiv: poster, year, country, "Kommt noch?",
+  screening count; Programm/Veranstaltungen: date, venue, categories, Gespräch), with
+  search/sort/empty states.
+- **Dashboard** (`site.yml`) — a stats row (program total, **upcoming count**, archive
+  size, events) linking into each container.
+- **File blueprints** — focusable poster (2/3) / still (16/9) previews + alt/source/caption.
 
 ---
 
 ## 6. Front-end asset pipeline
 
-- **`package.json`** (Bun) — `build`, `dev`, `vendor`, `build:css`, `watch:css`;
-  `postinstall` vendors runtime libs.
 - **Tailwind CSS v4.3** — `assets/css/index.css` uses `@import "tailwindcss" source(none)`
-  + `@source "../../site"` (scans only project templates/snippets/plugins, not the
-  committed `kirby/` core) → minified `assets/css/styles.css`.
-- **jQuery 4.0** + **Fancybox 6.1** — `scripts/vendor.mjs` copies them (+ German Fancybox
-  l10n) into `assets/vendor/`; `assets/js/app.js` binds Fancybox to `[data-fancybox]`.
-- **`site/snippets/header.php` / `footer.php`** — load the built CSS + Fancybox CSS in
-  `<head>` and jQuery → Fancybox → l10n → app.js before `</body>`, all first-party.
+  + `@source "../../site"` (scans only project files, **never** the committed `kirby/` core
+  → output stays ~11 KB) → minified `assets/css/styles.css` (committed).
+- **jQuery 4.0** + **Fancybox 6.1** — vendored into `assets/vendor/` (+ German Fancybox
+  l10n) by `scripts/vendor.mjs`; bound in `assets/js/app.js`. Loaded first-party in
+  `header.php`/`footer.php`.
+- **Bun** scripts in `package.json` (`vendor`/`build:css`/`watch:css`/`build`/`dev`/
+  `postinstall`). `node_modules`, `content/`, `media/`, `.env` are gitignored.
 
 ---
 
-## 7. Privacy posture (SPEC §7) — hard requirement
+## 7. Configuration & secrets
 
-No cookies, no third-party tracking, no consent banner. All assets (Tailwind/jQuery/
-Fancybox) are vendored locally. TMDB is fetched server-side and cached; posters are
-downloaded into local files; preview thumbnails go through a first-party auth-protected
-proxy. Ticket links (Mars EDV) and the TMDB attribution link are plain navigations, not
-embeds. ICS is first-party static-style content. No iframe anywhere.
+`site/config/config.php` loads a **gitignored `.env`** at the repo root (a tiny `getenv`
+loader) and reads `kinemathek.tmdb.{key,token,language,posterSize,thumbSize,maxResults}`,
+`kinemathek.ics.{defaultDuration,timezone}`, and enables the TMDB cache via
+`'cache' => ['kinemathek/tmdb' => true]`. `.env.example` (committed) is the template.
+Put a TMDB **v3 API key in `TMDB_KEY`** (sent as `api_key`) — *not* `TMDB_TOKEN` (v4 JWT).
 
 ---
 
-## 8. Verified working (live, `php -S`, 12/12 checks)
+## 8. Privacy posture (SPEC §7 — hard requirement)
 
-Routing for all page types; chronological program with showings/events interleaved
-(soonest first); film upcoming/past split; faceted filtering incl. the Showing→Film hop
-and event exclusion; film-keyword facet hopping to the film; archive "has discussion"
-facet; available-facets narrowing to the filtered set; valid `.ics` (Berlin VTIMEZONE,
-runtime→DTEND, CRLF, headers, single clean date in filename); homepage next/featured/
-overview; Panel boots; TMDB API returns **401** to unauthenticated requests; Tailwind
-builds and scans `.php`; all six front-end assets return 200.
+No cookies, no third-party tracking, no consent banner. All assets are vendored locally.
+TMDB is fetched server-side and cached; posters are downloaded into local files;
+preview thumbnails go through a first-party auth-protected proxy — the browser never
+contacts TMDB. Ticket links (Mars EDV) and the TMDB attribution link are plain
+navigations (`rel="noopener noreferrer"`); ICS is first-party. No iframes.
 
-## 9. Implemented but NOT end-to-end tested (honest caveats)
+---
 
-- **TMDB live round-trip** — no API key configured this session, so `search`/`apply`/
-  poster download were not exercised against the real API; the code path and caching are
-  in place and the routes correctly 401 when anonymous.
-- **Panel custom field UI** — the authenticated film edit view (the `tmdblookup` Vue
-  component) wasn't tested headlessly; it uses Kirby's supported inline-template approach.
-- **The authorization fix** (`apply` permission check) — verified by reading Kirby's
-  permission source; not tested with an actual restricted (non-admin) user, since the
-  project currently defines only the default admin role.
-- **ICS no-date 404 path** — `date` is required, so the `NotFoundException` branch isn't
-  reached in normal use.
-- **Poster file resolution** — `posterFile()` / `->toFile()` round-trip wasn't exercised
-  without a downloaded poster.
+## 9. Verified working
+
+Validated repeatedly this session via live HTTP smoke tests and Kirby-boot harnesses:
+
+- Routing for all page types; chronological program (showings + events interleaved);
+  film upcoming/past split.
+- Faceted filtering incl. the Showing→Film hop, event exclusion, the keyword `both`-hop,
+  and the films-archive `?discussion=1`/`?hasSubtitles=1` derived facets.
+- Valid `.ics` per showing/event (Berlin VTIMEZONE, runtime→DTEND, CRLF, headers, escaping).
+- **TMDB end-to-end with a real key**: search → candidates, `movie()` + `mapToFilm()`
+  (genre/language/structured directors), and **poster download** into a local file.
+- TMDB API routes return **401** to anonymous requests.
+- All Panel blueprints parse (Film: 3 tabs); `tmdblookup` registers; the dashboard
+  upcoming-count query resolves correctly; **clicking a row in a container table opens the
+  edit view** (the title-column link fix).
+- Tailwind builds and scans only `.php` under `site/`; all six front-end assets load 200.
+
+---
 
 ## 10. Deferred / open (by design)
 
 - **Static subpages** — Filmbildung ("more than a cinema"), Projekte (Nachklang), Koop,
-  Kontakt. Content-migration work, deferred to the teams (SPEC §11). The `filmbildung`
-  placement category and a generic `default` page type exist; the pages themselves don't.
-- **Design** (SPEC §10), **director search** (SPEC §5, data stored structurally for it),
-  **month-grid calendar** (SPEC §5, list view suffices), **contact form vs. details**
+  Kontakt. Content-migration work, deferred to the teams (SPEC §11). A generic `default`
+  page type + the `filmbildung` placement category exist; the pages themselves don't.
+- **Public-facing design** (SPEC §10), **director search** (SPEC §5 — data stored
+  structurally for it), **month-grid calendar** (SPEC §5), **contact form vs. details**
   (SPEC §13) — all deferred.
-- **Self-hosted TMDB logo** for attribution — text + link are in place; the logo asset
-  should be added under `/assets` before launch (do not hotlink).
-- **DB backing store** — flat-file is used throughout; revisit only if the catalogue
-  outgrows `site()->index()` scans (SPEC §1/§13).
-
-## 11. Sample content (for smoke testing — remove before production)
-
-`content/films/metropolis`, two showings under `content/program/` (a past 2026-05-20 and
-an upcoming 2026-06-20, both linked to Metropolis), and one event
-`content/events/vortrag-stummfilm` (2026-06-15).
+- **Self-hosted TMDB logo** for attribution — text + link are in place; add the logo asset
+  under `/assets` before launch (do not hotlink).
+- **DB backing store** — flat-file throughout; revisit only if the catalogue outgrows
+  `site()->index()` scans (SPEC §1/§13).
 
 ---
 
-## 12. Files (relative to repo root)
+## 11. Git / repo policy
 
-**New:** `package.json`, `bun.lock`, `scripts/vendor.mjs`, `assets/css/index.css`,
-`assets/js/app.js`, `assets/vendor/**`, `site/config/config.php`,
-`site/blueprints/{files/poster,files/still,pages/film,pages/showing,pages/event,pages/films,pages/program}.yml`,
-`site/plugins/kinemathek/**`, `site/plugins/kinemathek-tmdb/**`,
-`site/controllers/{program,films,film,showing,event,home}.php`,
-`site/templates/{program,films,film,showing,event,home,showing.ics,event.ics}.php`,
-`site/snippets/{header,footer,program-item,add-to-calendar}.php`, `content/{films,program,events}/**`.
+Single `main` branch. **`content/`, `media/`, `node_modules/`, `.env` are gitignored**
+(content is editorial data, provisioned per environment / staging "dry dock"). The Kirby
+core (`kirby/`), the built `assets/css/styles.css`, `assets/vendor/`, and `bun.lock` ARE
+committed. `SPEC.md`, `STATE.md`, `CLAUDE.md`, `.env.example` are committed.
 
-**Modified:** `.gitignore` (ignore `/node_modules`), `content/site.txt` (title),
-`site/blueprints/site.yml` (container sections), `site/templates/default.php`
-(wrap header/footer).
-
-**Untracked (pre-existing):** `SPEC.md`.
-
-Nothing has been committed.
+> As of this writing the repo has only the initial commit; the env/credential/cache/poster
+> fixes, the Panel UI pass, and the listing-link fix are **uncommitted** in the working tree.
