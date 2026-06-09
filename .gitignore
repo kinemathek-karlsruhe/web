@@ -3,6 +3,12 @@
 Icon
 .DS_Store
 
+# Secrets
+# -------
+# Real credentials (TMDB key/token) live here, loaded by site/config/config.php.
+# Never commit. .env.example IS committed as a template.
+.env
+
 # Front-end dependencies
 # ----------------------
 # Build-time only. jQuery/Fancybox are vendored into assets/vendor and the built

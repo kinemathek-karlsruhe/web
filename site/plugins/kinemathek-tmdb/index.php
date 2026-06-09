@@ -21,11 +21,10 @@ load([
 
 App::plugin('kinemathek/tmdb', [
 
-    // Enables kirby()->cache('kinemathek/tmdb') (default file driver). Search
-    // results, movie detail bundles and the TMDB image config are cached here.
-    'options' => [
-        'cache' => true,
-    ],
+    // NB: do NOT register 'options' => ['cache' => true] here. That stores a flat
+    // `kinemathek.tmdb` option key which SHADOWS the nested credentials in
+    // config.php (kinemathek.tmdb.key/token would resolve to null). The TMDB
+    // cache is enabled in site/config/config.php via 'cache' => ['kinemathek/tmdb' => true].
 
     // Required TMDB attribution (SPEC §4) — plain text + navigation link, no
     // network access. Rendered on the public film template.
