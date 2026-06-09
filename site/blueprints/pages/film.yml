@@ -6,128 +6,285 @@ icon: video
 # manual override for everything. Fields are stored individually so they work
 # as filter facets later (SPEC §2.4).
 #
-# NOTE: top-level `fields:` only (no columns/sections mix) — keeps the Panel
-# robust and avoids the columns-vs-sections pitfall.
+# LAYOUT (verified against Kirby 5 docs — getkirby.com/docs/guide/blueprints/layout):
+#   tabs -> columns -> sections(type: fields|pages|files). This is the one
+#   idiomatic structure that mixes a form with listings without the invalid
+#   "top-level columns + sibling top-level sections" trap. Three tabs split the
+#   film into the work it is (Stammdaten), the assets it has (Medien) and the
+#   screenings it discovers by reverse lookup (Vorführungen).
 
-fields:
-  tmdblookup:
-    label: TMDB-Suche
-    type: tmdblookup
-    titleField: title
-    help: >
-      Sucht den Film bei TMDB und füllt leere Felder. Mehrdeutige Titel zeigen
-      mehrere Treffer — die richtige Fassung muss bestätigt werden. Bei
-      „Manuell kuratiert“ wird der Sync gesperrt.
+# Header preview: title + year are the spine of the archive, so surface them.
+# Kirby's info template has no inline conditionals, so we keep it to a single
+# plain placeholder that degrades to an empty string when the year is unset.
+info: "{{ page.year }}"
+image:
+  query: page.poster.toFile
+  back: pattern
+  cover: true
 
-  title:
-    label: Titel
-    type: text
-    required: true
+tabs:
 
-  originalTitle:
-    label: Originaltitel
-    type: text
+  # ── Tab 1: the canonical metadata, two columns ──────────────────────────
+  stammdaten:
+    label: Stammdaten
+    icon: video
+    columns:
 
-  directors:
-    label: Regie
-    type: structure
-    # Stored structurally so director search can be added later (SPEC §5).
-    fields:
-      name:
-        label: Name
-        type: text
-        required: true
-      tmdbpersonid:
-        label: TMDB Person ID
-        type: number
+      # Main column: the editorial spine (TMDB search, titles, people, text).
+      main:
+        width: 2/3
+        sections:
+
+          lookup:
+            type: fields
+            fields:
+              tmdblookup:
+                label: TMDB-Suche
+                type: tmdblookup
+                titleField: title
+                help: >
+                  Zuerst hier suchen — füllt leere Felder automatisch (Titel,
+                  Inhalt, Jahr, Laufzeit, Regie, Besetzung, Poster). Bei
+                  mehrdeutigen Titeln erscheinen mehrere Treffer; die richtige
+                  Fassung selbst bestätigen, nie blind übernehmen. Ist „Manuell
+                  kuratiert“ aktiv, werden nur noch leere Felder ergänzt.
+
+          titles:
+            type: fields
+            fields:
+              title:
+                label: Titel
+                type: text
+                required: true
+                icon: title
+                help: Anzeigetitel im Archiv und Spielplan.
+              originalTitle:
+                label: Originaltitel
+                type: text
+                icon: globe
+                help: Leer lassen, wenn identisch mit dem Titel.
+
+          people:
+            type: fields
+            fields:
+              directors:
+                label: Regie
+                type: structure
+                # Stored structurally so director search can be added later (SPEC §5).
+                empty: Noch keine Regie erfasst.
+                fields:
+                  name:
+                    label: Name
+                    type: text
+                    required: true
+                    width: 2/3
+                  tmdbpersonid:
+                    label: TMDB Person ID
+                    type: number
+                    width: 1/3
+                    help: Wird vom TMDB-Sync gesetzt.
+              cast:
+                label: Besetzung
+                type: structure
+                empty: Noch keine Besetzung erfasst.
+                fields:
+                  name:
+                    label: Name
+                    type: text
+                    required: true
+                    width: 1/2
+                  role:
+                    label: Rolle
+                    type: text
+                    width: 1/4
+                  tmdbpersonid:
+                    label: TMDB Person ID
+                    type: number
+                    width: 1/4
+                    help: Wird vom TMDB-Sync gesetzt.
+
+          content:
+            type: fields
+            fields:
+              synopsis:
+                label: Inhalt / Beschreibung
+                type: textarea
+                size: large
+                icon: text
+                help: Aus TMDB übernommen oder von der Kinemathek selbst geschrieben.
+
+      # Sidebar: the quick facts + facets + TMDB controls, packed densely.
+      sidebar:
+        width: 1/3
+        sections:
+
+          facts:
+            type: fields
+            fields:
+              factsHeadline:
+                label: Eckdaten
+                type: headline
+              year:
+                label: Jahr
+                type: number
+                width: 1/2
+                icon: calendar
+              runtime:
+                label: Laufzeit (Min.)
+                type: number
+                width: 1/2
+                icon: clock
+
+          facets:
+            type: fields
+            fields:
+              facetsHeadline:
+                label: Facetten (filterbar)
+                type: headline
+              facetsInfo:
+                type: info
+                text: >
+                  Diese Felder treiben die Filter im Archiv (SPEC §2.4).
+                  Mehrfachwerte sind erlaubt — Werte konsequent wiederverwenden,
+                  damit die Facetten sauber bleiben.
+              country:
+                label: Land
+                type: tags
+                icon: flag
+                help: Mehrere möglich (Koproduktionen).
+              language:
+                label: Originalsprache
+                type: tags
+                icon: globe
+              genre:
+                label: Genre
+                type: tags
+                icon: tag
+                help: Beschreibende Facette — nicht die Platzierung im Spielplan.
+              series:
+                label: Reihe
+                type: tags
+                icon: layers
+              keywords:
+                label: Schlagworte
+                type: tags
+                icon: tag
+
+          tmdb:
+            type: fields
+            fields:
+              tmdbHeadline:
+                label: TMDB-Verknüpfung
+                type: headline
+              tmdbId:
+                label: TMDB ID
+                type: number
+                disabled: true
+                icon: bolt
+                help: Wird beim Sync automatisch gesetzt — nicht von Hand ändern.
+              manualOverride:
+                label: Manuell kuratiert
+                type: toggle
+                text:
+                  - "Sync darf überschreiben"
+                  - "Sync gesperrt (nur leere Felder)"
+                help: >
+                  Aktivieren, sobald Felder von Hand gepflegt wurden, damit der
+                  TMDB-Sync sie nicht überschreibt (SPEC §4).
+
+  # ── Tab 2: media assets ─────────────────────────────────────────────────
+  medien:
+    label: Medien
+    icon: image
+    columns:
+      poster:
+        width: 1/3
+        sections:
+          poster:
+            type: fields
+            fields:
+              poster:
+                label: Poster
+                type: files
+                max: 1
+                multiple: false
+                layout: cards
+                query: page.images
+                uploads:
+                  template: poster
+                help: >
+                  Beim TMDB-Sync wird das Poster serverseitig heruntergeladen und
+                  hier first-party abgelegt (nie direkt von image.tmdb.org).
+      stills:
+        width: 2/3
+        sections:
+          stills:
+            type: fields
+            fields:
+              stills:
+                label: Szenenbilder
+                type: files
+                layout: cards
+                query: page.images
+                uploads:
+                  template: still
+                help: Mehrere Szenenfotos möglich. Per Drag-and-drop sortierbar.
+
+  # ── Tab 3: screenings (read-only reverse lookup) ────────────────────────
+  vorfuehrungen:
+    label: Vorführungen
+    icon: calendar
+    columns:
+      intro:
+        width: 1/1
+        sections:
+          hint:
+            type: fields
+            fields:
+              screeningsInfo:
+                type: info
+                theme: info
+                label: Vorführungen
+                text: >
+                  Diese Listen werden automatisch aus dem Programm ermittelt
+                  (umgekehrte Verknüpfung). Neue Vorstellungen werden **nicht
+                  hier**, sondern unter *Programm (Spielplan)* angelegt — dort
+                  den Film verknüpfen. Ein Klick öffnet die jeweilige Vorstellung.
+      upcoming:
         width: 1/2
-
-  cast:
-    label: Besetzung
-    type: structure
-    fields:
-      name:
-        label: Name
-        type: text
-        required: true
-      role:
-        label: Rolle
-        type: text
-      tmdbpersonid:
-        label: TMDB Person ID
-        type: number
+        sections:
+          upcomingShowings:
+            type: pages
+            label: Kommende Vorstellungen
+            headline: Kommende Vorstellungen
+            # Reverse lookup from the showings under program/ (SPEC §3). These
+            # pages live under program/, not here, so creating one from this
+            # section makes no sense — disable the Add button explicitly. A
+            # query-based section also has manual sorting disabled by Kirby.
+            query: page.upcomingShowings
+            layout: list
+            create: false
+            sortable: false
+            search: false
+            image:
+              icon: calendar
+              back: light
+            info: "{{ page.date.toDate('d.m.Y H:i') }} Uhr"
+            empty: Aktuell keine kommenden Vorstellungen dieses Films.
+      past:
         width: 1/2
-
-  synopsis:
-    label: Inhalt / Beschreibung
-    type: textarea
-    help: Aus TMDB übernommen oder von der Kinemathek selbst geschrieben.
-
-  line_meta:
-    type: line
-
-  year:
-    label: Jahr
-    type: number
-    width: 1/4
-  runtime:
-    label: Laufzeit (Min.)
-    type: number
-    width: 1/4
-  country:
-    label: Land
-    type: tags
-    width: 1/2
-    help: Filterbare Facette — mehrere möglich (Koproduktionen).
-  language:
-    label: Originalsprache
-    type: tags
-    width: 1/2
-  genre:
-    label: Genre
-    type: tags
-    width: 1/2
-    help: Beschreibende Facette (nicht zu verwechseln mit der Platzierung).
-  series:
-    label: Reihe
-    type: tags
-    width: 1/2
-  keywords:
-    label: Schlagworte
-    type: tags
-    width: 1/2
-
-  line_media:
-    type: line
-
-  poster:
-    label: Poster
-    type: files
-    max: 1
-    multiple: false
-    layout: cards
-    query: page.images
-    uploads:
-      template: poster
-    help: Bei TMDB-Sync wird das Poster serverseitig heruntergeladen und hier abgelegt.
-  stills:
-    label: Szenenbilder
-    type: files
-    layout: cards
-    query: page.images
-    uploads:
-      template: still
-
-  line_tmdb:
-    type: line
-
-  tmdbId:
-    label: TMDB ID
-    type: number
-    width: 1/2
-    disabled: true
-  manualOverride:
-    label: Manuell kuratiert (TMDB-Sync sperren)
-    type: toggle
-    width: 1/2
-    help: Verhindert, dass der TMDB-Sync bestehende Felder überschreibt (SPEC §4).
+        sections:
+          pastShowings:
+            type: pages
+            label: Frühere Vorstellungen
+            headline: Frühere Vorstellungen
+            query: page.pastShowings
+            layout: list
+            create: false
+            sortable: false
+            search: false
+            image:
+              icon: clock
+              back: light
+            info: "{{ page.date.toDate('d.m.Y H:i') }} Uhr"
+            empty: Noch keine vergangenen Vorstellungen archiviert.

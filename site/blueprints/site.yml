@@ -1,27 +1,73 @@
 title: Kinemathek Karlsruhe
 
+# Panel dashboard for an editor landing in the Panel. Surface-only redesign
+# (no data-model changes): a stats row with live counts + the next screening,
+# then quicklinks to the three working containers and the remaining pages.
+#
+# All values use the Kirby query language. The "next screening" report sorts the
+# program children by date ascending and reads the first future one; verified
+# fact: page.date.toDate(...) and Pages filtering resolve in the query language.
+
 sections:
+  # ── Overview: live counts + the next screening, each links to its container ──
+  stats:
+    type: stats
+    size: large
+    reports:
+      - label: Programm (Spielplan)
+        value: "{{ site.find('program').children.count }}"
+        info: Vorstellungen insgesamt
+        link: "{{ site.find('program').panel.url }}"
+        icon: calendar
+        theme: info
+      - label: Kommende Vorstellungen
+        value: "{{ site.find('program').children.filterBy('date', 'date >=', 'today').count }}"
+        info: ab heute geplant
+        link: "{{ site.find('program').panel.url }}"
+        icon: clock
+        theme: positive
+      - label: Filmarchiv
+        value: "{{ site.find('films').children.count }}"
+        info: Filme dauerhaft archiviert
+        link: "{{ site.find('films').panel.url }}"
+        icon: video
+      - label: Veranstaltungen
+        value: "{{ site.find('events').children.count }}"
+        info: ohne Film (Vorträge, Festivals …)
+        link: "{{ site.find('events').panel.url }}"
+        icon: megaphone
+
+  # ── The three working containers as quick-access lists ──────────────────────
   program:
     label: Programm (Spielplan)
     type: pages
     templates:
       - program
+    image: false
     info: "{{ page.children.count }} Vorstellungen"
+
   films:
     label: Filmarchiv
     type: pages
     templates:
       - films
+    image: false
     info: "{{ page.children.count }} Filme"
+
   events:
     label: Veranstaltungen
     type: pages
     templates:
       - events
+    image: false
     info: "{{ page.children.count }} Veranstaltungen"
+
+  # ── Everything else: static/editorial pages ─────────────────────────────────
   pages:
     label: Seiten
     type: pages
     templates:
       - default
       - home
+    image: false
+    empty: Keine weiteren Seiten.

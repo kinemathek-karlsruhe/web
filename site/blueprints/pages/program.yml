@@ -3,16 +3,63 @@ icon: calendar
 
 # Container for every Showing (dated screening of one Film). All showings live
 # here as siblings so the site-wide chronological program is a single sort.
+#
+# Surface redesign (Panel UX only): a table layout listing date, the linked
+# film title, venue and placement. The film title is read via
+# ShowingPage::displayTitle() (falls back to the linked film when no override
+# title is set). Sorted newest-first so the most relevant rows sit at the top.
 options:
   changeTemplate: false
 
 sections:
   showings:
+    headline: Vorstellungen (chronologisch)
     label: Vorstellungen
     type: pages
     template: showing
     create: showing
     status: all
+    layout: table
     sortBy: date desc
     search: true
-    info: "{{ page.date.toDate('d.m.Y H:i') }}"
+    limit: 50
+    empty: Noch keine Vorstellungen geplant. Lege eine Vorstellung an und verknüpfe einen Film.
+    # The film poster gives each row an instant visual anchor.
+    image:
+      query: page.film.toPage.poster.toFile
+      cover: true
+      ratio: 2/3
+      back: black
+    # Set the (clickable) title TEXT via the section-level `text` option — this
+    # keeps the title column's link to the showing's edit view intact. Overriding
+    # the title column's `value:` would replace the {text,href} link object with a
+    # bare string and break navigation ("Could not find Panel view…").
+    text: "{{ page.displayTitle }}"
+    columns:
+      info: false
+      title:
+        label: Film
+        width: 2/6
+      date:
+        label: Datum & Uhrzeit
+        type: text
+        width: 1/6
+        value: "{{ page.date.toDate('d.m.Y H:i') }}"
+      venue:
+        label: Ort / Saal
+        type: text
+        width: 1/6
+        value: "{{ page.venue }}"
+        mobile: false
+      categories:
+        label: Platzierung
+        type: tags
+        width: 1/6
+        value: "{{ page.categories }}"
+        mobile: false
+      discussion:
+        label: Gespräch
+        type: toggle
+        width: 1/12
+        value: "{{ page.hasDiscussion.toBool }}"
+        mobile: false

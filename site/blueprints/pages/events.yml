@@ -3,16 +3,55 @@ icon: megaphone
 
 # Container for standalone, non-film events (SPEC §2.3). Separate template +
 # separate parent guarantee these never pollute the film archive.
+#
+# Surface redesign (Panel UX only): a table layout listing date, venue and
+# placement, with the event's key image as a thumbnail.
 options:
   changeTemplate: false
 
 sections:
   events:
+    headline: Veranstaltungen (chronologisch)
     label: Veranstaltungen
     type: pages
     template: event
     create: event
     status: all
+    layout: table
     sortBy: date desc
     search: true
-    info: "{{ page.date.toDate('d.m.Y H:i') }}"
+    limit: 50
+    empty: Noch keine Veranstaltungen. Lege eine eigenständige Veranstaltung an (kein Film nötig).
+    image:
+      query: page.image.toFile
+      cover: true
+      ratio: 3/2
+      back: black
+    columns:
+      info: false
+      title:
+        label: Titel
+        width: 2/6
+      date:
+        label: Datum & Uhrzeit
+        type: text
+        width: 1/6
+        value: "{{ page.date.toDate('d.m.Y H:i') }}"
+      venue:
+        label: Ort
+        type: text
+        width: 1/6
+        value: "{{ page.venue }}"
+        mobile: false
+      categories:
+        label: Platzierung
+        type: tags
+        width: 1/6
+        value: "{{ page.categories }}"
+        mobile: false
+      discussion:
+        label: Gespräch
+        type: toggle
+        width: 1/12
+        value: "{{ page.hasDiscussion.toBool }}"
+        mobile: false

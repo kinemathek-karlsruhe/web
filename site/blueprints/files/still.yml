@@ -1,15 +1,47 @@
 title: Szenenbild
+icon: image
 
+# File blueprint for film stills (Panel UX only; field names alt/source/caption
+# are unchanged). A wide landscape preview with the focus-point picker (provided
+# by Kirby's file view automatically) so the editor can pick the crop center.
 accept:
   mime: image/jpeg, image/png, image/webp
+  maxsize: 10000000 # 10 MB
 
-fields:
-  alt:
-    label: Alt-Text
-    type: text
-  caption:
-    label: Bildunterschrift
-    type: text
-  source:
-    label: Quelle
-    type: text
+# Landscape preview matching typical film stills; the "Set focus" action on the
+# preview lets the editor choose the focal point used for cropping.
+image:
+  cover: true
+  ratio: 16/9
+  back: black
+
+columns:
+  preview:
+    width: 1/3
+    sections:
+      meta:
+        type: fields
+        fields:
+          alt:
+            label: Alt-Text
+            type: text
+            icon: text
+            help: Bildbeschreibung für Screenreader und SEO.
+          source:
+            label: Quelle
+            type: text
+            icon: globe
+            default: TMDB
+            help: Herkunft des Bildes (z. B. TMDB) — für die Attribution.
+  details:
+    width: 2/3
+    sections:
+      info:
+        type: fields
+        fields:
+          caption:
+            label: Bildunterschrift
+            type: textarea
+            size: small
+            icon: text
+            help: Optionale Unterschrift, falls das Bild öffentlich gezeigt wird.

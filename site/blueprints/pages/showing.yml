@@ -6,72 +6,130 @@ icon: calendar
 # `num` encodes date+time so the Panel lists showings chronologically.
 num: "{{ page.date.toDate('YmdHi') }}"
 
-fields:
-  film:
-    label: Film
-    type: pages
-    required: true
-    max: 1
-    multiple: false
-    query: site.find("films").children
-    info: "{{ page.year }}"
-    help: Verknüpfter Film (Pflicht). Nur Filme aus dem Archiv.
+# Header: the film + when it runs are what an editor scans for. The model
+# exposes displayTitle()/film(); date drives everything.
+info: "{{ page.date.toDate('d.m.Y H:i') }} Uhr"
+image:
+  query: page.film.toPage.poster.toFile
+  back: pattern
+  cover: true
 
-  title:
-    label: Abweichender Titel (optional)
-    type: text
-    help: Leer lassen — fällt auf den Filmtitel zurück.
+columns:
 
-  date:
-    label: Datum & Uhrzeit
-    type: date
-    time: true
-    required: true
-    display: DD.MM.YYYY
-    width: 1/2
+  # Main column: what plays, when, and the editorial extras.
+  main:
+    width: 2/3
+    sections:
 
-  venue:
-    label: Ort / Saal
-    type: text
-    width: 1/2
+      verknuepfung:
+        type: fields
+        fields:
+          film:
+            label: Film
+            type: pages
+            required: true
+            max: 1
+            multiple: false
+            query: site.find("films").children
+            image:
+              query: page.poster.toFile
+              cover: true
+            info: "{{ page.year }}"
+            icon: video
+            help: Verknüpfter Film (Pflicht). Nur Filme aus dem Archiv.
+          title:
+            label: Abweichender Titel (optional)
+            type: text
+            icon: title
+            help: Leer lassen — fällt automatisch auf den Filmtitel zurück.
 
-  subtitles:
-    label: Untertitel / Fassung
-    type: multiselect
-    width: 1/2
-    # Per-occurrence facet — can differ per showing (SPEC §2.2).
-    options:
-      OmU: OmU
-      OmeU: OmeU
-      OF: Originalfassung
-      dtF: dt. Fassung
+      termin:
+        type: fields
+        fields:
+          terminHeadline:
+            label: Termin
+            type: headline
+          date:
+            label: Datum & Uhrzeit
+            type: date
+            time: true
+            required: true
+            display: DD.MM.YYYY
+            icon: calendar
+            width: 1/2
+          venue:
+            label: Ort / Saal
+            type: text
+            icon: pin
+            width: 1/2
 
-  hasDiscussion:
-    label: Mit Filmgespräch
-    type: toggle
-    width: 1/2
+      extras:
+        type: fields
+        fields:
+          extrasHeadline:
+            label: Zusatzinfos
+            type: headline
+          sonderinfo:
+            label: Sonderinfo
+            type: textarea
+            icon: text
+            help: Einführung, Gast, „mit Filmgespräch" + mit wem, etc.
+          ticketUrl:
+            label: Ticket-Link (Mars EDV)
+            type: url
+            icon: ticket
+            help: Externer Link. Keine Zahlung / kein iframe auf der Website (SPEC §6).
 
-  categories:
-    label: Platzierung
-    type: multiselect
-    # Placement / routing — controls WHERE this surfaces (SPEC §2.4). Distinct
-    # from descriptive tags. Multiple allowed.
-    options:
-      spielplan: Spielplan
-      koop: Kooperation
-      festival: Festival
-      filmbildung: Filmbildung
+  # Sidebar: per-occurrence facets and routing.
+  sidebar:
+    width: 1/3
+    sections:
 
-  keywords:
-    label: Schlagworte
-    type: tags
+      fassung:
+        type: fields
+        fields:
+          fassungHeadline:
+            label: Fassung & Gespräch
+            type: headline
+          subtitles:
+            label: Untertitel / Fassung
+            type: multiselect
+            icon: globe
+            # Per-occurrence facet — can differ per showing (SPEC §2.2).
+            options:
+              OmU: OmU
+              OmeU: OmeU
+              OF: Originalfassung
+              dtF: dt. Fassung
+            help: Kann sich je Vorstellung unterscheiden.
+          hasDiscussion:
+            label: Mit Filmgespräch
+            type: toggle
+            text:
+              - "Nein"
+              - "Ja"
 
-  sonderinfo:
-    label: Sonderinfo
-    type: textarea
-    help: Einführung, Gast, „mit Filmgespräch“ + mit wem, etc.
-
-  ticketUrl:
-    label: Ticket-Link (Mars EDV)
-    type: url
-    help: Externer Link. Keine Zahlung/kein iframe auf der Website (SPEC §6).
+      platzierung:
+        type: fields
+        fields:
+          platzierungHeadline:
+            label: Platzierung
+            type: headline
+          platzierungInfo:
+            type: info
+            text: >
+              Steuert, **wo** diese Vorstellung auftaucht (SPEC §2.4) — nicht zu
+              verwechseln mit den beschreibenden Schlagworten.
+          categories:
+            label: Platzierung
+            type: multiselect
+            # Placement / routing — controls WHERE this surfaces (SPEC §2.4).
+            options:
+              spielplan: Spielplan
+              koop: Kooperation
+              festival: Festival
+              filmbildung: Filmbildung
+          keywords:
+            label: Schlagworte
+            type: tags
+            icon: tag

@@ -3,16 +3,63 @@ icon: archive
 
 # Container for the permanent film archive (SPEC §2.1, §5).
 # Children are Films only; Events live elsewhere and never appear here.
+#
+# Surface redesign (Panel UX only — data model untouched): a table layout with
+# a poster thumbnail, year, country and a live "Kommt noch?" flag driven by
+# FilmPage::hasUpcoming(). Column `value` strings use the Kirby query language,
+# which resolves the film model methods (verified: page.hasUpcoming,
+# page.showings resolve to bool / Pages from the query language).
 options:
   changeTemplate: false
 
 sections:
   films:
+    headline: Filme im Archiv
     label: Filme
     type: pages
     template: film
     create: film
     status: all
+    layout: table
     sortBy: title asc
     search: true
-    info: "{{ page.year }}"
+    # 50 films per page keeps a large back-catalogue snappy.
+    limit: 50
+    empty: Noch keine Filme im Archiv. Lege den ersten Film an oder nutze die TMDB-Suche im Film.
+    # Poster thumbnail for fast visual scanning; portrait ratio matches posters.
+    image:
+      query: page.poster.toFile
+      cover: true
+      ratio: 2/3
+      back: black
+    columns:
+      # Drop the default "info" (slug) column — we provide richer columns below.
+      info: false
+      # Default title column — the film title links to the page.
+      title:
+        label: Titel
+        width: 2/6
+      year:
+        label: Jahr
+        type: text
+        width: 1/12
+        align: right
+        value: "{{ page.year }}"
+      country:
+        label: Land
+        type: tags
+        width: 1/6
+        value: "{{ page.country }}"
+        mobile: false
+      upcoming:
+        label: Kommt noch?
+        type: toggle
+        width: 1/6
+        value: "{{ page.hasUpcoming }}"
+      showings:
+        label: Vorstellungen
+        type: text
+        width: 1/6
+        align: right
+        value: "{{ page.showings.count }}"
+        mobile: false

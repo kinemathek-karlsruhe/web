@@ -1,14 +1,46 @@
 title: Poster
+icon: image
 
+# File blueprint for film posters (Panel UX only; field names alt/source/caption
+# are unchanged). A large portrait preview with the focus-point picker (provided
+# by Kirby's file view automatically), plus tidy metadata fields.
 accept:
   mime: image/jpeg, image/png, image/webp
+  maxsize: 10000000 # 10 MB
 
-fields:
-  alt:
-    label: Alt-Text
-    type: text
-  source:
-    label: Quelle
-    type: text
-    default: TMDB
-    help: Herkunft des Bildes (z. B. TMDB) — für die Attribution.
+# Big, focusable preview in the file view. The poster ratio keeps it readable;
+# the "Set focus" action appears on the preview automatically for images.
+image:
+  cover: true
+  ratio: 2/3
+  back: black
+
+columns:
+  preview:
+    width: 1/3
+    sections:
+      meta:
+        type: fields
+        fields:
+          alt:
+            label: Alt-Text
+            type: text
+            icon: text
+            help: Bildbeschreibung für Screenreader und SEO.
+          source:
+            label: Quelle
+            type: text
+            icon: globe
+            default: TMDB
+            help: Herkunft des Bildes (z. B. TMDB) — für die Attribution.
+  details:
+    width: 2/3
+    sections:
+      info:
+        type: fields
+        fields:
+          caption:
+            label: Bildunterschrift (optional)
+            type: text
+            icon: text
+            help: Wird selten gebraucht — Poster meist ohne Unterschrift.
