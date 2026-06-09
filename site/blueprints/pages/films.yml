@@ -1,0 +1,18 @@
+title: Filmarchiv
+icon: archive
+
+# Container for the permanent film archive (SPEC §2.1, §5).
+# Children are Films only; Events live elsewhere and never appear here.
+options:
+  changeTemplate: false
+
+sections:
+  films:
+    label: Filme
+    type: pages
+    template: film
+    create: film
+    status: all
+    sortBy: title asc
+    search: true
+    info: "{{ page.year }}"

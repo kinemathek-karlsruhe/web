@@ -1,0 +1,23 @@
+{
+  "name": "kinemathek",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Kinemathek Karlsruhe — front-end asset pipeline (Tailwind CSS, jQuery, Fancybox)",
+  "type": "module",
+  "scripts": {
+    "vendor": "node scripts/vendor.mjs",
+    "build:css": "tailwindcss -i ./assets/css/index.css -o ./assets/css/styles.css --minify",
+    "watch:css": "tailwindcss -i ./assets/css/index.css -o ./assets/css/styles.css --watch",
+    "build": "node scripts/vendor.mjs && tailwindcss -i ./assets/css/index.css -o ./assets/css/styles.css --minify",
+    "dev": "node scripts/vendor.mjs && tailwindcss -i ./assets/css/index.css -o ./assets/css/styles.css --watch",
+    "postinstall": "node scripts/vendor.mjs"
+  },
+  "dependencies": {
+    "@fancyapps/ui": "^6.1.14",
+    "jquery": "^4.0.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.0",
+    "tailwindcss": "^4.3.0"
+  }
+}

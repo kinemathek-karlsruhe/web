@@ -1,0 +1,30 @@
+/* Kinemathek TMDB lookup field — minimal Panel styling. */
+.k-tmdblookup-controls {
+  display: flex;
+  gap: var(--spacing-3, 0.75rem);
+  align-items: center;
+  margin-top: var(--spacing-2, 0.5rem);
+  flex-wrap: wrap;
+}
+.k-tmdblookup-results {
+  display: grid;
+  gap: var(--spacing-3, 0.75rem);
+  margin-top: var(--spacing-3, 0.75rem);
+}
+.k-tmdblookup-results li {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: var(--spacing-3, 0.75rem);
+  padding: var(--spacing-2, 0.5rem);
+  border: 1px solid var(--color-border, #ddd);
+  border-radius: var(--rounded, 4px);
+  align-items: start;
+}
+.k-tmdblookup-results small {
+  display: block;
+  color: var(--color-text-dimmed, #777);
+}
+.k-tmdblookup-message {
+  margin-top: var(--spacing-2, 0.5rem);
+  color: var(--color-text-dimmed, #777);
+}

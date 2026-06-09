@@ -1,0 +1,18 @@
+title: Programm (Spielplan)
+icon: calendar
+
+# Container for every Showing (dated screening of one Film). All showings live
+# here as siblings so the site-wide chronological program is a single sort.
+options:
+  changeTemplate: false
+
+sections:
+  showings:
+    label: Vorstellungen
+    type: pages
+    template: showing
+    create: showing
+    status: all
+    sortBy: date desc
+    search: true
+    info: "{{ page.date.toDate('d.m.Y H:i') }}"

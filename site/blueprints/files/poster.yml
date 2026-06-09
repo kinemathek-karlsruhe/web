@@ -1,0 +1,14 @@
+title: Poster
+
+accept:
+  mime: image/jpeg, image/png, image/webp
+
+fields:
+  alt:
+    label: Alt-Text
+    type: text
+  source:
+    label: Quelle
+    type: text
+    default: TMDB
+    help: Herkunft des Bildes (z. B. TMDB) — für die Attribution.

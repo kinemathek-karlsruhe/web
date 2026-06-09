@@ -1,0 +1,18 @@
+title: Veranstaltungen
+icon: megaphone
+
+# Container for standalone, non-film events (SPEC §2.3). Separate template +
+# separate parent guarantee these never pollute the film archive.
+options:
+  changeTemplate: false
+
+sections:
+  events:
+    label: Veranstaltungen
+    type: pages
+    template: event
+    create: event
+    status: all
+    sortBy: date desc
+    search: true
+    info: "{{ page.date.toDate('d.m.Y H:i') }}"

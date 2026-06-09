@@ -1,0 +1,27 @@
+title: Kinemathek Karlsruhe
+
+sections:
+  program:
+    label: Programm (Spielplan)
+    type: pages
+    templates:
+      - program
+    info: "{{ page.children.count }} Vorstellungen"
+  films:
+    label: Filmarchiv
+    type: pages
+    templates:
+      - films
+    info: "{{ page.children.count }} Filme"
+  events:
+    label: Veranstaltungen
+    type: pages
+    templates:
+      - events
+    info: "{{ page.children.count }} Veranstaltungen"
+  pages:
+    label: Seiten
+    type: pages
+    templates:
+      - default
+      - home

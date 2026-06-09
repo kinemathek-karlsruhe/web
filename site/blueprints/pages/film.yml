@@ -1,0 +1,133 @@
+title: Film
+icon: video
+
+# The permanent, canonical record for a film (SPEC §2.1). Metadata can be
+# auto-filled from TMDB (server-side, cached) via the TMDB lookup field, with a
+# manual override for everything. Fields are stored individually so they work
+# as filter facets later (SPEC §2.4).
+#
+# NOTE: top-level `fields:` only (no columns/sections mix) — keeps the Panel
+# robust and avoids the columns-vs-sections pitfall.
+
+fields:
+  tmdblookup:
+    label: TMDB-Suche
+    type: tmdblookup
+    titleField: title
+    help: >
+      Sucht den Film bei TMDB und füllt leere Felder. Mehrdeutige Titel zeigen
+      mehrere Treffer — die richtige Fassung muss bestätigt werden. Bei
+      „Manuell kuratiert“ wird der Sync gesperrt.
+
+  title:
+    label: Titel
+    type: text
+    required: true
+
+  originalTitle:
+    label: Originaltitel
+    type: text
+
+  directors:
+    label: Regie
+    type: structure
+    # Stored structurally so director search can be added later (SPEC §5).
+    fields:
+      name:
+        label: Name
+        type: text
+        required: true
+      tmdbpersonid:
+        label: TMDB Person ID
+        type: number
+        width: 1/2
+
+  cast:
+    label: Besetzung
+    type: structure
+    fields:
+      name:
+        label: Name
+        type: text
+        required: true
+      role:
+        label: Rolle
+        type: text
+      tmdbpersonid:
+        label: TMDB Person ID
+        type: number
+        width: 1/2
+
+  synopsis:
+    label: Inhalt / Beschreibung
+    type: textarea
+    help: Aus TMDB übernommen oder von der Kinemathek selbst geschrieben.
+
+  line_meta:
+    type: line
+
+  year:
+    label: Jahr
+    type: number
+    width: 1/4
+  runtime:
+    label: Laufzeit (Min.)
+    type: number
+    width: 1/4
+  country:
+    label: Land
+    type: tags
+    width: 1/2
+    help: Filterbare Facette — mehrere möglich (Koproduktionen).
+  language:
+    label: Originalsprache
+    type: tags
+    width: 1/2
+  genre:
+    label: Genre
+    type: tags
+    width: 1/2
+    help: Beschreibende Facette (nicht zu verwechseln mit der Platzierung).
+  series:
+    label: Reihe
+    type: tags
+    width: 1/2
+  keywords:
+    label: Schlagworte
+    type: tags
+    width: 1/2
+
+  line_media:
+    type: line
+
+  poster:
+    label: Poster
+    type: files
+    max: 1
+    multiple: false
+    layout: cards
+    query: page.images
+    uploads:
+      template: poster
+    help: Bei TMDB-Sync wird das Poster serverseitig heruntergeladen und hier abgelegt.
+  stills:
+    label: Szenenbilder
+    type: files
+    layout: cards
+    query: page.images
+    uploads:
+      template: still
+
+  line_tmdb:
+    type: line
+
+  tmdbId:
+    label: TMDB ID
+    type: number
+    width: 1/2
+    disabled: true
+  manualOverride:
+    label: Manuell kuratiert (TMDB-Sync sperren)
+    type: toggle
+    width: 1/2
+    help: Verhindert, dass der TMDB-Sync bestehende Felder überschreibt (SPEC §4).

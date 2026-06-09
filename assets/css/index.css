@@ -1,0 +1,16 @@
+/* Kinemathek Karlsruhe — Tailwind CSS v4 entry point.
+ *
+ * Source detection is scoped explicitly: the Kirby core in /kirby is committed
+ * to the repo and full of class-like strings, so we disable automatic scanning
+ * (source(none)) and register only the project's own templates, snippets and
+ * plugins under /site. Add more @source lines if class names start living
+ * elsewhere.
+ *
+ * Build:  npm run build:css   (one-off, minified -> assets/css/styles.css)
+ * Watch:  npm run watch:css
+ */
+@import "tailwindcss" source(none);
+
+@source "../../site";
+
+/* No design work yet — the @theme block and component layers come later. */

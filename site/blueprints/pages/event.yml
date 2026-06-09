@@ -1,0 +1,76 @@
+title: Veranstaltung
+icon: megaphone
+
+# Standalone, non-film programming (SPEC §2.3): a lecture, talk, festival item
+# without a single attached film. Reuses the Showing occurrence mechanics but
+# has NO film link, and lives under events/ so it never reaches the archive.
+num: "{{ page.date.toDate('YmdHi') }}"
+
+fields:
+  title:
+    label: Titel
+    type: text
+    required: true
+
+  date:
+    label: Datum & Uhrzeit
+    type: date
+    time: true
+    required: true
+    display: DD.MM.YYYY
+    width: 1/2
+
+  endDate:
+    label: Ende (optional, mehrtägig)
+    type: date
+    time: true
+    display: DD.MM.YYYY
+    width: 1/2
+
+  venue:
+    label: Ort
+    type: text
+    width: 1/2
+
+  hasDiscussion:
+    label: Mit Gespräch
+    type: toggle
+    width: 1/2
+
+  text:
+    label: Beschreibung
+    type: textarea
+
+  categories:
+    label: Platzierung
+    type: multiselect
+    options:
+      spielplan: Spielplan
+      koop: Kooperation
+      festival: Festival
+      filmbildung: Filmbildung
+
+  subtitles:
+    label: Untertitel / Fassung
+    type: multiselect
+    options:
+      OmU: OmU
+      OmeU: OmeU
+      OF: Originalfassung
+      dtF: dt. Fassung
+
+  keywords:
+    label: Schlagworte
+    type: tags
+
+  ticketUrl:
+    label: Ticket-Link
+    type: url
+
+  image:
+    label: Bild
+    type: files
+    max: 1
+    multiple: false
+    layout: cards
+    query: page.images

@@ -1,0 +1,40 @@
+# System files
+# ------------
+Icon
+.DS_Store
+
+# Front-end dependencies
+# ----------------------
+# Build-time only. jQuery/Fancybox are vendored into assets/vendor and the built
+# Tailwind CSS (assets/css/styles.css) is committed, so the site runs without an
+# install step. bun.lock IS committed.
+/node_modules
+
+# Content & media
+# ---------------
+# Content is editorial data, managed in the staging ("dry dock") environment and
+# provisioned per environment — not version-controlled. Media (generated image
+# thumbnails etc.) is regenerated on demand.
+/content/*
+/media/*
+!/media/index.html
+
+# Lock files
+# ---------------
+.lock
+
+# Editors
+# ---------------
+*.sublime-workspace
+/.vscode
+/.idea
+
+# Kirby runtime / sensitive — NEVER commit
+# ----------------------------------------
+/site/cache/*
+!/site/cache/index.html
+/site/sessions/*
+!/site/sessions/index.html
+/site/accounts/*
+!/site/accounts/index.html
+/site/config/.license

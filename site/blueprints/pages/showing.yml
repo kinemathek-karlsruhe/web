@@ -1,0 +1,77 @@
+title: Vorstellung
+icon: calendar
+
+# A dated screening of exactly one Film (SPEC §2.2). One Film -> many Showings.
+# The relationship is stored here (the "many" side) in the `film` field.
+# `num` encodes date+time so the Panel lists showings chronologically.
+num: "{{ page.date.toDate('YmdHi') }}"
+
+fields:
+  film:
+    label: Film
+    type: pages
+    required: true
+    max: 1
+    multiple: false
+    query: site.find("films").children
+    info: "{{ page.year }}"
+    help: Verknüpfter Film (Pflicht). Nur Filme aus dem Archiv.
+
+  title:
+    label: Abweichender Titel (optional)
+    type: text
+    help: Leer lassen — fällt auf den Filmtitel zurück.
+
+  date:
+    label: Datum & Uhrzeit
+    type: date
+    time: true
+    required: true
+    display: DD.MM.YYYY
+    width: 1/2
+
+  venue:
+    label: Ort / Saal
+    type: text
+    width: 1/2
+
+  subtitles:
+    label: Untertitel / Fassung
+    type: multiselect
+    width: 1/2
+    # Per-occurrence facet — can differ per showing (SPEC §2.2).
+    options:
+      OmU: OmU
+      OmeU: OmeU
+      OF: Originalfassung
+      dtF: dt. Fassung
+
+  hasDiscussion:
+    label: Mit Filmgespräch
+    type: toggle
+    width: 1/2
+
+  categories:
+    label: Platzierung
+    type: multiselect
+    # Placement / routing — controls WHERE this surfaces (SPEC §2.4). Distinct
+    # from descriptive tags. Multiple allowed.
+    options:
+      spielplan: Spielplan
+      koop: Kooperation
+      festival: Festival
+      filmbildung: Filmbildung
+
+  keywords:
+    label: Schlagworte
+    type: tags
+
+  sonderinfo:
+    label: Sonderinfo
+    type: textarea
+    help: Einführung, Gast, „mit Filmgespräch“ + mit wem, etc.
+
+  ticketUrl:
+    label: Ticket-Link (Mars EDV)
+    type: url
+    help: Externer Link. Keine Zahlung/kein iframe auf der Website (SPEC §6).
