@@ -191,8 +191,33 @@
     if (ev) toggle(ev);
   });
 
+  /* ----- masthead section menu (the title line is the nav) ----- */
+  var mastBtn = document.querySelector('.mast-menu-btn');
+  var mastMenu = document.getElementById('mast-menu');
+
+  function closeMastMenu() {
+    if (!mastMenu || mastMenu.hidden) return false;
+    mastMenu.hidden = true;
+    mastBtn.setAttribute('aria-expanded', 'false');
+    return true;
+  }
+
+  if (mastBtn && mastMenu) {
+    mastBtn.addEventListener('click', function () {
+      var opening = mastMenu.hidden;
+      mastMenu.hidden = !opening;
+      mastBtn.setAttribute('aria-expanded', String(opening));
+      if (opening) mastMenu.querySelector('a').focus();
+    });
+    document.addEventListener('click', function (e) {
+      if (!e.target.closest('.mast-title')) closeMastMenu();
+    });
+  }
+
   document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') closeOpen(true);
+    if (e.key !== 'Escape') return;
+    if (closeMastMenu()) { if (mastBtn) mastBtn.focus(); return; }
+    closeOpen(true);
   });
 
   /* Heute-Strip anchors: if the target day is filtered away, clear the

@@ -102,13 +102,16 @@ body {
 .eyebrow-lang a:focus-visible { text-decoration: underline; text-underline-offset: .15em; }
 .eyebrow-lang .sep { opacity: .45; margin-inline: .35em; }
 
+/* same 3-column rhythm as .program, so the legend starts exactly where
+   program column 2 begins */
 .masthead {
   display: grid;
-  grid-template-columns: auto 1fr auto;
-  gap: 1.25rem 2.5rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem 2.4rem;
   align-items: start;
   padding-block: 1.1rem .4rem;
 }
+.mast-title { grid-column: 1; position: relative; }
 
 .masthead h1 {
   margin: 0;
@@ -126,16 +129,20 @@ body {
 .masthead h1 .thin { font-weight: 400; }
 
 .legend {
+  grid-column: 2 / -1;
   align-self: end;
   font-size: .76rem;
   line-height: 1.55;
-  max-width: 34rem;
+  /* keep clear of the logo in the top-right cell */
+  padding-right: calc(clamp(6.5rem, 11vw, 9rem) + 1.5rem);
   padding-bottom: .2rem;
 }
 .legend p { margin: 0; }
 .legend .sep { opacity: .45; margin-inline: .3em; }
 
 .brand-logo {
+  grid-column: 3;
+  grid-row: 1;
   display: block;
   width: clamp(6.5rem, 11vw, 9rem);
   height: auto;
@@ -146,7 +153,61 @@ body {
 
 @media (max-width: 760px) {
   .masthead { grid-template-columns: 1fr auto; }
-  .legend { grid-column: 1 / -1; grid-row: 2; }
+  .mast-title { grid-column: 1; }
+  .brand-logo { grid-column: 2; }
+  .legend { grid-column: 1 / -1; grid-row: 2; padding-right: 0; }
+}
+
+/* ---------- Masthead menu: the title line is the section nav ---------- */
+
+.mast-menu-btn {
+  appearance: none;
+  background: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: baseline;
+  gap: .22em;
+  text-align: left;
+}
+.mast-menu-btn .chev {
+  width: .36em;
+  height: auto;
+  flex: none;
+  transition: transform .18s ease-out;
+}
+.mast-menu-btn[aria-expanded="true"] .chev { transform: translateY(.06em) rotate(180deg); }
+.mast-menu-btn:hover .chev { transform: translateY(.08em); }
+.mast-menu-btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 5px; }
+
+.mast-menu {
+  position: absolute;
+  z-index: 20;
+  margin: .3rem 0 0;
+  padding: .35rem 1rem .45rem;
+  list-style: none;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  font-size: clamp(1.5rem, 3.2vw, 2.2rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.005em;
+}
+.mast-menu a {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  padding: .08em 0;
+}
+.mast-menu a:hover,
+.mast-menu a:focus-visible {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: .12em;
 }
 
 /* ---------- Hero ---------- */

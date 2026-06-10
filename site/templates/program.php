@@ -144,8 +144,33 @@ usort($allSeries, 'strcasecmp');
   </div>
 
   <header class="masthead">
-    <h1><?= html($titleMonths) ?><sup><?= html($titleYear) ?></sup><br>
-      <span class="thin"><?= html(t('kinemathek.mb.inCinema')) ?></span></h1>
+    <div class="mast-title">
+      <h1>
+        <button type="button" class="mast-menu-btn" aria-expanded="false" aria-controls="mast-menu"
+                aria-label="<?= html(t('kinemathek.mb.nav')) ?>">
+          <span><?= html($titleMonths) ?><sup><?= html($titleYear) ?></sup></span>
+          <svg class="chev" viewBox="0 0 12 8" aria-hidden="true">
+            <path d="M1 1l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/>
+          </svg>
+        </button><br>
+        <span class="thin"><?= html(t('kinemathek.mb.inCinema')) ?></span>
+      </h1>
+      <?php
+      // The masthead title doubles as the section menu: the big first line
+      // swaps for the subpages ("Filme im Kino", "Events im Kino", …).
+      $navTargets = array_values(array_filter([
+          ['page' => $site->find('films'),  'label' => t('kinemathek.mb.nav.films')],
+          ['page' => $site->find('events'), 'label' => t('kinemathek.mb.nav.events')],
+      ], fn ($target) => $target['page'] !== null));
+      ?>
+      <?php if ($navTargets !== []): ?>
+        <ul class="mast-menu" id="mast-menu" hidden>
+          <?php foreach ($navTargets as $target): ?>
+            <li><a href="<?= $target['page']->url() ?>"><?= html($target['label']) ?></a></li>
+          <?php endforeach ?>
+        </ul>
+      <?php endif ?>
+    </div>
 
     <div class="legend">
       <p>
