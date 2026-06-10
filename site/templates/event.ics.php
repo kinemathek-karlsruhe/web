@@ -35,7 +35,7 @@ if ($page->text()->isNotEmpty()) {
     $parts[] = $page->text()->value();
 }
 if ($page->ticketUrl()->isNotEmpty()) {
-    $parts[] = 'Tickets: ' . $page->ticketUrl()->value();
+    $parts[] = t('kinemathek.tickets', 'Tickets') . ': ' . $page->ticketUrl()->value();
 }
 
 $ics = Ics::build([

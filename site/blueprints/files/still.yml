@@ -32,6 +32,8 @@ columns:
             type: text
             icon: globe
             default: TMDB
+            # Provenance is language-invariant (alt/caption stay translatable).
+            translate: false
             help: Herkunft des Bildes (z. B. TMDB) — für die Attribution.
   details:
     width: 2/3

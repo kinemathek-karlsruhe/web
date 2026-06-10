@@ -11,9 +11,9 @@
 // for plugins). No bundler is introduced here on purpose.
 //
 // UI-kit components used (all verified against Kirby 5.4 panel/dist + docs):
-//   k-field, k-text-input, k-button, k-button-group, k-toggles-input,
-//   k-image, k-icon (type="loader" for the spinner — there is no k-loader in
-//   Kirby 5), k-empty, k-box, k-headline, k-text, k-bubble.
+//   k-field, k-text-input, k-button, k-button-group, k-image, k-icon
+//   (type="loader" for the spinner — there is no k-loader in Kirby 5),
+//   k-empty, k-box, k-headline, k-text, k-bubble.
 
 panel.plugin("kinemathek/tmdb", {
   fields: {
@@ -37,12 +37,22 @@ panel.plugin("kinemathek/tmdb", {
           // searched=false → idle state; true → we have run at least one search.
           searched: false,
           searching: false,
-          // id of the candidate currently being applied (null = none).
+          // id + mode of the candidate currently being applied (null = none).
           applyingId: null,
-          mode: "fill-empty", // or "overwrite"
+          applyingMode: null, // "fill-empty" | "overwrite" | null
           error: null, // string | null — hard error (network / API).
           notice: null, // string | null — soft success / info after apply.
           locked: null, // last apply's locked flag, for an accurate hint.
+          // true when fields applied but an image download failed/was partial
+          // — the notice then renders as a warning, not a green success.
+          assetWarning: false,
+          // true while the editor explicitly searches although the page is
+          // already linked ("Lösen & neu suchen") — back via "Abbrechen" or a
+          // successful apply.
+          searchMode: false,
+          // set on a successful apply so the held bar fills immediately,
+          // independent of when the reloaded view props arrive.
+          applied: null, // { id, title, year } | null
         };
       },
       computed: {
@@ -54,21 +64,106 @@ panel.plugin("kinemathek/tmdb", {
         controlsDisabled() {
           return this.disabled || this.busy;
         },
-        modeOptions() {
-          return [
-            { value: "fill-empty", text: "Nur Leeres füllen" },
-            { value: "overwrite", text: "Überschreiben" },
-          ];
+        // ── Linked state ─────────────────────────────────────────────────
+        // Once a movie has been applied, the SEARCH BAR holds it as
+        // "Titel (Jahr) – Regie – TMDB 123" until the editor explicitly
+        // releases it via "Lösen & neu suchen". Source of truth is the page's
+        // saved tmdbId; `applied` bridges the moment between apply and the
+        // view reload.
+        pageContent() {
+          return this.$panel?.view?.props?.content ?? {};
         },
-        modeHint() {
-          if (this.mode === "overwrite") {
-            return "Vorhandene Felder werden ersetzt. Bei „Manuell kuratiert“ wird Überschreiben ignoriert — dann nur leere Felder.";
+        pageLinkedId() {
+          const id = parseInt(
+            this.pageContent.tmdbid ?? this.pageContent.tmdbId,
+            10
+          );
+          return id > 0 ? id : 0;
+        },
+        // `applied` (the just-confirmed candidate) wins over the page content,
+        // which stays stale until the view reload lands; apply() clears
+        // `applied` after the reload, making the page authoritative again.
+        linkedId() {
+          if (this.applied && this.applied.id > 0) {
+            return this.applied.id;
           }
-          return "Vorhandene Inhalte bleiben unangetastet; nur leere Felder werden ergänzt.";
+          return this.pageLinkedId;
+        },
+        linked() {
+          return this.linkedId > 0;
+        },
+        // The search bar holds the linked movie unless the editor released it.
+        held() {
+          return this.linked && !this.searchMode;
+        },
+        linkedTitle() {
+          if (this.applied && this.applied.title) {
+            return this.applied.title;
+          }
+          const title = this.pageContent[this.titleField];
+          return title ? String(title) : "Ohne Titel";
+        },
+        linkedYear() {
+          if (this.applied) {
+            return this.applied.year || null;
+          }
+          return this.pageContent.year || null;
+        },
+        linkedDirectors() {
+          // Unknown for a just-applied candidate; reappears after the reload.
+          if (this.applied) {
+            return "";
+          }
+          const directors = this.pageContent.directors;
+          if (!Array.isArray(directors)) {
+            return "";
+          }
+          return directors
+            .map((row) => row && row.name)
+            .filter(Boolean)
+            .join(", ");
+        },
+        // What the held search bar displays: Titel (Jahr) – Regie – TMDB 123.
+        // The director comes from the page content, so it appears once the
+        // post-apply reload has landed.
+        heldText() {
+          let text = this.linkedTitle;
+          if (this.linkedYear) {
+            text += " (" + this.linkedYear + ")";
+          }
+          if (this.linkedDirectors) {
+            text += " – " + this.linkedDirectors;
+          }
+          return text + " – TMDB " + this.linkedId;
+        },
+
+        // Notice presentation: locked beats warning beats clean success.
+        // The value is a Kirby data-theme name — the Panel's [data-theme]
+        // rules then supply fully light/dark-adaptive --theme-color-* tokens.
+        noticeTheme() {
+          if (this.locked) return "info";
+          if (this.assetWarning) return "warning";
+          return "positive";
+        },
+        noticeIcon() {
+          if (this.locked) return "lock";
+          if (this.assetWarning) return "alert";
+          return "check";
+        },
+        // While a candidate is being applied, the list collapses to just that
+        // card — the moment of choice is over, the rest is noise.
+        visibleCandidates() {
+          if (this.applyingId !== null) {
+            return this.candidates.filter((c) => c.id === this.applyingId);
+          }
+          return this.candidates;
         },
         // "Treffer" is invariant in German, so we phrase the count without
         // pretending to pluralise the noun.
         resultsHeadline() {
+          if (this.applyingId !== null) {
+            return "Treffer wird übernommen …";
+          }
           const n = this.candidates.length;
           const what = n === 1 ? "1 Treffer" : n + " Treffer";
           if (this.lastQuery) {
@@ -91,6 +186,7 @@ panel.plugin("kinemathek/tmdb", {
           this.error = null;
           this.notice = null;
           this.locked = null;
+          this.assetWarning = false;
 
           if (query === "") {
             this.error = "Bitte einen Filmtitel eingeben.";
@@ -126,31 +222,76 @@ panel.plugin("kinemathek/tmdb", {
           }
         },
 
-        async apply(candidate) {
+        async apply(candidate, mode) {
           if (this.busy) {
             return;
           }
           this.error = null;
           this.notice = null;
           this.locked = null;
+          this.assetWarning = false;
           this.applyingId = candidate.id;
+          this.applyingMode = mode;
           try {
             const pageId = this.$panel?.view?.props?.id;
             const res = await this.$api.post("kinemathek/tmdb/apply", {
               id: candidate.id,
               page: pageId,
-              mode: this.mode,
+              mode: mode,
             });
 
             if (res.status === "ok") {
               const applied = Array.isArray(res.applied) ? res.applied : [];
+              // Hold the chosen movie in the search bar until the editor
+              // releases it via "Lösen & neu suchen".
+              this.applied = {
+                id: candidate.id,
+                title: candidate.title || null,
+                year: candidate.year || null,
+              };
+              this.searchMode = false;
               this.locked = res.locked === true;
-              this.notice =
+              this.assetWarning =
+                res.poster === "failed" ||
+                res.stills === "failed" ||
+                (res.stills === "attached" &&
+                  res.stillsTotal > 0 &&
+                  res.stillsCount < res.stillsTotal);
+              // Per-language sync: the apply route also writes the
+              // translatable fields (title/synopsis/genre) into every
+              // non-default content language, fetched from TMDB in that
+              // language — surface those in the notice as e.g. "EN: title, …".
+              const translations = res.appliedTranslations || {};
+              const translated = Object.keys(translations)
+                .filter(
+                  (code) =>
+                    Array.isArray(translations[code]) &&
+                    translations[code].length > 0
+                )
+                .map(
+                  (code) =>
+                    code.toUpperCase() + ": " + translations[code].join(", ")
+                );
+              const parts = [
                 applied.length > 0
                   ? "Übernommen: " + applied.join(", ") + "."
-                  : "Keine Felder geändert — vorhandene Inhalte blieben erhalten.";
+                  : "Keine Felder geändert — vorhandene Inhalte blieben erhalten.",
+                translated.length > 0
+                  ? "Übersetzungen — " + translated.join(" · ") + "."
+                  : "",
+                this.posterText(res.poster),
+                this.stillsText(res.stills, res.stillsCount, res.stillsTotal),
+              ];
+              this.notice = parts.filter(Boolean).join(" ");
               // Persist & re-read the page so the new field values render.
-              this.$panel.view.reload();
+              // Once the reload lands, the page content is authoritative again
+              // and the `applied` bridge is dropped (covers fill-empty keeping
+              // an existing link as much as a normal re-link).
+              Promise.resolve(this.$panel.view.reload())
+                .catch(() => {})
+                .then(() => {
+                  this.applied = null;
+                });
             } else if (res.status === "locked") {
               this.error =
                 res.message ||
@@ -164,6 +305,7 @@ panel.plugin("kinemathek/tmdb", {
             this.error = "Übernehmen fehlgeschlagen: " + this.errorText(e);
           } finally {
             this.applyingId = null;
+            this.applyingMode = null;
           }
         },
 
@@ -174,6 +316,65 @@ panel.plugin("kinemathek/tmdb", {
           this.error = null;
           this.notice = null;
           this.locked = null;
+          this.assetWarning = false;
+        },
+
+        // "Lösen & neu suchen": clears the held bar back to an editable
+        // search input. Nothing on the page changes until a new match is
+        // applied — Abbrechen returns to the held movie.
+        enterSearchMode() {
+          this.reset();
+          this.searchMode = true;
+          const title = this.pageContent[this.titleField];
+          if (title) {
+            this.query = String(title);
+          }
+        },
+        exitSearchMode() {
+          this.reset();
+          this.searchMode = false;
+        },
+
+        // Human messages for the per-asset outcome the apply route reports.
+        // "skipped" (no file permission / not requested) stays silent.
+        posterText(status) {
+          switch (status) {
+            case "attached":
+              return "Poster übernommen.";
+            case "kept":
+              return "Poster unverändert (war schon vorhanden).";
+            case "none":
+              return "Kein Poster bei TMDB.";
+            case "failed":
+              return "Poster-Download fehlgeschlagen — bitte erneut versuchen.";
+            default:
+              return "";
+          }
+        },
+        stillsText(status, count, total) {
+          switch (status) {
+            case "attached":
+              if (total > 0 && count < total) {
+                return (
+                  count +
+                  " von " +
+                  total +
+                  " Szenenbildern übernommen — Rest fehlgeschlagen, bitte erneut versuchen."
+                );
+              }
+              return (
+                (count === 1 ? "1 Szenenbild" : count + " Szenenbilder") +
+                " übernommen."
+              );
+            case "kept":
+              return "Szenenbilder unverändert (waren schon vorhanden).";
+            case "none":
+              return "Keine Szenenbilder bei TMDB.";
+            case "failed":
+              return "Szenenbild-Download fehlgeschlagen — bitte erneut versuchen.";
+            default:
+              return "";
+          }
         },
 
         errorText(e) {
@@ -201,9 +402,21 @@ panel.plugin("kinemathek/tmdb", {
         >
           <div class="k-tmdblookup">
 
-            <!-- Search bar -->
+            <!-- Search bar. When a movie is linked, the bar HOLDS it
+                 ("Titel (Jahr) – Regie – TMDB 123") until released. -->
             <div class="k-tmdblookup-search">
               <k-text-input
+                v-if="held"
+                :value="heldText"
+                type="text"
+                name="tmdb-held"
+                icon="check"
+                :disabled="true"
+                :aria-label="'Verknüpfter Film: ' + heldText"
+                class="k-tmdblookup-held"
+              />
+              <k-text-input
+                v-else
                 v-model="query"
                 type="text"
                 name="tmdb-query"
@@ -216,60 +429,69 @@ panel.plugin("kinemathek/tmdb", {
               />
               <k-button-group class="k-tmdblookup-search-buttons">
                 <k-button
-                  icon="search"
+                  v-if="held"
+                  icon="cancel"
                   variant="filled"
-                  theme="notice"
                   size="sm"
                   :disabled="controlsDisabled"
-                  @click="search"
+                  @click="enterSearchMode"
                 >
-                  Suchen
+                  Lösen & neu suchen
                 </k-button>
-                <k-button
-                  v-if="searched"
-                  icon="refresh"
-                  variant="filled"
-                  size="sm"
-                  :disabled="busy"
-                  @click="reset"
-                >
-                  Zurücksetzen
-                </k-button>
+                <template v-else>
+                  <k-button
+                    icon="search"
+                    variant="filled"
+                    theme="notice"
+                    size="sm"
+                    :disabled="controlsDisabled"
+                    @click="search"
+                  >
+                    Suchen
+                  </k-button>
+                  <k-button
+                    v-if="searched"
+                    icon="refresh"
+                    variant="filled"
+                    size="sm"
+                    :disabled="busy"
+                    @click="reset"
+                  >
+                    Zurücksetzen
+                  </k-button>
+                  <k-button
+                    v-if="linked"
+                    icon="undo"
+                    variant="filled"
+                    size="sm"
+                    :disabled="busy"
+                    @click="exitSearchMode"
+                  >
+                    Abbrechen
+                  </k-button>
+                </template>
               </k-button-group>
-            </div>
-
-            <!-- Apply mode -->
-            <div class="k-tmdblookup-mode">
-              <k-toggles-input
-                v-model="mode"
-                :options="modeOptions"
-                :labels="true"
-                :disabled="controlsDisabled"
-                aria-label="Übernahme-Modus"
-              />
-              <k-text class="k-tmdblookup-mode-hint">
-                {{ modeHint }}
-              </k-text>
             </div>
 
             <!-- Hard error -->
             <div
               v-if="error"
-              class="k-tmdblookup-box k-tmdblookup-box--negative"
+              class="k-tmdblookup-box"
+              data-theme="negative"
               role="alert"
             >
               <k-icon type="alert" />
               <span>{{ error }}</span>
             </div>
 
-            <!-- Soft success after apply -->
+            <!-- Soft success / warning after apply -->
             <div
               v-if="notice"
               class="k-tmdblookup-box"
-              :class="locked ? 'k-tmdblookup-box--info' : 'k-tmdblookup-box--positive'"
+              :data-theme="noticeTheme"
               role="status"
             >
-              <k-icon :type="locked ? 'lock' : 'check'" />
+              <k-icon :type="noticeIcon" />
               <span>
                 {{ notice }}
                 <template v-if="locked">
@@ -278,6 +500,9 @@ panel.plugin("kinemathek/tmdb", {
                 </template>
               </span>
             </div>
+
+            <!-- Search states + results: hidden while the bar holds a movie -->
+            <template v-if="!held">
 
             <!-- Loading -->
             <div
@@ -292,12 +517,18 @@ panel.plugin("kinemathek/tmdb", {
             <!-- Idle prompt (before first search) -->
             <div
               v-else-if="!searched"
-              class="k-tmdblookup-box k-tmdblookup-box--passive k-tmdblookup-idle"
+              class="k-tmdblookup-box k-tmdblookup-idle"
+              data-theme="passive"
             >
               <k-icon type="search" />
               <span>
                 Titel oben eingeben und „Suchen“ — übernommene Treffer füllen
-                Titel, Inhalt, Jahr, Laufzeit, Regie, Besetzung und Poster.
+                Titel, Inhalt, Jahr, Laufzeit, Regie, Besetzung, Poster und
+                Szenenbilder.
+                <template v-if="linked">
+                  Die bestehende Verknüpfung bleibt erhalten, bis ein neuer
+                  Treffer übernommen wird.
+                </template>
               </span>
             </div>
 
@@ -321,13 +552,10 @@ panel.plugin("kinemathek/tmdb", {
               </k-headline>
               <ul class="k-tmdblookup-list">
                 <li
-                  v-for="c in candidates"
+                  v-for="c in visibleCandidates"
                   :key="c.id"
                   class="k-tmdblookup-card"
-                  :class="{
-                    'k-tmdblookup-card--applying': applyingId === c.id,
-                    'k-tmdblookup-card--dimmed': applyingId !== null && applyingId !== c.id,
-                  }"
+                  :class="{ 'k-tmdblookup-card--applying': applyingId === c.id }"
                 >
                   <figure class="k-tmdblookup-thumb">
                     <k-image
@@ -368,12 +596,26 @@ panel.plugin("kinemathek/tmdb", {
                         variant="filled"
                         theme="positive"
                         size="sm"
-                        :loading="applyingId === c.id"
+                        :loading="applyingId === c.id && applyingMode === 'fill-empty'"
                         :disabled="controlsDisabled"
-                        :aria-label="'Diesen Treffer übernehmen: ' + (c.title || 'unbekannt')"
-                        @click="apply(c)"
+                        title="Füllt nur leere Felder — vorhandene Inhalte bleiben unangetastet."
+                        :aria-label="'Diesen Treffer übernehmen (nur leere Felder): ' + (c.title || 'unbekannt')"
+                        @click="apply(c, 'fill-empty')"
                       >
-                        {{ applyingId === c.id ? 'Übernehme …' : 'Übernehmen' }}
+                        {{ applyingId === c.id && applyingMode === 'fill-empty' ? 'Übernehme …' : 'Übernehmen' }}
+                      </k-button>
+                      <k-button
+                        icon="wand"
+                        variant="filled"
+                        theme="notice"
+                        size="sm"
+                        :loading="applyingId === c.id && applyingMode === 'overwrite'"
+                        :disabled="controlsDisabled"
+                        title="Ersetzt auch vorhandene Felder. Bei „Manuell kuratiert“ gesperrt — dann nur leere Felder."
+                        :aria-label="'Diesen Treffer übernehmen und vorhandene Felder überschreiben: ' + (c.title || 'unbekannt')"
+                        @click="apply(c, 'overwrite')"
+                      >
+                        {{ applyingId === c.id && applyingMode === 'overwrite' ? 'Überschreibe …' : 'Überschreiben' }}
                       </k-button>
                     </div>
                   </div>
@@ -384,6 +626,8 @@ panel.plugin("kinemathek/tmdb", {
                 Daten von The Movie Database (TMDB).
               </p>
             </div>
+
+            </template>
 
           </div>
         </k-field>

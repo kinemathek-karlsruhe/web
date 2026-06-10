@@ -43,6 +43,9 @@ columns:
             display: DD.MM.YYYY
             icon: calendar
             width: 1/2
+            # Drives num:, program ordering and ICS — must be identical in
+            # every language.
+            translate: false
           endDate:
             label: Ende (optional, mehrtägig)
             type: date
@@ -50,15 +53,18 @@ columns:
             display: DD.MM.YYYY
             icon: calendar
             width: 1/2
+            translate: false
             help: Nur bei mehrtägigen Veranstaltungen ausfüllen.
           venue:
             label: Ort
             type: text
             icon: pin
             width: 1/2
+            translate: false
           hasDiscussion:
             label: Mit Gespräch
             type: toggle
+            translate: false
             text:
               - "Nein"
               - "Ja"
@@ -79,6 +85,7 @@ columns:
             label: Ticket-Link
             type: url
             icon: ticket
+            translate: false
             help: Externer Link. Keine Zahlung / kein iframe auf der Website (SPEC §6).
 
   # Sidebar: routing/facets and the key visual.
@@ -100,6 +107,8 @@ columns:
           categories:
             label: Platzierung
             type: multiselect
+            # Routing keys are invariant — never translated.
+            translate: false
             options:
               spielplan: Spielplan
               koop: Kooperation
@@ -109,6 +118,8 @@ columns:
             label: Untertitel / Fassung
             type: multiselect
             icon: globe
+            # Invariant codes (OmU/OmeU/…).
+            translate: false
             options:
               OmU: OmU
               OmeU: OmeU
@@ -133,4 +144,6 @@ columns:
             multiple: false
             layout: cards
             query: page.images
+            # File refs are shared across languages.
+            translate: false
             help: Schlüsselbild für die Programm-Ansicht.

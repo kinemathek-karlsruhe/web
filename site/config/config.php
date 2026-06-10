@@ -29,15 +29,28 @@ if (is_file($envFile) === true) {
 }
 
 return [
+	// Multi-language content (DE default at /, EN at /en) — definitions live in
+	// site/languages/. Do NOT add 'languages.detect': it stores the detected
+	// language in the session, i.e. sets a cookie (forbidden, SPEC §7).
+	"languages" => true,
+
 	"kinemathek" => [
 		// TMDB integration (site/plugins/kinemathek-tmdb). Credentials come from
 		// .env: TMDB_KEY for a v3 key, or TMDB_TOKEN for a v4 bearer token.
 		"tmdb" => [
 			"key" => getenv("TMDB_KEY") ?: null,
 			"token" => getenv("TMDB_TOKEN") ?: null,
+			// Fallback TMDB locale (single-language mode / unmapped codes).
 			"language" => "de-DE",
+			// Kirby language code -> TMDB locale, used by the per-language sync.
+			"languages" => [
+				"de" => "de-DE",
+				"en" => "en-US",
+			],
 			"posterSize" => "w780",
 			"thumbSize" => "w185",
+			"stillSize" => "w1280", // TMDB backdrop sizes: w300/w780/w1280/original
+			"maxStills" => 4, // backdrops pulled as Szenenbilder per sync
 			"maxResults" => 8,
 		],
 		// Add-to-calendar (ICS) export defaults.

@@ -31,10 +31,10 @@ if ($page->sonderinfo()->isNotEmpty()) {
     $parts[] = $page->sonderinfo()->value();
 }
 if ($page->subtitles()->isNotEmpty()) {
-    $parts[] = 'Fassung: ' . $page->subtitles()->commaList();
+    $parts[] = t('kinemathek.showing.version', 'Fassung') . ': ' . $page->subtitles()->commaList();
 }
 if ($page->ticketUrl()->isNotEmpty()) {
-    $parts[] = 'Tickets: ' . $page->ticketUrl()->value();
+    $parts[] = t('kinemathek.tickets', 'Tickets') . ': ' . $page->ticketUrl()->value();
 }
 
 $ics = Ics::build([

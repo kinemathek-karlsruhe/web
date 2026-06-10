@@ -35,6 +35,6 @@ class ShowingPage extends Page
             return $own->value();
         }
         $film = $this->film();
-        return $film ? $film->title()->value() : 'Vorstellung';
+        return $film ? $film->title()->value() : t('kinemathek.showing', 'Vorstellung');
     }
 }

@@ -43,11 +43,13 @@ tabs:
                 type: tmdblookup
                 titleField: title
                 help: >
-                  Zuerst hier suchen — füllt leere Felder automatisch (Titel,
-                  Inhalt, Jahr, Laufzeit, Regie, Besetzung, Poster). Bei
-                  mehrdeutigen Titeln erscheinen mehrere Treffer; die richtige
-                  Fassung selbst bestätigen, nie blind übernehmen. Ist „Manuell
-                  kuratiert“ aktiv, werden nur noch leere Felder ergänzt.
+                  Zuerst hier suchen, dann beim richtigen Treffer „Übernehmen“
+                  (füllt nur leere Felder: Titel, Inhalt, Jahr, Laufzeit,
+                  Regie, Besetzung, Poster, Szenenbilder) oder „Überschreiben“
+                  (ersetzt auch Vorhandenes). Danach hält die Suchleiste den
+                  verknüpften Film fest — neu verknüpfen über „Lösen & neu
+                  suchen“. Ist „Manuell kuratiert“ aktiv, werden nur noch
+                  leere Felder ergänzt.
 
           titles:
             type: fields
@@ -62,6 +64,8 @@ tabs:
                 label: Originaltitel
                 type: text
                 icon: globe
+                # The ORIGINAL title is language-invariant by definition.
+                translate: false
                 help: Leer lassen, wenn identisch mit dem Titel.
 
           people:
@@ -71,6 +75,8 @@ tabs:
                 label: Regie
                 type: structure
                 # Stored structurally so director search can be added later (SPEC §5).
+                # Person names are language-invariant; one shared list (DE wins).
+                translate: false
                 empty: Noch keine Regie erfasst.
                 fields:
                   name:
@@ -86,6 +92,7 @@ tabs:
               cast:
                 label: Besetzung
                 type: structure
+                translate: false
                 empty: Noch keine Besetzung erfasst.
                 fields:
                   name:
@@ -129,11 +136,13 @@ tabs:
                 type: number
                 width: 1/2
                 icon: calendar
+                translate: false
               runtime:
                 label: Laufzeit (Min.)
                 type: number
                 width: 1/2
                 icon: clock
+                translate: false
 
           facets:
             type: fields
@@ -151,11 +160,15 @@ tabs:
                 label: Land
                 type: tags
                 icon: flag
+                # ISO codes — language-invariant.
+                translate: false
                 help: Mehrere möglich (Koproduktionen).
               language:
                 label: Originalsprache
                 type: tags
                 icon: globe
+                # Language codes from TMDB — language-invariant.
+                translate: false
               genre:
                 label: Genre
                 type: tags
@@ -181,10 +194,12 @@ tabs:
                 type: number
                 disabled: true
                 icon: bolt
+                translate: false
                 help: Wird beim Sync automatisch gesetzt — nicht von Hand ändern.
               manualOverride:
                 label: Manuell kuratiert
                 type: toggle
+                translate: false
                 text:
                   - "Sync darf überschreiben"
                   - "Sync gesperrt (nur leere Felder)"
@@ -209,7 +224,10 @@ tabs:
                 max: 1
                 multiple: false
                 layout: cards
-                query: page.images
+                # File refs are shared across languages (one poster per film).
+                translate: false
+                # Only poster-template files in the picker — keeps stills out.
+                query: page.images.template('poster')
                 uploads:
                   template: poster
                 help: >
@@ -225,10 +243,16 @@ tabs:
                 label: Szenenbilder
                 type: files
                 layout: cards
-                query: page.images
+                translate: false
+                # Only still-template files in the picker — keeps the poster out.
+                query: page.images.template('still')
                 uploads:
                   template: still
-                help: Mehrere Szenenfotos möglich. Per Drag-and-drop sortierbar.
+                help: >
+                  Mehrere Szenenfotos möglich, per Drag-and-drop sortierbar.
+                  Der TMDB-Sync legt hier automatisch die besten Szenenbilder
+                  ab (serverseitig heruntergeladen); eigene Uploads bleiben
+                  beim erneuten Sync erhalten.
 
   # ── Tab 3: screenings (read-only reverse lookup) ────────────────────────
   vorfuehrungen:

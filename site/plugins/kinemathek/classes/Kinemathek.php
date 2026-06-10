@@ -106,6 +106,53 @@ class Kinemathek
     }
 
     /**
+     * Format a timestamp for the CURRENT content language (multilang, SPEC).
+     *
+     * PHP's date() always produces English day/month names, so localized
+     * output goes through IntlDateFormatter with the active language's locale.
+     * The ICU pattern comes from the language's translations
+     * (kinemathek.date.<format> in site/languages/*.php) with German defaults,
+     * so " Uhr" lives in the pattern (quoted ICU literal), not in templates.
+     *
+     * Formats: 'datetime' (abbrev. weekday), 'long' (full weekday),
+     * 'short' (date+time, no weekday), 'date' (date only).
+     */
+    public static function localDate(?int $timestamp, string $format = 'datetime'): string
+    {
+        if ($timestamp === null) {
+            return '';
+        }
+
+        $defaults = [
+            'datetime' => "EE dd.MM.yyyy · HH:mm 'Uhr'",
+            'long'     => "EEEE, dd.MM.yyyy · HH:mm 'Uhr'",
+            'short'    => "dd.MM.yyyy HH:mm 'Uhr'",
+            'date'     => 'dd.MM.yyyy',
+        ];
+        $pattern = t(
+            'kinemathek.date.' . $format,
+            $defaults[$format] ?? $defaults['datetime']
+        );
+
+        if (class_exists(\IntlDateFormatter::class) === false) {
+            // intl missing on the host: neutral, unlocalized fallback.
+            return date('d.m.Y H:i', $timestamp);
+        }
+
+        $language  = kirby()->language();
+        $formatter = new \IntlDateFormatter(
+            $language?->locale(LC_ALL) ?? 'de_DE',
+            \IntlDateFormatter::FULL,
+            \IntlDateFormatter::FULL,
+            (string) (option('kinemathek.ics.timezone') ?? 'Europe/Berlin'),
+            \IntlDateFormatter::GREGORIAN,
+            $pattern
+        );
+
+        return (string) $formatter->format($timestamp);
+    }
+
+    /**
      * Compose faceted filters over a collection (SPEC §5).
      *
      * AND across facets, OR within a multi-value facet. Absent/empty facets are

@@ -18,6 +18,8 @@ class EventPage extends Page
 
     public function displayTitle(): string
     {
-        return $this->title()->isNotEmpty() ? $this->title()->value() : 'Veranstaltung';
+        return $this->title()->isNotEmpty()
+            ? $this->title()->value()
+            : t('kinemathek.event', 'Veranstaltung');
     }
 }

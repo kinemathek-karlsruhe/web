@@ -23,6 +23,15 @@ use Kirby\Toolkit\Str;
  */
 class Client
 {
+    /**
+     * mapToFilm() keys whose values are language-dependent on TMDB. The apply
+     * route writes ONLY these into non-default content languages (everything
+     * else — people, codes, numbers, files — is translate:false and lives in
+     * the default language). Keys must match the Film blueprint's translatable
+     * fields.
+     */
+    public const TRANSLATABLE = ['title', 'synopsis', 'genre'];
+
     protected const API_BASE = 'https://api.themoviedb.org/3/';
     protected const IMG_BASE = 'https://image.tmdb.org/t/p/';
 
@@ -40,8 +49,24 @@ class Client
 
     // ---- config / auth ---------------------------------------------------
 
-    protected function language(): string
+    /**
+     * TMDB locale for a Kirby content language code. With no code given, the
+     * CURRENT language is used — in Panel API requests Kirby sets it from the
+     * Panel's x-language header, so searches follow the editor's language tab.
+     * Unmapped codes and single-language mode fall back to the flat
+     * kinemathek.tmdb.language option ('de-DE').
+     */
+    protected function language(?string $kirbyCode = null): string
     {
+        $kirbyCode ??= $this->kirby->language()?->code();
+
+        if ($kirbyCode !== null) {
+            $map = option('kinemathek.tmdb.languages');
+            if (is_array($map) === true && isset($map[$kirbyCode]) === true) {
+                return (string) $map[$kirbyCode];
+            }
+        }
+
         return (string) (option('kinemathek.tmdb.language') ?? 'de-DE');
     }
 
@@ -53,6 +78,16 @@ class Client
     protected function thumbSize(): string
     {
         return (string) (option('kinemathek.tmdb.thumbSize') ?? 'w185');
+    }
+
+    protected function stillSize(): string
+    {
+        return (string) (option('kinemathek.tmdb.stillSize') ?? 'w1280');
+    }
+
+    protected function maxStills(): int
+    {
+        return (int) (option('kinemathek.tmdb.maxStills') ?? 4);
     }
 
     protected function maxResults(): int
@@ -154,12 +189,12 @@ class Client
         return self::IMG_BASE;
     }
 
-    protected function posterUrl(?string $posterPath, string $size): ?string
+    protected function imageUrl(?string $imagePath, string $size): ?string
     {
-        if (empty($posterPath) === true) {
+        if (empty($imagePath) === true) {
             return null;
         }
-        return $this->imageBaseUrl() . $size . $posterPath;
+        return $this->imageBaseUrl() . $size . $imagePath;
     }
 
     // ---- search (multi-candidate) ----------------------------------------
@@ -167,7 +202,8 @@ class Client
     /**
      * Search movies by title. Returns a normalized candidate list so the editor
      * can confirm the correct match (SPEC §4 — no auto-accept). Side effect:
-     * caches a small preview thumbnail per candidate for the first-party proxy.
+     * remembers each candidate's poster path so the first-party thumb proxy can
+     * download it on demand — the search response never blocks on image fetches.
      */
     public function search(string $query, int $page = 1): array
     {
@@ -184,7 +220,13 @@ class Client
         $candidates = [];
         foreach (array_slice($data['results'] ?? [], 0, $this->maxResults()) as $r) {
             $id = (int) ($r['id'] ?? 0);
-            $this->cacheThumb($id, $r['poster_path'] ?? null);
+            if ($id > 0) {
+                $this->cache()->set(
+                    'posterpath/' . $id,
+                    (string) ($r['poster_path'] ?? ''),
+                    self::TTL_MOVIE
+                );
+            }
 
             $candidates[] = [
                 'id'             => $id,
@@ -192,8 +234,12 @@ class Client
                 'original_title' => (string) ($r['original_title'] ?? ''),
                 'year'           => $this->yearFromDate($r['release_date'] ?? null),
                 'overview'       => Str::short((string) ($r['overview'] ?? ''), 240),
+                // The Panel renders this via a plain <img>, which cannot send
+                // the x-csrf header — without the csrf query param Kirby's API
+                // auth rejects every thumb request for session-authed users.
                 'thumb'          => $id > 0
                     ? $this->kirby->url('api') . '/kinemathek/tmdb/thumb/' . $id
+                        . (($csrf = $this->csrfToken()) !== null ? '?csrf=' . urlencode($csrf) : '')
                     : null,
             ];
         }
@@ -203,13 +249,57 @@ class Client
 
     // ---- movie detail bundle (movie + credits) ---------------------------
 
-    public function movie(int $id): array
+    /**
+     * Movie detail bundle, localized for the given Kirby language code
+     * (null = current language / configured fallback). Cached per TMDB locale,
+     * so two Kirby languages mapping to the same TMDB locale share one entry.
+     */
+    public function movie(int $id, ?string $kirbyLang = null): array
     {
-        $lang = $this->language();
+        $lang = $this->language($kirbyLang);
         return $this->get('movie/' . $id, [
             'language'           => $lang,
             'append_to_response' => 'credits',
         ], 'movie/' . $lang . '/' . $id, self::TTL_MOVIE);
+    }
+
+    // ---- movie images (backdrops -> Szenenbilder) -------------------------
+
+    /**
+     * Cached images payload for a movie. Requested WITHOUT the site language
+     * as the primary filter: backdrops carrying baked-in text are tagged with
+     * a language, textless artwork has iso_639_1 = null — and textless is what
+     * we want for Szenenbilder, with de/en as fallback.
+     */
+    public function images(int $id): array
+    {
+        return $this->get('movie/' . $id . '/images', [
+            'include_image_language' => 'null,de,en',
+        ], 'images/' . $id, self::TTL_MOVIE);
+    }
+
+    /** Best backdrop file paths: textless first, TMDB's vote order preserved. */
+    protected function backdropPaths(array $images, int $max): array
+    {
+        if ($max <= 0) {
+            return [];
+        }
+
+        $textless = [];
+        $titled   = [];
+        foreach ($images['backdrops'] ?? [] as $b) {
+            $path = $b['file_path'] ?? null;
+            if (is_string($path) === false || $path === '') {
+                continue;
+            }
+            if (($b['iso_639_1'] ?? null) === null) {
+                $textless[] = $path;
+            } else {
+                $titled[] = $path;
+            }
+        }
+
+        return array_slice(array_merge($textless, $titled), 0, $max);
     }
 
     // ---- map a TMDB bundle to Film fields --------------------------------
@@ -282,55 +372,185 @@ class Client
             'directors'     => $directors,
             'tmdbId'        => (int) ($b['id'] ?? 0),
             // Source URL only; the caller downloads this into a real file.
-            'poster'        => $this->posterUrl($b['poster_path'] ?? null, $this->posterSize()),
+            'poster'        => $this->imageUrl($b['poster_path'] ?? null, $this->posterSize()),
         ];
     }
 
-    // ---- server-side poster download -> real Kirby file ------------------
+    // ---- server-side image download -> real Kirby files ------------------
 
     /**
-     * Download the chosen movie's poster server-side and attach it to the Film
-     * page as a genuine first-party file. Returns the stored filename or null —
-     * the browser never contacts image.tmdb.org (SPEC §7).
+     * Download one TMDB image server-side and attach it to the page under a
+     * deterministic filename — the browser never contacts image.tmdb.org
+     * (SPEC §7). Re-running is safe: a byte-identical existing file is kept
+     * as-is (content + focus point survive); a same-named file with different
+     * bytes (TMDB swapped the artwork, size option changed) goes through
+     * File::replace(), which keeps uuid/content/refs and leaves the old file
+     * untouched if it throws — createFile would DuplicateException here, and
+     * delete-then-create would lose the old artwork on a failed create.
+     * A failed download (non-200 or curl-level error) returns the existing
+     * same-named file when there is one — a transient CDN error must never
+     * cost a file that is already on the page — and null otherwise.
      */
-    public function attachPoster(Page $page, array $bundle): ?string
+    protected function attachImage(
+        Page $page,
+        string $url,
+        string $filename,
+        string $template,
+        array $content
+    ): ?string {
+        $existing = $page->file($filename);
+
+        try {
+            $response = Remote::get($url, [
+                'timeout' => 10,
+                'agent'   => 'Kinemathek-Kirby/1.0 (+server-side cache)',
+            ]);
+            if ($response->code() !== 200) {
+                return $existing?->filename();
+            }
+        } catch (\Throwable $e) {
+            return $existing?->filename();
+        }
+
+        $tmpDir = $this->kirby->root('cache') . '/kinemathek-tmdb/tmp';
+        Dir::make($tmpDir);
+        $tmpFile = $tmpDir . '/' . uniqid('', true) . '-' . $filename;
+        F::write($tmpFile, $response->content());
+
+        try {
+            if ($existing !== null) {
+                if ($existing->sha1() === sha1_file($tmpFile)) {
+                    return $existing->filename();
+                }
+                return $existing->replace($tmpFile)->filename();
+            }
+
+            $file = $page->createFile([
+                'source'   => $tmpFile,
+                'filename' => $filename,
+                'template' => $template,
+                'content'  => $content,
+            ]);
+
+            return $file->filename();
+        } finally {
+            if (is_file($tmpFile) === true) {
+                F::remove($tmpFile);
+            }
+        }
+    }
+
+    /**
+     * Download the chosen movie's poster and attach it as a first-party file.
+     * $title is the freshly applied title (don't read $page->title(): it falls
+     * back to the slug and the page object may predate the field update).
+     */
+    public function attachPoster(Page $page, array $bundle, ?string $title = null): ?string
     {
-        $url = $this->posterUrl($bundle['poster_path'] ?? null, $this->posterSize());
+        $url = $this->imageUrl($bundle['poster_path'] ?? null, $this->posterSize());
         if ($url === null) {
             return null;
         }
 
-        $response = Remote::get($url, [
-            'timeout' => 10,
-            'agent'   => 'Kinemathek-Kirby/1.0 (+server-side cache)',
+        $tmdbId = (int) ($bundle['id'] ?? 0);
+        $ext    = $this->extensionFromUrl($url);
+        $title  = $title ?? (string) $page->content()->get('title')?->value();
+
+        return $this->attachImage($page, $url, 'tmdb-poster-' . $tmdbId . '.' . $ext, 'poster', [
+            'alt'    => trim($title . ' (Poster)'),
+            'source' => 'TMDB',
         ]);
-        if ($response->code() !== 200) {
-            return null;
+    }
+
+    /**
+     * Download the best backdrops as Szenenbilder (SPEC §2.1: poster/stills
+     * from TMDB). Filenames are keyed on the TMDB image id, so re-runs replace
+     * or reuse instead of stacking duplicates. One broken download must not
+     * abort the batch, so each still is attached in its own try/catch.
+     *
+     * Returns ['attempted' => int, 'stored' => string[]] — attempted=0 means
+     * TMDB has no backdrops at all, which callers must treat differently from
+     * "downloads failed" (attempted > 0, stored empty).
+     */
+    public function attachStills(Page $page, array $bundle, ?string $title = null): array
+    {
+        $tmdbId = (int) ($bundle['id'] ?? 0);
+        if ($tmdbId <= 0) {
+            return ['attempted' => 0, 'stored' => []];
         }
 
-        $tmdbId   = (int) ($bundle['id'] ?? 0);
-        $ext      = pathinfo(parse_url($url, PHP_URL_PATH), PATHINFO_EXTENSION) ?: 'jpg';
-        $filename = 'tmdb-poster-' . $tmdbId . '.' . $ext;
-        $tmpDir   = $this->kirby->root('cache') . '/kinemathek-tmdb/tmp';
-        Dir::make($tmpDir);
-        $tmpFile  = $tmpDir . '/' . $filename;
-        F::write($tmpFile, $response->content());
+        $paths = $this->backdropPaths($this->images($tmdbId), $this->maxStills());
+        $title = $title ?? (string) $page->content()->get('title')?->value();
+        $size  = $this->stillSize();
+
+        $stored = [];
+        foreach ($paths as $path) {
+            $url = $this->imageUrl($path, $size);
+            if ($url === null) {
+                continue;
+            }
+
+            $key  = Str::slug(pathinfo($path, PATHINFO_FILENAME));
+            $name = 'tmdb-still-' . $tmdbId . '-' . $key . '.' . $this->extensionFromUrl($url);
+
+            try {
+                $filename = $this->attachImage($page, $url, $name, 'still', [
+                    'alt'    => trim($title . ' (Szenenbild)'),
+                    'source' => 'TMDB',
+                ]);
+            } catch (\Throwable $e) {
+                $filename = null; // this still failed; keep going with the rest
+            }
+
+            if ($filename !== null) {
+                $stored[] = $filename;
+            }
+        }
+
+        return ['attempted' => count($paths), 'stored' => $stored];
+    }
+
+    /**
+     * Remove previously synced TMDB files of one kind ('poster'|'still'),
+     * keeping $except (freshly attached filenames). Manual uploads are never
+     * touched — only files matching the plugin's own tmdb-* naming go.
+     */
+    public function removeTmdbImages(Page $page, string $type, array $except = []): void
+    {
+        $prefix = 'tmdb-' . $type . '-';
+        foreach ($page->files()->template($type) as $file) {
+            if (
+                Str::startsWith($file->filename(), $prefix) === true &&
+                in_array($file->filename(), $except, true) === false
+            ) {
+                $file->delete();
+            }
+        }
+    }
+
+    protected function extensionFromUrl(string $url): string
+    {
+        return pathinfo((string) parse_url($url, PHP_URL_PATH), PATHINFO_EXTENSION) ?: 'jpg';
+    }
+
+    /**
+     * CSRF token to embed in thumb URLs. Prefers the incoming request's
+     * (already validated) token — the Panel always sends x-csrf — then the
+     * session token (covers panel.dev / api.csrf setups). Null when neither
+     * exists (basic auth, CLI), where Kirby skips the csrf check anyway.
+     */
+    protected function csrfToken(): ?string
+    {
+        $token = $this->kirby->request()->csrf();
+        if (is_string($token) === true && $token !== '') {
+            return $token;
+        }
 
         try {
-            $file = $page->createFile([
-                'source'   => $tmpFile,
-                'filename' => $filename,
-                'template' => 'poster',
-                'content'  => [
-                    'alt'    => $page->title()->value() . ' (Poster)',
-                    'source' => 'TMDB',
-                ],
-            ]);
-        } finally {
-            F::remove($tmpFile);
+            return $this->kirby->auth()->csrfFromSession();
+        } catch (\Throwable $e) {
+            return null;
         }
-
-        return $file?->filename();
     }
 
     // ---- search-preview thumbnails (server-side cache, first-party proxy)--
@@ -355,31 +575,48 @@ class Client
         return null;
     }
 
-    /** Best-effort: download + store a small preview thumbnail server-side. */
-    protected function cacheThumb(int $tmdbId, ?string $posterPath): void
+    /**
+     * Disk path of the preview thumbnail, downloading it server-side on first
+     * demand (called by the proxy route per request, so a failed download
+     * self-heals on the next view instead of sticking as a placeholder).
+     * Returns null when the movie has no poster or the download fails.
+     */
+    public function ensureThumb(int $tmdbId): ?string
     {
-        if ($tmdbId <= 0 || empty($posterPath) === true || $this->thumbPath($tmdbId) !== null) {
-            return;
+        if ($tmdbId <= 0) {
+            return null;
         }
-
-        $url = $this->posterUrl($posterPath, $this->thumbSize());
-        if ($url === null) {
-            return;
+        if ($path = $this->thumbPath($tmdbId)) {
+            return $path;
         }
 
         try {
+            // Poster path remembered at search time; fall back to the (cached)
+            // detail call for thumbs requested after the search cache expired.
+            $posterPath = $this->cache()->get('posterpath/' . $tmdbId);
+            if ($posterPath === null) {
+                $posterPath = (string) ($this->movie($tmdbId)['poster_path'] ?? '');
+            }
+
+            $url = $this->imageUrl($posterPath ?: null, $this->thumbSize());
+            if ($url === null) {
+                return null;
+            }
+
             $response = Remote::get($url, [
                 'timeout' => 6,
                 'agent'   => 'Kinemathek-Kirby/1.0 (+server-side cache)',
             ]);
             if ($response->code() !== 200) {
-                return;
+                return null;
             }
-            $ext = pathinfo(parse_url($url, PHP_URL_PATH), PATHINFO_EXTENSION) ?: 'jpg';
+
+            $file = $this->thumbDir() . '/' . $tmdbId . '.' . $this->extensionFromUrl($url);
             Dir::make($this->thumbDir());
-            F::write($this->thumbDir() . '/' . $tmdbId . '.' . $ext, $response->content());
+            F::write($file, $response->content());
+            return $file;
         } catch (\Throwable $e) {
-            // Non-fatal: preview falls back to the placeholder.
+            return null; // preview falls back to the placeholder
         }
     }
 
@@ -401,8 +638,12 @@ class Client
     public static function attribution(): array
     {
         return [
-            'text' => 'Dieses Produkt nutzt die TMDB-API, ist aber nicht von TMDB '
-                . 'unterstützt oder zertifiziert.',
+            // Localized via the language files; German wording is the fallback.
+            'text' => t(
+                'kinemathek.tmdb.attribution',
+                'Dieses Produkt nutzt die TMDB-API, ist aber nicht von TMDB '
+                . 'unterstützt oder zertifiziert.'
+            ),
             'url'  => 'https://www.themoviedb.org/',
             // Per TMDB branding a self-hosted logo should accompany this text
             // before launch: add it under /assets and render it via url() — never

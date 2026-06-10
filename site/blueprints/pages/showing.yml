@@ -30,6 +30,8 @@ columns:
             required: true
             max: 1
             multiple: false
+            # The Film relation is structural — never per-language.
+            translate: false
             query: site.find("films").children
             image:
               query: page.poster.toFile
@@ -57,11 +59,16 @@ columns:
             display: DD.MM.YYYY
             icon: calendar
             width: 1/2
+            # Drives num:, program ordering and ICS — must be identical in
+            # every language.
+            translate: false
           venue:
             label: Ort / Saal
             type: text
             icon: pin
             width: 1/2
+            # Venue/Saal names are proper names — shared across languages.
+            translate: false
 
       extras:
         type: fields
@@ -78,6 +85,7 @@ columns:
             label: Ticket-Link (Mars EDV)
             type: url
             icon: ticket
+            translate: false
             help: Externer Link. Keine Zahlung / kein iframe auf der Website (SPEC §6).
 
   # Sidebar: per-occurrence facets and routing.
@@ -96,6 +104,8 @@ columns:
             type: multiselect
             icon: globe
             # Per-occurrence facet — can differ per showing (SPEC §2.2).
+            # Option KEYS (OmU/OmeU/…) are invariant codes — never translated.
+            translate: false
             options:
               OmU: OmU
               OmeU: OmeU
@@ -105,6 +115,7 @@ columns:
           hasDiscussion:
             label: Mit Filmgespräch
             type: toggle
+            translate: false
             text:
               - "Nein"
               - "Ja"
@@ -124,6 +135,8 @@ columns:
             label: Platzierung
             type: multiselect
             # Placement / routing — controls WHERE this surfaces (SPEC §2.4).
+            # Routing keys are invariant — never translated.
+            translate: false
             options:
               spielplan: Spielplan
               koop: Kooperation

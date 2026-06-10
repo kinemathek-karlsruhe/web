@@ -76,6 +76,16 @@ App::plugin('kinemathek/core', [
          */
         'commaList' => fn ($field, string $glue = ', ') =>
             implode($glue, Kinemathek\Kinemathek::splitField($field)),
+
+        /**
+         * Locale-aware date output for the current content language (templates
+         * only — Panel info:/num: keep the locale-neutral toDate()). Formats:
+         * datetime | long | short | date — see Kinemathek::localDate().
+         */
+        'localDate' => fn ($field, string $format = 'datetime'): string =>
+            $field->isEmpty()
+                ? ''
+                : Kinemathek\Kinemathek::localDate($field->toDate(), $format),
     ],
 
     // Cross-type page methods for the ICS export. Showings and Events both

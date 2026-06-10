@@ -1,9 +1,12 @@
 /* Kinemathek TMDB lookup field.
  *
- * Styled with Kirby Panel CSS custom properties (--color-*, --spacing-*,
- * --rounded, --text-*) so it inherits the active light/dark theme. Every
- * var() carries a sensible fallback so the field still looks correct if a
- * token is ever renamed upstream. */
+ * Styled with Kirby Panel CSS custom properties (--color-*, --theme-color-*,
+ * --spacing-*, --rounded, --text-*) so it inherits the active light/dark
+ * theme. Boxes carry a `data-theme` attribute: the Panel's generic
+ * [data-theme] rule then provides the full adaptive --theme-color-* scale.
+ * Where a palette step must differ between schemes we use native
+ * light-dark() — the Panel sets color-scheme per theme on :root, and Kirby 5
+ * requires evergreen browsers anyway. */
 
 .k-tmdblookup {
   display: flex;
@@ -33,22 +36,32 @@
   align-items: center;
 }
 
-/* ── Mode toggle + hint ─────────────────────────────────────────────────── */
-.k-tmdblookup-mode {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-1, 0.25rem);
+/* The held bar: a linked movie sits in the (disabled) search input as
+   "Titel (Jahr) – Regie – TMDB 123". Keep the text readable — the default
+   disabled dimming would make the held state look broken rather than set. */
+.k-tmdblookup-search .k-tmdblookup-held {
+  background: light-dark(
+    var(--color-blue-200, #d2e0fb),
+    hsl(var(--color-blue-hs, 216, 80%), 16%)
+  );
+  border-color: light-dark(
+    var(--color-blue-400, #a9c6f5),
+    hsl(var(--color-blue-hs, 216, 80%), 30%)
+  );
 }
 
-.k-tmdblookup-mode-hint {
-  color: var(--color-text-dimmed, #888);
-  font-size: var(--text-xs, 0.75rem);
-  line-height: 1.4;
+.k-tmdblookup-search .k-tmdblookup-held input[disabled] {
+  opacity: 1;
+  color: var(--color-text, #16171a);
+  -webkit-text-fill-color: var(--color-text, #16171a);
 }
 
-/* ── Boxes (idle / error / success) ──────────────────────────────────────
+/* ── Boxes (idle / error / success / warning) ────────────────────────────
  * Rendered as plain elements (not k-box) so we never depend on an
- * unverified k-box `icon` prop. Themed with Panel color tokens. */
+ * unverified k-box `icon` prop. Each box carries data-theme="passive|
+ * negative|positive|info|warning"; the Panel's [data-theme] rule supplies
+ * the --theme-color-* scale for that hue, and light-dark() picks pastel
+ * surfaces in light mode / deep tinted surfaces in dark mode. */
 .k-tmdblookup-box {
   display: flex;
   align-items: flex-start;
@@ -57,36 +70,20 @@
   border-radius: var(--rounded, 0.25rem);
   font-size: var(--text-sm, 0.875rem);
   line-height: 1.45;
+  background: light-dark(var(--theme-color-200), var(--theme-color-900));
+  color: light-dark(var(--theme-color-800), var(--theme-color-200));
+  border: 1px solid light-dark(var(--theme-color-300), var(--theme-color-800));
 }
 
 .k-tmdblookup-box .k-icon {
   flex: 0 0 auto;
   margin-top: 0.1em;
+  color: light-dark(var(--theme-color-700), var(--theme-color-400));
 }
 
 .k-tmdblookup-box-sub {
-  color: var(--color-text-dimmed, #888);
   font-size: var(--text-xs, 0.75rem);
-}
-
-.k-tmdblookup-box--passive {
-  color: var(--color-text-dimmed, #6d6d6d);
-  background: var(--color-gray-200, #efefef);
-}
-
-.k-tmdblookup-box--negative {
-  color: var(--color-red-900, #481310);
-  background: var(--color-red-200, #f9dada);
-}
-
-.k-tmdblookup-box--positive {
-  color: var(--color-green-900, #133d1b);
-  background: var(--color-green-200, #d4ecd8);
-}
-
-.k-tmdblookup-box--info {
-  color: var(--color-blue-900, #1c2956);
-  background: var(--color-blue-200, #d2e0fb);
+  opacity: 0.8;
 }
 
 /* ── Loading state ──────────────────────────────────────────────────────── */
@@ -143,18 +140,14 @@
 }
 
 .k-tmdblookup-card:hover {
-  border-color: var(--color-gray-400, #c2c2c2);
+  border-color: light-dark(var(--color-gray-400), var(--color-gray-650));
   box-shadow: var(--shadow, 0 2px 5px rgba(0, 0, 0, 0.05));
 }
 
-.k-tmdblookup-card--applying {
-  border-color: var(--color-green-500, #4caf50);
-}
-
-/* While one card is being applied, fade the others so the active one stands
- * out and double-submits read as visually blocked (they are also disabled). */
-.k-tmdblookup-card--dimmed {
-  opacity: 0.55;
+/* The chosen card while applying (the list collapses to just this one). */
+.k-tmdblookup-card--applying,
+.k-tmdblookup-card--applying:hover {
+  border-color: light-dark(var(--color-green-500), var(--color-green-700));
 }
 
 /* Thumbnail (2:3 poster) with graceful no-image fallback. */
@@ -163,7 +156,7 @@
   margin: 0;
   border-radius: var(--rounded-sm, 0.1875rem);
   overflow: hidden;
-  background: var(--color-gray-200, #efefef);
+  background: light-dark(var(--color-gray-200), var(--color-gray-850));
 }
 
 .k-tmdblookup-thumb .k-image {
@@ -178,7 +171,7 @@
   aspect-ratio: 2 / 3;
   width: 100%;
   color: var(--color-text-dimmed, #aaa);
-  background: var(--color-gray-200, #efefef);
+  background: light-dark(var(--color-gray-200), var(--color-gray-850));
 }
 
 /* Card body */
@@ -230,8 +223,10 @@
 }
 
 .k-tmdblookup-actions {
-  margin-top: var(--spacing-1, 0.25rem);
+  margin-top: var(--spacing-2, 0.5rem);
   display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-2, 0.5rem);
 }
 
 /* ── TMDB attribution (required by TMDB terms, SPEC §4) ──────────────────── */
