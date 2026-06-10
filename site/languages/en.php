@@ -88,6 +88,7 @@ return [
         'kinemathek.mb.filter'           => 'Filter',
         'kinemathek.mb.all'              => 'All',
         'kinemathek.mb.show'             => 'screening',
+        'kinemathek.mb.film'             => 'film',
         'kinemathek.mb.shows'            => 'screenings',
         'kinemathek.mb.series'           => 'Series',
         'kinemathek.mb.allSeries'        => 'All series',

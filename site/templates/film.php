@@ -1,85 +1,139 @@
-<?php snippet('header') ?>
 <?php
+
+use Kinemathek\Kinemathek;
+
 /**
- * Single Film page (SPEC §3): metadata + upcoming (clickable) and past
- * (non-clickable history) showings. Poster/stills use Fancybox.
- * UI strings via t(); dates via the locale-aware localDate field method.
+ * Single Film page — Monatsblatt design (SPEC §3): big typographic head with
+ * the poster alongside, synopsis, Fancybox stills, then upcoming (clickable)
+ * and past (history-only) showings as listing-style rows.
  *
+ * @var \Kirby\Cms\Page $page
  * @var \Kirby\Cms\Pages $upcoming
  * @var \Kirby\Cms\Pages $past
  * @var \Kirby\Content\Structure $directors
  */
+
+// Credits line, print style (same dialect as the listing snippet —
+// -> FilmPage::creditsLine() once the plugin unfreezes)
+$names = [];
+foreach ($directors as $director) {
+    $names[] = (string)$director->name();
+}
+$credits = implode(', ', array_filter($names));
+$tail = trim(implode('/', array_map('strtoupper', Kinemathek::splitField($page->country())))
+    . ' ' . $page->year()->value());
+if ($tail !== '') {
+    $credits .= ($credits !== '' ? ', ' : '') . $tail;
+}
+if ($page->runtime()->isNotEmpty()) {
+    $credits .= ($credits !== '' ? '; ' : '') . $page->runtime()->value() . '′';
+}
+
+$showRow = function (\Kirby\Cms\Page $showing, bool $clickable) {
+    $ts = $showing->timestamp();
+    $vk = stripos($showing->venue()->value() ?? '', 'box') !== false ? 'box' : 'saal';
+    ?>
+    <li class="show-row<?= $clickable ? '' : ' past' ?>">
+      <span class="sr-date">
+        <?php if ($clickable): ?><a href="<?= $showing->url() ?>"><?php endif ?>
+        <?= html(rtrim(Kinemathek::localDate($ts, 'detail'), '.')) ?>
+        <?php if ($clickable): ?></a><?php endif ?>
+      </span>
+      <span class="time"><?= date('G', $ts) ?><sup><?= date('i', $ts) ?></sup></span>
+      <span class="vtag <?= $vk ?>"><?= $vk === 'box' ? 'Box' : 'Saal' ?></span>
+      <?php if ($showing->subtitles()->isNotEmpty()): ?>
+        <span class="sr-subs"><?= html($showing->subtitles()->commaList()) ?></span>
+      <?php endif ?>
+      <?php if ($clickable): ?>
+        <span class="sr-actions">
+          <?php if ($showing->ticketUrl()->isNotEmpty()): ?>
+            <a class="btn" href="<?= $showing->ticketUrl()->esc() ?>" rel="noopener noreferrer"><?= html(t('kinemathek.tickets', 'Tickets')) ?></a>
+          <?php endif ?>
+          <?php snippet('add-to-calendar', ['page' => $showing, 'class' => 'btn']) ?>
+        </span>
+      <?php endif ?>
+    </li>
+    <?php
+};
 ?>
-<article class="mx-auto max-w-3xl p-6">
-  <h1 class="text-2xl font-bold"><?= html($page->title()) ?></h1>
+<?php snippet('header', ['languageNav' => false]) ?>
+<div class="sheet">
 
-  <?php if ($poster = $page->posterFile()): ?>
-    <a href="<?= $poster->url() ?>" data-fancybox="film" data-caption="<?= html($page->title()) ?>">
-      <img src="<?= $poster->url() ?>" alt="<?= html($page->title()) ?>" class="my-4 max-w-[220px] h-auto">
-    </a>
-  <?php endif ?>
+  <?php snippet('monatsblatt-masthead', ['active' => 'films']) ?>
 
-  <dl class="grid grid-cols-[max-content_1fr] gap-x-4">
-    <?php if ($page->originalTitle()->isNotEmpty()): ?><dt class="font-semibold"><?= html(t('kinemathek.film.originalTitle', 'Originaltitel')) ?></dt><dd><?= html($page->originalTitle()) ?></dd><?php endif ?>
-    <?php if ($page->year()->isNotEmpty()): ?><dt class="font-semibold"><?= html(t('kinemathek.film.year', 'Jahr')) ?></dt><dd><?= html($page->year()) ?></dd><?php endif ?>
-    <?php if ($page->country()->isNotEmpty()): ?><dt class="font-semibold"><?= html(t('kinemathek.film.country', 'Land')) ?></dt><dd><?= html($page->country()->commaList()) ?></dd><?php endif ?>
-    <?php if ($page->language()->isNotEmpty()): ?><dt class="font-semibold"><?= html(t('kinemathek.film.language', 'Sprache')) ?></dt><dd><?= html($page->language()->commaList()) ?></dd><?php endif ?>
-    <?php if ($page->runtime()->isNotEmpty()): ?><dt class="font-semibold"><?= html(t('kinemathek.film.runtime', 'Laufzeit')) ?></dt><dd><?= html($page->runtime()) ?> min</dd><?php endif ?>
-    <?php if ($page->genre()->isNotEmpty()): ?><dt class="font-semibold"><?= html(t('kinemathek.film.genre', 'Genre')) ?></dt><dd><?= html($page->genre()->commaList()) ?></dd><?php endif ?>
-  </dl>
+  <div id="pivot-content">
 
-  <?php if ($directors->count() > 0): ?>
-    <h2 class="font-semibold mt-4"><?= html(t('kinemathek.film.directors', 'Regie')) ?></h2>
-    <ul><?php foreach ($directors as $director): ?><li><?= html($director->name()) ?></li><?php endforeach ?></ul>
-  <?php endif ?>
-
-  <?php if ($page->synopsis()->isNotEmpty()): ?>
-    <h2 class="font-semibold mt-4"><?= html(t('kinemathek.film.synopsis', 'Inhalt')) ?></h2>
-    <div class="prose"><?= $page->synopsis()->kt() ?></div>
-  <?php endif ?>
-
-  <?php $stills = $page->stills()->toFiles() ?>
-  <?php if ($stills->count() > 0): ?>
-    <h2 class="font-semibold mt-4"><?= html(t('kinemathek.film.stills', 'Szenenbilder')) ?></h2>
-    <div class="flex flex-wrap gap-2">
-      <?php foreach ($stills as $still): ?>
-        <a href="<?= $still->url() ?>" data-fancybox="film-stills" data-caption="<?= html($still->caption()) ?>">
-          <img src="<?= $still->url() ?>" alt="<?= html($still->alt()) ?>" class="h-24 w-auto">
-        </a>
-      <?php endforeach ?>
+  <article class="film-page">
+    <div class="fp-head">
+      <div class="fp-text">
+        <?php if ($page->series()->isNotEmpty()): ?>
+          <p class="d-series"><?= html($page->series()->commaList()) ?></p>
+        <?php endif ?>
+        <h2 class="fp-title"><?= html($page->title()) ?></h2>
+        <?php if ($credits !== ''): ?><p class="fp-credits"><?= html($credits) ?></p><?php endif ?>
+        <p class="fp-facts">
+          <?php if ($page->originalTitle()->isNotEmpty() && $page->originalTitle()->value() !== $page->title()->value()): ?>
+            <span><?= html(t('kinemathek.film.originalTitle', 'Originaltitel')) ?>: <?= html($page->originalTitle()) ?></span>
+          <?php endif ?>
+          <?php if ($page->genre()->isNotEmpty()): ?>
+            <span><?= html($page->genre()->commaList()) ?></span>
+          <?php endif ?>
+          <?php if ($page->language()->isNotEmpty()): ?>
+            <span><?= html(t('kinemathek.film.language', 'Sprache')) ?>: <?= html(strtoupper($page->language()->commaList())) ?></span>
+          <?php endif ?>
+        </p>
+        <?php if ($page->synopsis()->isNotEmpty()): ?>
+          <div class="fp-syn"><?= $page->synopsis()->kt() ?></div>
+        <?php endif ?>
+      </div>
+      <?php if ($poster = $page->posterFile()): ?>
+        <figure class="fp-poster">
+          <a href="<?= $poster->url() ?>" data-fancybox="film" data-caption="<?= html($page->title()) ?>">
+            <img src="<?= $poster->resize(560)->url() ?>" alt="<?= $poster->alt()->or($page->title())->esc() ?>">
+          </a>
+        </figure>
+      <?php endif ?>
     </div>
-  <?php endif ?>
 
-  <h2 class="font-semibold mt-6"><?= html(t('kinemathek.film.upcoming', 'Kommende Vorstellungen')) ?></h2>
-  <?php if ($upcoming->count() === 0): ?>
-    <p class="text-gray-500"><?= html(t('kinemathek.program.none', 'Derzeit keine Termine.')) ?></p>
-  <?php else: ?>
-    <ul>
-      <?php foreach ($upcoming as $showing): ?>
-        <li class="py-1">
-          <a class="underline" href="<?= $showing->url() ?>"><?= html($showing->date()->localDate('datetime')) ?></a>
-          <?php if ($showing->subtitles()->isNotEmpty()): ?> · <?= html($showing->subtitles()->commaList()) ?><?php endif ?>
-          <?php if ($showing->ticketUrl()->isNotEmpty()): ?> · <a href="<?= $showing->ticketUrl()->esc() ?>" rel="noopener noreferrer"><?= html(t('kinemathek.tickets', 'Tickets')) ?></a><?php endif ?>
-          · <?php snippet('add-to-calendar', ['page' => $showing]) ?>
-        </li>
-      <?php endforeach ?>
-    </ul>
-  <?php endif ?>
+    <?php $stills = $page->stills()->toFiles() ?>
+    <?php if ($stills->count() > 0): ?>
+      <ul class="fp-stills">
+        <?php foreach ($stills as $still): ?>
+          <li>
+            <a href="<?= $still->url() ?>" data-fancybox="film-stills" data-caption="<?= html($still->caption()) ?>">
+              <img src="<?= $still->resize(520)->url() ?>" alt="<?= $still->alt()->esc() ?>" loading="lazy">
+            </a>
+          </li>
+        <?php endforeach ?>
+      </ul>
+    <?php endif ?>
 
-  <h2 class="font-semibold mt-6"><?= html(t('kinemathek.film.past', 'Frühere Vorstellungen')) ?></h2>
-  <?php if ($past->count() === 0): ?>
-    <p class="text-gray-500">—</p>
-  <?php else: ?>
-    <ul class="text-gray-500">
-      <?php foreach ($past as $showing): ?>
-        <!-- past showings are visible but NOT clickable (SPEC §3) -->
-        <li class="py-1"><?= html($showing->date()->localDate('datetime')) ?><?php if ($showing->subtitles()->isNotEmpty()): ?> · <?= html($showing->subtitles()->commaList()) ?><?php endif ?></li>
-      <?php endforeach ?>
-    </ul>
-  <?php endif ?>
+    <section class="fp-shows">
+      <h3 class="daybar"><span class="dow"><?= html(t('kinemathek.film.upcoming', 'Kommende Vorstellungen')) ?></span></h3>
+      <?php if ($upcoming->count() === 0): ?>
+        <p class="program-empty" style="display:block"><?= html(t('kinemathek.program.none', 'Derzeit keine Termine.')) ?></p>
+      <?php else: ?>
+        <ul class="show-list">
+          <?php foreach ($upcoming as $showing) $showRow($showing, true) ?>
+        </ul>
+      <?php endif ?>
 
-  <?php $attr = $site->tmdbAttribution() ?>
-  <p class="text-xs text-gray-400 mt-10"><?= html($attr['text']) ?>
-    <a href="<?= $attr['url'] ?>" rel="noopener noreferrer">themoviedb.org</a></p>
-</article>
-<?php snippet('footer') ?>
+      <?php if ($past->count() > 0): ?>
+        <h3 class="daybar"><span class="dow"><?= html(t('kinemathek.film.past', 'Frühere Vorstellungen')) ?></span></h3>
+        <ul class="show-list">
+          <?php /* past showings are visible but NOT clickable (SPEC §3) */ ?>
+          <?php foreach ($past as $showing) $showRow($showing, false) ?>
+        </ul>
+      <?php endif ?>
+    </section>
+  </article>
+
+  <?php $attr = $site->tmdbAttribution(); ?>
+  <?php snippet('monatsblatt-colophon', [
+      'extra' => html($attr['text']) . ' <a href="' . $attr['url'] . '" rel="noopener noreferrer">themoviedb.org</a>',
+  ]) ?>
+
+  </div><?php /* /#pivot-content */ ?>
+
+</div>
+<?php snippet('footer', ['scripts' => ['assets/js/monatsblatt.js', 'assets/js/program.js']]) ?>

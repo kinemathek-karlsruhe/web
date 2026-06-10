@@ -1,42 +1,108 @@
-<?php snippet('header') ?>
 <?php
+
+use Kinemathek\Kinemathek;
+
 /**
- * Single Showing (SPEC §2.2 / §3).
- * UI strings via t(); dates via the locale-aware localDate field method.
+ * Single Showing — Monatsblatt design (SPEC §2.2 / §3): the program's detail
+ * panel as a standalone card. All info + Tickets/.ics/film actions, plus
+ * other upcoming dates of the same film.
  *
+ * @var \Kirby\Cms\Page $page
  * @var \Kirby\Cms\Page|null $film
  * @var bool $isPast
  * @var \Kirby\Cms\Pages $otherShowings
  */
+
+$ts = $page->timestamp();
+$vk = stripos($page->venue()->value() ?? '', 'box') !== false ? 'box' : 'saal';
+
+$credits = '';
+if ($film) {
+    $names = [];
+    foreach ($film->directors() as $director) {
+        $names[] = (string)$director->name();
+    }
+    $credits = implode(', ', array_filter($names));
+    $tail = trim(implode('/', array_map('strtoupper', Kinemathek::splitField($film->country())))
+        . ' ' . $film->year()->value());
+    if ($tail !== '') {
+        $credits .= ($credits !== '' ? ', ' : '') . $tail;
+    }
+    if ($film->runtime()->isNotEmpty()) {
+        $credits .= ($credits !== '' ? '; ' : '') . $film->runtime()->value() . '′';
+    }
+}
+$still = $film ? ($film->stills()->toFiles()->first() ?? $film->posterFile()) : null;
 ?>
-<article class="mx-auto max-w-3xl p-6">
-  <h1 class="text-2xl font-bold"><?= html($page->displayTitle()) ?></h1>
+<?php snippet('header', ['languageNav' => false]) ?>
+<div class="sheet">
 
-  <p class="text-lg"><?= html($page->date()->localDate('long')) ?><?= $isPast ? ' ' . html(t('kinemathek.past', '(vergangen)')) : '' ?></p>
+  <?php snippet('monatsblatt-masthead', ['active' => 'program']) ?>
 
-  <?php if ($page->venue()->isNotEmpty()): ?><p><?= html(t('kinemathek.venue', 'Ort')) ?>: <?= html($page->venue()) ?></p><?php endif ?>
-  <?php if ($page->subtitles()->isNotEmpty()): ?><p><?= html(t('kinemathek.showing.version', 'Fassung')) ?>: <?= html($page->subtitles()->commaList()) ?></p><?php endif ?>
-  <?php if ($page->hasDiscussion()->toBool()): ?><p><?= html(t('kinemathek.showing.discussion', 'Mit Filmgespräch.')) ?></p><?php endif ?>
-  <?php if ($page->sonderinfo()->isNotEmpty()): ?><div class="prose my-3"><?= $page->sonderinfo()->kt() ?></div><?php endif ?>
+  <div id="pivot-content">
 
-  <?php if ($film): ?>
-    <p><?= html(t('kinemathek.showing.film', 'Film')) ?>: <a class="underline" href="<?= $film->url() ?>"><?= html($film->title()) ?></a></p>
-  <?php endif ?>
+  <article class="single-card">
+    <div class="detail">
+      <header class="d-head">
+        <span class="d-date"><?= $ts ? html(Kinemathek::localDate($ts, 'detail')) : '' ?></span>
+        <?php if ($ts): ?><span class="d-time"><?= date('G', $ts) ?><sup><?= date('i', $ts) ?></sup></span><?php endif ?>
+        <span class="vtag <?= $vk ?>"><?= $vk === 'box' ? 'Box' : 'Saal' ?></span>
+        <?php if ($isPast): ?><span class="past-tag"><?= html(t('kinemathek.past', '(vergangen)')) ?></span><?php endif ?>
+      </header>
+      <?php if ($film && $film->series()->isNotEmpty()): ?>
+        <p class="d-series"><?= html(Kinemathek::splitField($film->series())[0] ?? '') ?></p>
+      <?php endif ?>
+      <h2 class="d-title"><?= html($page->displayTitle()) ?></h2>
+      <?php if ($credits !== ''): ?><p class="d-credits"><?= html($credits) ?></p><?php endif ?>
+      <?php
+      $flags = [];
+      foreach (Kinemathek::splitField($page->subtitles()) as $sub) {
+          $flags[] = t('kinemathek.version.' . strtolower($sub), $sub);
+      }
+      if ($page->hasDiscussion()->toBool()) {
+          $flags[] = t('kinemathek.mb.legend.talk');
+      }
+      ?>
+      <?php if ($flags !== []): ?>
+        <ul class="d-flags"><?php foreach ($flags as $flag): ?><li><?= html($flag) ?></li><?php endforeach ?></ul>
+      <?php endif ?>
+      <?php if ($page->sonderinfo()->isNotEmpty()): ?>
+        <div class="d-note"><?= $page->sonderinfo()->kt() ?></div>
+      <?php endif ?>
+      <?php if ($still): ?>
+        <figure class="d-still">
+          <img src="<?= $still->resize(900)->url() ?>" alt="<?= $still->alt()->or($page->displayTitle())->esc() ?>">
+        </figure>
+      <?php endif ?>
+      <?php if ($film && $film->synopsis()->isNotEmpty()): ?>
+        <p class="d-syn"><?= nl2br(html(trim($film->synopsis()->value()))) ?></p>
+      <?php endif ?>
+      <p class="d-actions">
+        <?php if (!$isPast && $page->ticketUrl()->isNotEmpty()): ?>
+          <a class="btn" href="<?= $page->ticketUrl()->esc() ?>" rel="noopener noreferrer"><?= html(t('kinemathek.tickets.mars', 'Tickets (Mars EDV)')) ?></a>
+        <?php endif ?>
+        <?php if (!$isPast): ?>
+          <?php snippet('add-to-calendar', ['page' => $page, 'class' => 'btn']) ?>
+        <?php endif ?>
+        <?php if ($film): ?>
+          <a class="btn" href="<?= $film->url() ?>"><?= html(t('kinemathek.mb.filmpage')) ?></a>
+        <?php endif ?>
+        <a class="btn" href="<?= $site->url() ?>"><?= html(t('kinemathek.program', 'Spielplan')) ?></a>
+      </p>
+      <?php if ($otherShowings->count() > 0): ?>
+        <p class="d-others">
+          <strong><?= html(t('kinemathek.showing.others', 'Weitere Termine dieses Films')) ?>:</strong>
+          <?php foreach ($otherShowings as $other): ?>
+            <a href="<?= $other->url() ?>"><?= html($other->date()->localDate('short')) ?></a>
+          <?php endforeach ?>
+        </p>
+      <?php endif ?>
+    </div>
+  </article>
 
-  <p class="my-4">
-    <?php if ($page->ticketUrl()->isNotEmpty()): ?>
-      <a class="underline font-semibold" href="<?= $page->ticketUrl()->esc() ?>" rel="noopener noreferrer"><?= html(t('kinemathek.tickets.mars', 'Tickets (Mars EDV)')) ?></a> ·
-    <?php endif ?>
-    <?php snippet('add-to-calendar', ['page' => $page]) ?>
-  </p>
+  <?php snippet('monatsblatt-colophon') ?>
 
-  <?php if ($otherShowings->count() > 0): ?>
-    <h2 class="font-semibold mt-6"><?= html(t('kinemathek.showing.others', 'Weitere Termine dieses Films')) ?></h2>
-    <ul>
-      <?php foreach ($otherShowings as $other): ?>
-        <li><a class="underline" href="<?= $other->url() ?>"><?= html($other->date()->localDate('short')) ?></a></li>
-      <?php endforeach ?>
-    </ul>
-  <?php endif ?>
-</article>
-<?php snippet('footer') ?>
+  </div><?php /* /#pivot-content */ ?>
+
+</div>
+<?php snippet('footer', ['scripts' => ['assets/js/monatsblatt.js', 'assets/js/program.js']]) ?>

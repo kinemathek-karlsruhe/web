@@ -1,26 +1,73 @@
-<?php snippet('header') ?>
 <?php
+
+use Kinemathek\Kinemathek;
+
 /**
- * Single non-film Event (SPEC §2.3).
- * UI strings via t(); the date via the locale-aware localDate field method.
+ * Single non-film Event — Monatsblatt design (SPEC §2.3): the program's
+ * detail panel as a standalone card.
  *
+ * @var \Kirby\Cms\Page $page
  * @var bool $isPast
  */
+
+$ts = $page->timestamp();
+$vk = stripos($page->venue()->value() ?? '', 'box') !== false ? 'box' : 'saal';
+// NB: ->image() is a native Page method — read the files field explicitly
+$image = $page->content()->get('image')->toFile();
 ?>
-<article class="mx-auto max-w-3xl p-6">
-  <h1 class="text-2xl font-bold"><?= html($page->displayTitle()) ?></h1>
+<?php snippet('header', ['languageNav' => false]) ?>
+<div class="sheet">
 
-  <p class="text-lg"><?= html($page->date()->localDate('long')) ?><?= $isPast ? ' ' . html(t('kinemathek.past', '(vergangen)')) : '' ?></p>
+  <?php snippet('monatsblatt-masthead', ['active' => 'events']) ?>
 
-  <?php if ($page->venue()->isNotEmpty()): ?><p><?= html(t('kinemathek.venue', 'Ort')) ?>: <?= html($page->venue()) ?></p><?php endif ?>
-  <?php if ($page->hasDiscussion()->toBool()): ?><p><?= html(t('kinemathek.event.discussion', 'Mit Gespräch.')) ?></p><?php endif ?>
-  <?php if ($page->text()->isNotEmpty()): ?><div class="prose my-3"><?= $page->text()->kt() ?></div><?php endif ?>
+  <div id="pivot-content">
 
-  <p class="my-4">
-    <?php if ($page->ticketUrl()->isNotEmpty()): ?>
-      <a class="underline font-semibold" href="<?= $page->ticketUrl()->esc() ?>" rel="noopener noreferrer"><?= html(t('kinemathek.tickets', 'Tickets')) ?></a> ·
-    <?php endif ?>
-    <?php snippet('add-to-calendar', ['page' => $page]) ?>
-  </p>
-</article>
-<?php snippet('footer') ?>
+  <article class="single-card">
+    <div class="detail">
+      <header class="d-head">
+        <span class="d-date"><?= $ts ? html(Kinemathek::localDate($ts, 'detail')) : '' ?></span>
+        <?php if ($ts): ?><span class="d-time"><?= date('G', $ts) ?><sup><?= date('i', $ts) ?></sup></span><?php endif ?>
+        <span class="vtag <?= $vk ?>"><?= $vk === 'box' ? 'Box' : 'Saal' ?></span>
+        <?php if ($isPast): ?><span class="past-tag"><?= html(t('kinemathek.past', '(vergangen)')) ?></span><?php endif ?>
+      </header>
+      <?php $series = Kinemathek::splitField($page->keywords())[0] ?? ''; ?>
+      <?php if ($series !== ''): ?><p class="d-series"><?= html($series) ?></p><?php endif ?>
+      <h2 class="d-title"><?= html($page->displayTitle()) ?></h2>
+      <?php
+      $flags = [];
+      foreach (Kinemathek::splitField($page->subtitles()) as $sub) {
+          $flags[] = t('kinemathek.version.' . strtolower($sub), $sub);
+      }
+      if ($page->hasDiscussion()->toBool()) {
+          $flags[] = t('kinemathek.event.discussion', 'Mit Gespräch.');
+      }
+      ?>
+      <?php if ($flags !== []): ?>
+        <ul class="d-flags"><?php foreach ($flags as $flag): ?><li><?= html($flag) ?></li><?php endforeach ?></ul>
+      <?php endif ?>
+      <?php if ($image): ?>
+        <figure class="d-still">
+          <img src="<?= $image->resize(900)->url() ?>" alt="<?= $image->alt()->or($page->displayTitle())->esc() ?>">
+        </figure>
+      <?php endif ?>
+      <?php if ($page->text()->isNotEmpty()): ?>
+        <div class="d-syn"><?= $page->text()->kt() ?></div>
+      <?php endif ?>
+      <p class="d-actions">
+        <?php if (!$isPast && $page->ticketUrl()->isNotEmpty()): ?>
+          <a class="btn" href="<?= $page->ticketUrl()->esc() ?>" rel="noopener noreferrer"><?= html(t('kinemathek.tickets', 'Tickets')) ?></a>
+        <?php endif ?>
+        <?php if (!$isPast): ?>
+          <?php snippet('add-to-calendar', ['page' => $page, 'class' => 'btn']) ?>
+        <?php endif ?>
+        <a class="btn" href="<?= $site->find('events')?->url() ?? $site->url() ?>"><?= html(t('kinemathek.mb.nav.events')) ?></a>
+      </p>
+    </div>
+  </article>
+
+  <?php snippet('monatsblatt-colophon') ?>
+
+  </div><?php /* /#pivot-content */ ?>
+
+</div>
+<?php snippet('footer', ['scripts' => ['assets/js/monatsblatt.js', 'assets/js/program.js']]) ?>
