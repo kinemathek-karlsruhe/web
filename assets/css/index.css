@@ -949,7 +949,12 @@ body {
   line-height: 1.15;
   margin: 1.3em 0 .35em;
 }
-.prose-mb h2 { font-size: 1.3rem; }
+/* section headings as mini day-bars — the sheet's grey-bar language */
+.prose-mb h2 {
+  font-size: 1.05rem;
+  background: var(--bar);
+  padding: .22rem .5rem .26rem;
+}
 .prose-mb h3 { font-size: 1.05rem; }
 .prose-mb p { margin: 0 0 .75em; }
 .prose-mb ul, .prose-mb ol { margin: 0 0 .75em; padding-left: 1.2em; }

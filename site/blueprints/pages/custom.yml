@@ -6,6 +6,11 @@ description: >-
   inline eingebettet. Wahlweise im Monatsblatt-Rahmen oder als leere
   Leinwand.
 
+options:
+  template:
+    - text
+    - collection
+
 status:
   draft: Entwurf
   unlisted: Versteckt (nur per Link erreichbar)

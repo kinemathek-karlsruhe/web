@@ -3,6 +3,11 @@ icon: text
 
 description: Einfache Inhaltsseite — Einleitung, Fließtext (Kirbytext), optionales Bild.
 
+options:
+  template:
+    - collection
+    - custom
+
 status:
   draft: Entwurf
   unlisted: Versteckt (nur per Link erreichbar)
