@@ -19,7 +19,7 @@
 
   <article class="text-page collection-intro">
     <?php if ($page->intro()->isNotEmpty()): ?>
-      <p class="intro"><?= $page->intro()->esc() ?></p>
+      <p class="intro"><?= $page->intro()->kti() ?></p>
     <?php endif ?>
   </article>
 
@@ -29,6 +29,8 @@
         'dayMeta'  => $dayMeta,
         'todayKey' => $todayKey,
     ]) ?>
+  <?php elseif ($page->categories()->isNotEmpty()): ?>
+    <p class="collection-none"><?= html(t('kinemathek.mb.collection.none')) ?></p>
   <?php endif ?>
 
   <?php if ($page->children()->listed()->count() > 0): ?>

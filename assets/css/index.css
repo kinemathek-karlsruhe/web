@@ -944,6 +944,14 @@ body {
   border: 1px solid var(--line);
 }
 .collection-intro { padding-bottom: 0; }
+.collection-none {
+  max-width: 44rem;
+  margin: 0;
+  padding: .6rem 0 .4rem;
+  font-size: .85rem;
+  color: var(--ink-soft);
+  border-bottom: 1px solid var(--line);
+}
 
 /* Tailwind preflight strips element styles — restore prose basics for
    kirbytext output */

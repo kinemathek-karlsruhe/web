@@ -16,7 +16,7 @@
 
   <article class="text-page">
     <?php if ($page->intro()->isNotEmpty()): ?>
-      <p class="intro"><?= $page->intro()->esc() ?></p>
+      <p class="intro"><?= $page->intro()->kti() ?></p>
     <?php endif ?>
     <?php if ($image = $page->content()->get('mainimage')->toFile()): ?>
       <figure class="tp-image">
