@@ -150,9 +150,12 @@ body {
   transition: opacity .4s ease-out;
   flex: none;
 }
-.pivot-item.is-active { opacity: 1; }
-.pivot-item:not(.is-active):hover,
-.pivot-item:not(.is-active):focus-visible { opacity: .5; }
+/* only the occurrence at the FRONT of the strip is fully opaque —
+   .is-active marks both it and its loop clone (labels must render
+   identically for the silent snap-back), .is-front only ever one */
+.pivot-item.is-front { opacity: 1; }
+.pivot-item:not(.is-front):hover,
+.pivot-item:not(.is-front):focus-visible { opacity: .5; }
 .pivot-item:focus-visible { outline: 2px solid var(--ink); outline-offset: 5px; }
 
 /* the program item morphs: month range while active, generic name otherwise —

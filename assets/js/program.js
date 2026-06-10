@@ -219,6 +219,7 @@
     var pivotClones = pivotItems.map(function (original) {
       var clone = original.cloneNode(true);
       clone.classList.add('pivot-clone');
+      clone.classList.remove('is-front');
       clone.setAttribute('aria-hidden', 'true');
       clone.setAttribute('tabindex', '-1');
       clone.removeAttribute('aria-current');
@@ -240,6 +241,10 @@
       strip.style.transition = '';
     };
 
+    var setFront = function (el) {
+      allPivotItems.forEach(function (i) { i.classList.toggle('is-front', i === el); });
+    };
+
     var slideStrip = function (key) {
       allPivotItems.forEach(function (i) {
         var on = i.dataset.pivot === key;
@@ -255,13 +260,18 @@
         next = candidates.filter(function (i) { return i.offsetLeft >= stripX - 1; })[0] || candidates[0];
       }
       stripX = next.offsetLeft;
+      setFront(next);
       strip.style.transform = 'translateX(' + (-stripX) + 'px)';
     };
 
     strip.addEventListener('transitionend', function (e) {
       if (e.target !== strip || e.propertyName !== 'transform') return;
       var w = setWidth();
-      if (w > 0 && stripX >= w) snapStrip(stripX - w);
+      if (w > 0 && stripX >= w) {
+        snapStrip(stripX - w);
+        /* the front role moves from the clone to its original counterpart */
+        setFront(pivotItems.filter(function (i) { return i.dataset.pivot === pivotCurrent; })[0]);
+      }
     });
 
     var loadSection = function (key, url) {

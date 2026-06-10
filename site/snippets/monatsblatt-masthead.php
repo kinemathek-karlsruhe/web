@@ -50,7 +50,7 @@ $pivotItems = array_values(array_filter([
   <nav class="pivot" aria-label="<?= html(t('kinemathek.mb.nav')) ?>">
     <div class="pivot-strip">
       <?php foreach ($pivotItems as $item): ?>
-        <a class="pivot-item<?= $item['key'] === $active ? ' is-active' : '' ?>"
+        <a class="pivot-item<?= $item['key'] === $active ? ' is-active is-front' : '' ?>"
            href="<?= $item['url'] ?>" data-pivot="<?= $item['key'] ?>"
            <?= $item['key'] === $active ? 'aria-current="page"' : '' ?>>
           <?php if ($item['key'] === 'program' && $titleMonths !== null): ?>
