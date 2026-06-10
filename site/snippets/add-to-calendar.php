@@ -4,11 +4,13 @@
  * given page. Plain first-party link: no JavaScript, no widget, no cookies.
  *
  * Usage: snippet('add-to-calendar', ['page' => $showingOrEvent])
+ *        optional 'class' overrides the default link styling.
  *
  * @var \Kirby\Cms\Page $page
+ * @var ?string $class
  */
 ?>
-<a class="add-to-calendar underline"
+<a class="<?= $class ?? 'add-to-calendar underline' ?>"
    href="<?= $page->url() ?>.ics"
    download="<?= $page->icsFilename() ?>"
-   rel="nofollow">In Kalender (.ics)</a>
+   rel="nofollow"><?= html(t('kinemathek.calendar', 'In Kalender (.ics)')) ?></a>

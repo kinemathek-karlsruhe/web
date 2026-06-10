@@ -44,3 +44,6 @@ Icon
 /site/accounts/*
 !/site/accounts/index.html
 /site/config/.license
+
+# Licensed font masters (source OTFs) — only the subsetted WOFF2 in assets/font are served/committed
+/fonts-src/
