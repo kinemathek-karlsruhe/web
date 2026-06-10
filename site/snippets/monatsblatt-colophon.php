@@ -13,7 +13,12 @@
     Kasse: <a href="tel:+4972183189585">Tel. 0721&#8201;-&#8201;83189585</a>,
     Büro: <a href="tel:+4972183189580">0721&#8201;-&#8201;83189580</a>
   </p>
-  <p class="support"><?= html(t('kinemathek.mb.support')) ?></p>
+  <p class="support">
+    <?= html(t('kinemathek.mb.support')) ?>
+    <?php if ($legal = $site->find('datenschutz')): ?>
+      <span class="sep">|</span><a href="<?= $legal->url() ?>"><?= html($legal->title()) ?></a>
+    <?php endif ?>
+  </p>
   <?php if (($extra ?? '') !== ''): ?>
     <p class="support"><?= $extra ?></p>
   <?php endif ?>

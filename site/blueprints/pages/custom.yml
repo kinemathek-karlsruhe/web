@@ -1,0 +1,45 @@
+title: Freie Seite (HTML/CSS/JS)
+icon: code
+
+description: >-
+  Komplett freie Seite — HTML wird unverändert ausgegeben, CSS und JS
+  inline eingebettet. Wahlweise im Monatsblatt-Rahmen oder als leere
+  Leinwand.
+
+status:
+  draft: Entwurf
+  unlisted: Versteckt (nur per Link erreichbar)
+  listed: Im Seitenmenü (Pivot-Navigation)
+
+fields:
+  warning:
+    type: info
+    theme: notice
+    text: >-
+      Kein Drittanbieter-Code einbetten (keine externen Skripte, Fonts,
+      iframes) — die Seite ist cookie- und trackerfrei (SPEC §7).
+  html:
+    label: HTML
+    type: textarea
+    size: huge
+    font: monospace
+  css:
+    label: CSS
+    type: textarea
+    size: large
+    font: monospace
+    translate: false
+  js:
+    label: JavaScript
+    type: textarea
+    size: large
+    font: monospace
+    translate: false
+  shell:
+    label: Im Monatsblatt-Rahmen (Masthead + Fußzeile) anzeigen
+    type: toggle
+    translate: false
+    default: true
+    text:
+      - Leere Leinwand
+      - Monatsblatt-Rahmen

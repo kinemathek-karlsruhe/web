@@ -1,0 +1,42 @@
+title: Bereichsseite
+icon: dashboard
+
+description: >-
+  Bereichs-Startseite (z. B. Festivals, Filmbildung) — Einleitung, dann
+  automatisch alle kommenden Programmpunkte der gewählten Kategorien,
+  darunter optional weitere Unterseiten und Text.
+
+status:
+  draft: Entwurf
+  unlisted: Versteckt (nur per Link erreichbar)
+  listed: Im Seitenmenü (Pivot-Navigation)
+
+fields:
+  intro:
+    label: Einleitung
+    type: textarea
+    size: small
+  categories:
+    label: Programm-Kategorien
+    type: multiselect
+    translate: false
+    options:
+      spielplan: Spielplan
+      koop: Koop
+      festival: Festival
+      filmbildung: Filmbildung
+    help: >-
+      Kommende Vorstellungen/Events mit diesen Kategorien erscheinen
+      automatisch unter der Einleitung.
+  text:
+    label: Weiterer Text
+    type: textarea
+    size: large
+
+sections:
+  subpages:
+    type: pages
+    label: Unterseiten
+    templates:
+      - text
+      - custom

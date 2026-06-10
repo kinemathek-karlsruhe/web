@@ -903,6 +903,78 @@ body {
 .d-others { margin: .7rem 0 0; font-size: .78rem; }
 .d-others a { color: inherit; margin-right: .6em; }
 
+/* ---------- Static pages: text / collection / custom ---------- */
+
+.text-page {
+  max-width: 44rem;
+  padding-block: 1.4rem .6rem;
+  font-size: .95rem;
+  line-height: 1.55;
+}
+.text-page .intro {
+  margin: 0 0 1rem;
+  font-size: 1.18rem;
+  font-weight: 500;
+  line-height: 1.45;
+}
+.tp-image { margin: 0 0 1rem; }
+.tp-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+}
+.collection-intro { padding-bottom: 0; }
+
+/* Tailwind preflight strips element styles — restore prose basics for
+   kirbytext output */
+.prose-mb h2, .prose-mb h3 {
+  font-weight: 700;
+  line-height: 1.15;
+  margin: 1.3em 0 .35em;
+}
+.prose-mb h2 { font-size: 1.3rem; }
+.prose-mb h3 { font-size: 1.05rem; }
+.prose-mb p { margin: 0 0 .75em; }
+.prose-mb ul, .prose-mb ol { margin: 0 0 .75em; padding-left: 1.2em; }
+.prose-mb ul { list-style: disc; }
+.prose-mb ol { list-style: decimal; }
+.prose-mb a { color: inherit; text-decoration: underline; text-underline-offset: .14em; }
+.prose-mb strong { font-weight: 700; }
+.prose-mb img { max-width: 100%; height: auto; border: 1px solid var(--line); }
+.prose-mb hr { border: 0; border-top: 1px solid var(--line); margin: 1.2em 0; }
+
+.subpage-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: .8rem;
+  padding-block: .4rem 1.2rem;
+}
+.subpage-link {
+  display: block;
+  border: 1.5px solid var(--ink);
+  padding: .7rem .8rem .8rem;
+  color: inherit;
+  text-decoration: none;
+}
+.subpage-link:hover .sp-title { text-decoration: underline; text-underline-offset: .12em; }
+.subpage-link .sp-title {
+  display: block;
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+.subpage-link .sp-intro {
+  display: block;
+  margin-top: .25rem;
+  font-size: .76rem;
+  color: var(--ink-soft);
+  line-height: 1.4;
+}
+
+.custom-page { padding-block: 1.2rem; }
+.custom-bare { padding: 0; }
+
 /* ---------- Colophon ---------- */
 
 .colophon {

@@ -12,21 +12,41 @@
  *   'titleYear'   => $titleYear,         // optional: '26'
  * ])
  *
- * @var string  $active
+ * @var string  $active       pivot key ('program', 'films', 'events' or a
+ *                            top-level static page slug)
  * @var ?string $titleMonths
  * @var ?string $titleYear
+ * @var bool    $sub          render the "im Kino" line (default true)
  */
 $active      = $active ?? 'program';
 $titleMonths = $titleMonths ?? null;
 $titleYear   = $titleYear ?? null;
+$sub         = $sub ?? true;
 
-// Pivot sections: program first, containers only if they exist. New sections
-// (Projekte, Newsletter, …) are one line each.
+// Pivot sections: program + containers first, then every LISTED top-level
+// static page (text/collection/custom blueprints) — publishing a page adds
+// it to the strip.
 $pivotItems = array_values(array_filter([
     ['key' => 'program', 'url' => $site->url(),            'label' => t('kinemathek.mb.nav.program')],
     ['key' => 'films',   'url' => $site->find('films')?->url(),  'label' => t('kinemathek.mb.nav.films')],
     ['key' => 'events',  'url' => $site->find('events')?->url(), 'label' => t('kinemathek.mb.nav.events')],
 ], fn ($item) => $item['url'] !== null));
+
+foreach ($site->children()->listed() as $sectionPage) {
+    if (in_array($sectionPage->intendedTemplate()->name(), ['text', 'collection', 'custom'], true)) {
+        $pivotItems[] = [
+            'key'   => $sectionPage->slug(),
+            'url'   => $sectionPage->url(),
+            'label' => $sectionPage->title()->value(),
+        ];
+    }
+}
+
+// Pages outside the strip (children, unlisted) lead with their own title.
+$selfTitle = null;
+if (!in_array($active, array_column($pivotItems, 'key'), true)) {
+    $selfTitle = $page->title()->value();
+}
 ?>
 <?php snippet('monatsblatt-icons') ?>
 
@@ -49,10 +69,13 @@ $pivotItems = array_values(array_filter([
   <h1 class="sr-only"><?= $page->isHomePage() ? html(t('kinemathek.program', 'Spielplan')) : $page->title()->esc() ?> – <?= $site->title()->esc() ?></h1>
   <nav class="pivot" aria-label="<?= html(t('kinemathek.mb.nav')) ?>">
     <div class="pivot-strip">
+      <?php if ($selfTitle !== null): ?>
+        <span class="pivot-item is-active is-front" data-pivot="self" aria-current="page"><?= html($selfTitle) ?></span>
+      <?php endif ?>
       <?php foreach ($pivotItems as $item): ?>
-        <a class="pivot-item<?= $item['key'] === $active ? ' is-active is-front' : '' ?>"
+        <a class="pivot-item<?= $selfTitle === null && $item['key'] === $active ? ' is-active is-front' : '' ?>"
            href="<?= $item['url'] ?>" data-pivot="<?= $item['key'] ?>"
-           <?= $item['key'] === $active ? 'aria-current="page"' : '' ?>>
+           <?= $selfTitle === null && $item['key'] === $active ? 'aria-current="page"' : '' ?>>
           <?php if ($item['key'] === 'program' && $titleMonths !== null): ?>
             <span class="pivot-label">
               <span class="lbl lbl-months"><?= html($titleMonths) ?><sup><?= html($titleYear) ?></sup></span>
@@ -65,7 +88,9 @@ $pivotItems = array_values(array_filter([
       <?php endforeach ?>
     </div>
   </nav>
-  <p class="mast-sub"><?= html(t('kinemathek.mb.inCinema')) ?></p>
+  <?php if ($sub): ?>
+    <p class="mast-sub"><?= html(t('kinemathek.mb.inCinema')) ?></p>
+  <?php endif ?>
 
   <div class="legend">
     <p>

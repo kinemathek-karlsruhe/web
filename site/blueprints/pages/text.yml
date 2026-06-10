@@ -1,0 +1,25 @@
+title: Textseite
+icon: text
+
+description: Einfache Inhaltsseite — Einleitung, Fließtext (Kirbytext), optionales Bild.
+
+status:
+  draft: Entwurf
+  unlisted: Versteckt (nur per Link erreichbar)
+  listed: Im Seitenmenü (Pivot-Navigation)
+
+fields:
+  intro:
+    label: Einleitung
+    type: textarea
+    size: small
+    help: Optionaler Vorspann — wird größer gesetzt.
+  text:
+    label: Text
+    type: textarea
+    size: huge
+  mainimage:
+    label: Bild
+    type: files
+    multiple: false
+    uploads: true

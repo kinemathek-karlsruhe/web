@@ -141,7 +141,7 @@
 
   strip.addEventListener('click', function (e) {
     var item = e.target.closest('.pivot-item');
-    if (!item) return;
+    if (!item || !item.href) return; /* the self-title item is a plain span */
     e.preventDefault();
     goPivot(item, true);
   });
