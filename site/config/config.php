@@ -34,6 +34,10 @@ return [
 	// language in the session, i.e. sets a cookie (forbidden, SPEC §7).
 	"languages" => true,
 
+	// The Spielplan (Monatsblatt) IS the homepage: / renders content/program.
+	// Its children keep their /program/<slug> URLs; content/home is unused.
+	"home" => "program",
+
 	"kinemathek" => [
 		// TMDB integration (site/plugins/kinemathek-tmdb). Credentials come from
 		// .env: TMDB_KEY for a v3 key, or TMDB_TOKEN for a v4 bearer token.

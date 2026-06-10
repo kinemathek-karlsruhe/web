@@ -4,7 +4,8 @@ Current state of the Kinemathek Karlsruhe website rebuild. Built on **Kirby 5.4.
 (flat-file), PHP 8.4, package manager **Bun**. Replaces a WordPress + ACF site.
 Spec: [`SPEC.md`](SPEC.md). The **Panel/admin UI is fully designed**; public design
 work has begun: the **Spielplan (`program` template) carries the full Monatsblatt
-design** — a web translation of the printed program sheet (prototype in
+design and is the homepage** (`'home' => 'program'` in config.php; `content/home`
+is currently unused) — a web translation of the printed program sheet (prototype in
 `monatsblatt.html`, untracked). Typeface: Lipa Agate High Cnd (`assets/font/`,
 WOFF2 self-hosted, weights 300/400/500/700 only). Logo SVG inlined via the
 `monatsblatt-logo` snippet (fills bound to theme vars). Other public templates
