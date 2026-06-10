@@ -112,6 +112,8 @@ return [
         'kinemathek.mb.legend.talk'      => 'Vorstellung mit Einführung/Filmgespräch',
         'kinemathek.mb.legend.saal'      => 'Veranstaltung im Saal',
         'kinemathek.mb.legend.box'       => 'Veranstaltung in der Box',
+        'kinemathek.mb.legend.unterwegs' => 'Open Air & andere Orte',
+        'kinemathek.venue.unterwegs'     => 'Unterwegs',
         'kinemathek.mb.support'          => 'Mit freundlicher Unterstützung von Filmförderung Baden-Württemberg und Stadt Karlsruhe',
 
         // Fassungen (spelled-out subtitle markers in the detail panel)

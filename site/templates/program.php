@@ -45,15 +45,11 @@
           <?= html($dayMeta[$stripKey]['dow']) ?> <?= $dayMeta[$stripKey]['num'] ?>.
         </span>
         <?php foreach ($stripItems as $item): ?>
-          <?php
-          $ts = $item->timestamp();
-          // -> OccurrenceTrait::venueKey() once the plugin unfreezes
-          $vk = stripos($item->venue()->value() ?? '', 'box') !== false ? 'box' : 'saal';
-          ?>
+          <?php $ts = $item->timestamp(); ?>
           <a class="hs-event" href="#tag-<?= $stripKey ?>">
             <span class="hs-time"><?= date('G', $ts) ?><sup><?= date('i', $ts) ?></sup></span>
             <span class="hs-title"><?= html($item->displayTitle()) ?></span>
-            <span class="vtag <?= $vk ?>"><?= $vk === 'box' ? 'Box' : 'Saal' ?></span>
+            <span class="vtag <?= $item->venueKey() ?>"><?= html($item->venueLabel()) ?></span>
           </a>
         <?php endforeach ?>
       </div>

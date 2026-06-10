@@ -61,6 +61,10 @@ columns:
             icon: pin
             width: 1/2
             translate: false
+            help: >-
+              Leer = Saal. Enthält „Box" = Box. Alles andere (z. B.
+              „Kronenplatz (Open Air)", „Stadtbibliothek") wird als
+              „Unterwegs" ausgewiesen.
           hasDiscussion:
             label: Mit Gespräch
             type: toggle

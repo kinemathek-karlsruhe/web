@@ -11,7 +11,6 @@ use Kinemathek\Kinemathek;
  */
 
 $ts = $page->timestamp();
-$vk = stripos($page->venue()->value() ?? '', 'box') !== false ? 'box' : 'saal';
 // NB: ->image() is a native Page method — read the files field explicitly
 $image = $page->content()->get('image')->toFile();
 ?>
@@ -27,7 +26,7 @@ $image = $page->content()->get('image')->toFile();
       <header class="d-head">
         <span class="d-date"><?= $ts ? html(Kinemathek::localDate($ts, 'detail')) : '' ?></span>
         <?php if ($ts): ?><span class="d-time"><?= date('G', $ts) ?><sup><?= date('i', $ts) ?></sup></span><?php endif ?>
-        <span class="vtag <?= $vk ?>"><?= $vk === 'box' ? 'Box' : 'Saal' ?></span>
+        <span class="vtag <?= $page->venueKey() ?>"><?= html($page->venueLabel()) ?></span>
         <?php if ($isPast): ?><span class="past-tag"><?= html(t('kinemathek.past', '(vergangen)')) ?></span><?php endif ?>
       </header>
       <?php $series = Kinemathek::splitField($page->keywords())[0] ?? ''; ?>

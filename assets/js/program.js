@@ -53,7 +53,7 @@
         if (i < 0) return;
         var key = pair.slice(0, i);
         var value = decodeURIComponent(pair.slice(i + 1));
-        if (key === 'v' && (value === 'saal' || value === 'box')) state.venue = value;
+        if (key === 'v' && ['saal', 'box', 'unterwegs'].indexOf(value) !== -1) state.venue = value;
         if (key === 'f') value.split(',').forEach(function (f) { if (f) state.flags[f] = true; });
         if (key === 's') state.series = value;
       });

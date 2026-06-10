@@ -18,12 +18,6 @@ use Kinemathek\Kinemathek;
  * @var string $todayKey
  */
 
-// Saal/Box classification from the free-text venue field — single source for
-// entries and filters. (-> OccurrenceTrait::venueKey() once the plugin
-// unfreezes.)
-$venueKey = fn (\Kirby\Cms\Page $item): string =>
-    stripos($item->venue()->value() ?? '', 'box') !== false ? 'box' : 'saal';
-
 // Subtitle markers (multiselect keys): icon?, printed note, original version?
 // Label = t('kinemathek.version.<key>'). The OmU quick filter means
 // "subtitled original" — OF (no subtitles) deliberately doesn't match.
@@ -35,7 +29,7 @@ $markMap = [
 ];
 
 // Per-item display data, shared by the entry and its detail panel.
-$entryData = function (\Kirby\Cms\Page $item, string $detailDate) use ($venueKey, $markMap): array {
+$entryData = function (\Kirby\Cms\Page $item, string $detailDate) use ($markMap): array {
     $film  = $item->film();
     $ts    = $item->timestamp();
     $isEvent = $item->intendedTemplate()->name() === 'event';
@@ -91,7 +85,8 @@ $entryData = function (\Kirby\Cms\Page $item, string $detailDate) use ($venueKey
         'isEvent'    => $isEvent,
         'detailId'   => 'detail-' . str_replace('/', '-', $item->id()),
         'detailDate' => $detailDate,
-        'venueKey'   => $venueKey($item),
+        'venueKey'   => $item->venueKey(),
+        'venueLabel' => $item->venueLabel(),
         'timeH'      => date('G', $ts),
         'timeM'      => date('i', $ts),
         'series'     => $series,
@@ -124,10 +119,11 @@ usort($allSeries, 'strcasecmp');
 ?>
 <nav class="filters" aria-label="<?= html(t('kinemathek.filters.by', 'Filtern nach')) ?>">
   <span class="label"><?= html(t('kinemathek.mb.filter')) ?></span>
-  <div class="seg" role="group" aria-label="Saal / Box">
+  <div class="seg" role="group" aria-label="Saal / Box / <?= html(t('kinemathek.venue.unterwegs', 'Unterwegs')) ?>">
     <button type="button" data-venue="alle" aria-pressed="true"><?= html(t('kinemathek.mb.all')) ?></button>
     <button type="button" data-venue="saal" aria-pressed="false">Saal</button>
     <button type="button" data-venue="box" aria-pressed="false">Box</button>
+    <button type="button" data-venue="unterwegs" aria-pressed="false"><?= html(t('kinemathek.venue.unterwegs', 'Unterwegs')) ?></button>
   </div>
   <button type="button" class="chip" data-flag="omu" aria-pressed="false">
     <svg class="icon" aria-hidden="true"><use href="#i-ut"/></svg> OmU
@@ -161,7 +157,9 @@ usort($allSeries, 'strcasecmp');
     <?php
     $meta = $dayMeta[$key];
     $entries = $dayEntries[$key];
-    $saal = array_filter($entries, fn ($e) => $e['venueKey'] === 'saal');
+    // left column = Saal + Unterwegs (print put open-air entries left),
+    // right column = Box
+    $left = array_filter($entries, fn ($e) => $e['venueKey'] !== 'box');
     $box  = array_filter($entries, fn ($e) => $e['venueKey'] === 'box');
     ?>
     <section class="day<?= $key === $todayKey ? ' today' : '' ?>" data-date="<?= $key ?>" id="tag-<?= $key ?>">
@@ -171,10 +169,10 @@ usort($allSeries, 'strcasecmp');
         <span class="num"><?= $meta['num'] ?>.</span>
         <?php if ($key === $todayKey): ?><span class="today-tag"><?= html(t('kinemathek.mb.today')) ?></span><?php endif ?>
       </h2>
-      <div class="day-events<?= $saal !== [] && $box !== [] ? ' duo' : '' ?>">
-        <?php foreach (['saal' => $saal, 'box' => $box] as $venue => $list): ?>
+      <div class="day-events<?= $left !== [] && $box !== [] ? ' duo' : '' ?>">
+        <?php foreach ([$left, $box] as $list): ?>
           <?php if ($list === []) continue ?>
-          <div class="venue-col" data-venue="<?= $venue ?>">
+          <div class="venue-col">
             <?php foreach ($list as $entry) snippet('monatsblatt-event', $entry) ?>
           </div>
         <?php endforeach ?>

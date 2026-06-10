@@ -31,7 +31,6 @@ if ($page->runtime()->isNotEmpty()) {
 
 $showRow = function (\Kirby\Cms\Page $showing, bool $clickable) {
     $ts = $showing->timestamp();
-    $vk = stripos($showing->venue()->value() ?? '', 'box') !== false ? 'box' : 'saal';
     ?>
     <li class="show-row<?= $clickable ? '' : ' past' ?>">
       <span class="sr-date">
@@ -40,7 +39,7 @@ $showRow = function (\Kirby\Cms\Page $showing, bool $clickable) {
         <?php if ($clickable): ?></a><?php endif ?>
       </span>
       <span class="time"><?= date('G', $ts) ?><sup><?= date('i', $ts) ?></sup></span>
-      <span class="vtag <?= $vk ?>"><?= $vk === 'box' ? 'Box' : 'Saal' ?></span>
+      <span class="vtag <?= $showing->venueKey() ?>"><?= html($showing->venueLabel()) ?></span>
       <?php if ($showing->subtitles()->isNotEmpty()): ?>
         <span class="sr-subs"><?= html($showing->subtitles()->commaList()) ?></span>
       <?php endif ?>

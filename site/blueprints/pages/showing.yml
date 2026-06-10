@@ -69,6 +69,10 @@ columns:
             width: 1/2
             # Venue/Saal names are proper names — shared across languages.
             translate: false
+            help: >-
+              Leer = Saal. Enthält „Box" = Box. Alles andere (z. B.
+              „Kronenplatz (Open Air)", „Stadtbibliothek") wird als
+              „Unterwegs" ausgewiesen.
 
       extras:
         type: fields

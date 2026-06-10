@@ -31,4 +31,32 @@ trait OccurrenceTrait
         $ts = $this->timestamp();
         return $ts !== null && $ts < Kinemathek::now($includeToday);
     }
+
+    /**
+     * Venue classification from the free-text `venue` field:
+     * 'box' when it names the Box, 'saal' when it names the Saal or is empty
+     * (the house default), 'unterwegs' for everything else — Open Air on the
+     * Kronenplatz, Stadtbibliothek, any pop-up location.
+     */
+    public function venueKey(): string
+    {
+        $venue = trim($this->venue()->value() ?? '');
+        if (stripos($venue, 'box') !== false) {
+            return 'box';
+        }
+        if ($venue === '' || stripos($venue, 'saal') !== false) {
+            return 'saal';
+        }
+        return 'unterwegs';
+    }
+
+    /** Display label for the venue tag (Saal/Box are proper names). */
+    public function venueLabel(): string
+    {
+        return match ($this->venueKey()) {
+            'box'       => 'Box',
+            'unterwegs' => t('kinemathek.venue.unterwegs', 'Unterwegs'),
+            default     => 'Saal',
+        };
+    }
 }

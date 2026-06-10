@@ -30,7 +30,7 @@
   <span class="time"><?= $timeH ?><sup><?= $timeM ?></sup></span>
   <span class="head">
     <?php if ($series !== ''): ?><span class="series"><?= html($series) ?></span><?php endif ?>
-    <span class="vtag <?= $venueKey ?>"><?= $venueKey === 'box' ? 'Box' : 'Saal' ?></span>
+    <span class="vtag <?= $venueKey ?>"><?= html($venueLabel) ?></span>
   </span>
   <div class="what">
     <h3 class="film"><button type="button" class="t-btn"

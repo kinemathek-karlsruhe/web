@@ -104,6 +104,8 @@ return [
         'kinemathek.mb.legend.talk'      => 'Screening with introduction/film talk',
         'kinemathek.mb.legend.saal'      => 'Held in the Saal',
         'kinemathek.mb.legend.box'       => 'Held in the Box',
+        'kinemathek.mb.legend.unterwegs' => 'open air & other venues',
+        'kinemathek.venue.unterwegs'     => 'Out & about',
         'kinemathek.mb.support'          => 'Kindly supported by Filmförderung Baden-Württemberg and the City of Karlsruhe',
 
         // Versions (spelled-out subtitle markers in the detail panel)
