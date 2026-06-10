@@ -2,8 +2,11 @@
 
 Backend + Panel for the **Kinemathek Karlsruhe** cinema website, rebuilding a WordPress+ACF
 site on **Kirby 5.4.3** (flat-file CMS), PHP 8.4, package manager **Bun**. The full brief is
-[`SPEC.md`](SPEC.md); current status is [`STATE.md`](STATE.md). Design is deferred (SPEC §10)
-— **public templates are intentionally primitive**; the **Panel/admin UI is fully designed**.
+[`SPEC.md`](SPEC.md); current status is [`STATE.md`](STATE.md). The **Panel/admin UI is fully
+designed**; the **Spielplan (`program` template) carries the Monatsblatt design** (web
+translation of the printed program sheet — Lipa Agate High Cnd in `assets/font/`, weights
+300/400/500/700 only; `monatsblatt-*` snippets; behaviour in `assets/js/program.js`).
+Other public templates are still intentionally primitive (SPEC §10).
 Read this file before editing — it encodes the field contract and the gotchas that have
 already bitten us.
 
@@ -46,6 +49,13 @@ node --check site/plugins/kinemathek-tmdb/index.js   # the Panel field is no-bui
 - Controllers are matched by **template name** (`film.php` = single, `films.php` = archive).
   Public templates are primitive; the Panel UI (blueprints + the TMDB field) is the designed
   surface.
+- **Multi-language: DE (default, bare root `/`) + EN (`/en`)** — definitions in
+  `site/languages/`, enabled via `'languages' => true`. Content files are
+  language-suffixed (`film.de.txt`); `scripts/migrate-content-multilang.php` migrates a
+  pre-multilang content tree (run once per environment, `--apply`). Untranslated fields
+  fall back to German. Frontend strings: `t('kinemathek.*')`, defined in BOTH language
+  files; localized dates: `Kinemathek::localDate()` / the `localDate` field method.
+  Panel labels/help stay German on purpose (German editorial team).
 
 ---
 
@@ -74,6 +84,16 @@ override), `date`(date,time:true,req), `venue`(text), `sonderinfo`(textarea), `t
 **Poster/Still files** (`poster.yml`/`still.yml`): `alt`(text), `source`(text, default TMDB),
 `caption`(text / textarea). Written by `attachPoster()`.
 
+**Translation contract** (multilang; enforced via `translate: false` in the blueprints —
+keep blueprint, TMDB sync and this list in agreement): TRANSLATABLE are Film
+`title/synopsis/genre/series/keywords`, Showing `title/sonderinfo/keywords`, Event
+`title/text/keywords`, file `alt/caption`. Everything else is `translate: false`
+(invariant, default language only): dates, numbers, `directors`/`cast`, `originalTitle`,
+`country`/`language` (codes), `subtitles`/`categories` (option keys), `venue`,
+`ticketUrl`, `tmdbId`, `manualOverride`, `poster`/`stills`/`image` (file refs), `source`.
+The TMDB sync writes `Client::TRANSLATABLE = title/synopsis/genre` into non-default
+languages — keep that const in sync with this contract.
+
 Facet routing (`Kinemathek::FACETS`): `country/language/genre/series` → on the **film**;
 `subtitles` → per **occurrence**; `keywords` → **both** (occurrence ∪ film). Boolean facets:
 `?discussion=1` → field `hasDiscussion`; `?hasSubtitles=1` → `subtitles` non-empty.
@@ -85,6 +105,16 @@ Facet routing (`Kinemathek::FACETS`): `country/language/genre/series` → on the
 **Kirby 5 API**
 - The content Field class is **`Kirby\Content\Field`**, NOT `Kirby\Cms\Field` (the old import
   caused a fatal 500). Type-hint field values with the Content namespace.
+- **`$page->update()` returns a NEW page object and freezes the old one**
+  (`ImmutableMemoryStorage`) — a second write through the stale object throws
+  `LogicException: Storage … is immutable`. Always chain: `$page = $page->update(...)`.
+- **`$page->createFile()` throws a `DuplicateException`** when a same-named file exists
+  with *different* bytes (identical bytes are reused silently). Use **`$file->replace($src)`**
+  to swap bytes in place (keeps uuid/content/refs; old file untouched if it throws) — the
+  TMDB `Client::attachImage()` wraps all of this; reuse it for any synced file.
+- **Panel `<img>` tags can't call API routes bare**: Kirby's API auth requires a CSRF token
+  (header `x-csrf` or `?csrf=` query param) for session-authed requests, and an `<img>`
+  sends neither — append `?csrf=` (see `Client::csrfToken()`), or every image 403s.
 - **`$page->title()` falls back to the slug** when the title field is empty (→ date-stamped
   garbage in listings/filenames). For optional/derived titles read
   `$page->content()->get('title')` or call `displayTitle()`.
@@ -96,6 +126,34 @@ Facet routing (`Kinemathek::FACETS`): `country/language/genre/series` → on the
   Film's read-only screening sections (`query: page.upcomingShowings`) and table column flags
   (`{{ page.hasUpcoming }}`, `{{ page.showings.count }}`, `{{ page.displayTitle }}`). No
   controller needed for those.
+
+**Multi-language**
+- **`$page->content($lang)` / field accessors MERGE the default language under every
+  translation** — an untranslated field never looks empty. For "is this field actually
+  translated" (e.g. fill-empty checks) read the RAW translation:
+  `$page->version()->read($lang)` (lowercased keys, `null` when no translation file).
+- **`$page->update($vals, $nonDefaultLang)` silently DROPS `translate: false` fields**
+  (the Form filters them). In Panel API context the implicit current language is whatever
+  tab the editor is on (`x-language` header) — so invariant fields (file refs!) must be
+  written with an explicit default-language code or they vanish into thin air.
+- **`update()` on a non-default language MATERIALIZES every translatable field** in that
+  translation file, copying the current fallback values — after the first EN write,
+  `film.en.txt` contains a German synopsis copy that raw reads see as non-empty.
+  "Überschreiben" (overwrite) is the editor's way out, not fill-empty.
+- **Never enable `languages.detect`** — it stores the detected language in the session,
+  i.e. sets a cookie (SPEC §7 forbids cookies). Language switching is plain links.
+- **`t()` keys must exist in BOTH `site/languages/*.php` files** — there is no
+  cross-language fallback for site translations; a missing key renders the fallback arg
+  or nothing. Always pass the German string as the `t()` fallback parameter.
+- In CLI scripts, `setCurrentLanguage()` alone leaves `t()` on the old language — also
+  call `setCurrentTranslation()`, or use `$kirby->site()->visit($page, $lang)` (which is
+  what real requests do) before rendering.
+- **PHP `date()`/`toDate()` always produce English weekday/month names** — public output
+  goes through `localDate()` (IntlDateFormatter + per-language ICU pattern). Keep
+  `toDate('YmdHi')` for `num:` and other locale-neutral machine formats.
+- **`url('program')` is not language-aware** (always the default-language path) — build
+  internal links with `page('program')->url()`; the other-language URL of the same page
+  is `$page->url('en')`.
 
 **Panel blueprints**
 - **Never mix top-level `columns:` with a sibling top-level `sections:`** (invalid in Kirby 5).
@@ -118,9 +176,15 @@ Facet routing (`Kinemathek::FACETS`): `country/language/genre/series` → on the
   a v3 key in `token` → TMDB 401.
 - Secrets live in a **gitignored `.env`** loaded by `config.php` via a small `getenv` loader.
   Never put a real credential in a tracked file.
-- In `apply`, authorise the **real caller** (`permissions()->can('update')`/`createFile`)
-  *before* `impersonate('kirby')` and capture the flag into the closure — permission checks
-  inside `impersonate` evaluate against the almighty system user.
+- In `apply`, authorise the **real caller** *before* `impersonate('kirby')` and capture the
+  flags into the closure — permission checks inside `impersonate` evaluate against the
+  almighty system user.
+- **`$model->permissions()->can()` returns `false` for unknown actions** instead of
+  throwing — and file create/delete are **`files`-category role permissions**
+  (`$user->role()->permissions()->for('files', 'create')`), NOT page actions. The bogus
+  `$page->permissions()->can('createFile')` silently returned false for every real Panel
+  user (only the almighty `kirby` user short-circuits to true, so CLI tests that
+  impersonate `kirby` can't catch it — verify permission gates as a **real** user).
 
 **Data handling**
 - **Multiselect/tags are stored as comma-separated OR as a YAML sequence** (`- value`). Never
@@ -153,7 +217,14 @@ Facet routing (`Kinemathek::FACETS`): `country/language/genre/series` → on the
 - **Add a descriptive facet**: add to `Kinemathek::FACETS` with `on: self|film|both`; it's
   picked up by `filterByFacets`/`availableFacets` and the controllers automatically.
 - **Work with TMDB**: credentials in `.env`; lookups are Panel-only (the `tmdblookup` field on
-  a Film). Server-side + cached; the public site never calls TMDB.
+  a Film). Server-side + cached; the public site never calls TMDB. Apply syncs **every
+  content language** (Kirby code → TMDB locale via `kinemathek.tmdb.languages`): the full
+  field set to DE, `Client::TRANSLATABLE` (title/synopsis/genre, localized) to EN;
+  fill-empty is checked per language. Apply pulls fields,
+  the poster AND stills (best textless backdrops, `maxStills`); synced files are named
+  `tmdb-poster-{id}.*` / `tmdb-still-{id}-{img}.*` — that prefix is the contract that lets
+  overwrite-cleanup distinguish them from manual uploads. Search thumbnails download
+  on demand in the `/thumb` route, never during search.
 - **Verifying changes** (preferred over the dev server): a throwaway script —
   `require __DIR__.'/kirby/bootstrap.php'; $kirby = new Kirby(); $kirby->impersonate('kirby');`
   — then assert blueprints parse (`$page->blueprint()->toArray()`), render pages

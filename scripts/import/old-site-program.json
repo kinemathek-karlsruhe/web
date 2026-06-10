@@ -1,0 +1,1351 @@
+{
+  "scrapedAt": "2026-06-10",
+  "source": {
+    "site": "https://kinemathek-karlsruhe.de",
+    "method": "HTML scrape of /spielplan/ (WP Theatre listing) + /film/<slug>/ detail pages",
+    "restApiNote": "wp_theatre_prod exposed via /wp-json/wp/v2/wp_theatre_prod, but wp_theatre_event (dates) is not in REST; schedule taken from HTML."
+  },
+  "films": [
+    {
+      "title": "Cotton Queen",
+      "originalTitle": "",
+      "directors": [
+        "Suzannah Mirghani"
+      ],
+      "year": 2025,
+      "country": [
+        "DE",
+        "FR",
+        "SD"
+      ],
+      "runtime": 93,
+      "subtitleVersion": null,
+      "synopsis": "Nafisa (15) lebt in einem traditionellen Baumwolldorf im Sudan. Sie hat Sommerferien und muss mit ihren Freundinnen bei der Baumwollernte ihrer Großmutter helfen. Außerdem ist sie zum ersten Mal verliebt – in einen Jungen aus dem Dorf.\n\nIhre Großmutter Al-Sit, die geachtete Matriarchin, hält die Fäden des Dorfs fest in ihren Händen und gibt ihr Wissen an Nafisa weiter.\n\nDie Ankunft von Nadir, einem jungen sudanstämmigen Geschäftsmann aus dem Ausland, droht das Leben des Dorfs durch neue Technologien im Baumwollanbau zu erschüttern. Nafisas Eltern wittern die Chance, ihre Tochter mit Nadir zu verheiraten und so den Wohlstand der Familie zu vergrößern.\n\nHin- und hergerissen zwischen den Forderungen ihrer Familie und ihrem Wunsch nach Unabhängigkeit muss Nafisa ihren eigenen Weg zwischen Tradition und Moderne finden.",
+      "synopsisEn": null,
+      "series": [
+        "Premiere"
+      ],
+      "fsk": null,
+      "mentionsDiscussion": false,
+      "isEvent": false,
+      "specRaw": "Suzannah Mirghani, DE/FR/SD 2025; 93′",
+      "slug": "cotton-queen",
+      "url": "https://kinemathek-karlsruhe.de/film/cotton-queen/"
+    },
+    {
+      "title": "Dao",
+      "originalTitle": "",
+      "directors": [
+        "Alain Gomis"
+      ],
+      "year": 2026,
+      "country": [
+        "FR",
+        "SN",
+        "GW"
+      ],
+      "runtime": 185,
+      "subtitleVersion": "OmU",
+      "synopsis": "Bei einem Filmcasting begegnen sich zwei Frauen und werden vor der Kamera zu Mutter und Tochter: Gloria und Nour. Und die Familie wächst vor unseren Augen. Mit anderen Schauspieler:innen und Laien feiern sie eine rauschende Hochzeit in Paris und reisen nach Guinea-Bissau, um ihr Familienoberhaupt zu verabschieden. Zwischen diesen beiden Ritualen – zwischen Europa und Westafrika, Leben und Tod, Vergangenheit und Gegenwart – verweben sich wahre Geschichten mit erfundenen Erzählungen. Was folgt, ist eine große Feier des Lebens: ein kreisender Tanz aus Liebe und Schmerz, aus Freude und Loslassen. DAO ist mehr als nur ein Film – es ist eine grenzenlose Familie, in deren Umarmung wir fallen und von deren Kraft wir getragen werden.",
+      "synopsisEn": null,
+      "series": [
+        "Premiere"
+      ],
+      "fsk": null,
+      "mentionsDiscussion": false,
+      "isEvent": false,
+      "specRaw": "Alain Gomis, FR/SN/GW 2026; 185′ OmU",
+      "slug": "dao",
+      "url": "https://kinemathek-karlsruhe.de/film/dao/"
+    },
+    {
+      "title": "Das Klimamonster-Mini-Filmfestival",
+      "originalTitle": "",
+      "directors": [],
+      "year": null,
+      "country": [],
+      "runtime": 45,
+      "subtitleVersion": null,
+      "synopsis": "Schüler*innen der Grundschule Grünwinkel, der Grundschule Knielingen, der Schillerschule und der Viktor-von-Scheffel Schule zeigen ihre Animationskurzfilme, die in den letzten Monaten unter der Workshopleitung der Trickfilmerin Franziska Poike entstanden sind. Alle Filme wurden von den Kindern in Gruppenarbeit selbst entwickelt und thematisieren die ökologischen Krisen und ihre Lösungsmöglichkeiten.\n\nDas Projekt fördert die Klima- und Nachhaltigkeitsbildung an Schulen und wird von der BW Stiftung gefördert. Kit Klimamonster ist das Kindermaskottchen der Parents for Future Deutschland. www.klima-kit.de",
+      "synopsisEn": null,
+      "series": [
+        "Junge Kinemathek"
+      ],
+      "fsk": null,
+      "mentionsDiscussion": false,
+      "isEvent": false,
+      "specRaw": "Klimamonster-Animationskurzfilme; 45‘",
+      "slug": "das-klimamonster-mini-filmfestival",
+      "url": "https://kinemathek-karlsruhe.de/film/das-klimamonster-mini-filmfestival/"
+    },
+    {
+      "title": "Die Eiche – Mein Zuhause",
+      "originalTitle": "",
+      "directors": [
+        "Michel Seydoux",
+        "Laurent Charbonnier"
+      ],
+      "year": 2022,
+      "country": [
+        "Frankreich"
+      ],
+      "runtime": 80,
+      "subtitleVersion": "DF",
+      "synopsis": "Es war einmal eine alte Eiche… Die Jahreszeiten ändern sich, aber die Bewohner bleiben die gleichen: das flinke Eichhörnchen, die farbigen Rüsselkäfer und viele andere Lebewesen. Sie alle finden Zuflucht, Unterschlupf und ein Zu-hause in diesem majestätischen Baum. Im Anschluss Gespräch mit Karlsruher Baumpfleger*innen.",
+      "synopsisEn": null,
+      "series": [
+        "Klima | Krisen | Utopien"
+      ],
+      "fsk": null,
+      "mentionsDiscussion": true,
+      "isEvent": false,
+      "specRaw": "Michel Seydoux / Laurent Charbonnier, Frankreich 2022 | 80 Min. | DF",
+      "slug": "die-eiche-mein-zuhause",
+      "url": "https://kinemathek-karlsruhe.de/film/die-eiche-mein-zuhause/"
+    },
+    {
+      "title": "Die leisen und die großen Töne (En Fanfare)",
+      "originalTitle": "En fanfare",
+      "directors": [
+        "Emmanuel Courcol"
+      ],
+      "year": 2024,
+      "country": [
+        "FR"
+      ],
+      "runtime": 103,
+      "subtitleVersion": "OmU",
+      "synopsis": "Thibaut ist ein berühmter Dirigent, der die Konzertsäle der ganzen Welt bereist. In der Mitte seines Lebens erfährt er, dass er adoptiert wurde und dass er auch einen jüngeren Bruder hat, Jimmy, der in einer Schulküche arbeitet und Posaune in der Blaskapelle einer Arbeiterstadt spielt. Die beiden Brüder könnten unterschiedlicher nicht sein. Nur in einer Sache sind sie sich einig: ihrer Liebe zur Musik. Thibaut ist beeindruckt vom musikalischen Talent seines Bruders. Er will die Ungerechtigkeit ihres Schicksals begleichen, seinem Bruder die eine Chance geben, die er nie hatte: sein Talent zu entfalten, seinem Herzen zu folgen und mit dem kleinen Orchester einen nationalen Wettbewerb zu gewinnen. Jimmy beginnt, von einem ganz anderen Leben zu träumen…\n\nEin Kino der Superlative hat Regisseur Emmanuel Courcol mit diesem Film geschaffen: eine Geschichte, die sowohl im Kleinen als auch im Großen, im Privaten wie im Politischen überwältigt, berührt und vor allem unterhält. Benjamin Lavernhe (BIRNENKUCHEN MIT LAVENDEL) und Pierre Lottin (EIN TRIUMPH) sind brillant in dieser großen filmischen Erzählung von zwei Männern, die Brüder werden, und erst dadurch die Welt verstehen.",
+      "synopsisEn": null,
+      "series": [
+        "Cinefete"
+      ],
+      "fsk": null,
+      "mentionsDiscussion": false,
+      "isEvent": false,
+      "specRaw": "Emmanuel Courcol, FR 2024; 103′ OmU",
+      "slug": "die-leisen-und-die-grossen-toene",
+      "url": "https://kinemathek-karlsruhe.de/film/die-leisen-und-die-grossen-toene/"
+    },
+    {
+      "title": "Ein Sommer in Paris",
+      "originalTitle": "Le rendez-vous de l’été",
+      "directors": [
+        "Valentine Cadic"
+      ],
+      "year": 2025,
+      "country": [
+        "FR"
+      ],
+      "runtime": 77,
+      "subtitleVersion": "OmU",
+      "synopsis": "Paris im Sommer 2024: Während die ganze Stadt wegen der Olympischen Spiele Kopf steht, stolpert die schüchterne Blandine aus der Normandie von einem Missverständnis ins nächste. Eigentlich ist sie gekommen, um bei den Schwimmwettkämpfen der Frauen ihren heimlichen Schwarm anzufeuern. Stattdessen verläuft sie sich in den fremden Straßen, kommt mit dem Gesetz in Konflikt und begegnet scheinbar nur Menschen, die ganz anders ticken als sie.\n\nAuch die Kommunikation mit ihrer Halbschwester Julie, mit der Blandine viele Jahren lang keinen Kontakt hatte, ist voller Tücken. Besser läuft es mit Alma, Julies kleiner Tochter, die ihr sofort ans Herz wächst. Zwischen sportlicher Euphorie, chaotischen Familienmomenten und einem unverhofften Rendezvous folgt Blandine unbeirrt ihrem eigenen Rhythmus und erlebt ein unvergessliches Großstadtabenteuer.​EIN SOMMER IN PARIS erzählt mit Witz und ganz viel Herz vom Zauber, sich die Welt trotz aller Regeln und Hektik mit der ganz individuellen Sensibilität zu erschließen — und gerade so sich selbst und andere zu finden. Eine herrlich verspielte und umwerfend charmante Sommerkomödie!",
+      "synopsisEn": null,
+      "series": [
+        "Premiere"
+      ],
+      "fsk": null,
+      "mentionsDiscussion": false,
+      "isEvent": false,
+      "specRaw": "Valentine Cadic, FR 2025, 77′ OmU",
+      "slug": "ein-sommer-in-paris",
+      "url": "https://kinemathek-karlsruhe.de/film/ein-sommer-in-paris/"
+    },
+    {
+      "title": "Ex Machina",
+      "originalTitle": "",
+      "directors": [
+        "Alex Garland"
+      ],
+      "year": 2014,
+      "country": [
+        "USA"
+      ],
+      "runtime": 108,
+      "subtitleVersion": "OmU",
+      "synopsis": "Zum Abschluss unseres ANYMOS KI:NO-Sommers präsentieren wir am 16. Juli auf dem Kronenplatz den Science-Fiction-Thriller „Ex Machina“.\n\nIn einer dichten Mischung aus Spannung und philosophischem Drama folgt der Film dem jungen Programmierer Caleb, der zu einem abgelegenen Anwesen eingeladen wird, um an einem außergewöhnlichen Experiment teilzunehmen: Er soll die Künstliche Intelligenz Ava auf ihre Menschlichkeit hin testen. Was als wissenschaftliche Aufgabe beginnt, entwickelt sich schnell zu einem intensiven Machtspiel zwischen Mensch und Maschine.\n\n„Ex Machina“ stellt dabei auf faszinierende und zugleich beunruhigende Weise Fragen nach Bewusstsein, Kontrolle und den Grenzen künstlicher Intelligenz und danach, was uns eigentlich menschlich macht.\n\nDer Eintritt ist kostenfrei und es gilt das Prinzip – first come, first serve. Einlass ist um 18:30 Uhr.",
+      "synopsisEn": null,
+      "series": [],
+      "fsk": null,
+      "mentionsDiscussion": false,
+      "isEvent": false,
+      "specRaw": "Alex Garland, USA 2014 | 108 Min. | OmU",
+      "slug": "ex-machina",
+      "url": "https://kinemathek-karlsruhe.de/film/ex-machina/"
+    },
+    {
+      "title": "Filmabend Boxy Eyes: 10 Dinge, die ich an Dir hasse",
+      "originalTitle": "",
+      "directors": [
+        "Gil Junger"
+      ],
+      "year": 1999,
+      "country": [
+        "USA"
+      ],
+      "runtime": 97,
+      "subtitleVersion": "OmU",
+      "synopsis": "Der Jugendclub der Kinemathek befindet sich aktuell in der Findungsphase– umso mehr freuen wir uns, gemeinsam erste Aktionen zu erleben, unsweiterzuentwickeln und als Gruppe zusammenzuwachsen.Gemeinsam schauen wir die beliebte Teenie-Romcom „10 Things I HateAbout You“ und besprechen sie anschließend.Damit ist der Abend noch nicht vorbei: Nach dem Film wollen wirgemeinsam Pizza bestellen und verwandeln den Kinosaal in eingemütliches Nachtlager. Wer noch nicht müde ist, kann noch einen Filmanmachen oder wir schauen Trailer und planen die nächsten Aktionen.Mit Raum für Diskussionen und Reflexion. Die Jugendlichen kommenmiteinander ins Gespräch, teilen Eindrücke und diskutieren die Inhalteder Filme und ihre Wünsche und Ideen.Wir freuen uns auf einen tollen gemeinsamen Abend.\n\nStart: 18:30Film: 19:00Pizza wird gegen 21:00 geliefertEnde: am nächsten Morgen nach dem Frühstück gegen 11:30",
+      "synopsisEn": null,
+      "series": [
+        "Deluxe – Lange Nacht der Jugendkultur"
+      ],
+      "fsk": null,
+      "mentionsDiscussion": false,
+      "isEvent": false,
+      "specRaw": "Gil Junger, USA 1999; 97‘ OmU",
+      "slug": "filmabend-boxy-eyes-10-dinge-die-ich-an-dir-hasse",
+      "url": "https://kinemathek-karlsruhe.de/film/filmabend-boxy-eyes-10-dinge-die-ich-an-dir-hasse/"
+    },
+    {
+      "title": "Fräulein Hicks und die kleine Pupswolke",
+      "originalTitle": "",
+      "directors": [],
+      "year": null,
+      "country": [],
+      "runtime": null,
+      "subtitleVersion": null,
+      "synopsis": "Wir lesen animierte Bildergeschichten auf der großen Kinoleinwand! Macht es euch in den Sesseln der Kinemathek gemütlich und begleitet Fräulein Hicks und die kleine Pupswolke.",
+      "synopsisEn": null,
+      "series": [
+        "Bilderbuchkino"
+      ],
+      "fsk": null,
+      "mentionsDiscussion": false,
+      "isEvent": true,
+      "specRaw": "Vorleseveranstaltung mit der Stadtbibliothek",
+      "slug": "fraulein-hicks-und-die-kleine-pupswolke",
+      "url": "https://kinemathek-karlsruhe.de/film/fraulein-hicks-und-die-kleine-pupswolke/"
+    },
+    {
+      "title": "I Only Rest in the Storm",
+      "originalTitle": "",
+      "directors": [
+        "Pedro Pinho"
+      ],
+      "year": 2025,
+      "country": [
+        "PT",
+        "FR",
+        "BR",
+        "RO"
+      ],
+      "runtime": 211,
+      "subtitleVersion": "OmU",
+      "synopsis": "Sérgio reist ins westafrikanische Guinea-Bissau, um dort als Umweltingenieur für eine NGO an einem Straßenbauprojekt zwischen Wüste und Wald mitzuarbeiten. Bei seinen Streifzügen durch die Großstadt lernt er Diára und Gui kennen, die Teil der lokalen queeren Community sind. Während Sérgio miterlebt, wie sich die Kolleginnen aus seinem europäisch geprägten Arbeitsumfeld oftmals herablassend und sogar gewalttätig gebärden, werden Diára und Gui zu seinem einzigen Zufluchtsort und eine fragile Beziehung entsteht. Aber versucht Sérgio einfach nur der Einsamkeit in der Fremde zu entgehen? Oder kann er seine Rolle als Europäer in einem afrikanischen Land reflektieren und seinen neuen Freundinnen auf Augenhöhe begegnen?\n\nMit I ONLY REST IN THE STORM legt Pedro Pinho nach A FABRICA DE NADA ein weiteres beeindruckendes Zeugnis für die Kreativität des portugisieschen Kinos vor: ein quicklebendiger, mäandernder und überraschender Film voller unvergesslicher Bilder, der das Verhältnis zwischen Europa und Afrika sowie die ambivalente Rolle der Entwicklungzusammenarbeit untersucht.",
+      "synopsisEn": null,
+      "series": [
+        "Premiere"
+      ],
+      "fsk": null,
+      "mentionsDiscussion": false,
+      "isEvent": false,
+      "specRaw": "Pedro Pinho, PT/FR/BR/RO 2025; 211′ OmU",
+      "slug": "i-only-rest-in-the-storm",
+      "url": "https://kinemathek-karlsruhe.de/film/i-only-rest-in-the-storm/"
+    },
+    {
+      "title": "It Happened on our Ground",
+      "originalTitle": "",
+      "directors": [
+        "Avner Faingulernt"
+      ],
+      "year": 2024,
+      "country": [
+        "IL",
+        "DE",
+        "CA"
+      ],
+      "runtime": 124,
+      "subtitleVersion": "OmU",
+      "synopsis": "Drei Generationen von Frauen setzen sich mit dem Erbe ihrer Familie aus der Zeit des Holocaust, deren Verstrickung in das NS-Regime und ihrem Widerstand auseinander.„IT HAPPENED ON OUR GROUND“ ist eine einfühlsame Auseinandersetzung mit Schuld, Erinnerung und der Kraft, die zur Heilung nötig ist.\n\nAuf einem friedlichen, traumhaft schönen Landsitz in Süddeutschland leben drei Generationen von Frauen mit der stillen Last einer schmerzhaften Vergangenheit. In „It Happened on Our Ground“ bringt Regisseur Avner Faingulernt das außergewöhnliche Leben von Wendelgard von Staden – Wendi – auf die Leinwand: eine Frau, die in ihren letzten Lebensjahren immer noch mit dem langen Schatten ringt, den die Nähe ihrer Familie zur NS-Macht und die Gräueltaten des Holocaust auf sie werfen. Wendi ist keine gewöhnliche Zeitzeugin. Sie ist die Nichte von Hitlers erstem Außenminister, Konstantin von Neurath, und verbrachte ihre Teenagerjahre während des Zweiten Weltkriegs auf dem Anwesen ihrer Eltern in Kleinglattbach, wo Land beschlagnahmt und in das KZ Wiesengrund umgewandelt wurde, ein Außenlager des KZ Natzweiler-Struthof. Ihre Mutter, Irmgard von Neurath, widersetzte sich der moralischen Abstumpfung ihrer Klasse und ihrer Zeit und versuchte, den Gefangenen selbst unter den stets wachsamen Augen der SS zu helfen. Wendi, damals noch ein Teenager, war eine widerwillige Zeugin. Ihre Memoiren „Nacht über dem Tal“ bildeten die Grundlage für diese eindringliche filmische Reflexion über Erinnerung, Schweigen und Mitschuld. Doch Faingulerns Film ist mehr als ein historisches Porträt – er ist eine Meditation über generationenübergreifendes Trauma und das Schweigen, das sich nach dem Krieg über viele deutsche Familien legte. Der Film begleitet Wendi, ihre Tochter Inga und ihre Enkelin Gina über mehrere Jahre hinweg und lädt die Zuschauer zu einer Reihe intimer, oft schmerzhafter Gespräche ein. Was haben die Kinder des Krieges miterlebt? Was haben sie tief in sich vergraben?",
+      "synopsisEn": null,
+      "series": [
+        "Masel Talk"
+      ],
+      "fsk": null,
+      "mentionsDiscussion": false,
+      "isEvent": false,
+      "specRaw": "Avner Faingulernt, IL/DE/CA 2024; 124′ OmU",
+      "slug": "it-happened-on-our-ground",
+      "url": "https://kinemathek-karlsruhe.de/film/it-happened-on-our-ground/"
+    },
+    {
+      "title": "Kassensturz – Kommunen vor dem Kollaps",
+      "originalTitle": "",
+      "directors": [
+        "Katharina Singer"
+      ],
+      "year": 2026,
+      "country": [
+        "DE"
+      ],
+      "runtime": 45,
+      "subtitleVersion": null,
+      "synopsis": "Die deutschen Städte verbuchen 2025 das größte Defizit der bundesdeutschen Geschichte. Und jetzt sparen sie was zu sparen geht: an Straßen, Kultur, erhöhen Gebühren für Kitas und Nahverkehr. Und die Bürger:innen gehen auf die Barrikaden. Die „ARD Story“ begleitet deutsche Städte ein Jahr durch die Krise: Warum fehlt plötzlich so viel Geld? Welche Folgen hat das für die Menschen und am Ende für die Demokratie?\n\nDeutschlands Städte sind im Minus, im tiefroten Minus. 2025 verbuchen sie das größte Defizit der bundesdeutschen Geschichte. Und jetzt sparen sie was zu sparen geht: an Straßen, Kultur und den Innenstädten, erhöhen Gebühren für Kitas, Schwimmbäder und den Nahverkehr. Geht gar nicht, finden viele Bürger:innen und gehen auf die Barrikaden.Die „ARD Story“ begleitet deutsche Städte ein Jahr durch die Krise, zeigt Politikerinnen und Politiker bei der Herausforderung: Wo kann man überhaupt noch sparen? Trifft Bürgerinnen und Bürger, die gegen die Sparpläne kämpfen und Angst um ihre Zukunft haben. Warum fehlt plötzlich so viel Geld? Was bedeutet die Finanznot der eigenen Stadt für das tägliche Leben? Und was passiert, wenn Frust und Wut der Bürger:innen über Einsparungen überhandnehmen? Gefährdet das die Demokratie?",
+      "synopsisEn": null,
+      "series": [
+        "Koop-Kino"
+      ],
+      "fsk": null,
+      "mentionsDiscussion": false,
+      "isEvent": false,
+      "specRaw": "Katharina Singer, DE 2026; 45′",
+      "slug": "kassensturz-kommunen-vor-dem-kollaps",
+      "url": "https://kinemathek-karlsruhe.de/film/kassensturz-kommunen-vor-dem-kollaps/"
+    },
+    {
+      "title": "Kein Land für Niemand",
+      "originalTitle": "",
+      "directors": [
+        "M. Ahrens",
+        "M. Lüdemann"
+      ],
+      "year": 2025,
+      "country": [
+        "DE"
+      ],
+      "runtime": 107,
+      "subtitleVersion": "OmU",
+      "synopsis": "Europa zieht die Mauern hoch – mitten in einer humanitären Katastrophe. Der Dokumentarfilm „Kein Land für Niemand – Abschottung eines Einwanderungslandes“ beleuchtet die drastischen Folgen der europäischen Abschottungspolitik und die Rolle Deutschlands in diesem Paradigmenwechsel.\n\nDie Dokumentation „Kein Land für Niemand” begleitet eine Rettungsmission im Mittelmeer, zeigt die katastrophalen Zustände in Lagern für Geflüchtete und gibt Menschen eine Stimme, die den lebensgefährlichen Weg nach Europa überlebt haben. Gleichzeitig blickt der Film auf die politische und gesellschaftliche Entwicklung in Deutschland: Ein erstarkender Rechtspopulismus prägt den Diskurs. Flucht und Migration werden zunehmend kriminalisiert, und humanitäre Hilfe gerät unter Druck.\n\nDeutschland gibt hier immer wieder den Takt vor und Europa zieht nach. Durch exklusive Interviews mit Wissenschaftlerinnen, politischen Entscheidungsträgerinnen und Aktivist*innen hinterfragt „Kein Land für Niemand“ die aktuellen Narrative über Flucht und Migration und beleuchtet die Mechanismen, mit denen Angst und Populismus die politische Agenda bestimmen. Wie konnte es so weit kommen? Und welche Alternativen gibt es zu einem Europa, das sich immer weiter abschottet?\n\nFilm findet im Rahmen des Demokradienstags statt und in Kooperation mit dem TRIANGEL | TRANSFER | KULTUR | RAUM.Ort: Kronenplatz Open Air (bei schlechtem Wetter in der Kinemathek)",
+      "synopsisEn": null,
+      "series": [],
+      "fsk": null,
+      "mentionsDiscussion": false,
+      "isEvent": false,
+      "specRaw": "M. Ahrens / M. Lüdemann, DE 2025; 107‘ OmU",
+      "slug": "kein-land-fuer-niemand",
+      "url": "https://kinemathek-karlsruhe.de/film/kein-land-fuer-niemand/"
+    },
+    {
+      "title": "Le Panache",
+      "originalTitle": "",
+      "directors": [
+        "Jennifer Devoldère"
+      ],
+      "year": 2024,
+      "country": [
+        "FR"
+      ],
+      "runtime": 93,
+      "subtitleVersion": "OmU",
+      "synopsis": "Das hartnäckige Stottern ist nur eines von vielen Problemen des jungen Colin. An seiner neuen Schule, die er nach der Scheidung seiner Eltern besucht, fühlt er sich ausgeschlossen und allein. Der charismatische Lehrer M. Devarseau sieht Colins Potenzial und besetzt ihn in einer Theateraufführung von „Cyrano de Bergerac“. Um auf der Bühne zu bestehen, muss der unauffällige Colin jedoch nicht nur sein Stottern in den Griff kriegen.\n\nErst in der vorigen Cinéfête-Saison in 2024/2025 zeigten wir erstmals einen Film der französischen Regisseurin und Autorin Jennifer Devoldère. In SAGE-HOMME widmete sie sich einem jungen Mann, der auf dem Weg zu seinem „unmännlichen“ Traumjob allerlei innere und äußere Hürden überwinden musste. Kaum ein Jahr später ist sie mit LE PANACHE zurück und zeigt erneut, wie wichtig nicht nur ein gesundes Selbstvertrauen, sondern auch Inspiration durch Freunde und Vorbilder ist.",
+      "synopsisEn": null,
+      "series": [
+        "Cinefete"
+      ],
+      "fsk": null,
+      "mentionsDiscussion": false,
+      "isEvent": false,
+      "specRaw": "Jennifer Devoldère, FR 2024; 93′ OmU",
+      "slug": "le-panache",
+      "url": "https://kinemathek-karlsruhe.de/film/le-panache/"
+    },
+    {
+      "title": "Louise und die Schule der Freiheit",
+      "originalTitle": "",
+      "directors": [
+        "Éric Besnard"
+      ],
+      "year": 2024,
+      "country": [
+        "FR"
+      ],
+      "runtime": 109,
+      "subtitleVersion": "OmU",
+      "synopsis": "Im Frankreich des späten 19. Jahrhunderts geht ein Beben durchs Land. In Paris wird beschlossen, die landesweite Schulpflicht einzuführen. Die ambitionierte Lehrerin Louise Violet trifft in einem kleinen ländlichen Dorf ein, um dort den Kindern Lesen, Schreiben und Rechnen beizubringen. Doch bevor sie damit beginnen kann, muss sie den verärgerten Eltern erklären, warum Bildung wichtig für die Zukunft ihrer Kinder ist.\n\nEine Welt ohne das elementare Grundschulwissen können wir uns in Europa heute gar nicht mehr vorstellen, doch vor kaum 150 Jahren war geistige Bildung ein Privileg, das nur GroßstadtbewohnerInnen vorbehalten war. Trotz (oder gerade wegen) der schier unendlichen Informationen der modernen Welt wächst das Misstrauen zwischen den Menschen heute wieder. LOUISE VIOLET ist ein Plädoyer für das gegenseitige Entgegenkommen auf dem Weg in die Zukunft.",
+      "synopsisEn": null,
+      "series": [
+        "Cinefete"
+      ],
+      "fsk": null,
+      "mentionsDiscussion": false,
+      "isEvent": false,
+      "specRaw": "Éric Besnard, FR 2024; 109′ OmU",
+      "slug": "louise-und-die-schule-der-freiheit",
+      "url": "https://kinemathek-karlsruhe.de/film/louise-und-die-schule-der-freiheit/"
+    },
+    {
+      "title": "Margarete Schütte-Lihotzky – Architektin, Kommunistin, Widerstandskämpferin",
+      "originalTitle": "",
+      "directors": [],
+      "year": 2018,
+      "country": [],
+      "runtime": 45,
+      "subtitleVersion": null,
+      "synopsis": "In einer Epoche, in der Frauen selten als Architektinnen anerkannt wurden, entwarfMargarete Schütte-Lihotzky die revolutionäre Frankfurter Küche, den Vorläufer moderner Einbauküchen. Obwohl sie nie selbst gekocht hatte, wurde sie ihr Leben lang mit dieser nnovation in Verbindung gebracht. Sie widersetzte sich den Nationalsozialisten, wurde zum Tode verurteilt, überlebte jedoch durch Glück und Zufälle. Die beeindruckende Wienerin, diefast 103 Jahre lebte, wird in dieser Dokumentation gewürdigt.\n\nAls Vorfilm spielen wir die Kurzdoku Die Frankfurter Küche (stumm,8′). Nach der Vorstellung besteht die Möglichkeit, sich bei einem Cocktail in unserer KinoBar noch über die großartige Architektin zu unterhalten.",
+      "synopsisEn": null,
+      "series": [
+        "Koop-Kino"
+      ],
+      "fsk": null,
+      "mentionsDiscussion": false,
+      "isEvent": false,
+      "specRaw": "TV-Doku, 2018; 45′ + Kurzdoku 1927; 8′",
+      "slug": "margarete-schuette-lihotzky-architektin-kommunistin-widerstandskaempferin",
+      "url": "https://kinemathek-karlsruhe.de/film/margarete-schuette-lihotzky-architektin-kommunistin-widerstandskaempferin/"
+    },
+    {
+      "title": "Mein neues altes Ich",
+      "originalTitle": "",
+      "directors": [
+        "Louise Unmack Kjeldsen"
+      ],
+      "year": 2026,
+      "country": [
+        "DE",
+        "DK",
+        "NR"
+      ],
+      "runtime": 75,
+      "subtitleVersion": "OmU",
+      "synopsis": "In MEIN NEUES ALTES ICH begibt sich die Filmemacherin Louise Unmack Kjeldsen auf eine emotionale Reise in das Mysterium der Menopause. Louise und andere betroffene Frauen aus aller Welt erzählen offen über ihre Erlebnisse mit starken Symptomen der Menopause.\n\nObwohl die Hälfte der Weltbevölkerung die Menopause erlebt und viele Frauen darunter so leiden, dass ihr Alltag stark beeinträchtigt ist, ist diese Lebensphase noch immer wenig erforscht. Über Jahrhunderte trugen historische Vorurteile dazu bei, dass viele Betroffene im Stillen litten und Wissen bis heute begrenzt ist.\n\nNun suchen Forschende weltweit nach Antworten, um die Auswirkungen des Östrogenrückgangs auf Körper und Gehirn zu ergründen.\n\nWarum haben vier von fünf Frauen Hitzewallungen, mehr als ein Viertel Schlafstörungen? Warum leider 41% unter Gedächtnisproblemen? Warum hat die Altersgruppe 45-54 Jahre die höchste Selbstmordrate? Wie hängen Menopause-Symptome mit dem dreifach höheren Alzheimer-Risiko von Frauen und Depressionen zusammen? Welche Möglichkeiten gibt es, entgegen zu wirken?\n\nMEIN NEUES ALTES ICH bricht Tabus, deckt Mythen und Fehlinformationen auf und rückt die Menopause in ein neues Licht.",
+      "synopsisEn": null,
+      "series": [
+        "Menopause"
+      ],
+      "fsk": null,
+      "mentionsDiscussion": false,
+      "isEvent": false,
+      "specRaw": "Louise Unmack Kjeldsen, DE/DK/NR 2026; 75′ OmU",
+      "slug": "mein-neues-altes-ich",
+      "url": "https://kinemathek-karlsruhe.de/film/mein-neues-altes-ich/"
+    },
+    {
+      "title": "Mommy",
+      "originalTitle": "",
+      "directors": [
+        "Xavier Dolan"
+      ],
+      "year": 2014,
+      "country": [
+        "CA"
+      ],
+      "runtime": 139,
+      "subtitleVersion": "OmU",
+      "synopsis": "Die resolute Diane liebt ihren 15-jährigen Sohn Steve über alles, obwohl er sie mit seinen extremen Wut- und Gewaltausbrüchen in den Wahnsinn und in den Ruin treibt. Seit dem Tod seines Vaters hat Steve eine Reihe von Heimen für schwer erziehbare Kinder durchlaufen. Nun kommt er zurück zu seiner Mutter, weil niemand sonst mit ihm fertig wird. Mit seinem fordernden Anspruch auf die Rolle des Mannes im Haus und seiner überbordenden Liebe zu ihr stellt er seine Mutter auf die Probe. Dabei ist Diane auch ohne ihren unbändigen Sohn längst überfordert mit sich und der Welt. In ihrem Bemühen, ihr Schicksal zu meistern, bekommt sie unverhofft Hilfe von der schweigsamen Nachbarin Kyla, der es gelingt, eine Balance in der Mutter-Sohn-Beziehung zu schaffen und eine zarte Hoffnung auf eine vielleicht doch noch glückliche Zukunft aufkeimen zu lassen.\n\nMit ungeheurer Wucht erzählt MOMMY von einer außergewöhnlichen Mutter-Sohn-Beziehung, in der Zärtlichkeit und Brutalität nur einen Herzschlag voneinander entfernt sind. Regiewunderkind Xavier Dolan feiert mit großem stilistischen Wagemut, mitreißender Musik und viel Liebe zu seinen Figuren die Möglichkeiten des Kinos. MOMMY ist so intensiv, dass er fast die Leinwand sprengt und direkt unter die Haut geht. In Cannes begeisterte der Film Kritiker und Publikum gleichermaßen und wurde mit dem Preis der Jury 2015 ausgezeichnet.",
+      "synopsisEn": null,
+      "series": [
+        "Fragile Teilhabe"
+      ],
+      "fsk": null,
+      "mentionsDiscussion": false,
+      "isEvent": false,
+      "specRaw": "Xavier Dolan, CA 2014; 139′ OmU",
+      "slug": "mommy",
+      "url": "https://kinemathek-karlsruhe.de/film/mommy/"
+    },
+    {
+      "title": "Oh, wie schön ist Panama",
+      "originalTitle": "",
+      "directors": [],
+      "year": null,
+      "country": [],
+      "runtime": null,
+      "subtitleVersion": null,
+      "synopsis": "Wir lesen animierte Bildergeschichten auf der großen Kinoleinwand! Macht es euch in den Sesseln der Kinemathek gemütlich und begleitet uns nach Panama.",
+      "synopsisEn": null,
+      "series": [
+        "Bilderbuchkino"
+      ],
+      "fsk": null,
+      "mentionsDiscussion": false,
+      "isEvent": true,
+      "specRaw": "Vorleseveranstaltung mit der Stadtbibliothek",
+      "slug": "oh-wie-schoen-ist-panama",
+      "url": "https://kinemathek-karlsruhe.de/film/oh-wie-schoen-ist-panama/"
+    },
+    {
+      "title": "Prinzessin Mononoke",
+      "originalTitle": "もののけ姫",
+      "directors": [
+        "Hayao Miyazaki"
+      ],
+      "year": 1997,
+      "country": [
+        "Japan"
+      ],
+      "runtime": 128,
+      "subtitleVersion": "OmU",
+      "synopsis": "Am zweiten Open-Air-Event des ANYMOS KI:NO-Sommers begeben wir uns am 11. Juni auf dem Kronenplatz mit „Prinzessin Mononoke“ von Studio Ghibli auf eine epische Reise zwischen Natur, Mensch und Mythos.\n\nMit „Prinzessin Mononoke“ erwartet Dich ein eindrucksvolles Kinoerlebnis, das Dich in eine faszinierende Welt entführt, in welcher uralte Naturkräfte und menschlicher Fortschritt aufeinandertreffen. Herzlich laden wir Dich ein, gemeinsam mit uns in diese kraftvolle Geschichte einzutauchen und Dich von ihrer einzigartigen Atmosphäre mitreißen zu lassen.\n\nIm preisgekrönten Anime von Hayao Miyazaki folgt der junge Prinz Ashitaka einer geheimnisvollen Spur in die Wälder, wo er auf die wilde Kriegerin San trifft – bekannt als Prinzessin Mononoke. Zwischen den Fronten eines erbitterten Konflikts zwischen Menschen und Natur muss er seinen eigenen Weg finden und das Gleichgewicht der Welt bewahren. Was folgt ist ein bildgewaltiges, emotionales Abenteuer voller Spannung und Tiefe, das eindrucksvoll zeigt, wie sensibel das Zusammenspiel zwischen Mensch und Natur ist.\n\nAlle Personen, die im Ghibli Cosplay zum Kino kommen, bekommen von uns ein Freigetränk spendiert!\n\nDer Eintritt ist kostenfrei und es gilt das Prinzip – first come, first serve. Einlass ist um 18:30 Uhr.",
+      "synopsisEn": null,
+      "series": [
+        "TRIANGEL TRANSFER | KULTUR | RAUM"
+      ],
+      "fsk": null,
+      "mentionsDiscussion": false,
+      "isEvent": false,
+      "specRaw": "Hayao Miyazaki, Japan 1997 | 128 Min. | OmU",
+      "slug": "prinzessin-mononoke",
+      "url": "https://kinemathek-karlsruhe.de/film/prinzessin-mononoke/"
+    },
+    {
+      "title": "Resurrection",
+      "originalTitle": "狂野时代",
+      "directors": [
+        "Bi Gan"
+      ],
+      "year": 2025,
+      "country": [
+        "CN",
+        "FR"
+      ],
+      "runtime": 160,
+      "subtitleVersion": "OmeU",
+      "synopsis": "In einer Welt, in der die Menschheit zugunsten des ewigen Lebens das Träumen aufgegeben hat, begibt sich ein junger Namenloser auf eine fantastische Odyssee durch Zeit und Raum, um die Träume vor dem Vergessen zu bewahren. Mit seinem dritten Film RESURRECTION hat Ausnahmeregisseur Bi Gan (LONG DAY’S JOURNEY INTO NIGHT) ein bildgewaltiges Werk von rauschhafter Fantasie erschaffen, wie es das Kino nur selten wagt – eine Sinnesreise durch die tiefsten Sehnsüchte des Menschseins, deren Bilder noch lange nachhallen. Bi Gan ist ein vom Kino Besessener, so wie sein Protagonist ein vom Träumen Besessener ist, und wurde für RESURRECTION bei den Filmfestspielen von Cannes mit dem Spezialpreis der Jury ausgezeichnet. In den Hauptrollen: Der chinesische Superstar Jackson Yee und die unvergleichliche Shu Qi (THE ASSASSIN).",
+      "synopsisEn": null,
+      "series": [
+        "Filmclub Redaiyu"
+      ],
+      "fsk": null,
+      "mentionsDiscussion": false,
+      "isEvent": false,
+      "specRaw": "Bi Gan, CN/FR 2025; 160′ OmeU",
+      "slug": "resurrection",
+      "url": "https://kinemathek-karlsruhe.de/film/resurrection/"
+    },
+    {
+      "title": null,
+      "originalTitle": null,
+      "directors": [],
+      "year": null,
+      "country": [],
+      "runtime": null,
+      "subtitleVersion": null,
+      "synopsis": "Zum Gedenken an die Opfer der Atombombenabwürfe auf Hiroshima und Nagasaki am 6. und 9. August 1945 werden am 21. Juni von 15.00 bis 17.00 Uhr in der Kinemathek Origami-Kraniche gefaltet. Die Tradition Origami-Kraniche zu falten geht auf die vor über 70 Jahren verstorbene Überlebende des Atombombenabwurfs Sadako Sasaki zurück und beruht auf einer alten japanischen Legende, nach der derjenige, der 1000 Origami-Kraniche falte, von den Göttern einen Wunsch erfüllt bekomme.\n\nDie Kraniche werden anschließend zur Gedenkveranstaltung nach Hiroshima geschickt.\n\nVeranstaltung in Zusammenarbeit mit der Gruppe Karlsruhe der Deutschen Friedensgesellschaft – Vereinigte Kriegsdienstgegner*innen DFG-VK https://karlsruhe.dfg-vk.de/",
+      "synopsisEn": null,
+      "series": [],
+      "fsk": null,
+      "mentionsDiscussion": false,
+      "isEvent": true,
+      "specRaw": null,
+      "slug": "sadakos-kraniche-fuer-eine-welt-ohne-atomwaffen",
+      "url": "https://kinemathek-karlsruhe.de/film/sadakos-kraniche-fuer-eine-welt-ohne-atomwaffen/"
+    },
+    {
+      "title": "Sieger Sein",
+      "originalTitle": "",
+      "directors": [
+        "Soleen Yusef"
+      ],
+      "year": 2024,
+      "country": [
+        "DE"
+      ],
+      "runtime": 119,
+      "subtitleVersion": null,
+      "synopsis": "Die elfjährige Mona ist mit ihrer kurdischen Familie aus Syrien geflüchtet und kommt auf eine Schule im Berliner Wedding. Mona kann kein Wort Deutsch, aber Fußball. Der engagierte Lehrer Herr Chepovsky, kurz Herr Che, erkennt ihr außergewöhnliches Talent und nimmt sie in das Mädchenteam auf. Mona ist eine Kämpferin, merkt aber bald, nur wenn sie und die anderen Mädchen zusammenspielen, können sie auch Sieger sein.",
+      "synopsisEn": null,
+      "series": [
+        "Fragile Teilhabe",
+        "Koop-Kino"
+      ],
+      "fsk": null,
+      "mentionsDiscussion": false,
+      "isEvent": false,
+      "specRaw": "Soleen Yusef, DE 2024; 119′",
+      "slug": "sieger-sein",
+      "url": "https://kinemathek-karlsruhe.de/film/sieger-sein/"
+    },
+    {
+      "title": "Silent Flood",
+      "originalTitle": "",
+      "directors": [
+        "Dmytro Sukholytkyy-Sobchuk"
+      ],
+      "year": 2025,
+      "country": [
+        "DE",
+        "UA"
+      ],
+      "runtime": 90,
+      "subtitleVersion": "OmU",
+      "synopsis": "Am Ufer des Dnjestr in der Westukraine lebt eine kleine religiöse Gemeinschaft, die ihren Alltag bis heute weitgehend ohne moderne Technik gestaltet. Die Menschen bewirtschaften ihre Felder mit Pferd und Wagen, leben eng mit der Natur und folgen einer pazifistischen Glaubenstradition.\n\nDie Region war bereits Schauplatz der beiden Weltkriege und wird regelmäßig von Überschwemmungen heimgesucht. Seit dem russischen Angriff auf die Ukraine ist der Krieg erneut Teil des Alltags. SILENT FLOOD begleitet die Dorfgemeinschaft und ukrainische Soldaten, die sich nach ihrer Heimat sehnen, und zeigt, wie unterschiedliche Lebensrealitäten unter den Bedingungen des Krieges aufeinandertreffen. Ohne Kampfszenen entsteht ein eindringliches Bild von Gemeinschaft, Verlust und der Suche nach Normalität in einer von Unsicherheit geprägten Zeit.Nach dem Film lädt der Verein Ukrainer in Karlsruhe zum Filmgespräch ein.",
+      "synopsisEn": null,
+      "series": [
+        "Koop-Kino"
+      ],
+      "fsk": null,
+      "mentionsDiscussion": true,
+      "isEvent": false,
+      "specRaw": "Dmytro Sukholytkyy-Sobchuk, DE/UA 2025; 90′ OmU",
+      "slug": "silent-flood",
+      "url": "https://kinemathek-karlsruhe.de/film/silent-flood/"
+    },
+    {
+      "title": null,
+      "originalTitle": null,
+      "directors": [],
+      "year": null,
+      "country": [],
+      "runtime": null,
+      "subtitleVersion": null,
+      "synopsis": null,
+      "synopsisEn": null,
+      "series": [],
+      "fsk": null,
+      "mentionsDiscussion": false,
+      "isEvent": true,
+      "specRaw": null,
+      "slug": "speakeasy-cinema",
+      "url": "https://kinemathek-karlsruhe.de/film/speakeasy-cinema/"
+    },
+    {
+      "title": "Sudan, Remember Us",
+      "originalTitle": "",
+      "directors": [
+        "Hind Meddeb"
+      ],
+      "year": 2025,
+      "country": [
+        "FR",
+        "TN"
+      ],
+      "runtime": 76,
+      "subtitleVersion": "OmeU",
+      "synopsis": "Eindringliches Porträt einer Generation, die der Poesie den Vorzug vor dem Schweigen und der Fantasie den Vorzug vor der Angst gab. Shajane, Maha, Muzamil, Khatab und die Stimme des Dichters Chaikhoon bilden einen filmischen Chor – jung, politisch rebellisch und künstlerisch furchtlos. In ihren Zwanzigern stehen sie an vorderster Front einer Revolution und stellen sich einer korrupten Armee und paramilitärischen Milizen entgegen, die für brutale Kriegsverbrechen in Darfur, Kordofan und am Blauen Nil verantwortlich sind. Sie hätten die Hoffnung schon vor dem Start verlieren können. Stattdessen bauten sie durch Gesänge, Gedichte und Träume eine Bewegung auf, die dazu beitrug, ein Regime zu stürzen. „Sudan, Remember Us“ verbindet intimes Geschichtenerzählen mit weitreichender politischer Dringlichkeit und fängt den ungleichen Kampf zwischen dem Feuer der Milizen und den unerschütterlichen Stimmen des Volkes ein. Es ist eine Hommage an die Kraft der Worte – und eine Erinnerung daran, dass Freiheit ein Kampf ist, der zuerst in der Vorstellungskraft entsteht.",
+      "synopsisEn": null,
+      "series": [
+        "Koop-Kino"
+      ],
+      "fsk": null,
+      "mentionsDiscussion": false,
+      "isEvent": false,
+      "specRaw": "Hind Meddeb, FR/TN 2025; 76‘ OmeU",
+      "slug": "sudan-remember-us",
+      "url": "https://kinemathek-karlsruhe.de/film/sudan-remember-us/"
+    },
+    {
+      "title": "Suiten für eine verwundete Welt",
+      "originalTitle": "",
+      "directors": [
+        "Stéphan Aubé"
+      ],
+      "year": 2023,
+      "country": [
+        "DE"
+      ],
+      "runtime": 70,
+      "subtitleVersion": null,
+      "synopsis": "Das Filmkonzert ist ein außergewöhnliches Projekt der renommierten Cellistin Tanja Tetzlaff (https://tanjatetzlaff.com/suites4nature/). Für den Film besuchte sie Orte, die vom Klimawandel betroffen sind, u.a. den Harz, die französische Atlantikküste und den Aletschgletscher, um dort die Bachsuiten 4 & 5 live zu spielen. Die Schönheit der Musik steht in Kontrast zu den teils dramatischen Bildern aus der verwundeten Natur, sie stemmt sich gegen die Endgültigkeit der Zerstörung. Ein musikalisch und visuell bewegendes Plädoyer für mehr Achtsamkeit und Demut gegenüber der Schönheit unseres Planeten. Berührend und bedrückend zugleich.\n\nNach dem Film Gespräch mit Detlef Grooß, Nationaltheater Mannheim und Vorsitzender des Vereins Orchester des Wandels, und Heinrich Goelzenleuchter, Badische Staatskapelle – Orchesters des Wandels (https://www.orchester-des-wandels.de). Moderation: Klaus Heid",
+      "synopsisEn": null,
+      "series": [
+        "Klima | Krisen | Utopien"
+      ],
+      "fsk": null,
+      "mentionsDiscussion": true,
+      "isEvent": false,
+      "specRaw": "Stéphan Aubé, DE 2023, 70′",
+      "slug": "suiten-fuer-eine-verwundete-welt",
+      "url": "https://kinemathek-karlsruhe.de/film/suiten-fuer-eine-verwundete-welt/"
+    },
+    {
+      "title": "Tori & Lokita",
+      "originalTitle": "",
+      "directors": [
+        "Jean-Pierre und Luc Dardenne"
+      ],
+      "year": 2022,
+      "country": [
+        "FR",
+        "BE"
+      ],
+      "runtime": 88,
+      "subtitleVersion": "OmU",
+      "synopsis": "Auf der Flucht von Benin nach Europa lernt Tori die ältere Lokita kennen. In Belgien angekommen, geben sie sich als Geschwister aus. Für die illegal eingereiste Lokita ist das die einzige Chance, eine Aufenthaltsgenehmigung zu erhalten. Allmählich werden die Behörden skeptisch – ein DNA-Test soll Klarheit schaffen. In einem Strudel aus Not und Kriminalität wird die Freundschaft der „Geschwister“ auf die Probe gestellt.",
+      "synopsisEn": null,
+      "series": [
+        "Fragile Teilhabe"
+      ],
+      "fsk": null,
+      "mentionsDiscussion": false,
+      "isEvent": false,
+      "specRaw": "Jean-Pierre und Luc Dardenne, FR/BE 2022; 88′ OmU",
+      "slug": "tori-lokita",
+      "url": "https://kinemathek-karlsruhe.de/film/tori-lokita/"
+    },
+    {
+      "title": "Trash or Treasure",
+      "originalTitle": "",
+      "directors": [],
+      "year": null,
+      "country": [],
+      "runtime": null,
+      "subtitleVersion": null,
+      "synopsis": "In den goldenen Zeiten war es in Europa noch möglich, Filme zu drehen, die sich hinter Hollywood nicht verstecken mussten. Sicher, nicht auf Augenhöhe – doch was an Budget fehlte, wurde durch Kühnheit, Einfallsreichtum und pures Showtalent mehr als ausgeglichen. Wenn Reisen an exotische Schauplätze unerschwinglich waren, fanden Filmemacher stets Wege, sich mit Improvisation aus den Zwängen knapper Mittel zu befreien. Eine gute Portion Sex, Gewalt und andere publikumswirksame Zutaten gehörten selbstverständlich dazu, während grelle Plakatkunst die kleinen und großen Mängel dieser Produktionen geschickt kaschierte.\n\nMonatlich öffnet sich ein Rahmen, der so in keinem regulären Programm existiert. Gezeigt werden Werke, die sich jenseits kanonischer Filmgeschichtsschreibung bewegen. Der Schwerpunkt liegt auf europäischen Genreproduktionen, insbesondere den radikaleren Strömungen der 60er bis 80er Jahre – ergänzt durch vereinzelte Abweichungen in andere Regionen, Zeiten und Ländern.Die Auswahl folgt nostalgischen Impuls, Interesse an Reibung, Abenteuerlust.Begleitet werden die Abende durch kurze Einführungen, manchmal Kontexte aber oft auch nur knappe Begrüßungen. Wer Zeit für ein Gespräch danach hat, es gibt gewiss Bedarf.Die Filme werden im Vorfeld nicht bekannt gegeben (es gibt aber Hinweise über Social Media). Wer kommt, entscheidet sich bewusst für das Ungewisse.",
+      "synopsisEn": null,
+      "series": [
+        "secret cinema"
+      ],
+      "fsk": null,
+      "mentionsDiscussion": true,
+      "isEvent": true,
+      "specRaw": "Genrekinoabend zwischen Schund und Wunder",
+      "slug": "trash-or-treasure",
+      "url": "https://kinemathek-karlsruhe.de/film/trash-or-treasure/"
+    },
+    {
+      "title": "Was ist schon normal?",
+      "originalTitle": "Un p’tit truc en plus",
+      "directors": [
+        "Artus"
+      ],
+      "year": 2024,
+      "country": [
+        "FR"
+      ],
+      "runtime": 99,
+      "subtitleVersion": "OmU",
+      "synopsis": "Paulo und sein Vater Lucien sind Bankräuber, sie haben sich außerdem verschätzt. Als die Flucht nach einem Raubzug aus dem Ruder gerät, schließen sie sich einer Reisegruppe eingeschränkter Männer und Frauen an und geben sich als Betreuer und Schützling aus. Eigentlich müssen sie das Spiel nur einige Tage aufrecht erhalten, bis Gras über ihren Raub gewachsen ist, doch sie unterschätzen die Auffassungsgabe ihrer Mitreisenden.\n\nDie Inklusion von behinderten Menschen hat in den letzten Jahren stark zugenommen, zumindes theoretisch. Praktisch sind geistig oder körperlich Behinderte nur selten Teil des Alltags und der gemeinsamen Popkultur. Dass dies auch anders geht, zeigt der Kinohit UN P’TIT TRUC EN PLUS, der in Frankreich fast 11 Millionen BesucherInnen amüsierte. Dabei werden vor allem seine gehandicappten Figuren weder auf ein Podest gestellt, noch zur Seite geschoben, stattdessen einfach so gezeigt, wie sie sind: Ganz normal eben.",
+      "synopsisEn": null,
+      "series": [
+        "Cinefete"
+      ],
+      "fsk": null,
+      "mentionsDiscussion": false,
+      "isEvent": false,
+      "specRaw": "Artus, FR 2024; 99′ OmU",
+      "slug": "was-ist-schon-normal",
+      "url": "https://kinemathek-karlsruhe.de/film/was-ist-schon-normal/"
+    }
+  ],
+  "showings": [
+    {
+      "date": "2026-06-10",
+      "time": "17:30",
+      "title": "I Only Rest in the Storm",
+      "venue": null,
+      "series": "Premiere",
+      "subtitles": [
+        "OmU"
+      ],
+      "discussion": false,
+      "notes": "Letzte Vorstellung",
+      "ticketUrl": "https://kinotickets.express/karlsruhe_kinemathek/booking/35591",
+      "filmSlug": "i-only-rest-in-the-storm",
+      "isEvent": false
+    },
+    {
+      "date": "2026-06-11",
+      "time": "19:00",
+      "title": "Prinzessin Mononoke",
+      "venue": null,
+      "series": "TRIANGEL TRANSFER | KULTUR | RAUM",
+      "subtitles": [
+        "OmU"
+      ],
+      "discussion": false,
+      "notes": "Eintritt Frei",
+      "ticketUrl": null,
+      "filmSlug": "prinzessin-mononoke",
+      "isEvent": false
+    },
+    {
+      "date": "2026-06-11",
+      "time": "19:30",
+      "title": "Ein Sommer in Paris",
+      "venue": null,
+      "series": "Premiere",
+      "subtitles": [
+        "OmU"
+      ],
+      "discussion": false,
+      "notes": null,
+      "ticketUrl": "https://kinotickets.express/karlsruhe_kinemathek/booking/35592",
+      "filmSlug": "ein-sommer-in-paris",
+      "isEvent": false
+    },
+    {
+      "date": "2026-06-13",
+      "time": "17:00",
+      "title": "Ein Sommer in Paris",
+      "venue": null,
+      "series": "Premiere",
+      "subtitles": [
+        "OmU"
+      ],
+      "discussion": false,
+      "notes": null,
+      "ticketUrl": "https://kinotickets.express/karlsruhe_kinemathek/booking/35593",
+      "filmSlug": "ein-sommer-in-paris",
+      "isEvent": false
+    },
+    {
+      "date": "2026-06-13",
+      "time": "19:00",
+      "title": "Dao",
+      "venue": null,
+      "series": "Premiere",
+      "subtitles": [
+        "OmU"
+      ],
+      "discussion": false,
+      "notes": null,
+      "ticketUrl": "https://kinotickets.express/karlsruhe_kinemathek/booking/35594",
+      "filmSlug": "dao",
+      "isEvent": false
+    },
+    {
+      "date": "2026-06-15",
+      "time": "19:30",
+      "title": "Speakeasy Cinema",
+      "venue": null,
+      "series": "Kinobar",
+      "subtitles": [],
+      "discussion": false,
+      "notes": null,
+      "ticketUrl": null,
+      "filmSlug": "speakeasy-cinema",
+      "isEvent": true
+    },
+    {
+      "date": "2026-06-16",
+      "time": "19:00",
+      "title": "Kein Land für Niemand",
+      "venue": null,
+      "series": "TRIANGEL TRANSFER | KULTUR | RAUM",
+      "subtitles": [
+        "OmU"
+      ],
+      "discussion": false,
+      "notes": "Eintritt Frei",
+      "ticketUrl": null,
+      "filmSlug": "kein-land-fuer-niemand",
+      "isEvent": false
+    },
+    {
+      "date": "2026-06-17",
+      "time": "19:30",
+      "title": "Tori & Lokita",
+      "venue": null,
+      "series": "Fragile Teilhabe",
+      "subtitles": [
+        "OmU"
+      ],
+      "discussion": false,
+      "notes": null,
+      "ticketUrl": "https://kinotickets.express/karlsruhe_kinemathek/booking/35595",
+      "filmSlug": "tori-lokita",
+      "isEvent": false
+    },
+    {
+      "date": "2026-06-18",
+      "time": "15:00",
+      "title": "Die leisen und die großen Töne (En Fanfare)",
+      "venue": null,
+      "series": "Cinefete",
+      "subtitles": [
+        "OmU"
+      ],
+      "discussion": false,
+      "notes": null,
+      "ticketUrl": "https://kinotickets.express/karlsruhe_kinemathek/booking/35596",
+      "filmSlug": "die-leisen-und-die-grossen-toene",
+      "isEvent": false
+    },
+    {
+      "date": "2026-06-18",
+      "time": "15:15",
+      "title": "Die leisen und die großen Töne (En Fanfare)",
+      "venue": null,
+      "series": "Cinefete",
+      "subtitles": [
+        "OmU"
+      ],
+      "discussion": false,
+      "notes": null,
+      "ticketUrl": "https://kinotickets.express/karlsruhe_kinemathek/booking/35597",
+      "filmSlug": "die-leisen-und-die-grossen-toene",
+      "isEvent": false
+    },
+    {
+      "date": "2026-06-18",
+      "time": "19:00",
+      "title": "Was ist schon normal?",
+      "venue": null,
+      "series": "Cinefete",
+      "subtitles": [
+        "OmU"
+      ],
+      "discussion": false,
+      "notes": null,
+      "ticketUrl": "https://kinotickets.express/karlsruhe_kinemathek/booking/35598",
+      "filmSlug": "was-ist-schon-normal",
+      "isEvent": false
+    },
+    {
+      "date": "2026-06-18",
+      "time": "19:30",
+      "title": "Trash or Treasure",
+      "venue": null,
+      "series": "secret cinema",
+      "subtitles": [],
+      "discussion": false,
+      "notes": null,
+      "ticketUrl": "https://kinotickets.express/karlsruhe_kinemathek/booking/35599",
+      "filmSlug": "trash-or-treasure",
+      "isEvent": true
+    },
+    {
+      "date": "2026-06-19",
+      "time": "18:30",
+      "title": "Louise und die Schule der Freiheit",
+      "venue": null,
+      "series": "Cinefete",
+      "subtitles": [
+        "OmU"
+      ],
+      "discussion": false,
+      "notes": "Ciné Club: Originalsprache mit französischen UT",
+      "ticketUrl": "https://kinotickets.express/karlsruhe_kinemathek/booking/35601",
+      "filmSlug": "louise-und-die-schule-der-freiheit",
+      "isEvent": false
+    },
+    {
+      "date": "2026-06-19",
+      "time": "19:00",
+      "title": "Margarete Schütte-Lihotzky – Architektin, Kommunistin, Widerstandskämpferin",
+      "venue": null,
+      "series": "Koop-Kino",
+      "subtitles": [],
+      "discussion": false,
+      "notes": null,
+      "ticketUrl": "https://kinotickets.express/karlsruhe_kinemathek/booking/35600",
+      "filmSlug": "margarete-schuette-lihotzky-architektin-kommunistin-widerstandskaempferin",
+      "isEvent": false
+    },
+    {
+      "date": "2026-06-20",
+      "time": "17:00",
+      "title": "Ein Sommer in Paris",
+      "venue": null,
+      "series": "Premiere",
+      "subtitles": [
+        "OmU"
+      ],
+      "discussion": false,
+      "notes": null,
+      "ticketUrl": "https://kinotickets.express/karlsruhe_kinemathek/booking/35605",
+      "filmSlug": "ein-sommer-in-paris",
+      "isEvent": false
+    },
+    {
+      "date": "2026-06-20",
+      "time": "17:30",
+      "title": "Le Panache",
+      "venue": null,
+      "series": "Cinefete",
+      "subtitles": [
+        "OmU"
+      ],
+      "discussion": false,
+      "notes": null,
+      "ticketUrl": "https://kinotickets.express/karlsruhe_kinemathek/booking/35603",
+      "filmSlug": "le-panache",
+      "isEvent": false
+    },
+    {
+      "date": "2026-06-20",
+      "time": "19:00",
+      "title": "Louise und die Schule der Freiheit",
+      "venue": null,
+      "series": "Cinefete",
+      "subtitles": [
+        "OmU"
+      ],
+      "discussion": false,
+      "notes": null,
+      "ticketUrl": "https://kinotickets.express/karlsruhe_kinemathek/booking/35604",
+      "filmSlug": "louise-und-die-schule-der-freiheit",
+      "isEvent": false
+    },
+    {
+      "date": "2026-06-20",
+      "time": "19:30",
+      "title": "Die leisen und die großen Töne (En Fanfare)",
+      "venue": null,
+      "series": "Cinefete",
+      "subtitles": [
+        "OmU"
+      ],
+      "discussion": false,
+      "notes": null,
+      "ticketUrl": "https://kinotickets.express/karlsruhe_kinemathek/booking/35602",
+      "filmSlug": "die-leisen-und-die-grossen-toene",
+      "isEvent": false
+    },
+    {
+      "date": "2026-06-21",
+      "time": "15:00",
+      "title": "Sadakos Kraniche – Für eine Welt ohne Atomwaffen!",
+      "venue": null,
+      "series": "Sonderveranstaltung",
+      "subtitles": [],
+      "discussion": false,
+      "notes": "Alle eingeladen",
+      "ticketUrl": null,
+      "filmSlug": "sadakos-kraniche-fuer-eine-welt-ohne-atomwaffen",
+      "isEvent": true
+    },
+    {
+      "date": "2026-06-21",
+      "time": "15:15",
+      "title": "Sieger Sein",
+      "venue": null,
+      "series": "Fragile Teilhabe",
+      "subtitles": [],
+      "discussion": false,
+      "notes": null,
+      "ticketUrl": "https://kinotickets.express/karlsruhe_kinemathek/booking/35607",
+      "filmSlug": "sieger-sein",
+      "isEvent": false
+    },
+    {
+      "date": "2026-06-21",
+      "time": "17:30",
+      "title": "Mein neues altes Ich",
+      "venue": null,
+      "series": "Menopause",
+      "subtitles": [
+        "OmU"
+      ],
+      "discussion": false,
+      "notes": null,
+      "ticketUrl": "https://kinotickets.express/karlsruhe_kinemathek/booking/35609",
+      "filmSlug": "mein-neues-altes-ich",
+      "isEvent": false
+    },
+    {
+      "date": "2026-06-21",
+      "time": "18:00",
+      "title": "Ein Sommer in Paris",
+      "venue": null,
+      "series": "Premiere",
+      "subtitles": [
+        "OmU"
+      ],
+      "discussion": false,
+      "notes": null,
+      "ticketUrl": "https://kinotickets.express/karlsruhe_kinemathek/booking/35606",
+      "filmSlug": "ein-sommer-in-paris",
+      "isEvent": false
+    },
+    {
+      "date": "2026-06-22",
+      "time": "19:30",
+      "title": "Speakeasy Cinema",
+      "venue": null,
+      "series": "Kinobar",
+      "subtitles": [],
+      "discussion": false,
+      "notes": null,
+      "ticketUrl": null,
+      "filmSlug": "speakeasy-cinema",
+      "isEvent": true
+    },
+    {
+      "date": "2026-06-24",
+      "time": "19:00",
+      "title": "Suiten für eine verwundete Welt",
+      "venue": null,
+      "series": "Klima | Krisen | Utopien",
+      "subtitles": [],
+      "discussion": false,
+      "notes": null,
+      "ticketUrl": "https://kinotickets.express/karlsruhe_kinemathek/booking/35610",
+      "filmSlug": "suiten-fuer-eine-verwundete-welt",
+      "isEvent": false
+    },
+    {
+      "date": "2026-06-25",
+      "time": "19:00",
+      "title": "Silent Flood",
+      "venue": null,
+      "series": "Koop-Kino",
+      "subtitles": [
+        "OmU"
+      ],
+      "discussion": false,
+      "notes": null,
+      "ticketUrl": "https://kinotickets.express/karlsruhe_kinemathek/booking/35611",
+      "filmSlug": "silent-flood",
+      "isEvent": false
+    },
+    {
+      "date": "2026-06-26",
+      "time": "16:00",
+      "title": "Fräulein Hicks und die kleine Pupswolke",
+      "venue": null,
+      "series": "Bilderbuchkino",
+      "subtitles": [],
+      "discussion": false,
+      "notes": null,
+      "ticketUrl": null,
+      "filmSlug": "fraulein-hicks-und-die-kleine-pupswolke",
+      "isEvent": true
+    },
+    {
+      "date": "2026-06-26",
+      "time": "19:00",
+      "title": "Sudan, Remember Us",
+      "venue": null,
+      "series": "Koop-Kino",
+      "subtitles": [
+        "OmeU"
+      ],
+      "discussion": false,
+      "notes": null,
+      "ticketUrl": "https://kinotickets.express/karlsruhe_kinemathek/booking/35612",
+      "filmSlug": "sudan-remember-us",
+      "isEvent": false
+    },
+    {
+      "date": "2026-06-27",
+      "time": "19:00",
+      "title": "Kassensturz – Kommunen vor dem Kollaps",
+      "venue": null,
+      "series": "Koop-Kino",
+      "subtitles": [],
+      "discussion": false,
+      "notes": "Eintritt Frei",
+      "ticketUrl": null,
+      "filmSlug": "kassensturz-kommunen-vor-dem-kollaps",
+      "isEvent": false
+    },
+    {
+      "date": "2026-06-29",
+      "time": "19:30",
+      "title": "Speakeasy Cinema",
+      "venue": null,
+      "series": "Kinobar",
+      "subtitles": [],
+      "discussion": false,
+      "notes": null,
+      "ticketUrl": null,
+      "filmSlug": "speakeasy-cinema",
+      "isEvent": true
+    },
+    {
+      "date": "2026-07-01",
+      "time": "19:30",
+      "title": "Sieger Sein",
+      "venue": null,
+      "series": "Fragile Teilhabe",
+      "subtitles": [],
+      "discussion": false,
+      "notes": null,
+      "ticketUrl": "https://kinotickets.express/karlsruhe_kinemathek/booking/35614",
+      "filmSlug": "sieger-sein",
+      "isEvent": false
+    },
+    {
+      "date": "2026-07-02",
+      "time": "17:00",
+      "title": "Das Klimamonster-Mini-Filmfestival",
+      "venue": null,
+      "series": "Junge Kinemathek",
+      "subtitles": [],
+      "discussion": false,
+      "notes": "Alle eingeladen",
+      "ticketUrl": null,
+      "filmSlug": "das-klimamonster-mini-filmfestival",
+      "isEvent": false
+    },
+    {
+      "date": "2026-07-04",
+      "time": "15:00",
+      "title": "Resurrection",
+      "venue": null,
+      "series": "Filmclub Redaiyu",
+      "subtitles": [
+        "OmeU"
+      ],
+      "discussion": false,
+      "notes": null,
+      "ticketUrl": "https://kinotickets.express/karlsruhe_kinemathek/booking/35615",
+      "filmSlug": "resurrection",
+      "isEvent": false
+    },
+    {
+      "date": "2026-07-04",
+      "time": "19:30",
+      "title": "Mommy",
+      "venue": null,
+      "series": "Fragile Teilhabe",
+      "subtitles": [
+        "OmU"
+      ],
+      "discussion": false,
+      "notes": null,
+      "ticketUrl": "https://kinotickets.express/karlsruhe_kinemathek/booking/35616",
+      "filmSlug": "mommy",
+      "isEvent": false
+    },
+    {
+      "date": "2026-07-06",
+      "time": "19:30",
+      "title": "Speakeasy Cinema",
+      "venue": null,
+      "series": "Kinobar",
+      "subtitles": [],
+      "discussion": false,
+      "notes": null,
+      "ticketUrl": null,
+      "filmSlug": "speakeasy-cinema",
+      "isEvent": true
+    },
+    {
+      "date": "2026-07-10",
+      "time": "19:00",
+      "title": "It Happened on our Ground",
+      "venue": null,
+      "series": "Masel Talk",
+      "subtitles": [
+        "OmU"
+      ],
+      "discussion": false,
+      "notes": null,
+      "ticketUrl": "https://kinotickets.express/karlsruhe_kinemathek/booking/35617",
+      "filmSlug": "it-happened-on-our-ground",
+      "isEvent": false
+    },
+    {
+      "date": "2026-07-11",
+      "time": "19:00",
+      "title": "Filmabend Boxy Eyes: 10 Dinge, die ich an Dir hasse",
+      "venue": null,
+      "series": "Deluxe – Lange Nacht der Jugendkultur",
+      "subtitles": [
+        "OmU"
+      ],
+      "discussion": false,
+      "notes": "Sleepover-Teilnahme nur nach Anmeldung",
+      "ticketUrl": "https://kinotickets.express/karlsruhe_kinemathek/booking/35618",
+      "filmSlug": "filmabend-boxy-eyes-10-dinge-die-ich-an-dir-hasse",
+      "isEvent": false
+    },
+    {
+      "date": "2026-07-13",
+      "time": "19:30",
+      "title": "Speakeasy Cinema",
+      "venue": null,
+      "series": "Kinobar",
+      "subtitles": [],
+      "discussion": false,
+      "notes": null,
+      "ticketUrl": null,
+      "filmSlug": "speakeasy-cinema",
+      "isEvent": true
+    },
+    {
+      "date": "2026-07-16",
+      "time": "19:00",
+      "title": "Ex Machina",
+      "venue": "Open Air auf dem Kronenplatz",
+      "series": "Ki:NO – Sommer",
+      "subtitles": [
+        "OmU"
+      ],
+      "discussion": false,
+      "notes": "Ort: Open Air auf dem Kronenplatz",
+      "ticketUrl": null,
+      "filmSlug": "ex-machina",
+      "isEvent": false
+    },
+    {
+      "date": "2026-07-16",
+      "time": "20:00",
+      "title": "Trash or Treasure",
+      "venue": null,
+      "series": "secret cinema",
+      "subtitles": [],
+      "discussion": false,
+      "notes": null,
+      "ticketUrl": "https://kinotickets.express/karlsruhe_kinemathek/booking/35619",
+      "filmSlug": "trash-or-treasure",
+      "isEvent": true
+    },
+    {
+      "date": "2026-07-18",
+      "time": "19:00",
+      "title": "Resurrection",
+      "venue": null,
+      "series": "Filmclub Redaiyu",
+      "subtitles": [
+        "OmeU"
+      ],
+      "discussion": false,
+      "notes": null,
+      "ticketUrl": "https://kinotickets.express/karlsruhe_kinemathek/booking/35620",
+      "filmSlug": "resurrection",
+      "isEvent": false
+    },
+    {
+      "date": "2026-07-20",
+      "time": "19:30",
+      "title": "Speakeasy Cinema",
+      "venue": null,
+      "series": "Kinobar",
+      "subtitles": [],
+      "discussion": false,
+      "notes": null,
+      "ticketUrl": null,
+      "filmSlug": "speakeasy-cinema",
+      "isEvent": true
+    },
+    {
+      "date": "2026-07-27",
+      "time": "19:30",
+      "title": "Speakeasy Cinema",
+      "venue": null,
+      "series": "Kinobar",
+      "subtitles": [],
+      "discussion": false,
+      "notes": null,
+      "ticketUrl": null,
+      "filmSlug": "speakeasy-cinema",
+      "isEvent": true
+    },
+    {
+      "date": "2026-07-29",
+      "time": "19:00",
+      "title": "Die Eiche – Mein Zuhause",
+      "venue": null,
+      "series": "Klima | Krisen | Utopien",
+      "subtitles": [
+        "DF"
+      ],
+      "discussion": false,
+      "notes": null,
+      "ticketUrl": "https://kinotickets.express/karlsruhe_kinemathek/booking/35621",
+      "filmSlug": "die-eiche-mein-zuhause",
+      "isEvent": false
+    },
+    {
+      "date": "2026-07-31",
+      "time": "16:00",
+      "title": "Oh, wie schön ist Panama",
+      "venue": null,
+      "series": "Bilderbuchkino",
+      "subtitles": [],
+      "discussion": false,
+      "notes": null,
+      "ticketUrl": null,
+      "filmSlug": "oh-wie-schoen-ist-panama",
+      "isEvent": true
+    },
+    {
+      "date": "2026-07-31",
+      "time": "18:00",
+      "title": "Cotton Queen",
+      "venue": null,
+      "series": "Premiere",
+      "subtitles": [],
+      "discussion": false,
+      "notes": null,
+      "ticketUrl": "https://kinotickets.express/karlsruhe_kinemathek/booking/35622",
+      "filmSlug": "cotton-queen",
+      "isEvent": false
+    }
+  ]
+}

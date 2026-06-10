@@ -1,0 +1,101 @@
+{
+  "scrapedAt": "2026-06-10T12:00:00Z",
+  "source": "fixture (hand-written test data for import-program.php)",
+  "films": [
+    {
+      "title": "Alien",
+      "originalTitle": "Alien",
+      "directors": ["Ridley Scott"],
+      "year": 1979,
+      "country": ["GB", "US"],
+      "runtime": 117,
+      "subtitleVersion": "OmU",
+      "synopsis": "Redaktionelle Test-Synopsis: Die Besatzung der Nostromo folgt einem Notsignal auf einen unbekannten Planeten.",
+      "synopsisEn": null,
+      "series": ["KOOP-KINO"],
+      "fsk": 16,
+      "mentionsDiscussion": false,
+      "isEvent": false,
+      "specRaw": "Ridley Scott, GB/US 1979; 117′ OmU",
+      "slug": "alien",
+      "url": "https://example.invalid/film/alien/"
+    },
+    {
+      "title": "Zzyzx Quantum Marmalade Kineautomat",
+      "originalTitle": "",
+      "directors": ["Niemand Bekannt"],
+      "year": 2099,
+      "country": ["DE"],
+      "runtime": 81,
+      "subtitleVersion": null,
+      "synopsis": "Absichtlich erfundener Film, der bei TMDB keinen Treffer haben darf.",
+      "synopsisEn": null,
+      "series": [],
+      "fsk": null,
+      "mentionsDiscussion": true,
+      "isEvent": false,
+      "specRaw": "Niemand Bekannt, DE 2099; 81′",
+      "slug": "zzyzx-quantum-marmalade-kineautomat",
+      "url": "https://example.invalid/film/zzyzx/"
+    },
+    {
+      "title": "Speakeasy Test Night",
+      "originalTitle": "",
+      "directors": [],
+      "year": null,
+      "country": [],
+      "runtime": null,
+      "subtitleVersion": null,
+      "synopsis": "Offene Bühne im Foyer — Beschreibung aus dem Event-Deskriptor.",
+      "synopsisEn": null,
+      "series": ["Kinobar"],
+      "fsk": null,
+      "mentionsDiscussion": true,
+      "isEvent": true,
+      "specRaw": null,
+      "slug": "speakeasy-test-night",
+      "url": "https://example.invalid/film/speakeasy-test-night/"
+    }
+  ],
+  "showings": [
+    {
+      "date": "2026-07-01",
+      "time": "20:00",
+      "title": "Alien",
+      "venue": "Saal",
+      "series": "KOOP-KINO",
+      "subtitles": ["OmU"],
+      "discussion": false,
+      "notes": "Restaurierte Fassung",
+      "ticketUrl": "https://kinotickets.express/karlsruhe_kinemathek/booking/99999",
+      "filmSlug": "alien",
+      "isEvent": false
+    },
+    {
+      "date": "2026-07-02",
+      "time": "19:30",
+      "title": "Zzyzx Quantum Marmalade Kineautomat",
+      "venue": null,
+      "series": null,
+      "subtitles": ["DF", "(e)"],
+      "discussion": true,
+      "notes": null,
+      "ticketUrl": null,
+      "filmSlug": "zzyzx-quantum-marmalade-kineautomat",
+      "isEvent": false
+    },
+    {
+      "date": "2026-07-03",
+      "time": "21:00",
+      "title": "Speakeasy Test Night",
+      "venue": "Box",
+      "series": "Kinobar",
+      "subtitles": [],
+      "discussion": false,
+      "notes": "Eintritt frei",
+      "ticketUrl": null,
+      "filmSlug": "speakeasy-test-night",
+      "isEvent": true
+    }
+  ]
+}

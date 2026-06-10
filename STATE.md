@@ -2,8 +2,19 @@
 
 Current state of the Kinemathek Karlsruhe website rebuild. Built on **Kirby 5.4.3**
 (flat-file), PHP 8.4, package manager **Bun**. Replaces a WordPress + ACF site.
-Spec: [`SPEC.md`](SPEC.md). Design is deliberately deferred (SPEC §10) — public
-templates are primitive; the **Panel/admin UI is fully designed**. Last updated 2026-06-10.
+Spec: [`SPEC.md`](SPEC.md). The **Panel/admin UI is fully designed**; public design
+work has begun: the **Spielplan (`program` template) carries the full Monatsblatt
+design** — a web translation of the printed program sheet (prototype in
+`monatsblatt.html`, untracked). Typeface: Lipa Agate High Cnd (`assets/font/`,
+WOFF2 self-hosted, weights 300/400/500/700 only). Logo SVG inlined via the
+`monatsblatt-logo` snippet (fills bound to theme vars). Other public templates
+(home, film, films, showing, event) are still primitive. Content has been
+imported from the old WordPress site via `scripts/import-program.php`
+(TMDB-enriched; see `scripts/import/SCRAPE-NOTES.md`). Deferred refactors (plugin
+was frozen by concurrent work when the Monatsblatt landed): move the template's
+venue classifier to `OccurrenceTrait::venueKey()`, the still-beats-poster pick to
+`FilmPage::artwork()`, the credits line to `FilmPage::creditsLine()`, and add
+`EventPage::imageFile()` for the native-`image()` trap. Last updated 2026-06-10.
 
 ---
 
@@ -48,6 +59,27 @@ content/
 **Authoritative field contract** — see [`CLAUDE.md`](CLAUDE.md). The backend logic, TMDB
 sync and ICS export all depend on these exact names; do not rename/retype them.
 
+### Multi-language (DE default / EN)
+
+Native Kirby multilang is ON (`'languages' => true` in config; definitions in
+`site/languages/de.php` + `en.php`). **German is the default language at the bare root
+(`url: '/'`), English lives under `/en`.** Content files carry the language code
+(`film.de.txt` / `film.en.txt`); `scripts/migrate-content-multilang.php` renames a
+pre-multilang content tree (idempotent, dry-run by default, `--apply` to execute) — run it
+once per environment when deploying this change, since `content/` is provisioned per
+environment. **No `languages.detect`** — it would store the detected language in the
+session (= a cookie), violating SPEC §7; switching is two plain links in the header.
+
+**Translation contract** (enforced via `translate: false` in the blueprints): translatable
+are Film `title/synopsis/genre/series/keywords`, Showing `title/sonderinfo/keywords`,
+Event `title/text/keywords`, file `alt/caption`. Everything else (dates, numbers, person
+structures, ISO codes, routing categories, subtitle codes, URLs, file refs, `tmdbId`,
+`manualOverride`, `source`) is language-invariant and lives in the default language;
+untranslated fields fall back to German automatically. Frontend UI strings resolve via
+`t('kinemathek.*')` from the language files; dates render through
+`Kinemathek::localDate()` / the `localDate` field method (IntlDateFormatter, ICU patterns
+per language — PHP `date()` would always print English weekday names).
+
 ---
 
 ## 3. Backend logic — `site/plugins/kinemathek/` (plugin `kinemathek/core`)
@@ -76,13 +108,38 @@ sync and ICS export all depend on these exact names; do not rename/retype them.
 
 ## 4. TMDB integration — `site/plugins/kinemathek-tmdb/` (SPEC §4, §7)
 
-Server-side, cached, **Panel-only**. `src/Client.php`: multi-candidate `search()`,
-`movie()` (+credits), `mapToFilm()`, `attachPoster()` (downloads the poster into a local
-first-party file), a first-party thumbnail proxy, and TMDB `attribution()`. Auth-protected
-API routes `/api/kinemathek/tmdb/{search,apply,thumb}`; `apply` authorises the real caller
-(`permissions()->can('update')`/`createFile`) **before** `impersonate('kirby')`, and
-respects `manualOverride`. `index.js`/`index.css`: the `tmdblookup` Panel field — no-build
-inline Vue, loading/empty/error states, candidate cards, German microcopy, theme-aware CSS.
+Server-side, cached, **Panel-only**. **Multi-language sync:** `apply` fetches the movie
+bundle once per site language (Kirby code → TMDB locale via the
+`kinemathek.tmdb.languages` map, cached per TMDB locale) and writes the full mapped set
+into the default language plus `Client::TRANSLATABLE` (`title/synopsis/genre`) into every
+other language; fill-empty is evaluated **per language** against the raw stored
+translation (`$page->version()->read($lang)` — the Content object's default-language
+fallback would make untranslated fields look non-empty). `search()` follows the Panel's
+current content language (`x-language` header). `src/Client.php`: multi-candidate `search()`,
+`movie()` (+credits), `images()` (backdrops), `mapToFilm()`, `attachPoster()` +
+`attachStills()` (download poster + best textless backdrops into local first-party files
+under deterministic `tmdb-poster-{id}` / `tmdb-still-{id}-{img}` names — byte-identical
+re-syncs reuse the file, changed artwork replaces it, `removeTmdbImages()` cleans up
+superseded TMDB files while manual uploads survive; changed artwork swaps bytes via
+`File::replace`, keeping uuid/refs; a transient CDN failure keeps the last good copy), an
+**on-demand** first-party thumbnail proxy (`ensureThumb()` — search no longer blocks on
+image downloads; thumb URLs carry `?csrf=` because a Panel `<img>` can't send the `x-csrf`
+header), and TMDB `attribution()`. Auth-protected API routes
+`/api/kinemathek/tmdb/{search,apply,thumb}`; `apply` authorises the real caller
+(`permissions()->can('update')` + role `files`-permissions `create`/`delete` — page-level
+`can('createFile')` is an unknown action and silently returns false for real users)
+**before** `impersonate('kirby')`, respects
+`manualOverride`, chains every page write off the latest page object (Kirby 5 freezes the
+old one), distinguishes "no artwork on TMDB" (overwrite then also cleans up a corrected
+wrong match's old artwork) from "download failed" (changes nothing, suggests retry), and
+reports per-asset outcomes (`poster`/`stills`/`stillsCount`/`stillsTotal`) so a failed
+image download never masks applied fields.
+`index.js`/`index.css`: the `tmdblookup` Panel field — no-build inline Vue. Flow: search →
+candidate cards with **two apply buttons** („Übernehmen" = fill-empty / „Überschreiben" =
+overwrite; no mode toggle) → on success the **search bar holds the linked film** as
+„Titel (Jahr) – Regie – TMDB id" until „Lösen & neu suchen" releases it (page data is only
+changed by applying a new match). Loading/empty/error states, poster/stills outcome
+notices (warning theme on download failures), German microcopy, theme-aware CSS.
 
 ---
 
@@ -118,7 +175,7 @@ inline Vue, loading/empty/error states, candidate cards, German microcopy, theme
 ## 7. Configuration & secrets
 
 `site/config/config.php` loads a **gitignored `.env`** at the repo root (a tiny `getenv`
-loader) and reads `kinemathek.tmdb.{key,token,language,posterSize,thumbSize,maxResults}`,
+loader) and reads `kinemathek.tmdb.{key,token,language,languages,posterSize,thumbSize,stillSize,maxStills,maxResults}`,
 `kinemathek.ics.{defaultDuration,timezone}`, and enables the TMDB cache via
 `'cache' => ['kinemathek/tmdb' => true]`. `.env.example` (committed) is the template.
 Put a TMDB **v3 API key in `TMDB_KEY`** (sent as `api_key`) — *not* `TMDB_TOKEN` (v4 JWT).
@@ -151,6 +208,13 @@ Validated repeatedly this session via live HTTP smoke tests and Kirby-boot harne
   upcoming-count query resolves correctly; **clicking a row in a container table opens the
   edit view** (the title-column link fix).
 - Tailwind builds and scans only `.php` under `site/`; all six front-end assets load 200.
+- **Multi-language (CLI boot harness, 38 checks):** languages de/en registered; DE at
+  root, EN under `/en`; blueprints parse with the translate flags; `t()` + `localDate()`
+  resolve per language (Mittwoch/„Uhr" vs Wednesday); home/program/films/film render in
+  both languages with localized headings and dates; hreflang alternates + `lang` attr;
+  `.ics` renders in both languages; `update($vals,'en')` writes translatable fields into
+  `film.en.txt`, silently drops `translate:false` fields, leaves German untouched, and
+  untranslated fields fall back to German.
 
 ---
 
