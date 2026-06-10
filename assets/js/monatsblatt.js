@@ -69,7 +69,16 @@
       label.style.setProperty('--w-name', name.offsetWidth + 'px');
     });
   };
-  measureLabels();
+
+  /* on a full page load the server marks the active item but the strip
+     sits at 0 — snap (not slide) the front item to the front position;
+     also re-snaps after resize/font-load when offsets shift */
+  var reposition = function () {
+    measureLabels();
+    var front = strip.querySelector('.pivot-item.is-front') || pivotItems[0];
+    snapStrip(front.offsetLeft);
+  };
+  reposition();
 
   var slideStrip = function (key) {
     allPivotItems.forEach(function (i) {
@@ -157,9 +166,9 @@
   var resizeT;
   window.addEventListener('resize', function () {
     clearTimeout(resizeT);
-    resizeT = setTimeout(measureLabels, 150);
+    resizeT = setTimeout(reposition, 150);
   });
   if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(measureLabels); /* metrics shift once Lipa loads */
+    document.fonts.ready.then(reposition); /* metrics shift once Lipa loads */
   }
 })();
