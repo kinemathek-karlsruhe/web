@@ -128,12 +128,14 @@ body {
 .pivot-strip {
   display: flex;
   align-items: baseline;
-  gap: .35em;
+  gap: .25em; /* a word space, no more */
   white-space: nowrap;
   font-size: clamp(2.3rem, 5.2vw, 3.5rem);
   font-weight: 700;
   line-height: .94;
   letter-spacing: -0.005em;
+  /* room for sup tops and g descenders — .pivot clips overflow */
+  padding-block: .06em .14em;
   transition: transform .5s cubic-bezier(.2, .8, .2, 1);
   will-change: transform;
 }
@@ -158,16 +160,28 @@ body {
 .pivot-item:not(.is-front):focus-visible { opacity: .5; }
 .pivot-item:focus-visible { outline: 2px solid var(--ink); outline-offset: 5px; }
 
-/* the program item morphs: month range while active, generic name otherwise —
-   and hovering/focusing the strip reveals the name too ("this is a menu") */
-.pivot-label { display: inline-grid; }
-.pivot-label .lbl { grid-area: 1 / 1; transition: opacity .35s ease-out; }
-.pivot-item.is-active .lbl-name { opacity: 0; }
-.pivot-item:not(.is-active) .lbl-months { opacity: 0; }
-.pivot-strip:hover .pivot-item.is-active .lbl-months,
-.pivot-strip:focus-within .pivot-item.is-active .lbl-months { opacity: 0; }
-.pivot-strip:hover .pivot-item.is-active .lbl-name,
-.pivot-strip:focus-within .pivot-item.is-active .lbl-name { opacity: 1; }
+/* The program item morphs: month range while at the FRONT, generic name
+   everywhere else (loop clones, ghosts) — and hovering/focusing the strip
+   reveals the name too ("this is a menu"). The slot's width follows the
+   visible label (--w-* measured by program.js), so "Programm" never sits
+   in a "Juni/Juli"-sized hole. */
+.pivot-label { display: inline-grid; width: var(--w-months, auto); }
+.pivot-label .lbl {
+  grid-area: 1 / 1;
+  width: max-content;
+  transition: opacity .35s ease-out;
+}
+.pivot-item.is-front .lbl-name { opacity: 0; }
+.pivot-item:not(.is-front) .lbl-months { opacity: 0; }
+.pivot-item:not(.is-front) .pivot-label { width: var(--w-name, auto); }
+/* :has(:focus-visible), not :focus-within — a mouse click leaves focus on
+   the link, which would pin "Programm" after the pointer moves away */
+.pivot-strip:hover .pivot-item.is-front .lbl-months,
+.pivot-strip:has(:focus-visible) .pivot-item.is-front .lbl-months { opacity: 0; }
+.pivot-strip:hover .pivot-item.is-front .lbl-name,
+.pivot-strip:has(:focus-visible) .pivot-item.is-front .lbl-name { opacity: 1; }
+.pivot-strip:hover .pivot-item.is-front .pivot-label,
+.pivot-strip:has(:focus-visible) .pivot-item.is-front .pivot-label { width: var(--w-name, auto); }
 
 .mast-sub {
   grid-column: 1;

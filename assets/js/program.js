@@ -245,6 +245,20 @@
       allPivotItems.forEach(function (i) { i.classList.toggle('is-front', i === el); });
     };
 
+    /* the program label's slot follows the visible text — measure both
+       variants so CSS can size it (months at the front, name otherwise) */
+    var pivotLabels = Array.prototype.slice.call(strip.querySelectorAll('.pivot-label'));
+    var measureLabels = function () {
+      pivotLabels.forEach(function (label) {
+        var months = label.querySelector('.lbl-months');
+        var name = label.querySelector('.lbl-name');
+        if (!months || !name) return;
+        label.style.setProperty('--w-months', months.offsetWidth + 'px');
+        label.style.setProperty('--w-name', name.offsetWidth + 'px');
+      });
+    };
+    measureLabels();
+
     var slideStrip = function (key) {
       allPivotItems.forEach(function (i) {
         var on = i.dataset.pivot === key;
@@ -259,8 +273,10 @@
         snapStrip(stripX - setWidth());
         next = candidates.filter(function (i) { return i.offsetLeft >= stripX - 1; })[0] || candidates[0];
       }
-      stripX = next.offsetLeft;
+      /* moving the front marker resizes the program label, which shifts
+         offsets — re-measure the target AFTER the state change */
       setFront(next);
+      stripX = next.offsetLeft;
       strip.style.transform = 'translateX(' + (-stripX) + 'px)';
     };
 
@@ -367,13 +383,17 @@
     });
   }
 
+  var remeasure = function () {
+    if (typeof measureLabels === 'function') measureLabels();
+    layoutColumns();
+  };
   var resizeT;
   window.addEventListener('resize', function () {
     clearTimeout(resizeT);
-    resizeT = setTimeout(layoutColumns, 150);
+    resizeT = setTimeout(remeasure, 150);
   });
   if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(layoutColumns); /* heights shift once Lipa loads */
+    document.fonts.ready.then(remeasure); /* metrics shift once Lipa loads */
   }
 
   readHash();
