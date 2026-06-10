@@ -27,11 +27,12 @@ $venueKey = fn (\Kirby\Cms\Page $item): string =>
     stripos($item->venue()->value() ?? '', 'box') !== false ? 'box' : 'saal';
 
 // Subtitle markers (multiselect keys): icon?, printed note, original version?
-// Label = t('kinemathek.version.<key>').
+// Label = t('kinemathek.version.<key>'). The OmU quick filter means
+// "subtitled original" — OF (no subtitles) deliberately doesn't match.
 $markMap = [
     'omu'  => ['icon' => true,  'note' => '',    'omu' => true],
     'omeu' => ['icon' => true,  'note' => '(e)', 'omu' => true],
-    'of'   => ['icon' => false, 'note' => 'OF',  'omu' => true],
+    'of'   => ['icon' => false, 'note' => 'OF',  'omu' => false],
     'dtf'  => ['icon' => false, 'note' => 'DF',  'omu' => false],
 ];
 
@@ -106,6 +107,22 @@ $entryData = function (\Kirby\Cms\Page $item, string $detailDate) use ($venueKey
         'synopsis'   => trim(($film ? $film->synopsis()->value() : $item->text()->value()) ?? ''),
     ];
 };
+
+// One pass over everything: per-day entry data + the distinct Reihen for the
+// series filter <select>.
+$dayEntries = [];
+$allSeries  = [];
+foreach ($days as $key => $items) {
+    foreach ($items as $item) {
+        $entry = $entryData($item, $dayMeta[$key]['detailDate']);
+        $dayEntries[$key][] = $entry;
+        if ($entry['series'] !== '') {
+            $allSeries[$entry['series']] = true;
+        }
+    }
+}
+$allSeries = array_keys($allSeries);
+usort($allSeries, 'strcasecmp');
 ?>
 <?php snippet('header', ['languageNav' => false]) ?>
 <?php snippet('monatsblatt-icons') ?>
@@ -153,7 +170,11 @@ $entryData = function (\Kirby\Cms\Page $item, string $detailDate) use ($venueKey
 
   <figure class="hero<?= $heroFile ? '' : ' no-image' ?>">
     <?php if ($heroFile): ?>
-      <img src="<?= $heroFile->resize(1600)->url() ?>"
+      <img src="<?= $heroFile->resize(1280)->url() ?>"
+           srcset="<?= $heroFile->resize(768)->url() ?> 768w,
+                   <?= $heroFile->resize(1280)->url() ?> 1280w,
+                   <?= $heroFile->resize(1920)->url() ?> 1920w"
+           sizes="(min-width: 1320px) 1232px, 100vw"
            alt="<?= $heroFile->alt()->or($heroTitle)->esc() ?>">
       <figcaption>+ <?= html($heroTitle) ?></figcaption>
     <?php endif ?>
@@ -189,7 +210,21 @@ $entryData = function (\Kirby\Cms\Page $item, string $detailDate) use ($venueKey
     <button type="button" class="chip" data-flag="talk" aria-pressed="false">
       <svg class="icon" aria-hidden="true"><use href="#i-talk"/></svg> <?= html(t('kinemathek.mb.talk')) ?>
     </button>
-    <span class="count" aria-live="polite" data-label="<?= html(t('kinemathek.mb.shows')) ?>"></span>
+    <?php if ($allSeries !== []): ?>
+      <label class="reihe">
+        <span class="sr-only"><?= html(t('kinemathek.mb.series')) ?></span>
+        <select data-filter="series">
+          <option value=""><?= html(t('kinemathek.mb.allSeries')) ?></option>
+          <?php foreach ($allSeries as $series): ?>
+            <option value="<?= html($series) ?>"><?= html($series) ?></option>
+          <?php endforeach ?>
+        </select>
+      </label>
+    <?php endif ?>
+    <button type="button" class="reset" hidden><?= html(t('kinemathek.filters.reset', 'Filter zurücksetzen')) ?></button>
+    <span class="count" aria-live="polite"
+          data-label-one="<?= html(t('kinemathek.mb.show')) ?>"
+          data-label-many="<?= html(t('kinemathek.mb.shows')) ?>"></span>
   </nav>
 
   <?php /* header.php already opens the document's <main> */ ?>
@@ -197,10 +232,11 @@ $entryData = function (\Kirby\Cms\Page $item, string $detailDate) use ($venueKey
     <?php if ($days === []): ?>
       <p><?= html(t('kinemathek.program.none', 'Derzeit keine Termine.')) ?></p>
     <?php endif ?>
+    <p class="program-empty" hidden><?= html(t('kinemathek.program.noMatches', 'Keine passenden Termine.')) ?></p>
     <?php foreach ($days as $key => $items): ?>
       <?php
       $meta = $dayMeta[$key];
-      $entries = array_map(fn ($item) => $entryData($item, $meta['detailDate']), $items);
+      $entries = $dayEntries[$key];
       $saal = array_filter($entries, fn ($e) => $e['venueKey'] === 'saal');
       $box  = array_filter($entries, fn ($e) => $e['venueKey'] === 'box');
       ?>

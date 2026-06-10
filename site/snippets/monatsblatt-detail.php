@@ -29,6 +29,7 @@
         <span class="d-date"><?= html($detailDate) ?></span>
         <span class="d-time"><?= $timeH ?><sup><?= $timeM ?></sup></span>
         <span class="vtag <?= $venueKey ?>"><?= $venueKey === 'box' ? 'Box' : 'Saal' ?></span>
+        <button type="button" class="d-close" aria-label="<?= html(t('kinemathek.mb.close')) ?>">&times;</button>
       </header>
       <?php if ($series !== ''): ?><p class="d-series"><?= html($series) ?></p><?php endif ?>
       <h3 class="d-title"><?= html($title) ?></h3>

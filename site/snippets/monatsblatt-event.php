@@ -23,6 +23,7 @@
          role=button would lose their semantics (h3s vanish from AT). */ ?>
 <article class="event"
          data-venue="<?= $venueKey ?>"
+         <?php if ($series !== ''): ?>data-series="<?= html($series) ?>"<?php endif ?>
          <?= $omu ? 'data-omu' : '' ?>
          <?= $talk ? 'data-talk' : '' ?>
          data-detail="#<?= $detailId ?>">
