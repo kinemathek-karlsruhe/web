@@ -144,33 +144,30 @@ usort($allSeries, 'strcasecmp');
   </div>
 
   <header class="masthead">
-    <div class="mast-title">
-      <h1>
-        <button type="button" class="mast-menu-btn" aria-expanded="false" aria-controls="mast-menu"
-                aria-label="<?= html(t('kinemathek.mb.nav')) ?>">
-          <span><?= html($titleMonths) ?><sup><?= html($titleYear) ?></sup></span>
-          <svg class="chev" viewBox="0 0 12 8" aria-hidden="true">
-            <path d="M1 1l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/>
-          </svg>
-        </button><br>
-        <span class="thin"><?= html(t('kinemathek.mb.inCinema')) ?></span>
-      </h1>
-      <?php
-      // The masthead title doubles as the section menu: the big first line
-      // swaps for the subpages ("Filme im Kino", "Events im Kino", …).
-      $navTargets = array_values(array_filter([
-          ['page' => $site->find('films'),  'label' => t('kinemathek.mb.nav.films')],
-          ['page' => $site->find('events'), 'label' => t('kinemathek.mb.nav.events')],
-      ], fn ($target) => $target['page'] !== null));
-      ?>
-      <?php if ($navTargets !== []): ?>
-        <ul class="mast-menu" id="mast-menu" hidden>
-          <?php foreach ($navTargets as $target): ?>
-            <li><a href="<?= $target['page']->url() ?>"><?= html($target['label']) ?></a></li>
-          <?php endforeach ?>
-        </ul>
-      <?php endif ?>
-    </div>
+    <h1 class="sr-only"><?= html(t('kinemathek.program', 'Spielplan')) ?> – <?= $site->title()->esc() ?></h1>
+    <?php
+    // WP7-pivot section nav: the headline line IS the menu. The active
+    // section sits at full opacity, the others ghost off to the right;
+    // program.js slides the strip and swaps #pivot-content in place.
+    $navTargets = array_values(array_filter([
+        ['page' => $site->find('films'),  'key' => 'films',  'label' => t('kinemathek.mb.nav.films')],
+        ['page' => $site->find('events'), 'key' => 'events', 'label' => t('kinemathek.mb.nav.events')],
+    ], fn ($target) => $target['page'] !== null));
+    ?>
+    <nav class="pivot" aria-label="<?= html(t('kinemathek.mb.nav')) ?>">
+      <div class="pivot-strip">
+        <a class="pivot-item is-active" href="<?= $site->url() ?>" data-pivot="program" aria-current="page">
+          <span class="pivot-label">
+            <span class="lbl lbl-months"><?= html($titleMonths) ?><sup><?= html($titleYear) ?></sup></span>
+            <span class="lbl lbl-name" aria-hidden="true"><?= html(t('kinemathek.mb.nav.program')) ?></span>
+          </span>
+        </a>
+        <?php foreach ($navTargets as $target): ?>
+          <a class="pivot-item" href="<?= $target['page']->url() ?>" data-pivot="<?= $target['key'] ?>"><?= html($target['label']) ?></a>
+        <?php endforeach ?>
+      </div>
+    </nav>
+    <p class="mast-sub"><?= html(t('kinemathek.mb.inCinema')) ?></p>
 
     <div class="legend">
       <p>
@@ -192,6 +189,9 @@ usort($allSeries, 'strcasecmp');
 
     <?php snippet('monatsblatt-logo') ?>
   </header>
+
+  <?php /* everything below the masthead is the pivot's swappable region */ ?>
+  <div id="pivot-content">
 
   <figure class="hero<?= $heroFile ? '' : ' no-image' ?>">
     <?php if ($heroFile): ?>
@@ -293,6 +293,8 @@ usort($allSeries, 'strcasecmp');
     </p>
     <p class="support"><?= html(t('kinemathek.mb.support')) ?></p>
   </footer>
+
+  </div><?php /* /#pivot-content */ ?>
 
 </div>
 <?php snippet('footer', ['scripts' => ['assets/js/program.js']]) ?>

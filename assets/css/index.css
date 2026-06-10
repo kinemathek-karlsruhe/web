@@ -103,38 +103,78 @@ body {
 .eyebrow-lang .sep { opacity: .45; margin-inline: .35em; }
 
 /* same 3-column rhythm as .program, so the legend starts exactly where
-   program column 2 begins */
+   program column 2 begins. Row 1: pivot strip (cols 1-2) + logo (col 3);
+   row 2: "im Kino" + legend. */
 .masthead {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.25rem 2.4rem;
+  grid-template-rows: auto auto;
+  gap: 0 2.4rem;
   align-items: start;
   padding-block: 1.1rem .4rem;
 }
-.mast-title { grid-column: 1; position: relative; }
 
-.masthead h1 {
-  margin: 0;
+/* ---------- Pivot nav (WP7 panorama): the headline IS the menu ---------- */
+
+.pivot {
+  grid-column: 1 / 3;
+  grid-row: 1;
+  overflow: hidden;
+  /* ghost titles get clipped mid-air at the right edge, panorama-style */
+  mask-image: linear-gradient(to right, #000 86%, transparent);
+}
+.pivot-strip {
+  display: flex;
+  align-items: baseline;
+  gap: .55em;
+  white-space: nowrap;
   font-size: clamp(2.3rem, 5.2vw, 3.5rem);
   font-weight: 700;
   line-height: .94;
   letter-spacing: -0.005em;
+  transition: transform .5s cubic-bezier(.2, .8, .2, 1);
+  will-change: transform;
 }
-.masthead h1 sup {
+.pivot-strip sup {
   font-size: .42em;
   font-weight: 700;
   vertical-align: super;
   letter-spacing: 0;
 }
-.masthead h1 .thin { font-weight: 400; }
+.pivot-item {
+  color: inherit;
+  text-decoration: none;
+  opacity: .18;
+  transition: opacity .4s ease-out;
+  flex: none;
+}
+.pivot-item.is-active { opacity: 1; }
+.pivot-item:not(.is-active):hover,
+.pivot-item:not(.is-active):focus-visible { opacity: .5; }
+.pivot-item:focus-visible { outline: 2px solid var(--ink); outline-offset: 5px; }
+
+/* the program item morphs: month range while active, generic name otherwise */
+.pivot-label { display: inline-grid; }
+.pivot-label .lbl { grid-area: 1 / 1; transition: opacity .35s ease-out; }
+.pivot-item.is-active .lbl-name { opacity: 0; }
+.pivot-item:not(.is-active) .lbl-months { opacity: 0; }
+
+.mast-sub {
+  grid-column: 1;
+  grid-row: 2;
+  margin: 0;
+  font-size: clamp(2.3rem, 5.2vw, 3.5rem);
+  font-weight: 400;
+  line-height: .94;
+  letter-spacing: -0.005em;
+}
 
 .legend {
   grid-column: 2 / -1;
+  grid-row: 2;
   align-self: end;
   font-size: .76rem;
   line-height: 1.55;
-  /* keep clear of the logo in the top-right cell */
-  padding-right: calc(clamp(6.5rem, 11vw, 9rem) + 1.5rem);
   padding-bottom: .2rem;
 }
 .legend p { margin: 0; }
@@ -152,62 +192,27 @@ body {
 .brand-logo .fg { fill: var(--ink); }
 
 @media (max-width: 760px) {
-  .masthead { grid-template-columns: 1fr auto; }
-  .mast-title { grid-column: 1; }
-  .brand-logo { grid-column: 2; }
-  .legend { grid-column: 1 / -1; grid-row: 2; padding-right: 0; }
+  .masthead { grid-template-columns: 1fr auto; gap: .25rem 1.25rem; }
+  .pivot { grid-column: 1; }
+  .brand-logo { grid-column: 2; grid-row: 1 / 3; align-self: start; }
+  .mast-sub { grid-column: 1; }
+  .legend { grid-column: 1 / -1; grid-row: 3; padding-top: .9rem; }
 }
 
-/* ---------- Masthead menu: the title line is the section nav ---------- */
+/* ---------- Pivot content swap (out left, in from the right) ---------- */
 
-.mast-menu-btn {
-  appearance: none;
-  background: none;
-  border: 0;
-  padding: 0;
-  margin: 0;
-  font: inherit;
-  color: inherit;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: baseline;
-  gap: .22em;
-  text-align: left;
+#pivot-content {
+  transition: opacity .22s ease-in, transform .22s ease-in;
 }
-.mast-menu-btn .chev {
-  width: .36em;
-  height: auto;
-  flex: none;
-  transition: transform .18s ease-out;
+#pivot-content.pivot-out {
+  opacity: 0;
+  transform: translateX(-2.5rem);
 }
-.mast-menu-btn[aria-expanded="true"] .chev { transform: translateY(.06em) rotate(180deg); }
-.mast-menu-btn:hover .chev { transform: translateY(.08em); }
-.mast-menu-btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 5px; }
-
-.mast-menu {
-  position: absolute;
-  z-index: 20;
-  margin: .3rem 0 0;
-  padding: .35rem 1rem .45rem;
-  list-style: none;
-  background: var(--paper);
-  border: 2px solid var(--ink);
-  font-size: clamp(1.5rem, 3.2vw, 2.2rem);
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: -0.005em;
+#pivot-content.pivot-in {
+  animation: pivot-in .42s cubic-bezier(.2, .8, .25, 1);
 }
-.mast-menu a {
-  display: block;
-  color: inherit;
-  text-decoration: none;
-  padding: .08em 0;
-}
-.mast-menu a:hover,
-.mast-menu a:focus-visible {
-  text-decoration: underline;
-  text-decoration-thickness: 2px;
-  text-underline-offset: .12em;
+@keyframes pivot-in {
+  from { opacity: 0; transform: translateX(4rem); }
 }
 
 /* ---------- Hero ---------- */

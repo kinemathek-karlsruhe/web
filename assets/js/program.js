@@ -191,34 +191,88 @@
     if (ev) toggle(ev);
   });
 
-  /* ----- masthead section menu (the title line is the nav) ----- */
-  var mastBtn = document.querySelector('.mast-menu-btn');
-  var mastMenu = document.getElementById('mast-menu');
-
-  function closeMastMenu() {
-    if (!mastMenu || mastMenu.hidden) return false;
-    mastMenu.hidden = true;
-    mastBtn.setAttribute('aria-expanded', 'false');
-    return true;
-  }
-
-  if (mastBtn && mastMenu) {
-    mastBtn.addEventListener('click', function () {
-      var opening = mastMenu.hidden;
-      mastMenu.hidden = !opening;
-      mastBtn.setAttribute('aria-expanded', String(opening));
-      if (opening) mastMenu.querySelector('a').focus();
-    });
-    document.addEventListener('click', function (e) {
-      if (!e.target.closest('.mast-title')) closeMastMenu();
-    });
-  }
-
   document.addEventListener('keydown', function (e) {
-    if (e.key !== 'Escape') return;
-    if (closeMastMenu()) { if (mastBtn) mastBtn.focus(); return; }
-    closeOpen(true);
+    if (e.key === 'Escape') closeOpen(true);
   });
+
+  /* ----- WP7-style pivot navigation: the headline strip slides, the
+     content region below the masthead swaps in place (same-origin fetch +
+     pushState; items are real links, so no JS = normal navigation) ----- */
+  var strip = document.querySelector('.pivot-strip');
+  var pivotContent = document.getElementById('pivot-content');
+
+  if (strip && pivotContent) {
+    var pivotItems = Array.prototype.slice.call(strip.querySelectorAll('.pivot-item'));
+    var pivotCache = {};
+    var pivotCurrent = 'program';
+
+    /* the program section keeps its LIVE nodes (listeners, open panels and
+       filter state survive a round trip) */
+    pivotCache.program = {
+      nodes: Array.prototype.slice.call(pivotContent.childNodes),
+      title: document.title
+    };
+
+    var slideStrip = function (item) {
+      pivotItems.forEach(function (i) {
+        i.classList.toggle('is-active', i === item);
+        if (i === item) i.setAttribute('aria-current', 'page');
+        else i.removeAttribute('aria-current');
+      });
+      strip.style.transform = 'translateX(' + (-item.offsetLeft) + 'px)';
+    };
+
+    var loadSection = function (key, url) {
+      if (pivotCache[key]) return Promise.resolve(pivotCache[key]);
+      return fetch(url).then(function (r) {
+        if (!r.ok) throw new Error(r.status);
+        return r.text();
+      }).then(function (html) {
+        var doc = new DOMParser().parseFromString(html, 'text/html');
+        var region = doc.getElementById('pivot-content') || doc.querySelector('main');
+        var nodes = Array.prototype.slice.call(region ? region.childNodes : [])
+          .map(function (n) { return document.adoptNode(n); });
+        pivotCache[key] = { nodes: nodes, title: doc.title };
+        return pivotCache[key];
+      });
+    };
+
+    var goPivot = function (item, push) {
+      var key = item.dataset.pivot;
+      if (key === pivotCurrent) return;
+      pivotCurrent = key;
+      slideStrip(item);
+      pivotContent.classList.add('pivot-out');
+      var outDone = new Promise(function (res) { setTimeout(res, 230); });
+      Promise.all([loadSection(key, item.href), outDone]).then(function (loaded) {
+        var section = loaded[0];
+        pivotContent.replaceChildren.apply(pivotContent, section.nodes);
+        document.title = section.title;
+        pivotContent.classList.remove('pivot-out');
+        pivotContent.classList.add('pivot-in');
+        setTimeout(function () { pivotContent.classList.remove('pivot-in'); }, 450);
+        if (push) history.pushState({ pivot: key }, '', item.href);
+        if (key === 'program') layoutColumns(); /* re-measure after reattach */
+      }).catch(function () {
+        location.href = item.href; /* graceful fallback: plain navigation */
+      });
+    };
+
+    strip.addEventListener('click', function (e) {
+      var item = e.target.closest('.pivot-item');
+      if (!item) return;
+      e.preventDefault();
+      goPivot(item, true);
+    });
+
+    window.addEventListener('popstate', function () {
+      var path = location.pathname.replace(/\/$/, '');
+      var item = pivotItems.filter(function (i) {
+        return new URL(i.href).pathname.replace(/\/$/, '') === path;
+      })[0] || pivotItems[0];
+      goPivot(item, false);
+    });
+  }
 
   /* Heute-Strip anchors: if the target day is filtered away, clear the
      filters first so the jump lands somewhere */
