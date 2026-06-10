@@ -17,11 +17,14 @@
  * @var ?string $titleMonths
  * @var ?string $titleYear
  * @var bool    $sub          render the "im Kino" line (default true)
+ * @var bool    $legend       render the icon/venue legend (default false —
+ *                            only the Spielplan asks for it)
  */
 $active      = $active ?? 'program';
 $titleMonths = $titleMonths ?? null;
 $titleYear   = $titleYear ?? null;
 $sub         = $sub ?? true;
+$legend      = $legend ?? false;
 
 // Pivot sections: program + containers first, then every LISTED top-level
 // static page (text/collection/custom blueprints) — publishing a page adds
@@ -92,6 +95,7 @@ if (!in_array($active, array_column($pivotItems, 'key'), true)) {
     <p class="mast-sub"><?= html(t('kinemathek.mb.inCinema')) ?></p>
   <?php endif ?>
 
+  <?php if ($legend): ?>
   <div class="legend">
     <p>
       <svg class="icon" aria-hidden="true"><use href="#i-ut"/></svg>
@@ -109,6 +113,7 @@ if (!in_array($active, array_column($pivotItems, 'key'), true)) {
       <span class="vtag box">Box</span> <?= html(t('kinemathek.mb.legend.box')) ?>
     </p>
   </div>
+  <?php endif ?>
 
   <?php snippet('monatsblatt-logo') ?>
 </header>

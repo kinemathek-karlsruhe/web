@@ -63,6 +63,8 @@ $showRow = function (\Kirby\Cms\Page $showing, bool $clickable) {
 
   <div id="pivot-content">
 
+  <a class="backlink" href="<?= $site->find('films')?->url() ?? $site->url() ?>">&larr; <?= html(t('kinemathek.mb.allFilms')) ?></a>
+
   <article class="film-page">
     <div class="fp-head">
       <div class="fp-text">

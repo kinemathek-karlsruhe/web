@@ -89,6 +89,7 @@ return [
         'kinemathek.mb.all'              => 'All',
         'kinemathek.mb.show'             => 'screening',
         'kinemathek.mb.film'             => 'film',
+        'kinemathek.mb.allFilms'         => 'All films',
         'kinemathek.mb.shows'            => 'screenings',
         'kinemathek.mb.series'           => 'Series',
         'kinemathek.mb.allSeries'        => 'All series',

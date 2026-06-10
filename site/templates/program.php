@@ -23,6 +23,7 @@
       'active'      => 'program',
       'titleMonths' => $titleMonths,
       'titleYear'   => $titleYear,
+      'legend'      => true,
   ]) ?>
 
   <?php /* everything below the masthead is the pivot's swappable region */ ?>

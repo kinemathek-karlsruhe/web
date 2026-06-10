@@ -813,6 +813,18 @@ body {
 
 /* ---------- Single film page ---------- */
 
+.backlink {
+  display: inline-block;
+  margin-top: 1.1rem;
+  font-size: .72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  color: var(--ink);
+  text-decoration: none;
+}
+.backlink:hover { text-decoration: underline; text-underline-offset: .18em; }
+
 .film-page { padding-block: 1.2rem .4rem; }
 .fp-head {
   display: grid;
