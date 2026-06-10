@@ -107,11 +107,24 @@ $entryData = function (\Kirby\Cms\Page $item, string $detailDate) use ($venueKey
     ];
 };
 ?>
-<?php snippet('header') ?>
+<?php snippet('header', ['languageNav' => false]) ?>
 <?php snippet('monatsblatt-icons') ?>
 <div class="sheet">
 
-  <p class="eyebrow"><?= html(t('kinemathek.mb.eyebrow')) ?></p>
+  <div class="eyebrow">
+    <p><?= html(t('kinemathek.mb.eyebrow')) ?></p>
+    <nav class="eyebrow-lang" aria-label="Sprache / Language">
+      <?php $first = true; foreach ($kirby->languages() as $lang): ?>
+        <?php if (!$first): ?><span class="sep" aria-hidden="true">|</span><?php endif; $first = false; ?>
+        <?php if ($kirby->language()?->code() === $lang->code()): ?>
+          <span aria-current="true"><?= html($lang->name()) ?></span>
+        <?php else: ?>
+          <a href="<?= $page->url($lang->code()) ?>"
+             hreflang="<?= $lang->code() ?>" lang="<?= $lang->code() ?>"><?= html($lang->name()) ?></a>
+        <?php endif ?>
+      <?php endforeach ?>
+    </nav>
+  </div>
 
   <header class="masthead">
     <h1><?= html($titleMonths) ?><sup><?= html($titleYear) ?></sup><br>

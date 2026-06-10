@@ -86,11 +86,21 @@ body {
 
 .eyebrow {
   margin: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
   padding-block: .8rem .2rem;
   font-size: .78rem;
   letter-spacing: .01em;
   border-bottom: 1px solid var(--ink);
 }
+.eyebrow p { margin: 0; }
+.eyebrow-lang [aria-current] { font-weight: 700; }
+.eyebrow-lang a { color: inherit; text-decoration: none; }
+.eyebrow-lang a:hover,
+.eyebrow-lang a:focus-visible { text-decoration: underline; text-underline-offset: .15em; }
+.eyebrow-lang .sep { opacity: .45; margin-inline: .35em; }
 
 .masthead {
   display: grid;

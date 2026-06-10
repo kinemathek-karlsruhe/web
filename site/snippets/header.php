@@ -26,6 +26,7 @@ $language = $kirby->language();
   <?= css('assets/vendor/fancybox/fancybox.css') ?>
 </head>
 <body>
+  <?php if ($languageNav ?? true): // designed templates render their own switcher ?>
   <nav class="mx-auto flex max-w-4xl justify-end gap-3 p-2 text-sm" aria-label="Sprache / Language">
     <?php foreach ($kirby->languages() as $lang): ?>
       <?php if ($language && $lang->code() === $language->code()): ?>
@@ -36,4 +37,5 @@ $language = $kirby->language();
       <?php endif ?>
     <?php endforeach ?>
   </nav>
+  <?php endif ?>
   <main>
