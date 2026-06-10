@@ -12,7 +12,7 @@ $shell = $page->shell()->or('true')->toBool();
 <?php if ($shell): ?>
   <?php snippet('header', ['languageNav' => false]) ?>
   <div class="sheet">
-    <?php snippet('monatsblatt-masthead', ['active' => $page->slug(), 'sub' => false]) ?>
+    <?php snippet('monatsblatt-masthead', ['active' => $page->slug()]) ?>
     <div id="pivot-content">
       <div class="custom-page"><?= $page->html()->value() ?></div>
       <?php snippet('monatsblatt-colophon') ?>

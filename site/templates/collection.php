@@ -13,7 +13,7 @@
 <?php snippet('header', ['languageNav' => false]) ?>
 <div class="sheet">
 
-  <?php snippet('monatsblatt-masthead', ['active' => $page->slug(), 'sub' => false]) ?>
+  <?php snippet('monatsblatt-masthead', ['active' => $page->slug()]) ?>
 
   <div id="pivot-content">
 

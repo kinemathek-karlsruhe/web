@@ -202,7 +202,11 @@ body {
   /* keep clear of the floating logo */
   padding-right: calc(clamp(6.5rem, 11vw, 9rem) + 1.5rem);
   padding-bottom: .2rem;
+  /* always in the markup; shown only for the program section so the pivot
+     can bring it back after starting on a subpage */
+  display: none;
 }
+.masthead[data-section="program"] .legend { display: block; }
 .legend p { margin: 0; }
 .legend .sep { opacity: .45; margin-inline: .3em; }
 

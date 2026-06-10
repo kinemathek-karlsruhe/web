@@ -16,15 +16,10 @@
  *                            top-level static page slug)
  * @var ?string $titleMonths
  * @var ?string $titleYear
- * @var bool    $sub          render the "im Kino" line (default true)
- * @var bool    $legend       render the icon/venue legend (default false —
- *                            only the Spielplan asks for it)
  */
 $active      = $active ?? 'program';
 $titleMonths = $titleMonths ?? null;
 $titleYear   = $titleYear ?? null;
-$sub         = $sub ?? true;
-$legend      = $legend ?? false;
 
 // Pivot sections: program + containers first, then every LISTED top-level
 // static page (text/collection/custom blueprints) — publishing a page adds
@@ -68,7 +63,10 @@ if (!in_array($active, array_column($pivotItems, 'key'), true)) {
   </nav>
 </div>
 
-<header class="masthead">
+<?php /* data-section drives per-section masthead extras (the legend shows
+         only for 'program') and is updated by the pivot JS on swaps, so
+         everything is always in the markup, never baked out server-side */ ?>
+<header class="masthead" data-section="<?= $selfTitle !== null ? 'self' : html($active) ?>">
   <h1 class="sr-only"><?= $page->isHomePage() ? html(t('kinemathek.program', 'Spielplan')) : $page->title()->esc() ?> – <?= $site->title()->esc() ?></h1>
   <nav class="pivot" aria-label="<?= html(t('kinemathek.mb.nav')) ?>">
     <div class="pivot-strip">
@@ -91,11 +89,8 @@ if (!in_array($active, array_column($pivotItems, 'key'), true)) {
       <?php endforeach ?>
     </div>
   </nav>
-  <?php if ($sub): ?>
-    <p class="mast-sub"><?= html(t('kinemathek.mb.inCinema')) ?></p>
-  <?php endif ?>
+  <p class="mast-sub"><?= html(t('kinemathek.mb.inCinema')) ?></p>
 
-  <?php if ($legend): ?>
   <div class="legend">
     <p>
       <svg class="icon" aria-hidden="true"><use href="#i-ut"/></svg>
@@ -113,7 +108,6 @@ if (!in_array($active, array_column($pivotItems, 'key'), true)) {
       <span class="vtag box">Box</span> <?= html(t('kinemathek.mb.legend.box')) ?>
     </p>
   </div>
-  <?php endif ?>
 
   <?php snippet('monatsblatt-logo') ?>
 </header>

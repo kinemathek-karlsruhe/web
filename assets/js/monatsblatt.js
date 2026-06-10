@@ -141,6 +141,9 @@
       pivotContent.classList.add('pivot-in');
       setTimeout(function () { pivotContent.classList.remove('pivot-in'); }, 450);
       if (push) history.pushState({ pivot: key }, '', item.href);
+      /* per-section masthead extras (e.g. the legend) follow the section */
+      var masthead = document.querySelector('.masthead');
+      if (masthead) masthead.dataset.section = key;
       /* page-specific scripts (program.js) (re)initialise on this */
       document.dispatchEvent(new CustomEvent('pivot:content', { detail: { key: key } }));
     }).catch(function () {
