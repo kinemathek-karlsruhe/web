@@ -3,10 +3,11 @@
 Backend + Panel for the **Kinemathek Karlsruhe** cinema website, rebuilding a WordPress+ACF
 site on **Kirby 5.4.3** (flat-file CMS), PHP 8.4, package manager **Bun**. The full brief is
 [`SPEC.md`](SPEC.md); current status is [`STATE.md`](STATE.md). The **Panel/admin UI is fully
-designed**; the **Spielplan (`program` template) carries the Monatsblatt design** (web
-translation of the printed program sheet — Lipa Agate High Cnd in `assets/font/`, weights
-300/400/500/700 only; `monatsblatt-*` snippets; behaviour in `assets/js/program.js`).
-Other public templates are still intentionally primitive (SPEC §10).
+designed**, and **all public templates carry the Monatsblatt design** (web translation of
+the printed program sheet — Lipa Agate High Cnd in `assets/font/`, weights 300/400/500/700
+only; `monatsblatt-*` snippets are the shell; behaviour split across `assets/js/monatsblatt.js`
+(pivot masthead) and `assets/js/program.js` (listing). Static pages use the `text` /
+`collection` / `custom` blueprints; listed top-level ones appear in the pivot nav).
 Read this file before editing — it encodes the field contract and the gotchas that have
 already bitten us.
 

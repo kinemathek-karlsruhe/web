@@ -3,15 +3,22 @@
 Current state of the Kinemathek Karlsruhe website rebuild. Built on **Kirby 5.4.3**
 (flat-file), PHP 8.4, package manager **Bun**. Replaces a WordPress + ACF site.
 Spec: [`SPEC.md`](SPEC.md). The **Panel/admin UI is fully designed**; public design
-work has begun: the **Spielplan (`program` template) carries the full Monatsblatt
-design and is the homepage** (`'home' => 'program'` in config.php; `content/home`
-is currently unused) — a web translation of the printed program sheet (prototype in
-`monatsblatt.html`, untracked). Typeface: Lipa Agate High Cnd (`assets/font/`,
-WOFF2 self-hosted, weights 300/400/500/700 only). Logo SVG inlined via the
-`monatsblatt-logo` snippet (fills bound to theme vars). Other public templates
-(home, film, films, showing, event) are still primitive. Content has been
-imported from the old WordPress site via `scripts/import-program.php`
-(TMDB-enriched; see `scripts/import/SCRAPE-NOTES.md`). Deferred refactors (plugin
+work is done for the core surface: **all public templates carry the Monatsblatt
+design** — a web translation of the printed program sheet (prototype in
+`monatsblatt.html`, untracked). The Spielplan is the homepage (`'home' =>
+'program'`; `content/home` unused). Shell pieces: `monatsblatt-masthead`
+(eyebrow + WP7-pivot section nav + legend + floating logo; listed top-level
+text/collection/custom pages join the pivot strip automatically),
+`monatsblatt-listing` (filter bar + day grid, shared by program/events/
+collection), `monatsblatt-colophon`; behaviour in `assets/js/monatsblatt.js`
+(pivot, content swap via fetch+pushState) + `assets/js/program.js` (listing
+filters/panels/columns, re-inits on `pivot:content`). Static page styles:
+`text`, `collection` (intro + category-filtered program), `custom` (raw
+HTML/CSS/JS box). Typeface: Lipa Agate High Cnd (`assets/font/`, WOFF2
+self-hosted, weights 300/400/500/700 only). Logo SVG inlined via
+`monatsblatt-logo` (fills bound to theme vars). Content imported from the old
+WordPress site via `scripts/import-program.php` and `scripts/import-static.php`
+(TMDB-enriched; see `scripts/import/SCRAPE-NOTES.md` + `static/STATIC-NOTES.md`). Deferred refactors (plugin
 was frozen by concurrent work when the Monatsblatt landed): move the template's
 venue classifier to `OccurrenceTrait::venueKey()`, the still-beats-poster pick to
 `FilmPage::artwork()`, the credits line to `FilmPage::creditsLine()`, and add

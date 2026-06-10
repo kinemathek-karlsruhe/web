@@ -69,5 +69,8 @@ sections:
     templates:
       - default
       - home
+      - text
+      - collection
+      - custom
     image: false
     empty: Keine weiteren Seiten.
