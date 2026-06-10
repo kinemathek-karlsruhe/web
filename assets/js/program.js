@@ -213,14 +213,56 @@
       title: document.title
     };
 
-    var slideStrip = function (item) {
-      pivotItems.forEach(function (i) {
-        i.classList.toggle('is-active', i === item);
-        if (i === item) i.setAttribute('aria-current', 'page');
+    /* infinite loop, WP7-style: a cloned set follows the originals, the strip
+       only ever slides FORWARD, and once it has travelled a full set width it
+       snaps back silently (identical pixels, nobody sees it) */
+    var pivotClones = pivotItems.map(function (original) {
+      var clone = original.cloneNode(true);
+      clone.classList.add('pivot-clone');
+      clone.setAttribute('aria-hidden', 'true');
+      clone.setAttribute('tabindex', '-1');
+      clone.removeAttribute('aria-current');
+      strip.appendChild(clone);
+      return clone;
+    });
+    var allPivotItems = pivotItems.concat(pivotClones);
+    var stripX = 0;
+
+    var setWidth = function () {
+      return pivotClones[0].offsetLeft - pivotItems[0].offsetLeft;
+    };
+
+    var snapStrip = function (x) {
+      stripX = Math.max(0, x);
+      strip.style.transition = 'none';
+      strip.style.transform = 'translateX(' + (-stripX) + 'px)';
+      void strip.offsetHeight; /* flush so the next slide transitions again */
+      strip.style.transition = '';
+    };
+
+    var slideStrip = function (key) {
+      allPivotItems.forEach(function (i) {
+        var on = i.dataset.pivot === key;
+        i.classList.toggle('is-active', on);
+        if (i.classList.contains('pivot-clone')) return;
+        if (on) i.setAttribute('aria-current', 'page');
         else i.removeAttribute('aria-current');
       });
-      strip.style.transform = 'translateX(' + (-item.offsetLeft) + 'px)';
+      var candidates = allPivotItems.filter(function (i) { return i.dataset.pivot === key; });
+      var next = candidates.filter(function (i) { return i.offsetLeft >= stripX - 1; })[0];
+      if (!next) { /* ran past the clone set (e.g. reduced motion): wrap first */
+        snapStrip(stripX - setWidth());
+        next = candidates.filter(function (i) { return i.offsetLeft >= stripX - 1; })[0] || candidates[0];
+      }
+      stripX = next.offsetLeft;
+      strip.style.transform = 'translateX(' + (-stripX) + 'px)';
     };
+
+    strip.addEventListener('transitionend', function (e) {
+      if (e.target !== strip || e.propertyName !== 'transform') return;
+      var w = setWidth();
+      if (w > 0 && stripX >= w) snapStrip(stripX - w);
+    });
 
     var loadSection = function (key, url) {
       if (pivotCache[key]) return Promise.resolve(pivotCache[key]);
@@ -241,7 +283,7 @@
       var key = item.dataset.pivot;
       if (key === pivotCurrent) return;
       pivotCurrent = key;
-      slideStrip(item);
+      slideStrip(key);
       pivotContent.classList.add('pivot-out');
       var outDone = new Promise(function (res) { setTimeout(res, 230); });
       Promise.all([loadSection(key, item.href), outDone]).then(function (loaded) {

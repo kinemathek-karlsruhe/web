@@ -125,70 +125,13 @@ $allSeries = array_keys($allSeries);
 usort($allSeries, 'strcasecmp');
 ?>
 <?php snippet('header', ['languageNav' => false]) ?>
-<?php snippet('monatsblatt-icons') ?>
 <div class="sheet">
 
-  <div class="eyebrow">
-    <p><?= html(t('kinemathek.mb.eyebrow')) ?></p>
-    <nav class="eyebrow-lang" aria-label="Sprache / Language">
-      <?php $first = true; foreach ($kirby->languages() as $lang): ?>
-        <?php if (!$first): ?><span class="sep" aria-hidden="true">|</span><?php endif; $first = false; ?>
-        <?php if ($kirby->language()?->code() === $lang->code()): ?>
-          <span aria-current="true"><?= html($lang->name()) ?></span>
-        <?php else: ?>
-          <a href="<?= $page->url($lang->code()) ?>"
-             hreflang="<?= $lang->code() ?>" lang="<?= $lang->code() ?>"><?= html($lang->name()) ?></a>
-        <?php endif ?>
-      <?php endforeach ?>
-    </nav>
-  </div>
-
-  <header class="masthead">
-    <h1 class="sr-only"><?= html(t('kinemathek.program', 'Spielplan')) ?> – <?= $site->title()->esc() ?></h1>
-    <?php
-    // WP7-pivot section nav: the headline line IS the menu. The active
-    // section sits at full opacity, the others ghost off to the right;
-    // program.js slides the strip and swaps #pivot-content in place.
-    $navTargets = array_values(array_filter([
-        ['page' => $site->find('films'),  'key' => 'films',  'label' => t('kinemathek.mb.nav.films')],
-        ['page' => $site->find('events'), 'key' => 'events', 'label' => t('kinemathek.mb.nav.events')],
-    ], fn ($target) => $target['page'] !== null));
-    ?>
-    <nav class="pivot" aria-label="<?= html(t('kinemathek.mb.nav')) ?>">
-      <div class="pivot-strip">
-        <a class="pivot-item is-active" href="<?= $site->url() ?>" data-pivot="program" aria-current="page">
-          <span class="pivot-label">
-            <span class="lbl lbl-months"><?= html($titleMonths) ?><sup><?= html($titleYear) ?></sup></span>
-            <span class="lbl lbl-name" aria-hidden="true"><?= html(t('kinemathek.mb.nav.program')) ?></span>
-          </span>
-        </a>
-        <?php foreach ($navTargets as $target): ?>
-          <a class="pivot-item" href="<?= $target['page']->url() ?>" data-pivot="<?= $target['key'] ?>"><?= html($target['label']) ?></a>
-        <?php endforeach ?>
-      </div>
-    </nav>
-    <p class="mast-sub"><?= html(t('kinemathek.mb.inCinema')) ?></p>
-
-    <div class="legend">
-      <p>
-        <svg class="icon" aria-hidden="true"><use href="#i-ut"/></svg>
-        <?= html(t('kinemathek.version.omu')) ?>
-        <span class="sep">|</span>
-        <svg class="icon" aria-hidden="true"><use href="#i-ut"/></svg><?= html(t('kinemathek.mb.legend.omuVariants')) ?>
-      </p>
-      <p>
-        <svg class="icon" aria-hidden="true"><use href="#i-talk"/></svg>
-        <?= html(t('kinemathek.mb.legend.talk')) ?>
-      </p>
-      <p>
-        <span class="vtag saal">Saal</span> <?= html(t('kinemathek.mb.legend.saal')) ?>
-        <span class="sep">|</span>
-        <span class="vtag box">Box</span> <?= html(t('kinemathek.mb.legend.box')) ?>
-      </p>
-    </div>
-
-    <?php snippet('monatsblatt-logo') ?>
-  </header>
+  <?php snippet('monatsblatt-masthead', [
+      'active'      => 'program',
+      'titleMonths' => $titleMonths,
+      'titleYear'   => $titleYear,
+  ]) ?>
 
   <?php /* everything below the masthead is the pivot's swappable region */ ?>
   <div id="pivot-content">

@@ -106,6 +106,7 @@ body {
    program column 2 begins. Row 1: pivot strip (cols 1-2) + logo (col 3);
    row 2: "im Kino" + legend. */
 .masthead {
+  position: relative; /* anchors the absolutely positioned logo */
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: auto auto;
@@ -117,16 +118,17 @@ body {
 /* ---------- Pivot nav (WP7 panorama): the headline IS the menu ---------- */
 
 .pivot {
-  grid-column: 1 / 3;
+  grid-column: 1 / -1;
   grid-row: 1;
   overflow: hidden;
-  /* ghost titles get clipped mid-air at the right edge, panorama-style */
-  mask-image: linear-gradient(to right, #000 86%, transparent);
+  /* ghost titles get clipped mid-air at the right edge, panorama-style
+     (fade ends before the absolutely positioned logo) */
+  mask-image: linear-gradient(to right, #000 72%, transparent 90%);
 }
 .pivot-strip {
   display: flex;
   align-items: baseline;
-  gap: .55em;
+  gap: .35em;
   white-space: nowrap;
   font-size: clamp(2.3rem, 5.2vw, 3.5rem);
   font-weight: 700;
@@ -153,11 +155,16 @@ body {
 .pivot-item:not(.is-active):focus-visible { opacity: .5; }
 .pivot-item:focus-visible { outline: 2px solid var(--ink); outline-offset: 5px; }
 
-/* the program item morphs: month range while active, generic name otherwise */
+/* the program item morphs: month range while active, generic name otherwise —
+   and hovering/focusing the strip reveals the name too ("this is a menu") */
 .pivot-label { display: inline-grid; }
 .pivot-label .lbl { grid-area: 1 / 1; transition: opacity .35s ease-out; }
 .pivot-item.is-active .lbl-name { opacity: 0; }
 .pivot-item:not(.is-active) .lbl-months { opacity: 0; }
+.pivot-strip:hover .pivot-item.is-active .lbl-months,
+.pivot-strip:focus-within .pivot-item.is-active .lbl-months { opacity: 0; }
+.pivot-strip:hover .pivot-item.is-active .lbl-name,
+.pivot-strip:focus-within .pivot-item.is-active .lbl-name { opacity: 1; }
 
 .mast-sub {
   grid-column: 1;
@@ -175,28 +182,32 @@ body {
   align-self: end;
   font-size: .76rem;
   line-height: 1.55;
+  /* keep clear of the floating logo */
+  padding-right: calc(clamp(6.5rem, 11vw, 9rem) + 1.5rem);
   padding-bottom: .2rem;
 }
 .legend p { margin: 0; }
 .legend .sep { opacity: .45; margin-inline: .3em; }
 
+/* floats over the masthead's top-right corner — never adds height */
 .brand-logo {
-  grid-column: 3;
-  grid-row: 1;
+  position: absolute;
+  top: .9rem;
+  right: 0;
+  z-index: 5;
   display: block;
   width: clamp(6.5rem, 11vw, 9rem);
   height: auto;
-  margin-left: auto;
 }
 .brand-logo .bg { fill: var(--paper); }
 .brand-logo .fg { fill: var(--ink); }
 
 @media (max-width: 760px) {
-  .masthead { grid-template-columns: 1fr auto; gap: .25rem 1.25rem; }
-  .pivot { grid-column: 1; }
-  .brand-logo { grid-column: 2; grid-row: 1 / 3; align-self: start; }
+  .masthead { grid-template-columns: 1fr; gap: .25rem 0; }
+  .pivot { grid-column: 1; mask-image: linear-gradient(to right, #000 55%, transparent 82%); }
+  .brand-logo { width: 5rem; top: .6rem; }
   .mast-sub { grid-column: 1; }
-  .legend { grid-column: 1 / -1; grid-row: 3; padding-top: .9rem; }
+  .legend { grid-column: 1; grid-row: 3; padding-top: .9rem; padding-right: 0; }
 }
 
 /* ---------- Pivot content swap (out left, in from the right) ---------- */
