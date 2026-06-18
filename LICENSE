@@ -1,0 +1,38 @@
+Copyright (C) 2026 Ruby Morgan Voigt
+
+Where otherwise applicable, the original work in this repository — the
+application code under site/, assets/css/, assets/js/ and scripts/, together
+with the top-level project configuration — is licensed under the BSD Zero
+Clause License (0BSD):
+
+  Permission to use, copy, modify, and/or distribute this software for any
+  purpose with or without fee is hereby granted.
+
+  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+  WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+  MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+  ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+  WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+  ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+  OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+----------------------------------------------------------------------------
+
+The following bundled third-party components are NOT covered by the 0BSD
+grant above. They are included for deployment convenience only; their
+inclusion here does not relicense them, and redistribution of each is
+governed by its own license terms, not by this file:
+
+  kirby/
+      Kirby CMS core — Kirby License (proprietary; production use requires a
+      paid license). https://getkirby.com/license
+
+  assets/vendor/fancybox/
+      Fancyapps Fancybox — commercial license. https://fancyapps.com/license
+
+  assets/vendor/jquery/
+      jQuery — MIT License. https://jquery.org/license
+
+  assets/font/LipaAgateHighCnd-*.woff2
+      Lipa Agate High Cnd — commercial typeface, licensed separately for the
+      Kinemathek Karlsruhe website; redistribution governed by its own terms.
