@@ -72,6 +72,7 @@ The TMDB sync (`mapToFilm`), faceting, ICS, and templates all key off these exac
 
 **Showing** (`showing.yml` / `ShowingPage`): `film`(pages,req,max1), `title`(text,optional
 override), `date`(date,time:true,req), `venue`(text), `sonderinfo`(textarea), `ticketUrl`(url),
+`freeAdmission`(toggle — hides the ticket button, shows „Freier Eintritt" instead),
 `subtitles`(multiselect OmU/OmeU/OF/dtF), `hasDiscussion`(toggle),
 `categories`(multiselect spielplan/koop/festival/filmbildung), `keywords`(tags).
 `num: "{{ page.date.toDate('YmdHi') }}"`.
@@ -79,6 +80,7 @@ override), `date`(date,time:true,req), `venue`(text), `sonderinfo`(textarea), `t
 **Event** (`event.yml` / `EventPage`): `title`(text,req), `date`(date,time:true,req),
 `endDate`(date,time:true,optional multi-day), `venue`(text), `hasDiscussion`(toggle),
 `text`(textarea — the description, **named `text`, not `synopsis`**), `ticketUrl`(url),
+`freeAdmission`(toggle — hides the ticket button, shows „Freier Eintritt" instead),
 `categories`(multiselect), `subtitles`(multiselect), `keywords`(tags), `image`(files,max1).
 **No `film` field.**
 

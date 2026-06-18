@@ -66,23 +66,34 @@ class Kinemathek
      * The unified chronological "what's on" program (SPEC §3 / §8):
      * Showings + Events merged, future-only, soonest first.
      *
+     * In `past` mode it instead returns the screening history (items strictly
+     * before today, most-recent first) — the data behind the Spielplan's
+     * "Frühere" archive toggle. NB: most back-catalogue films carry no historic
+     * screening dates (the old WP event dates were not migratable), so this
+     * accrues forward as upcoming showings age out.
+     *
      * @param array $options includeToday(bool=true), categories(array|null),
-     *                        limit(int|null)
+     *                        limit(int|null), past(bool=false)
      */
     public static function program(array $options = []): Pages
     {
         $includeToday = $options['includeToday'] ?? true;
         $categories   = $options['categories']   ?? null;
         $limit        = $options['limit']         ?? null;
+        $past         = $options['past']         ?? false;
         $boundary     = static::now($includeToday);
 
         // Merge both content types into one collection.
         $items = static::showings()->merge(static::events());
 
-        // Future-only (or future-incl-today). Skip items without a usable date.
-        $items = $items->filter(function (Page $item) use ($boundary) {
+        // Future program (future-incl-today) or, in `past` mode, the screening
+        // history (strictly before today). Skip items without a usable date.
+        $items = $items->filter(function (Page $item) use ($boundary, $past) {
             $ts = $item->timestamp();
-            return $ts !== null && $ts >= $boundary;
+            if ($ts === null) {
+                return false;
+            }
+            return $past === true ? $ts < $boundary : $ts >= $boundary;
         });
 
         // Optional placement restriction (e.g. only Spielplan, or only Festival).
@@ -94,9 +105,12 @@ class Kinemathek
             });
         }
 
-        // Soonest first. Sort on the timestamp via callback so heterogeneous
-        // page types interleave correctly.
-        $items = $items->sortBy(fn (Page $item) => $item->timestamp() ?? PHP_INT_MAX, 'asc');
+        // Soonest first (future) / most-recent first (past). Sort on the
+        // timestamp via callback so heterogeneous page types interleave.
+        $items = $items->sortBy(
+            fn (Page $item) => $item->timestamp() ?? PHP_INT_MAX,
+            $past === true ? 'desc' : 'asc'
+        );
 
         if (is_int($limit) === true) {
             $items = $items->limit($limit);

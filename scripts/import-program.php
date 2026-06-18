@@ -17,6 +17,7 @@
  *   php scripts/import-program.php --limit=3       # only first 3 films (+ their showings;
  *                                                  # events are skipped under --limit)
  *   php scripts/import-program.php --no-tmdb       # films from scraped data only
+ *   php scripts/import-program.php --no-stills     # TMDB poster only, skip stills (deep archive)
  *   php scripts/import-program.php --input=path    # alternate JSON (default: scripts/import/old-site-program.json)
  *
  * Idempotent: films are skipped when a page with the same slug OR tmdbId
@@ -37,16 +38,19 @@ ini_set('display_errors', '1');
 // CLI args
 // ---------------------------------------------------------------------------
 
-$apply  = false;
-$noTmdb = false;
-$limit  = null;
-$input  = __DIR__ . '/import/old-site-program.json';
+$apply    = false;
+$noTmdb   = false;
+$noStills = false;
+$limit    = null;
+$input    = __DIR__ . '/import/old-site-program.json';
 
 foreach (array_slice($argv, 1) as $arg) {
     if ($arg === '--apply') {
         $apply = true;
     } elseif ($arg === '--no-tmdb') {
         $noTmdb = true;
+    } elseif ($arg === '--no-stills') {
+        $noStills = true;   // posters only (used for the deep film archive)
     } elseif (preg_match('/^--limit=(\d+)$/', $arg, $m) === 1) {
         $limit = (int) $m[1];
     } elseif (preg_match('/^--input=(.+)$/', $arg, $m) === 1) {
@@ -708,12 +712,14 @@ foreach ($filmPlan as $slug => $plan) {
                     $log[] = 'poster FAILED';
                 }
             }
-            $stills = $client->attachStills($page, $bundle, $titleForAlt);
-            if ($stills['stored'] !== []) {
-                $page  = $page->update(['stills' => $stills['stored']], $defaultLang);
-                $log[] = 'stills ' . count($stills['stored']) . '/' . $stills['attempted'];
-            } elseif ($stills['attempted'] > 0) {
-                $log[] = 'stills FAILED';
+            if ($noStills === false) {
+                $stills = $client->attachStills($page, $bundle, $titleForAlt);
+                if ($stills['stored'] !== []) {
+                    $page  = $page->update(['stills' => $stills['stored']], $defaultLang);
+                    $log[] = 'stills ' . count($stills['stored']) . '/' . $stills['attempted'];
+                } elseif ($stills['attempted'] > 0) {
+                    $log[] = 'stills FAILED';
+                }
             }
             usleep(250000);
         }

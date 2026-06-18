@@ -16,7 +16,11 @@ use Kinemathek\Kinemathek;
  * @var array  $days
  * @var array  $dayMeta
  * @var string $todayKey
+ * @var bool   $past          archive mode: suppress ticket/calendar CTAs on rows
+ * @var bool   $archiveToggle render the Archiv button in the filter row (Spielplan only)
  */
+$past          = $past ?? false;
+$archiveToggle = $archiveToggle ?? false;
 
 // Subtitle markers (multiselect keys): icon?, printed note, original version?
 // Label = t('kinemathek.version.<key>'). The OmU quick filter means
@@ -29,7 +33,7 @@ $markMap = [
 ];
 
 // Per-item display data, shared by the entry and its detail panel.
-$entryData = function (\Kirby\Cms\Page $item, string $detailDate) use ($markMap): array {
+$entryData = function (\Kirby\Cms\Page $item, string $detailDate) use ($markMap, $past): array {
     $film  = $item->film();
     $ts    = $item->timestamp();
     $isEvent = $item->intendedTemplate()->name() === 'event';
@@ -83,6 +87,7 @@ $entryData = function (\Kirby\Cms\Page $item, string $detailDate) use ($markMap)
         'item'       => $item,
         'film'       => $film,
         'isEvent'    => $isEvent,
+        'past'       => $past,
         'detailId'   => 'detail-' . str_replace('/', '-', $item->id()),
         'detailDate' => $detailDate,
         'venueKey'   => $item->venueKey(),
@@ -146,11 +151,18 @@ usort($allSeries, 'strcasecmp');
   <span class="count" aria-live="polite"
         data-label-one="<?= html(t('kinemathek.mb.show')) ?>"
         data-label-many="<?= html(t('kinemathek.mb.shows')) ?>"></span>
+  <?php if ($archiveToggle): ?>
+    <?php /* mode switch, not a live filter: a plain link to the past view and
+             back. Active (aria-current) while viewing the archive. */ ?>
+    <a class="chip archive-toggle" href="<?= $past ? $page->url() : $page->url() . '?past=1' ?>"<?= $past ? ' aria-current="page"' : '' ?>><?= html(t('kinemathek.mb.archive', 'Archiv')) ?></a>
+  <?php endif ?>
 </nav>
 
 <section class="program" id="program">
   <?php if ($days === []): ?>
-    <p><?= html(t('kinemathek.program.none', 'Derzeit keine Termine.')) ?></p>
+    <p><?= html($past
+        ? t('kinemathek.program.nonePast', 'Noch keine vergangenen Termine.')
+        : t('kinemathek.program.none', 'Derzeit keine Termine.')) ?></p>
   <?php endif ?>
   <p class="program-empty" hidden><?= html(t('kinemathek.program.noMatches', 'Keine passenden Termine.')) ?></p>
   <?php foreach ($days as $key => $items): ?>

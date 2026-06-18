@@ -18,11 +18,44 @@
   var pivotCurrent = activeItem.dataset.pivot;
   var pivotCache = {};
 
+  /* the language switcher + hreflang alternates live in the masthead/head,
+     OUTSIDE the swapped region — without this they would keep pointing at
+     the page we originally landed on after every swap */
+  var readAlternates = function (doc) {
+    var map = {};
+    Array.prototype.forEach.call(
+      doc.querySelectorAll('link[rel="alternate"][hreflang]'),
+      function (link) { map[link.getAttribute('hreflang')] = link.getAttribute('href'); }
+    );
+    return map;
+  };
+
+  var applyAlternates = function (map) {
+    if (!map) return;
+    Array.prototype.forEach.call(
+      document.querySelectorAll('link[rel="alternate"][hreflang], .eyebrow-lang a[hreflang]'),
+      function (el) {
+        var href = map[el.getAttribute('hreflang')];
+        if (href) el.setAttribute('href', href);
+      }
+    );
+  };
+
+  /* carry the filter hash (program.js state) across a language switch —
+     readHash() over there drops anything that doesn't exist in that language */
+  document.addEventListener('click', function (e) {
+    var link = e.target.closest('.eyebrow-lang a[hreflang]');
+    if (link && location.hash) {
+      link.href = link.href.split('#')[0] + location.hash;
+    }
+  });
+
   /* the section we arrived on keeps its LIVE nodes (listeners, open panels
      and filter state survive a round trip) */
   pivotCache[pivotCurrent] = {
     nodes: Array.prototype.slice.call(pivotContent.childNodes),
-    title: document.title
+    title: document.title,
+    langs: readAlternates(document)
   };
 
   /* infinite loop, WP7-style: a cloned set follows the originals, the strip
@@ -121,7 +154,7 @@
       var region = doc.getElementById('pivot-content') || doc.querySelector('main');
       var nodes = Array.prototype.slice.call(region ? region.childNodes : [])
         .map(function (n) { return document.adoptNode(n); });
-      pivotCache[key] = { nodes: nodes, title: doc.title };
+      pivotCache[key] = { nodes: nodes, title: doc.title, langs: readAlternates(doc) };
       return pivotCache[key];
     });
   };
@@ -137,6 +170,7 @@
       var section = loaded[0];
       pivotContent.replaceChildren.apply(pivotContent, section.nodes);
       document.title = section.title;
+      applyAlternates(section.langs);
       pivotContent.classList.remove('pivot-out');
       pivotContent.classList.add('pivot-in');
       setTimeout(function () { pivotContent.classList.remove('pivot-in'); }, 450);

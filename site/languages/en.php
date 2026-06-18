@@ -34,6 +34,7 @@ return [
         // Shared UI
         'kinemathek.tickets'      => 'Tickets',
         'kinemathek.tickets.mars' => 'Tickets (Mars EDV)',
+        'kinemathek.free'         => 'Free admission',
         'kinemathek.calendar'     => 'Add to calendar (.ics)',
         'kinemathek.venue'        => 'Venue',
         'kinemathek.past'         => '(past)',
@@ -48,6 +49,7 @@ return [
         'kinemathek.program.list'      => 'Programme',
         'kinemathek.program.none'      => 'No screenings scheduled at the moment.',
         'kinemathek.program.noMatches' => 'No matching dates.',
+        'kinemathek.program.nonePast'  => 'No past screenings yet.',
 
         // Faceted filtering
         'kinemathek.filters.active'     => 'Active filters',
@@ -85,6 +87,7 @@ return [
         'kinemathek.mb.inCinema'         => 'at the cinema',
         'kinemathek.mb.today'            => 'Today',
         'kinemathek.mb.soon'             => 'Coming up',
+        'kinemathek.mb.archive'          => 'Archive',
         'kinemathek.mb.filter'           => 'Filter',
         'kinemathek.mb.all'              => 'All',
         'kinemathek.mb.show'             => 'screening',

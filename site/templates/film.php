@@ -45,7 +45,9 @@ $showRow = function (\Kirby\Cms\Page $showing, bool $clickable) {
       <?php endif ?>
       <?php if ($clickable): ?>
         <span class="sr-actions">
-          <?php if ($showing->ticketUrl()->isNotEmpty()): ?>
+          <?php if ($showing->freeAdmission()->toBool()): ?>
+            <span class="free"><?= html(t('kinemathek.free', 'Freier Eintritt')) ?></span>
+          <?php elseif ($showing->ticketUrl()->isNotEmpty()): ?>
             <a class="btn" href="<?= $showing->ticketUrl()->esc() ?>" rel="noopener noreferrer"><?= html(t('kinemathek.tickets', 'Tickets')) ?></a>
           <?php endif ?>
           <?php snippet('add-to-calendar', ['page' => $showing, 'class' => 'btn']) ?>

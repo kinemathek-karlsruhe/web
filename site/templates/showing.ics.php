@@ -33,7 +33,9 @@ if ($page->sonderinfo()->isNotEmpty()) {
 if ($page->subtitles()->isNotEmpty()) {
     $parts[] = t('kinemathek.showing.version', 'Fassung') . ': ' . $page->subtitles()->commaList();
 }
-if ($page->ticketUrl()->isNotEmpty()) {
+if ($page->freeAdmission()->toBool()) {
+    $parts[] = t('kinemathek.free', 'Freier Eintritt');
+} elseif ($page->ticketUrl()->isNotEmpty()) {
     $parts[] = t('kinemathek.tickets', 'Tickets') . ': ' . $page->ticketUrl()->value();
 }
 

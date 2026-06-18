@@ -14,7 +14,9 @@
   <?php if ($item->venue()->isNotEmpty()): ?> · <?= html($item->venue()) ?><?php endif ?>
   <?php if ($item->categories()->isNotEmpty()): ?> · <span class="text-gray-500"><?= html($item->categories()->commaList()) ?></span><?php endif ?>
   <?php if ($item->hasDiscussion()->toBool()): ?> · <span title="<?= html(t('kinemathek.showing.discussion', 'Mit Filmgespräch.')) ?>">🗣</span><?php endif ?>
-  <?php if ($item->ticketUrl()->isNotEmpty()): ?>
+  <?php if ($item->freeAdmission()->toBool()): ?>
+    · <?= html(t('kinemathek.free', 'Freier Eintritt')) ?>
+  <?php elseif ($item->ticketUrl()->isNotEmpty()): ?>
     · <a href="<?= $item->ticketUrl()->esc() ?>" rel="noopener noreferrer"><?= html(t('kinemathek.tickets', 'Tickets')) ?></a>
   <?php endif ?>
   · <?php snippet('add-to-calendar', ['page' => $item]) ?>

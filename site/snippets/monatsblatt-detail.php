@@ -20,7 +20,9 @@
  * @var string $note
  * @var ?\Kirby\Cms\File $still
  * @var string $synopsis
+ * @var bool   $past      archive mode: no ticket/calendar CTAs (history only)
  */
+$past = $past ?? false;
 ?>
 <div class="event-detail" id="<?= $detailId ?>">
   <div class="clip">
@@ -55,10 +57,16 @@
       <?php endif ?>
       <?php if ($synopsis !== ''): ?><p class="d-syn"><?= nl2br(html($synopsis)) ?></p><?php endif ?>
       <p class="d-actions">
-        <?php if ($item->ticketUrl()->isNotEmpty()): ?>
-          <a class="btn" href="<?= $item->ticketUrl()->esc() ?>" rel="noopener noreferrer"><?= html(t('kinemathek.tickets', 'Tickets')) ?></a>
+        <?php /* past screenings are history: their ticket link is dead and a
+                 calendar export is moot — only the film page stays useful */ ?>
+        <?php if (!$past): ?>
+          <?php if ($item->freeAdmission()->toBool()): ?>
+            <span class="free"><?= html(t('kinemathek.free', 'Freier Eintritt')) ?></span>
+          <?php elseif ($item->ticketUrl()->isNotEmpty()): ?>
+            <a class="btn" href="<?= $item->ticketUrl()->esc() ?>" rel="noopener noreferrer"><?= html(t('kinemathek.tickets', 'Tickets')) ?></a>
+          <?php endif ?>
+          <?php snippet('add-to-calendar', ['page' => $item, 'class' => 'btn']) ?>
         <?php endif ?>
-        <?php snippet('add-to-calendar', ['page' => $item, 'class' => 'btn']) ?>
         <?php if ($film): ?>
           <a class="btn" href="<?= $film->url() ?>"><?= html(t('kinemathek.mb.filmpage')) ?></a>
         <?php endif ?>

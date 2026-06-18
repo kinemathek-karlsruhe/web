@@ -77,10 +77,12 @@ $still = $film ? ($film->stills()->toFiles()->first() ?? $film->posterFile()) : 
         <p class="d-syn"><?= nl2br(html(trim($film->synopsis()->value()))) ?></p>
       <?php endif ?>
       <p class="d-actions">
-        <?php if (!$isPast && $page->ticketUrl()->isNotEmpty()): ?>
-          <a class="btn" href="<?= $page->ticketUrl()->esc() ?>" rel="noopener noreferrer"><?= html(t('kinemathek.tickets.mars', 'Tickets (Mars EDV)')) ?></a>
-        <?php endif ?>
         <?php if (!$isPast): ?>
+          <?php if ($page->freeAdmission()->toBool()): ?>
+            <span class="free"><?= html(t('kinemathek.free', 'Freier Eintritt')) ?></span>
+          <?php elseif ($page->ticketUrl()->isNotEmpty()): ?>
+            <a class="btn" href="<?= $page->ticketUrl()->esc() ?>" rel="noopener noreferrer"><?= html(t('kinemathek.tickets.mars', 'Tickets (Mars EDV)')) ?></a>
+          <?php endif ?>
           <?php snippet('add-to-calendar', ['page' => $page, 'class' => 'btn']) ?>
         <?php endif ?>
         <?php if ($film): ?>

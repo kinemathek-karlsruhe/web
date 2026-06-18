@@ -1,0 +1,973 @@
+{
+  "drafts": [
+    {
+      "slug": "dokka-xiii",
+      "title": "dokKa XIII",
+      "category": "festival",
+      "intro": "Das dokKa-Festival präsentiert aktuelle Dokumentarfilme und Hördokumentationen mit vielen Gästen im Kino.",
+      "text": "Zu allen Programmpunkten finden im Foyer Gespräche mit Filmemacherinnen und Hörautoren statt. Weitere Höhepunkte wie das dokKa-Frühstück, die Filmschool Picks der HfG, die Festivalparty sowie der Branchentreff mit der AG DOK Südwest machen dokKa zu einem einzigartigen Erlebnis.\n\nDer **Festivalpass** ermöglicht Ihnen den Zugang zu allen Filmvorführungen und Hörstücken vor Ort. Für das online Programm ist ein separater Online-Pass erhältlich. Bitte zu den Vorstellungen rechtzeitig erscheinen, ein Anspruch auf einen Platz können wir leider nicht garantieren. Der Festivalpass ist an den Kinokassen der Kinemathek erhältlich. Sowohl der Festivalpass fürs Kinos als auch der Online-Pass für die dokKa Mediathek können auf der Webseite erworben werden.",
+      "hazards": [
+        "Stale edition dates removed from the lead paragraph: 'dokKa 13 vom 13. bis 17. Mai in Karlsruhe', 'Am Mittwoch, den 13. Mai, um 19 Uhr eröffnet dokKa in der Kinemathek', and 'Über den Feiertag (Do.) hinweg läuft das Festival bis Sonntag ...' — re-add the correct dates for the current edition.",
+        "Removed the header image (wp-content WebP: dokKa13_facebook_851x315px_20260505-1.webp) — re-upload an edition image if wanted.",
+        "Removed the edition-specific Festivalpass price button '→Festivalpass 45 € (ermäßigt 35 €)' and its ticket link (kinotickets.express/karlsruhe_kinemathek/sale/tickets/35526) as stale program/ticket state. The kept Festivalpass paragraph still describes the general pass concept but mentions edition-specific pricing/availability — verify before publishing.",
+        "Removed an empty dynamic '#filmlistengrid' container that rendered the dated screening grid on the old site.",
+        "DUPLICATE RISK: dokKa is a named festival and likely already belongs on the curated 'Festivals' page on the new site — check whether a dokKa entry already exists there before publishing this as a standalone post."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "fragile-teilhabe",
+      "title": "Fragile Teilhabe",
+      "category": "koop",
+      "intro": "Veranstaltungsreihe in Kooperation mit dem Potentialbereich Diversität der RPTU Kaiserslautern Landau. Nach den Filmen Diskussion mit den Studierenden.",
+      "text": "## Jugend und Zugehörigkeit im Gegenwartskino",
+      "hazards": [
+        "Removed a stale film-teaser grid (wpt_listing) of three dated screenings linking to old-site /film/ pages: Tori & Lokita (17.6.), Sieger Sein (21.6. bis 1.7.), Mommy (4.7.) — re-add as Showings in the new program if this edition is current.",
+        "Removed the RPTU poster image (wp-content/uploads/.../RPTU_Poster-1.webp) — re-upload as a page image if wanted.",
+        "Cooperation partner: Potentialbereich Diversität der RPTU Kaiserslautern Landau (kept in prose, no external link was present).",
+        "The only evergreen prose is the subtitle/lead and the thematic heading; almost everything else was stale dated program state.",
+        "Likely overlaps in spirit with the curated Festivals/Projekte/Kooperationen areas — check before publishing to avoid duplication."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "spring-break",
+      "title": "Spring/Break",
+      "category": "reihe",
+      "intro": "Der Frühling ist die Jahreszeit der Erneuerung – die Zeit des Lichts, des Wachstums und des Neuanfangs. Doch unter dieser Oberfläche verbirgt sich etwas Unbeständigeres: ein Moment des Übergangs, in dem sich Strukturen auflösen, Identitäten verschieben und Emotionen sich verstärken.",
+      "text": "Unser Aprilthema **Spring/Break** greift diese Mehrdeutigkeit auf.\nDas Motiv vereint Filme, die Zustände des Bruchs und der Wiedergeburt einfangen, und erkundet Charaktere und Welten im Wandel – zwischen Ende und Anfang, Ordnung und Chaos. Von stillen inneren Erweckungen bis zu disruptiven Wendungen zeichnen diese Filme die Energie des Wandels nach.",
+      "hazards": [
+        "Dropped a WordPress query grid of 7 film-teaser cards (Valerie – Eine Woche voller Wunder, Mein Nachbar Totoro, Frühstück im Grünen, Picknick am Valentinstag, Auslöschung, April Story, Über den Dächern von Nizza), each linking to old-site /film/<slug>/ pages with stale 'Termine:' excerpts. These were the dated program for the April edition.",
+        "This is a dated monthly theme (Aprilthema April 2026), not an evergreen standing series. Only the conceptual description survived; team should decide whether a one-off monthly theme warrants a standalone page or should be re-created as a fresh program each spring.",
+        "One dropped teaser ('Frühstück im Grünen') referenced a specific dated event: 'Zur letzten Vorstellung am 26.4. laden wir ein zum Picknick im Freien' — a picnic at the final screening. Not migrated; flag if this special-event detail should be preserved.",
+        "Original lead had a double space in 'bis zu  disruptiven' (collapsed) and a typo-style run-on 'Erneuerung –die' (spacing normalized around the en dash); German wording otherwise kept verbatim.",
+        "No forms, iframes, embeds, PDFs, or sponsor-logo lines present in the source. No likely duplication with existing curated pages."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "film-noir",
+      "title": "Film Noir",
+      "category": "reihe",
+      "intro": "Mit unserer Film Noir Reihe widmen wir uns einem der faszinierendsten und prägendsten Kapitel der amerikanischen Filmgeschichte. Der Begriff Film Noir beschreibt weniger ein klar abgegrenztes Genre als vielmehr eine Stimmung geprägt von düsteren Großstadtlandschaften, moralisch ambivalente Figuren, fatalistische Geschichten und eine Bildsprache voller Schatten und Kontraste.",
+      "text": "Entstanden vor allem im amerikanischen Kino der 1940er- und 1950er-Jahre, spiegeln diese Filme eine vom Krieg geprägte, pessimistische Welt wider, in der Gewissheiten brüchig geworden sind und der Traum vom Aufstieg oft in Gier, Verrat oder persönlichem Untergang endet. Typisch sind Antihelden statt Helden, verhängnisvolle Beziehungen, sowie eine Atmosphäre aus Spannung, Zynismus und Melancholie.\n\nIn unserer Reihe präsentieren wir monatlich ausgewählte Klassiker des amerikanischen Film Noir: von ikonischen Meisterwerken bis hin zu besonderen Variationen wie Heist Filmen oder Horror Noir. Jeder Film wird mit einer kurzen Einführung präsentiert, die einen Einblick in seine filmhistorische Bedeutung und seine Stellung innerhalb des Genres gibt. (Louis Wolfinger-Meister)",
+      "hazards": [
+        "Removed an empty stale-program container (<div id=\"filmlistengrid\"> in a two-column layout) that on the live site rendered the grid of dated Film-Noir screenings — no evergreen content was lost.",
+        "Stripped WP block wrappers (wp-block-group / wp-block-columns / wp-block-column) and inline flex-basis styles.",
+        "Body retains author attribution '(Louis Wolfinger-Meister)' verbatim as part of the evergreen text.",
+        "No forms, iframes/embeds, PDF links, teaser tiles, or sponsor-logo lines were present.",
+        "Likely a NEW recurring 'reihe' page — does not appear to duplicate any already-migrated curated page (Über uns, Festivals, Filmbildung, Projekte, etc.)."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "fokus-feministische-aktionswochen",
+      "title": "Fokus Feministische Aktionswochen",
+      "category": "koop",
+      "intro": "Vom **6. bis 20. März** finden in Karlsruhe die feministischen Aktionswochen statt. Sie bieten ein abwechslungsreiches Programm aus Aktionen, Workshops, Vorträgen und kulturellen Veranstaltungen rund um den Frauentag, der weltweit am 8. März begangen wird.",
+      "text": "Die Kinemathek beteiligt sich mit einer Fokusreihe von Filmen und Veranstaltungen. In Kooperation mit der Stadtbibliothek Karlsruhe.\n\nVideo ansehen: https://player.vimeo.com/video/1170592296",
+      "hazards": [
+        "Vimeo-Embed (iframe) entfernt und durch einfachen Link ersetzt (Datenschutz: kein Third-Party-Embed). Video-URL: https://player.vimeo.com/video/1170592296 — Team prüfen/ggf. austauschen oder lokal hosten.",
+        "Poster-/Plakatbild (wp-content WebP) aus dem figure-Wrapper entfernt; Bild bei Bedarf neu als image-Feld einpflegen: https://kinemathek-karlsruhe.de/wp-content/uploads/2026/02/Bildschirmfoto-2026-02-18-um-10.19.18.webp",
+        "Komplette Sektionen 'Kommende Veranstaltungen' und 'Vergangene Veranstaltungen' entfernt — waren Film-Teaser-Kacheln mit Links auf alte /film/<slug>/-Seiten (Hola Frida!, Heldin, Oxana, Summer Snow, Die Sammler und die Sammlerin, Bildnis einer Trinkerin, The Chronology of Water, No Mercy, Ihr Jahrhundert, I'll Be Your Mirror / Heartache, Von der Frauenbewegung zum matriarchalen Bewusstsein). Diese werden im neuen System über Showings/Programm abgebildet.",
+        "Konkretes Datum '6. bis 20. März' ist editionsspezifisch (ohne Jahr) — als Termin pro Edition aktualisieren oder allgemeiner fassen.",
+        "Kooperation 'In Zusammenarbeit mit der Stadtbibliothek Karlsruhe' beibehalten — kein dangling Sponsor-Hinweis, sondern Teil der evergreen Beschreibung.",
+        "Kategorie 'koop' (Kooperationsprogramm mit der Stadtbibliothek); ggf. 'reihe' (Fokusreihe) prüfen — Team entscheiden."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "cinema-italia-2",
+      "title": "Cinema Italia",
+      "category": "festival",
+      "intro": "Bereits zum 28. Mal lädt die Festivaltournee **Cinema! Italia!** dazu ein, das aktuelle und künstlerisch engagierte Filmschaffen Italiens auf der großen Leinwand zu entdecken.",
+      "text": "## 28. Cinema Italia – Tournee\n\nDas Programm vereint neue Werke renommierter Regisseure wie **Daniele Luchetti** und **Gianluca Maria Tavarelli** mit eindrucksvollen Debüts vielversprechender Nachwuchstalente – fast immer mit starken Frauenfiguren im Mittelpunkt.\n\nAls besondere Hommage zum zehnten Todestag des großen **Francesco Rosi** wird sein meisterhafter und gesellschaftskritischer Klassiker **„Le mani sulla città / Hände über der Stadt\"** gezeigt.\n\nSechs ausgewählte Filme, die nicht nur fesselnde Geschichten erzählen, sondern zugleich spannende Einblicke in die Gegenwart, Kultur und Vielfalt Italiens bieten – getragen von herausragenden schauspielerischen Leistungen.",
+      "hazards": [
+        "Removed the WP Theatre (wpt_listing) film grid: 7 film-teaser tiles linking to old-site /film/<slug>/ pages (La Grande Ambizione, Indagine su una Storia d'Amore, Confidenza, Le Mani Sulla Città, Una Madre, La Storia del Frank e della Nina, Anna) with stills hosted on wp-content. These dated screening cards are stale program state and were dropped.",
+        "The surviving prose is edition-specific (28. Tournee, 2025): it names the current line-up's directors, the Francesco-Rosi Hommage and 'sechs ausgewählte Filme'. Editorial team should generalise it for an evergreen festival page or update per edition.",
+        "Likely overlaps with the curated 'Festivals' page on the new site, which lists named festivals incl. Cinema Italia — check before publishing to avoid duplication.",
+        "No form, no iframe/embed, and no dangling sponsor lines were present in the source."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "kaiser-passage-hoffest",
+      "title": "Kaiser-Passage-Hoffest",
+      "category": "sonstiges",
+      "intro": "In der Kaiserpassage findet das Passagenhoffest statt. Feiert mit uns im Herzen der Stadt!",
+      "text": "Die Kinobar ist mit leckeren Cocktails (mit und ohne Alkohol) geöffnet.\n\nMehr Informationen: [kaiser-passage-hoffest.de](https://www.kaiser-passage-hoffest.de/)",
+      "hazards": [
+        "Removed the dated per-edition program: the post centred on the '2. Passagenhoffest' on 1.+2. August 2025 with an hour-by-hour Friday/Saturday schedule (Kinobar opening hours Fr 16-23 / Sa 14-24 Uhr, Klimamonster-Bastelaktion, Versteigerung um 18 Uhr, Stummfilm-Vorführung um 21 Uhr). All of this is stale dated program state and was dropped; only the evergreen invitation + Kinobar mention + external link survive.",
+        "The intro is lightly paraphrased only to strip the fixed date/edition number ('Am 1. und 2. August 2025 ... das 2. Passagenhoffest'). Editorial team should confirm wording or restore the verbatim sentence with the correct upcoming date.",
+        "External partner link kept: https://www.kaiser-passage-hoffest.de/ (the original poster image linked to it). No PDF, no form, no embed in the source.",
+        "Removed a wp-content poster image: https://kinemathek-karlsruhe.de/wp-content/uploads/2025/07/1000032350-780x1024.webp - re-upload locally if the festival recurs.",
+        "Source mentions the Instagram handle @kit.klimamonster (already an @, no (ät) to decode); dropped along with the schedule but may be worth keeping as a partner reference.",
+        "Likely a near-empty page once the dated schedule is removed; consider whether a recurring 'Passagenhoffest' deserves its own evergreen page or is better folded into a general events/news context. No obvious duplicate among the existing curated pages."
+      ],
+      "isStale": true
+    },
+    {
+      "slug": "asia-horror-night",
+      "title": "Asia Horror Night",
+      "category": "reihe",
+      "intro": "Zwei Filme. Zwei Länder. Zwei Albträume.\nAber kaum unterschiedlicher könnten sie sein. Was sie verbindet? Ein kompromissloser Blick auf das Zerbrechen von Familie, Identität – und Realität.",
+      "text": "In unserer Asia Horror Night treffen zwei Klassiker des ostasiatischen Genrekinos aufeinander: Herman Yaus Eight Immortals Restaurant: The Untold Story, ein greller, bluttriefender Category-III-Splatter aus Hongkong, stößt auf Kim Jee-woons A Tale of Two Sisters, einen ätherisch-psychologischen Slow-Burn aus Südkorea. Die Kontraste könnten nicht größer sein – und gerade darin liegt der Reiz dieses Double Features.\n\nWährend Untold Story das Grauen offen ausstellt – schmatzend, hackend, lüstern –, zieht Two Sisters den Horror ins Innere zurück: leise, poetisch, zutiefst tragisch. Der eine Film schreit, der andere flüstert. Aber beide erzählen von familiären Geistern, die sich nicht abschütteln lassen. Von Schuld und Verdrängung. Von der Frage: Wer sind wir, wenn niemand mehr hinsieht?\n\nDieses Double Feature ist eine Reise durch die Extreme asiatischer Horrorkultur:\n🔪 Herman Yau seziert eine zerfallende Gesellschaft mit satirischem Skalpell – roh, brutal, bitter.\n👭 Kim Jee-woon dagegen webt einen Geisterreigen aus Verlust, Erinnerung und psychischer Instabilität – visuell überwältigend und zutiefst menschlich.\n\nZwei stilistisch radikale Filme, vereint durch ihre Obsession mit dem Innersten: Familie als Ursprung des Horrors.\nKeine leichte Kost – aber ein Fest für alle, die Horror als Spiegel der Gesellschaft lesen.",
+      "hazards": [
+        "Removed the WP poster figure (wp-content/uploads/2025/07/AHFF-Plakat-drucken-4-1-*.webp) — re-upload as the page image if wanted.",
+        "Removed the stale film-teaser grid: two cards linking to old-site /film/ pages (the-eight-immortals-restaurant-the-untold-story, a-tale-of-two-sisters) with technical specs 'Herman Yau, China 1993; 95’ OmU' and 'Kim Jee-woon, Südkorea 2003; 115’ OmeU'. In the new model these should become Film + Showing entries; the specs are useful source data for the editor.",
+        "Body prose contains emojis (🔪, 👭) that were in the verbatim WP source — kept as-is; editor may want to strip them.",
+        "No event date/time survived (the WP card date slots were empty) — the actual screening date must be set up as a Showing/Event separately.",
+        "Likely NOT a duplicate of an existing curated page; this is a one-off themed double feature. If a generic 'Reihen' index exists it may belong there rather than as a standalone evergreen page."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "sword-and-sorcery",
+      "title": "Three nights of swords and sorcery",
+      "category": "reihe",
+      "intro": "Die Kinemathek und die KinoBar verbünden sich für ein cineastisches Abenteuer voller Magie, Musik und Mixkunst.",
+      "text": "## Bereit für eine epische Reise?\nDrei Abende. Drei Heldenreisen. Drei magische Erlebnisse.\n\nJeden Abend erwartet euch ein Kultfilm-Fantasytrip auf der großen Leinwand – begleitet von verzaubernden Cocktails von KinoBar x Electric Eel und mystischen Vinyl-Klängen, die noch lange nachhallen werden.\n\nKommt gerne mit Umhang und Sandalen.\n\nVideo ansehen: https://player.vimeo.com/video/1096063507?h=e266d2a34b&dnt=1&app_id=122963",
+      "hazards": [
+        "Einmaliges, datiertes Event (24.–26. Juli 2025): konkrete Programmtermine, das abendliche DJ-Line-up (Sebastian Heck & Roman Mühlschlegel / DJ Stean & Ducks3000 / Chris Cacavas), die KinoBar-Öffnungszeit (18 Uhr) und die einzelnen Filmtitel (The Sword and the Sorcerer 24.07., The Beastmaster 25.07., Krull 26.07.) wurden als veraltete Programmstände entfernt. Falls die Reihe wiederholt wird, Termine/Line-up neu setzen.",
+        "Vimeo-iframe (Drittanbieter-Embed, Datenschutz!) entfernt und durch einen einfachen Link 'Video ansehen:' ersetzt. Bitte prüfen, ob das Video weiterhin verfügbar ist; ggf. ganz streichen oder als lokal gehostetes/Partner-Video einbinden.",
+        "Film-Teaser-Grid (Abschnitt 'Filme') mit Tiles, die auf alte /film/<slug>/-Seiten verlinkten (The Sword and the Sorcerer, The Beastmaster, Krull), wurde komplett entfernt – die drei Filme sollten als echte Showings/Film-Einträge im neuen System angelegt werden.",
+        "Plakat-Bild lag nur als wp-content-Upload vor (swordandsorcery.webp) und wurde nicht migriert; bei Bedarf neu hochladen.",
+        "Seite ist fast ausschließlich datierter Programmstand; nur wenige immergrüne Beschreibungssätze überlebten. Vor Veröffentlichung redaktionell entscheiden, ob die Seite überhaupt im neuen System gebraucht wird."
+      ],
+      "isStale": true
+    },
+    {
+      "slug": "frieden-in-kolumbien",
+      "title": "Frieden in Kolumbien",
+      "category": "reihe",
+      "intro": "Kuratierte Filmreihe mit Filmgesprächen, die sich mit der Zeit nach der Unterzeichnung des Friedensvertrages zwischen der kolumbianischen Regierung, der FARC und rechten Paramilitärs und Drogenkartellen befassen: ein Projekt, was in seiner Komplexität einmalig ist.",
+      "text": "## Posconflicto\n\n## Filmreihe über die Zeit des „Postkonflikts\" in Kolumbien",
+      "hazards": [
+        "Removed a stale WP Theatre film-teaser grid (column id=\"filmlistengrid\", heading 'Filme') of 4 tiles linking to old-site /film/<slug>/ pages with wp-content images: De Esmeraldas, Coca y Cacao; Canararí: Las Palabras del Encuentro; El tercer acuerdo; Cuando Las Aguas Se Juntan. The four films and their technical specs (director/country/year/runtime/OmU) are NOT preserved here - re-create them as proper Film/Showing entries in the new CMS if still relevant.",
+        "Decoded HTML entities: „ and \" (German low/closing quotes) in the subtitle heading.",
+        "The two surviving lines ('Posconflicto', subtitle) are kept as headings; the lead paragraph was promoted to intro. Editorial team should decide final heading/body structure.",
+        "This is a one-off curated film series ('reihe'); does not obviously duplicate any existing curated page on the new site.",
+        "No forms, iframes, embeds, or PDF links were present in the source."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "kino-sommer",
+      "title": "KI:NO – Sommer",
+      "category": "reihe",
+      "intro": "Die ANYMOS – Kompetenzclusters Anonymisierung für vernetzte Mobilitätssysteme laden Dich an ausgewählten Abenden dazu ein, in die fiktive wie reale Welt künstlicher Intelligenz einzutauchen.",
+      "text": "Auf Dich warten Spielfilme der Extraklasse, über die im Anschluss mit Expertinnen und Experten diskutiert wird und dessen Inhalte auf unser gesellschaftliches Leben übertragen werden.\n\nDie ersten Termine finden bei uns in der Kinemathek statt, in den wärmeren Monaten wird sich der Kronenplatz in ein **OPEN AIR KINO** verwandeln.\n\nDer Eintritt ist für alle Kinoabende kostenlos! Eine Anmeldung oder Sitzplatzreservierung ist nicht erforderlich – first come, first serve.\n\n**Bei Regen findet die Vorstellung immer in der Kinemathek statt.**\n\n## Unsere Partner\n\n- [Triangel Open Space](https://www.triangel.space/)\n- [AFK Filmkreis](https://afk-filmkreis.de/index.php)",
+      "hazards": [
+        "Edition-Dates entfernt: Die Original-Überschrift '24. April – 10. Juli 2025 in der Kinemathek und auf dem Kronenplatz' und die im Fließtext eingebetteten Daten ('vom 24. April bis 10. Juli') wurden als veralteter Programmstand gewertet. Im Intro/Text wurde der Zeitraum-Bezug entfernt, der Rest verbatim übernommen – bitte vor Veröffentlichung prüfen, ob ein aktueller Zeitraum ergänzt werden soll.",
+        "Partner-Logos (zwei <figure>-Bildkacheln, ANYMOS-Header-Bild) entfernt. Die externen Partner-Links wurden als einfache Markdown-Links unter 'Unsere Partner' erhalten: triangel.space und afk-filmkreis.de. Link-Texte (Triangel Open Space / AFK Filmkreis) wurden ergänzt, da die Originale nur Logos ohne Text waren – bitte gegenprüfen.",
+        "Veranstalter ist ein externer Partner (ANYMOS-Kompetenzcluster); diese Reihe ist Kooperations-/Open-Air-Programmierung. Kategorie 'reihe' ist eine Schätzung – ggf. 'koop' passender. Open-Air-Bezug (Kronenplatz) passt zum neuen Venue-State 'Unterwegs'.",
+        "Mögliche Dublette: Falls bereits eine kuratierte Festivals-/Reihen-Seite oder ein Open-Air-Eintrag existiert, vor Anlage abgleichen."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "maschenkino-stricken-und-haekeln-mit-film",
+      "title": "Maschenkino – Stricken und Häkeln mit Film",
+      "category": "reihe",
+      "intro": "Beim MaschenKino kannst Du nach Herzenslust stricken oder häkeln, während im Hintergrund ein Film läuft.",
+      "text": "Beim MaschenKino kannst Du nach Herzenslust stricken oder häkeln, während im Hintergrund ein Film läuft. Das Licht im Kino ist gedimmt, sodass die Maschen noch gut zu sehen sind.\n\nSchnapp dir deine Nadeln, dein Garn und deine Freundinnen und Freunde – hier treffen sich Handarbeitsfans für gemütliche Stunden mit Kino-Flair in der Kinemathek.",
+      "hazards": [
+        "Dropped a stale, now-empty program section: an h2 'Filme' heading with an empty #filmlistengrid column (WordPress film-listing grid placeholder, no content). The recurring screening dates were not in this payload and need to be re-added as Showings in the new CMS.",
+        "No forms, iframes, embeds, PDFs, or external links present in the source.",
+        "Classified as 'reihe' (MaschenKino is named in the prompt's reihe list). No obvious duplicate among the already-migrated curated pages.",
+        "The intro sentence is also repeated as the first line of the body text; the team may want to dedupe if intro and text are rendered together."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "hoer-das-kino",
+      "title": "Hör das Kino – Erlebe den Film – Filmgenuss mit Audiodeskription",
+      "category": "koop",
+      "intro": "Kino ist mehr als ein Film – es ist ein gemeinsames Erlebnis! Wir laden Sie ein, den Kinosaal als Ort des Austauschs und der Begegnung zu entdecken.",
+      "text": "In Kooperation mit der Selbsthilfegruppe Blickpunkt wählen wir Filme aus, die mit Audiodeskription für Menschen mit Sehbeeinträchtigungen erlebbar sind. Uns ist es wichtig, dass jeder und jede teilnehmen kann: Begleitpersonen haben freien Eintritt, und der ermäßigte Eintrittspreis beträgt 4 EUR. Zudem rollen wir sprichwörtlich und ganz praktisch den Teppich aus – er dient zugleich als Leitsystem und erleichtert die Orientierung.\n\n## Partner\n\n[Blickpunkt Karlsruhe](https://www.blickpunkt-karlsruhe.de/)",
+      "hazards": [
+        "Removed an empty 'Filme' column (#filmlistengrid) that on the old site dynamically rendered the dated screenings of this program — no evergreen content there.",
+        "Removed the Blickpunkt partner logo image (wp-content/uploads/.../blickpunkt_logo_web-2.webp); kept it as a plain text link to https://www.blickpunkt-karlsruhe.de/. Re-upload the logo locally if the team wants the image back (no hotlinking per privacy policy).",
+        "External partner link kept: https://www.blickpunkt-karlsruhe.de/ (Selbsthilfegruppe Blickpunkt). Verify it is still live.",
+        "This is a recurring cooperation program (audio-description / accessible cinema with Selbsthilfegruppe Blickpunkt). Classified as 'koop'; team may prefer 'reihe'. Not an obvious duplicate of any already-migrated curated page."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "elternkinozeit-dein-kino-mit-baby",
+      "title": "ElternKinoZeit – Dein Kino mit Baby",
+      "category": "reihe",
+      "intro": "Junge Familien mit Babys und Kleinkindern bis zwei Jahre können gemeinsam ein entspanntes Kinoerlebnis in kindgerechter Atmosphäre genießen.",
+      "text": "Die „ElternKinoZeit” findet einmal im Monat an einem Donnerstag statt und ist speziell für junge Eltern konzipiert. Dabei wird ein Film aus unserem aktuellen Programm für Erwachsene ausgewählt.\n\nDie Vorführungen erfolgen in einem geschlossenen Rahmen in unserem gemütlichen Kino die „Box” mit 35 Sitzplätzen.\n\nDamit sich Eltern und Kinder wohlfühlen, werden die Filme mit reduzierter Lautstärke gezeigt, während der Kinosaal sanft gedimmt beleuchtet bleibt. Babys können auf mitgebrachten Decken liegen, schlafen oder krabbeln. Stillen und Füttern ist jederzeit möglich, und Eltern können nach Bedarf aufstehen und ihr Kind beruhigen.\n\nEin Wickeltisch steht zur Verfügung, und die Kinderwagen dürfen direkt im Kinosaal abgestellt werden.",
+      "hazards": [
+        "Removed stale 'Filme' section: a film-teaser tile linking to the old-site page /film/die-leisen-und-die-grossen-toene/ with poster image and dated screening run ('18.6. bis zum 20.6.'). On the new site, current screenings should come from the Showing/Film relation, not hardcoded teaser tiles.",
+        "The original paragraph used inline <br> line breaks within a single block; I split them into separate paragraphs. Verify the editorial team is fine with this paragraphing — wording is kept verbatim including the '„...”' typographic quotes.",
+        "Possible overlap with Filmbildung / family-programming pages on the new site, but ElternKinoZeit is classified as a 'reihe' per project rules and does not appear in the listed curated subpages (Junge Kinemathek/Cinéfête/I Like Films/CCAJ/Bilderbuchkino/KinoKnirpse), so likely not a duplicate — confirm placement with the team."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "bambi-in-karlsruhe",
+      "title": "Bambi in Karlsruhe",
+      "category": "reihe",
+      "intro": "Schon gewusst? Die ersten Bambis wurden in Karlsruhe verliehen! Am 6. März 1955, vor 70 Jahren, wurde der Bambi-Filmpreis erstmals in der Fächerstadt im Rahmen einer öffentlichen Verleihung überreicht.",
+      "text": "## Filmreihe zur Ausstellung [Filmstars in der Fächerstadt](https://stadtgeschichte.karlsruhe.de/stadtmuseum/sonderausstellungen/bambi) des Stadtmuseums\n\nBis 1964 zogen die Veranstaltungen tausende von Fans an und waren ein vielbeachtetes Event in der Filmwelt. Stars von Weltrang wie Rock Hudson oder Sophia Loren und nationale Größen wie Heinz Rühmann, Horst Buchholz und Liselotte Pulver weilten während der Bambi-Feier in der damals noch recht beschaulichen Stadt.\n\n**Das Stadtmuseum im Prinz-Max-Palais** lässt diese Ära in der Sonderausstellung „[Filmstars in der Fächerstadt. Die Bambi-Verleihungen in Karlsruhe](https://stadtgeschichte.karlsruhe.de/stadtmuseum/sonderausstellungen/bambi)\" vom 13. Februar bis 28. September 2025 wieder lebendig werden.\n\nDie **Kinemathek** begleitet die Ausstellung mit Sondervorstellungen von 9 Bambi-prämierten Filmen immer Mittwochs und Sonntags. Die Filmauswahl folgt den Hauptpreiskategorien.\n\n(Text und Flyer: Stadmuseum)",
+      "hazards": [
+        "Stale Programmdaten in der Beschreibung belassen: Ausstellungslaufzeit 13. Februar bis 28. September 2025 sowie '9 Bambi-prämierte Filme immer Mittwochs und Sonntags' — beim Redigieren auf Aktualität prüfen, ggf. entdaten.",
+        "Bildergalerie (2 wp-content-Bilder) und Archiv-Logo-Grafik (logo_archive.svg) wurden entfernt — bei Bedarf neu als Kirby-Files hochladen.",
+        "Externer Link zur Stadtmuseum-Ausstellungsseite (stadtgeschichte.karlsruhe.de) beibehalten — vor Veröffentlichung auf Erreichbarkeit prüfen, Seite könnte nach Ausstellungsende offline sein.",
+        "Tippfehler aus Quelle verbatim übernommen: 'Stadmuseum' (statt Stadtmuseum) in der Credit-Zeile.",
+        "Wahrscheinlich KEIN Duplikat bestehender kuratierter Seiten; eigenständige Kooperations-Filmreihe mit dem Stadtmuseum (Kooperation könnte alternativ als 'koop' eingeordnet werden)."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "in-memoriam-david-lynch",
+      "title": "In Memoriam David Lynch",
+      "category": "reihe",
+      "intro": "David Lynch, der im Januar eine Woche vor seinem 79. Geburtstag gestorben ist, war einer der originellste Filmemacher des amerikanischen Kinos und der größte Surrealist seit Buñuel. Sein Verständnis von Sehnsucht, Fantasie und Schrecken war unvergleichlich; die *Paris Review* nannte ihn „den Edward Hopper des amerikanischen Films\".",
+      "text": "Sein Debüt gab er mit dem experimentellen Eraserhead (1977), der in rußigem Schwarzweiß gedreht wurde und in einer aufgewühlten Industrielandschaft angesiedelt ist, in der sich ein Mann mit einem grabsteinförmigen Pompadour um sein wimmerndes Reptilienbaby kümmert. Von den ersten Bildern an entwarf Lynch ein Kino des Unterbewusstseins, das von seiner eigenen Traumlogik und seinen Alptraumbildern lebte. Es prägte alles, was er tat, einschließlich seines Meisterwerks Blue Velvet (1986), in dem ein unschuldiger junger Mann (Kyle MacLachlan) ein menschliches Ohr entdeckt und in die schäbige, gewalttätige Welt eines Psychopathen (Dennis Hopper) und einer terrorisierten Nachtclubsängerin (Isabella Rossellini) hineingezogen wird.\n\nDieser Film hat dem Archetypus des gemütlichen Kleinstadt-Amerikas einige starke Töne der Skepsis und Abscheu verliehen, die bis heute nicht verschwunden sind.",
+      "hazards": [
+        "Stale program sentence removed from the end of the body: 'Wir zeigen im Februar seine drei Mystery-Meisterwerke Blue Velvet, Lost Highway und Mulholland Drive.' — it names a specific (past) February edition. If the team wants to keep a screening reference, they should re-add it via current Showings, not as prose.",
+        "WP column layout: the source was a two-column group whose second column was empty; the empty wrapper was stripped. Only the prose from the first column survives.",
+        "German typographic quotes kept verbatim („…\"). The original right-hand quote mark was a straight curly close quote; preserved as-is.",
+        "Likely NOT a duplicate of existing curated pages — this is a one-off In-Memoriam / tribute piece, not org/festival/Filmbildung evergreen content. Classified as 'reihe' (director-tribute film series); the team may prefer to file it under news/aktuelles if such a bucket exists."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "art-movie-night",
+      "title": "Art Movie Night",
+      "category": "koop",
+      "intro": "Die Art Movie Night ist eine Kooperation mit dem Kunstmuseum Karlsruhe und soll als Begleitung und Vertiefung für die Ausstellungen dienen.",
+      "text": "Das Kinoticket ist auch Eintrittskarte für die Ausstellung – und umgekehrt.\n\n## Partner\n\n[Kunstmuseum Karlsruhe](https://kunstmuseum-karlsruhe.de/)",
+      "hazards": [
+        "Removed an edition-specific exhibition description (the 'RATATATAA' / Özlem Günyol & Mustafa Kunt block) from the lead paragraph — it describes one current Kunstmuseum exhibition, not the evergreen series. Team should re-add per-edition copy when relevant.",
+        "Removed empty 'Kommende Veranstaltungen' heading (no content) and the whole 'Vergangene Veranstaltungen' section, which was a film-teaser tile for 'Burning Days' linking into the old-site /film/burning-days/ page.",
+        "Removed the Partner logo image (wp-content webp of the Kunstmuseum logo); kept the partner as a plain external link to kunstmuseum-karlsruhe.de instead.",
+        "This is a cooperation programme (koop). Verify it is not better placed as an Event/Showing series rather than a standalone editorial page; the new site has no existing 'Art Movie Night' page, so this is likely NOT a duplicate.",
+        "Decoded HTML entities: „ (&#8222;), & (&amp;), – (&#8211;)."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "klima-krisen-utopien",
+      "title": "Klima | Krisen | Utopien",
+      "category": "reihe",
+      "intro": "Der weltweite Klima-Umbruch ist nach wissenschaftlicher Erkenntnis nicht mehr rückgängig zu machen, im besten Fall noch zu begrenzen. Trotzdem wird er von den politischen Entscheidungsträgerinnen des globalen Nordens verharmlost und zum Teil sogar bestritten, während der globale Süden die Folgen der Klimakatastrophe weitgehend unverschuldet überproportional zu tragen hat.",
+      "text": "Den damit zusammenhängenden Themen wollen wir in Dokumentar- und Spielfilmen immer am letzten Mittwoch im Monat um 19.00 Uhr nachgehen und im Anschluss mit dem Publikum und Gästen diskutieren.\n\nWer sich an der Reihe beteiligen möchte, schreibt bitte an: kimlotte.stoeber@kinemathek-karlsruhe.de\n\n(Text: Filmgruppe Klima | Krisen | Utopien)",
+      "hazards": [
+        "Entfernt: Sektion \"Kommende Veranstaltungen\" mit einem Grid aus vier datierten Film-Teasern (Sadakos Kraniche, Suiten für eine verwundete Welt, Das Klimamonster-Mini-Filmfestival, Die Eiche - Mein Zuhause), die alle auf alte /film/<slug>/-Seiten verlinkten und veraltete Daten (bis 21.6., 24.6., 2.7., bis 29.7.) trugen. Diese Screenings müssen ggf. als neue Showings angelegt werden.",
+        "Entfernt: Sektion \"Kooperationspartner\", die ausschließlich aus einem Logo-Grid (DFG, Klimabündnis Karlsruhe, TfF Karlsruhe, WIKI, Klima-Aktion Karlsruhe, Filme-Workshops-Forschen, ICN, kat, Psy4F u.a.) ohne weiteren Text bestand. Ein Logo verlinkte auf den externen Partner https://antikapklimaka.wordpress.com/ — bei Bedarf als Link/Partner-Hinweis wieder aufnehmen.",
+        "Kontakt-Mailadresse kimlotte.stoeber@kinemathek-karlsruhe.de ist eine Teilnahme-/Mitmach-Adresse der Filmgruppe (kein Formular) und wurde verbatim übernommen — bitte prüfen, ob sie noch aktuell ist.",
+        "Reihe \"Klima | Krisen | Utopien\" scheint auf der neuen Seite noch nicht kuratiert zu sein; Dublettenrisiko gering."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "koop-kino",
+      "title": "Koop – Kino",
+      "category": "koop",
+      "intro": "Im Koop-Kino arbeiten wir eng mit Vereinen, Initiativen und Organisationen zusammen und gestalten gemeinsam Filmabende, die über den Kinosaal hinaus wirken.",
+      "text": "Ob thematisch relevante Filme mit anschließender Diskussion, besondere Premieren oder cineastische Beiträge zu gesellschaftlichen Fragen – diese Veranstaltungen schaffen Raum für Austausch und Begegnung. „Koop-Kino“ steht für Partnerschaft, Vielfalt und die Kraft des Films, Menschen zusammenzubringen.",
+      "hazards": [
+        "Removed two large dated program grids: 'Kommende Veranstaltungen' and 'Vergangene Veranstaltungen' — 67 film teaser tiles in total (wp_theatre_prod), each linking to old-site /film/<slug>/ pages with dates, technical specs and stills. All stale program state; none of it is evergreen.",
+        "Removed external event links that were embedded inside the dropped dated tiles (triangel.space open-air/WWN events, freeride-filmfestival.com) — they belong to specific past/upcoming screenings, not to the evergreen description.",
+        "No forms, no iframes/video embeds, no PDF links were present in the source.",
+        "The original post had only ONE evergreen prose paragraph (the lead). I split it: first sentence -> intro, remaining two sentences -> text. Editorial team may prefer it as a single block.",
+        "Possible overlap: this is a cooperation programme similar in spirit to the curated 'Projekte' and partner pages on the new site — team should confirm Koop-Kino warrants its own page vs. being folded into an existing cooperation/partner section."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "jubilaeum",
+      "title": "50 Jahre Kinemathek Karlsruhe e. V.",
+      "category": "organisation",
+      "intro": "",
+      "text": "## „Andere Filme anders zeigen“\n\nVideo ansehen: https://vimeo.com/1088038365/367e160ad8\n\nTrailer von Alexander Thelen\n\nDas war das Motto der Gründerinnen der Kinemathek Karlsruhe im Jahr 1974, sowie vieler anderer kommunaler Kinos in Deutschland in den frühen 1970er Jahren. In Karlsruhe taten sich vor 50 Jahren einige junge Menschen zusammen, um in erster Linie Filme zu zeigen, die es so nicht in den Karlsruher Kinos zu sehen gab, die jedoch über Verleihe verfügbar waren.\n\nDas erste Programm der Kinemathek vom März 1974 zeigt, dass man hungrig war nach Bildern, die etwas mit der deutschen Wirklichkeit zu tun hatten. Nicht nur Westernfilme aus Übersee, die es in den Lichtspielpalästen der Stadt zuhauf gab. Filme über die Lebenswirklichkeit in Ost und West, vor allem über alternative Lebens- und Liebesformen wollte man sehen. Eben weil Bilder auch Vorbilder sind. Es ging um neue Seherfahrungen für jeden Einzelnen und um den Austausch und die Diskussion über das gemeinsam Erlebte im Kinosaal. Die Gründung eines Kommunalen Kinos in Karlsruhe fand großen Anklang und war damals einer der Grundsteine für die freie Kulturszene in der Stadt. Auch 50 Jahre später sind wir in der Kinemathek davon begeistert, dass alte und neue Filme Perspektiven, Erfahrungen und Erkenntnisse vermitteln können. Und dass sie Menschen zusammenbringen und zum Dialog anregen können. Kommunale Filmarbeit will nicht nur „andere“ Filme zeigen, sondern auch dazu einladen, an der Auswahl der Filme mitzuwirken.\n\nSeit 50 Jahren lebt die Kinemathek gerade vom ständigen Dialog mit vielen Kulturvereinen, Institutionen und engagierten Gruppen der Karlsruher Stadtgesellschaft. Anlässlich unseres Jubiläums möchten wir deshalb das vorliegende Filmprogramm präsentieren, das in Zusammenarbeit mit 50 Persönlichkeiten und Freundeskreisen aus der Geschichte der Kinemathek entstanden ist und 50 Filme umfasst. Die Auswahl, welche Filme wir zu diesem runden Geburtstag zeigen möchten, haben wir an Filmpatinnen übergeben. Wir haben ehemalige Mitarbeiterinnen, Gründerinnen des Kinos, unsere treuen Kooperationspartner*innen, langjährige Kinogänger*innen, Vereinsmitglieder und das aktuelle Team gebeten eine Patenschaft für einen Film zu übernehmen, den wir dann im Rahmen des Jubiläums wieder aufführen. Allerdings wollten wir uns nicht an der gesamten Filmgeschichte bedienen, sondern an Filmen aus dem 50-jährigen Programm der Kinemathek. Dabei ging es uns nicht um Eigenwerbung, sondern darum, persönliche Kinoerlebnisse mit der Geschichte und Programmarbeit der Kinemathek zu verknüpfen. Das Jubiläum ist also nicht nur ein Anlass zum Feiern, sondern auch zum Forschen: Wie wurde damals Kino gemacht – wie wollen wir heute Kino machen?",
+      "hazards": [
+        "Replaced a Vimeo iframe embed (player.vimeo.com/video/1088038365?h=367e160ad8) with a plain link to avoid third-party requests. I converted it to the public watch URL https://vimeo.com/1088038365/367e160ad8 — team should verify this resolves; the trailer is by Alexander Thelen.",
+        "Dropped the entire stale 'Filme' section: a grid of ~46 film-teaser tiles each linking to old-site /film/<slug>/ pages (e.g. Open Archive, Dr. Jekyll and Mr. Hyde, 3 Women, M – Eine Stadt sucht einen Mörder, …, Die Sammler und die Sammlerin), with per-film director/year/runtime/format lines. This was dated program state for the 2024 jubilee edition and does not belong on an evergreen page; the individual films, if wanted, now live as Film archive entries in the new site.",
+        "Likely DUPLICATES already-migrated content: the new site already has an 'Über uns' page. This 50-Jahre-Jubiläum text is org/history prose — check whether it overlaps with or should be folded into 'Über uns' rather than kept as a standalone post.",
+        "No Contact Form 7 / Ninja Forms, no PDF links, and no other embeds were present in the source.",
+        "The verbatim text uses asterisk gender notation (Kooperationspartner*innen, Kinogänger*innen). In Kirbytext/markdown a lone '*' is safe here, but if rendering ever italicizes across these, the team may need to escape them — left verbatim as required."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "faire-woche",
+      "title": "Faire Wochen",
+      "category": "koop",
+      "intro": "Von Mitte September bis Ende Oktober können alle Interessierten an offenen Veranstaltungen rund um den Fairen Handel und das diesjährige Motto „Fair. Und kein Grad mehr\" teilnehmen.",
+      "text": "Die Kinemathek Karlsruhe beteiligt sich an den Fairen Wochen und zeigt im Rahmen der Aktion Filme in Kooperation mit verschiedenen Partnern, jeweils mit anschließendem Gespräch.\n\nMehr Infos zu den Fairen Wochen: [www.karlsruhe.de/themen/faire-woche-2024](https://www.karlsruhe.de/themen/faire-woche-2024)",
+      "hazards": [
+        "Removed the dated screening list (20.09.-28.10.) of specific films: Das Kombinat - Der Traum von Veränderung, The Chocolate War, Power to the Children, Green Border, Outgrow The System - these are stale per-edition program entries; editorial team should re-link current screenings via Showings if the program runs again.",
+        "The lead sentence keeps the year-specific motto 'Fair. Und kein Grad mehr' (2024 edition). Editorial team should update or genericize the motto for future editions.",
+        "External link kept points to a year-specific page (karlsruhe.de/themen/faire-woche-2024); verify/update the URL for the current edition.",
+        "I added a brief connective sentence ('Die Kinemathek Karlsruhe beteiligt sich...zeigt im Rahmen der Aktion Filme in Kooperation mit verschiedenen Partnern, jeweils mit anschließendem Gespräch.') to summarize the dropped film list. This is paraphrase, not verbatim source prose - editorial team should review/replace.",
+        "Source had an empty 'Veranstaltungen' heading column (second WP column) with no content - dropped as empty wrapper.",
+        "Cooperation partners named in the dropped list (Gemeinwohl-Ökonomie Karlsruhe, Weltladen Karlsruhe, INKOTA Berlin, GloW Karlsruhe e.V., Brot für die Welt, SIMAMA - STEH AUF e.V.) are not preserved in the evergreen text; preserve if a partner credit is wanted.",
+        "Likely a cooperation/Aktionswochen page; not an obvious duplicate of existing curated pages, but check whether it overlaps with a broader Kooperationen listing."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "klimamonster",
+      "title": "Klimamonster",
+      "category": "projekt",
+      "intro": "Jeden Mittwoch von 15:00-17:00 gibt es tolle Kit Klimamonster Workshops in der Kinemathek rund um's Thema Film, Animation, Natur, Klima und Selbstwirksamkeit!",
+      "text": "Wir filmen, animieren, gucken Filme, basteln, zeichnen Storyboards, spielen und produzieren unsere eigenen Klimamonstertrickfilme!\n\nHabt ihr tolle Ideen für Storys, die ihr schon immer mal auf der großen Leinwand sehen wolltet? Wollt ihr eure Filme auf Social Media verbreiten? Möchtet ihr Geschichten erzählen, wie wir die Welt besser und schöner machen können?\n\nDann kommt in die Kinemathek und entwickelt wilde, monsterstarke Ideen!\n\nAnmeldung unter klimamonster@kinemathek-karlsruhe.de\n\nMehr übers Klimamonster auf [klima-kit.de/AKTIONEN/](https://www.klima-kit.de/AKTIONEN/)\n\n## Ist ein Projekt von\n\nParentZ, KIT BNE-Akteur\n\n## Dank der Unterstützung von\n\n[Baden-Württemberg Stiftung](https://www.bwstiftung.de/de/), [Heidehof Stiftung](https://www.heidehof-stiftung.de/)",
+      "hazards": [
+        "Removed the specific edition start date 'Ab dem 18.09.24' from the lead — kept the evergreen 'jeden Mittwoch von 15:00-17:00' schedule, but the team should confirm the recurring time/day still applies before publishing.",
+        "Removed two photo-gallery images (Instagram workshop photos from wp-content/uploads/2024/08) — re-add fresh images if desired.",
+        "The 'Ist ein Projekt von' section was a logo gallery with NO links (parentz.png, Kit-BNE-Akteur.png) — I transcribed the partner names (ParentZ, KIT BNE-Akteur) as plain text; verify exact spelling/branding.",
+        "The 'Dank der Unterstützung von' logos linked to bwstiftung.de and heidehof-stiftung.de — I converted them to named partner links (Baden-Württemberg Stiftung, Heidehof Stiftung); confirm the funder names are correct.",
+        "Signup is a plain email (klimamonster@kinemathek-karlsruhe.de), kept as-is — no Contact Form 7 / Ninja Forms was present, so no form replacement was needed.",
+        "Emojis from the original lead line (🖍✂️🎞✏️📽💻💚🌎👧🏽👦🏼🧒🏼🧑🏾‍🦱😈) were dropped as decorative; re-add if the team wants the playful tone.",
+        "Likely related to the Projekte hub on the new site, but Klimamonster is NOT among the already-mentioned projects (EXPECT_art, Quartierskino, Doppelbelichtung, Nachklang) — this is new content, low duplication risk; could be filed under Filmbildung/Junge Kinemathek instead of Projekte given it's a children's education workshop."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "western-am-sonntag",
+      "title": "Western am Sonntag",
+      "category": "reihe",
+      "intro": "…halten wir für eine großartige Idee. Jeden Sonntagnachmittag spielen wir deshalb eine Auswahl dieses Ur-Kino-Genres.",
+      "text": "",
+      "hazards": [
+        "Removed per-edition film lineup (Whity, Deadlock, Meek's Cutoff, Emigranten) — these were specific current-program descriptions, i.e. stale dated program state, not evergreen series description. Editorial team may want to re-add a generic example or rotating lineup blurb.",
+        "Intro sentence begins with an ellipsis ('…halten wir…'); in the original WP page it continued from the page title/heading ('Western am Sonntag…'). Kept verbatim per the no-paraphrase rule — team may want to rephrase into a standalone sentence.",
+        "No forms, iframes, PDFs, sponsor lines, or teaser links were present. No HTML entities needed decoding.",
+        "Possible overlap: this is a recurring 'reihe' that may already be represented in the new site's curated program/Spielplan area — verify it does not duplicate an existing series page."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "perlen",
+      "title": "Perlen…",
+      "category": "reihe",
+      "intro": "Die Perlen sind Double Features, welche wir um ein Thema oder Genre herum zusammengestellt haben und die samstags zur Prime Time laufen werden.",
+      "text": "Double Features sind ein frühes Phänomen der US-Filmindustrie, bei dem die Kinos zwei Filme zum Preis von einem zeigen, ursprünglich aufgrund einer Studiopraxis, die als „Block Booking“ bekannt war, bei der die großen Hollywood-Studios von den Kinos verlangten, \"B-Filme\" zusammen mit den begehrten \"A-Filmen\" zu kaufen. Dies wurde den Studios bald untersagt, aber der nostalgische und kuratorische Reiz bleibt bis heute bestehen, sodass viele Kinos und Kinofans dem Double Feature noch einiges abgewinnen können.",
+      "hazards": [
+        "Removed a grid of 5 cover-card teaser tiles linking to old-site double-feature pages: New Hollywood (/new-hollywood-double-feature/), Yakuza (/yakuza-double-feature/), Kind Sein (/kind-sein-double-feature/), Junge Frauen (/junge-frauen-double-feature/), Überwachung (/ueberwachung-double-feature/). These are stale per-edition teasers; the actual double-feature editions should become Showings/Reihen in the new site.",
+        "Removed all cover-block background images (wp-content AVIF assets) and their inline aspect-ratio styles.",
+        "The two paragraphs were joined with <br>; kept as a single paragraph of evergreen body. No HTML entities needed decoding (curly quotes already literal).",
+        "Possible overlap: this 'Perlen' double-feature series concept may belong with other recurring Reihen on the new site — check it does not duplicate an existing series/Reihe page before publishing."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "ueberwachung-double-feature",
+      "title": "Überwachung Double Feature",
+      "category": "reihe",
+      "intro": "Beim finalen Double Feature im August verschwimmen die Grenzen zwischen Realität und Dystopie.",
+      "text": "Die Firma Palantir Technologies aus Watching You – Die Welt von Palantir und Alex Karp ist so verschwiegen wie mysteriös. Ihre Datenanalyse-Software Gotham befähigt Staaten zur umfassenden Überwachung ihrer BürgerInnen.\nIn Steven Spielbergs Minority Report sind die Pre-Cogs in der Lage, Gedanken an vorsätzliche Morde aufzuschnappen und die Polizei zu warnen, die die potenziellen Täter verhaftet, bevor die Morde begangen werden können. Die Handlung dreht sich um eine seltene Panne in den Visionen der Pre-Cogs. Obwohl die Pre-Cogs sich nie irren, sind sie manchmal … nicht einer Meinung.",
+      "hazards": [
+        "Removed stale dated booking link: 'Double Feature – Samstag, 31.8. ab 18 Uhr' pointing to kinotickets.express (https://kinotickets.express/karlsruhe_kinemathek/booking/34271). This dated screening belongs in the new Showing/program model, not in an evergreen post.",
+        "Removed a wp-block-separator (<hr>) and empty group wrappers.",
+        "Intro retains the phrase 'im August' (stale date reference); the team may want to neutralize it for an evergreen description.",
+        "This is a themed double feature (Watching You – Die Welt von Palantir und Alex Karp + Minority Report); consider modeling the films as Films and the pairing as Showings rather than a standalone post. Low duplication risk against existing curated pages."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "junge-frauen-double-feature",
+      "title": "Junge Frauen Double Feature",
+      "category": "reihe",
+      "intro": "Die Frauen aus diesem Double Feature kommen aus dem Senegal und aus einem Shtetl in Polen und leisten jeweils ihre eigene Form von Widerstand.",
+      "text": "In Black Girl wird eine junge Senegalesin aus Dakar eingeladen, als Gouvernante nach Frankreich mitzukommen. Doch im Westen ist sie für alle bloß noch „das schwarze Mädchen“. Ihrer Freiheit und ihrer Würde beraubt, bleibt ihr ein letzter Akt des Widerstands. Ousmane Sembènes Langfilmdebüt war einer der ersten afrikanischen Spielfilme überhaupt.\n\nDie junge Yentl lebt in einem Schtetl in Polen und wird von ihrem Vater heimlich im Talmud unterrichtet, obwohl die Bräuche ihrer Gemeinde ein solches Studium für Frauen verbieten. Nach dem Tod ihres Vaters schneidet sie sich die Haare kurz, kleidet sich wie ein Mann und besucht eine jüdische Religionsschule. Yentl basiert auf dem gleichnamigen Theaterstück von Leah Napolin und Bashevis Singer und wurde von der legendären Barbra Streisand inszeniert.",
+      "hazards": [
+        "Removed dated booking link 'Double Feature – Samstag, 24.8. ab 18 Uhr' pointing to kinotickets.express (kinotickets.express/karlsruhe_kinemathek/booking/34270) — stale program state; the screening should be re-created as a Showing/Event in the new CMS if it recurs.",
+        "Removed a film-teaser tile (wpt_listing) for 'Yentl' (Barbra Streisand, USA 1983 | 137 Min. | OmU) linking to the old-site page /film/yentl/ and its wp-content image. The two films (Black Girl / Yentl) should exist as Film entries in the new archive and be linked there.",
+        "Decoded HTML entities: typographic quotes „ “ and the en dash –.",
+        "This is a thematic double feature (two women's-resistance films) — classified as 'reihe'. Verify it is not better filed elsewhere; it does not appear to duplicate an existing curated page."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "kind-sein-double-feature",
+      "title": "Kind Sein Double Feature",
+      "category": "reihe",
+      "intro": "Das Double Feature Kind sein zeigt Licht und Schatten durch die Augen von Kindern.",
+      "text": "In der Kinodoku Das Land der verlorenen Kinder kämpft Carolina gegen den Hunger und organisiert eine Nachbarschaftshilfe. Zum Schutz ihrer Tochter schickt sie diese in ein Kinderheim von Ordensschwestern; eine Oase inmitten von Gewalt und Entbehrung. Kiaras Sohn ist Mitglied der Tribu Gang und steht an der Schwelle, selbst zum Mörder zu werden.\n\nIn Petite Maman fährt die achtjährige Nelly mit ihren Eltern in das Haus der geliebten, gerade verstorbenen Großmutter, um es auszuräumen. Während ihr Vater am Haus arbeitet, streift Nelly durch die Wälder. Dort trifft sie auf ein Mädchen, das ihr wie ein Ei dem anderen gleicht. Schnell entwickeln die beiden eine innige Freundschaft und teilen bald ein mystisches Geheimnis. Unaufgeregt und dabei voller Poesie ist der Film eine Zeitreise durch die Augen eines jungen Mädchens.",
+      "hazards": [
+        "Removed stale dated screening/ticket link: 'Double Feature – Samstag, 17.8. ab 18 Uhr' pointing to kinotickets.express (Mars EDV booking). A future double-feature edition would need a fresh Showing in the program.",
+        "Removed a decorative <hr> separator at the end of the post.",
+        "Original 'Kind sein' double feature pairs two specific films (Das Land der verlorenen Kinder, Petite Maman). Classified as 'reihe' (themed double feature); the editorial team may instead model these as individual Films + dated Showings rather than an evergreen text page.",
+        "No external/PDF links remain; no forms or third-party embeds were present in the source."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "yakuza-double-feature",
+      "title": "Yakuza Double Feature",
+      "category": "reihe",
+      "intro": "In diesem Doppelprogramm tauchen wir ein in die Welt der japanischen Gangsterfilme, auch bekannt als Yakuzafilme.",
+      "text": "In Battles Without Honor and Humanity liegt das Nachkriegs-Japan in Trümmern. Gewalt und Kriminalität sind an der Tagesordnung – es sind die Yakuza, die die Straßen fest im Griff haben. Der Genreklassiker von 1973 beruht auf wahren Begebenheiten.\n\nIm humorvollen und empathischen Yakuza-Drama Under the Open Sky hat der ehemalige Yakuza-Gangster Mikami mehr als die Hälfte seines Lebens im Gefängnis verbracht. Als er entlassen wird, wagt er erste zaghafte Schritte zurück in die Gesellschaft und macht sich auf die Suche nach seiner Mutter.",
+      "hazards": [
+        "Removed a dated booking link/program state: 'Double Feature – Samstag, 10.8. ab 18 Uhr' linking to the old ticketing system (kinotickets.express/karlsruhe_kinemathek/booking/34268). The actual screening should be modelled as a Showing/Event in the new CMS, not as prose.",
+        "Removed a trailing horizontal separator (wp-block-separator) and empty WP group wrappers.",
+        "The two films (Battles Without Honor and Humanity, 1973; Under the Open Sky) may warrant Film + Showing entries in the new structure rather than living only as prose in this reihe post.",
+        "Split the single source paragraph into an evergreen intro plus body; wording is otherwise verbatim with the <br> turned into a paragraph break."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "new-hollywood-double-feature",
+      "title": "New Hollywood Double Feature",
+      "category": "reihe",
+      "intro": "Ein Double Feature zu Ehren einer der vielleicht folgenreichsten Epoche des US-amerikanischen Kinos. Von Mitte der 1960er bis Anfang der 1980er Jahre gelang es FilmemacherInnen des New Hollywood sehr persönliche und sogar experimentelle Filme für Erwachsene ins Kino zu bringen. In der Folge zerbrach das alte Hollywood-Studiosystem.",
+      "text": "Mit ihrem ersten und einzigen Spielfilm Wanda gelang Loden ein bahnbrechendes Werk des amerikanischen Independent-Kinos. Wanda verlässt ihren Mann, verliert das Sorgerecht für ihre Kinder und treibt sich allein in schäbigen Bars und Motels herum, wo sie einer Reihe gefühlloser Männer zum Opfer fällt – darunter ein Bankräuber, der sie in seinen nächsten kriminellen Plan einspannt.\n\nEasy Rider ist der Blockbuster der Gegenkultur. Das Regiedebüt des ehemaligen Teenie-Stars Dennis Hopper läutete die Ankunft einer neuen Stimme im Film ein, die sich wütend gegen den Mainstream stellte. Nach der Reise quer durchs Land sollte der amerikanische Roadtrip nie wieder derselbe sein.",
+      "hazards": [
+        "Removed dated program framing: the original opener tied the series to 'Samstag, 3. August ... ab 18 Uhr'. The intro was reworded only to drop the date ('Am Samstag, 3. August starten wir mit'); the evergreen New Hollywood description is kept verbatim. Team should re-check.",
+        "Removed stale ticket/booking link to kinotickets.express (Mars EDV): 'Double Feature – Samstag, 3.8. ab 18 Uhr' (https://kinotickets.express/karlsruhe_kinemathek/booking/34241).",
+        "Removed a film-teaser tile (image + link) pointing to the old-site page https://kinemathek-karlsruhe.de/film/wanda/ with the spec line 'Barbara Loden, USA 1970; 103' OmU'. This screening corresponds to a Film/Showing in the new CMS; link/credit data should be reattached there, not in body prose.",
+        "Second film (Easy Rider) had no teaser tile in the source; only Wanda did.",
+        "Possible duplication: as a recurring/themed series this may belong under an existing curated structure; verify it is not already represented before publishing."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "expect_art",
+      "title": "EXPECT_art",
+      "category": "projekt",
+      "intro": "Wie können kulturelle Bildungsangebote helfen, soziale Ungleichheit ins Bewusstsein zu bringen? Mit dieser Frage befasst sich das Projekt „Exploring and Educating Cultural Literacy through Art” (EXPECT_ART), das von der Europäischen Union im Rahmen des Programms „Horizont Europa” für drei Jahre mit rund drei Millionen Euro gefördert wird.",
+      "text": "## EXPloring and Educating Cultural literacy Through Art\n\nDaran beteiligt ist auch der Arbeitsbereich „Interkulturelle Bildung” vom Institut für Erziehungswissenschaft der Rheinland-Pfälzischen Technischen Universität Kaiserslautern-Landau (RPTU). Koordiniert wird es an der Syddansk Universitet in Dänemark (SDU), dabei sind insgesamt sechs Universitäten und sechs Bildungseinrichtungen aus sechs europäischen Ländern.\n\nDas Projekt zielt darauf ab, kritische kulturelle Kompetenzen durch Kunst und den Einsatz von Kunst in der Bildung innerhalb und zwischen verschiedenen Bildungseinrichtungen in Europa zu fördern. Ziel ist es, soziale Ungleichheit zu thematisieren und wahrzunehmen. Die sechs beteiligten Universitäten arbeiten dazu jeweils mit einer Bildungseinrichtung vor Ort zusammen. Eingebunden in Forschung und Bildungsangebote werden zudem die Stadteile, in denen die Bildungseinrichtungen ihren Sitz haben.\n\nDie Kinemathek in Karlsruhe kooperiert mit der RPTU Rheinland-Pfälzische Technische Universität Kaiserslautern-Landau. Gemeinsam werden sie ein Bildungsangebot für Kinder und Jugendliche entwickeln. Um dieses Angebot zu erforschen, kommen ethnografische partizipative Methoden zum Einsatz: Jugendliche, Lehrkräfte und Bildungsarbeiterinnen und -arbeiter forschen gemeinsam mit den Forschenden.\n\nBei dem Material, das Gegenstand der Forschung ist, geht es um beobachtete Handlungen, aufgenommene Gespräche, Ergebnisse der Angebote et cetera – einfach gesagt: alles, worin Kultur sichtbar wird. Ziel dabei ist es, zu verstehen, inwieweit wir alle in unserem Alltag und unserem kulturellen Handeln in Ungleichheitsverhältnisse eingebunden sind.\n\nDas Landauer Team entwickelt im Projekt für alle Partnerinnen und Partner ein Reflexionsmodell für die Forschung. Dies ist wichtig, da die Reflexion von Methoden und des eigenen Standpunkts ein Gütekriterium von partizipativer Forschung darstellen. Dazu wird es vom 18. bis 19. September einen Workshop an der RPTU in Landau geben.\n\nFerner werden die Arbeitsgruppen eine Online-Plattform erstellen, die verschiedene Aktivitäten zur kulturellen Bildung anbieten wird. Diese sollen auf die Bedürfnisse verschiedenen Zielgruppen zugeschnitten werden. Ziel dabei ist es unter anderem, kulturelle Kompetenzen in Bezug auf die Reflexion sozialer Ungleichheit von Kindern, Jugendlichen, Lehrkräften und der interessierten Öffentlichkeit zu verbessern. Auch neue Lehrveranstaltungen an den beteiligten Universitäten sind in Planung sowie ein Handbuch und politische Empfehlungen.\n\nKoordiniert wird das Vorhaben an der Syddansk Universitet in Odense in Dänemark, beteiligt sind außerdem fünf weitere Universitäten und sechs Einrichtungen aus der Kultur- und Kreativwirtschaft aus Dänemark, Deutschland, Ungarn, Polen, Slowenien und Spanien. Das Projekt ist im Januar gestartet. Zum Auftakt kamen die Beteiligten in Dänemark zusammen. Für die Bildungseinrichtungen wird im Rahmen des Projekts jeweils eine Stelle eingerichtet. Es ist eine enge Zusammenarbeit der Universitäten mit diesen angestrebt.",
+      "hazards": [
+        "LIKELY DUPLICATE: the new site's 'Projekte' page already mentions EXPECT_art. Confirm whether this standalone page is still wanted or should redirect/merge into Projekte.",
+        "Dated reference kept in verbatim prose: 'Dazu wird es vom 18. bis 19. September einen Workshop an der RPTU in Landau geben.' No year given; this may be stale (past workshop). Editorial team should decide whether to keep, generalise, or remove.",
+        "Time-relative phrasing kept verbatim: 'Das Projekt ist im Januar gestartet.' May read as outdated depending on publish date.",
+        "Dropped a leading WP spacer block (height:100px) and the duplicate h2 'EXPECT_art' that just repeated the page title.",
+        "Minor inconsistency in the source (kept verbatim, not corrected): intro says 'sechs Universitäten', closing paragraph says 'fünf weitere Universitäten'; 'Stadteile' (typo for 'Stadtteile') and 'verschiedenen Zielgruppen' are also as in the original."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "klimakatastrophe-krieg-und-sci-fi-filme",
+      "title": "Klimakatastrophe, Krieg und Sci-Fi-Filme",
+      "category": "koop",
+      "intro": "Vorträge, Diskussionen und Filme mit der Physikerin, Philosophin und Publizistin Annette Schlemm.",
+      "text": "## Klima, Krieg und Science Fiction\n\nIst die Menschheit noch zu retten? – Seit über 50 Jahren verbraucht die Menschheit jedes Jahr mehr natürliche Ressourcen als die Erde in einem Jahr regenerieren kann. Im letzten Jahr betrug die menschenverursachte Klimaerwärmung durchgängig mehr als 1,5 Grad im Vergleich zum vorindustriellen Zeitalter. Situationen, die es in der Menschheitsgeschichte im globalen Maßstab zuvor noch nie gegeben hat. Zunehmende Verteilungskämpfe um die endlich vorhandenen Rohstoffe, Krieg und Vertreibung in dramatisch zunehmendem Maße sind die Folgen.\n\nGibt es mit „Climate Engineering“ technische Lösungen die Klimakatastrophe noch zu stoppen? Droht ein globaler Kampf der Weltmächte um die verbleibenden fossilen Ressourcen? Gibt es noch Chancen, dass die Menschheit ihre Lebensweise global radikal ändert um die Klimaerwärmung doch noch zu begrenzen? Wie könnte dann eine für alle Menschen lebenswerte Zukunft aussehen? Diese Fragen wollen die Kinemathek Karlsruhe und die Gruppe Karlsruhe der Deutschen Friedensgesellschaft – Vereinigte Kriegsdienstgegnerinnen DFG-VK mit der Physikerin, Philosophin und Publizistin Annette Schlemm an drei Abenden diskutieren und im Anschluss Science-Fiction-Filme aus unterschiedlichen Epochen anschauen. (Stefan Lau, DFG-VK Gruppe Karlsruhe)\n\nEine Kooperation der Kinemathek und Deutsche Friedensgesellschaft – Vereinigte Kriegsdienstgegnerinnen DFG-VK Gruppe Karlsruhe\n\nAnnette Schlemm ist Physikerin und Philosophin und beschäftigt sich seit über 30 Jahren mit dem Klimawandel. Neben ihrer beruflichen Tätigkeit als Physikerin, u. a. im Bereich der Photovoltaik, veröffentlichte sie Vorträge und Studien auf ihrem Blog Philosophenstübchen, schrieb bisher drei Bücher über die Entwicklung in Natur und Gesellschaft sowie Wissenschaftstheorie.\n\nBuchauswahl: [Climate Engineering (mandelbaum.at)](https://www.mandelbaum.at/buecher/annette-schlemm/climate-engineering/)",
+      "hazards": [
+        "Dropped the dated 'Das Programm' block (3 fixed dates 11.-13. April with per-evening lectures + films 'Der schweigende Stern', 'Silent Running', 'Beasts of the Southern Wild' and times) — stale program state. Re-add as Showings if the series recurs.",
+        "Dropped the WP Theatre film-teaser grid (8 tiles linking to old-site /film/ pages: Buchvorstellung: Klimawende jetzt!, ANNA – A Tale for Tomorrow, Vortrag '80 Jahre Atomzeitalter', Schwarzer Regen, Klimamonster, Das Salz der Erde, Sadakos Kraniche). These are old program links and were not migrated.",
+        "Kept one external partner link: https://www.mandelbaum.at/buecher/annette-schlemm/climate-engineering/ (publisher book page). Verify it still resolves.",
+        "Removed the Annette-Schlemm portrait image (wp-content PNG); the figcaption bio text was kept as evergreen prose. Editorial team may want to re-upload a portrait via the new media field.",
+        "Category set to 'koop' because the post explicitly states it is a cooperation with DFG-VK Gruppe Karlsruhe. Not a duplicate of an existing curated page.",
+        "No forms or third-party embeds (iframes/YouTube/Vimeo) present in source — nothing to replace there."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "masel-talk",
+      "title": "Masel Talk",
+      "category": "reihe",
+      "intro": "Seit November 2023 widmet sich die Reihe Masel Talk einmal im Monat der Vielfalt jüdischer Kultur im Film.",
+      "text": "## Jüdische und israelische Filmkultur\n\nSeit November 2023 widmet sich die Reihe Masel Talk einmal im Monat der Vielfalt jüdischer Kultur im Film. Gezeigt werden sowohl aktuelle Produktionen aus Israel, als auch internationale Werke, die jüdische Themen, Geschichte und Gegenwart ins Zentrum stellen. Ziel der Reihe ist es, neue filmische Perspektiven zu eröffnen, die Auseinandersetzung mit Religion, Identität und Erinnerung zu fördern und einen Raum für Diskussionen zu schaffen.\n\n## Regelmäßige Partner\n\n- [DIF Karlsruhe](https://www.difkarlsruhe.org/)\n- [Deutsch-Israelische Gesellschaft Mittelbaden](https://mittelbaden.deutsch-israelische-gesellschaft.de/)\n- [JLK e.V.](https://jlk-ev.de/)",
+      "hazards": [
+        "Removed two stale program grids ('Kommende Veranstaltungen' and 'Vergangene Veranstaltungen') containing ~30 film-teaser tiles linking to old-site /film/<slug>/ pages.",
+        "Dropped a dated/edition-specific announcement: 'Einladung zur Studienreise nach Israel | Mai 2026' which linked to an external partner page (https://www.difkarlsruhe.org/index.php?object=tx,3312.5&ModID=7&FID=3312.124.1). Team should decide whether to re-add as a current event.",
+        "Partner section was logo image tiles with no link text; I reconstructed the names from the alt text / URLs. Verify the exact partner organisation names (DIF Karlsruhe, DIG Mittelbaden, JLK e.V.) before publishing.",
+        "External partner links kept as plain markdown: difkarlsruhe.org, mittelbaden.deutsch-israelische-gesellschaft.de, jlk-ev.de.",
+        "Removed wp-content logo images (3312_2_1_k.webp, Logo-DIG-Horizontal-400.webp, header_bg.webp) — re-upload partner logos locally if the team wants them shown (no third-party image requests allowed).",
+        "'Masel Talk' is a recurring film series; this likely overlaps with the new site's curated programme/Festivals area but does not appear to duplicate an existing dedicated page."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "frauentage",
+      "title": "Frauentage",
+      "category": "reihe",
+      "intro": "Im März feiern wir die vielfältigen Stimmen, Geschichten und Perspektiven der Frau.",
+      "text": "Die Frauenwochen in Karlsruhe bieten eine schöne Gelegenheit, die Kraft und das Talent von Regisseurinnen, Schauspielerinnen und Filmemacherinnen zu würdigen und gleichzeitig wichtige Themen rund um die Gleichstellung der Geschlechter zu reflektieren. Wir möchten dafür einen Raum schaffen, in dem Frauen im Mittelpunkt stehen und ihre Stimmen gehört werden.\n\nWir laden Sie zu einzigartigen Geschichten ein, um gemeinsam zu lachen, zu weinen, zu träumen und zu diskutieren.",
+      "hazards": [
+        "Removed the entire right-hand column: a grid of ~12 film-teaser tiles (images + titles + technical specs) linking into old-site /film/<slug>/ pages (Von der Frauenbewegung zum matriarchalen Bewusstsein, I'll Be Your Mirror / Heartache, Ihr Jahrhundert, No Mercy, The Chronology of Water, Bildnis einer Trinkerin, Die Sammler und die Sammlerin, Summer Snow, Oxana, Heldin, Hola Frida!). These are stale per-edition program state.",
+        "Removed six film-description paragraphs woven into the lead text that each linked into old /film/ pages (Julie - Eine Frau gibt nicht auf, Helke Sander: Aufräumen, Feminism WTF, Madame Aurora und der Duft von Frühling, Saint Omer, Smoke Sauna Sisterhood). They describe one specific edition's lineup and reference a concrete date ('Am 21. März ... Austausch ... Wechseljahre'), so they are stale program state, not evergreen.",
+        "Only the two opening sentences survive as evergreen description of what the series is. The team may wish to expand this lead.",
+        "Category set to 'reihe' (recurring/themed film series held each March). Not a duplicate of any existing curated page; no overlap detected with the migrated Über uns / Festivals / Filmbildung / Projekte pages."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "das-kino-von-denis-villeneuve",
+      "title": "Das Kino von Denis Villeneuve",
+      "category": "reihe",
+      "intro": "Wummernde Musik, ausdrucksstarke Farben, isolierte Figuren in trostlosen Landschaften… Pünktlich zum Start von Dune Teil 2 gibt es bei uns im Kino die Gelegenheit, das filmische Universum des kanadischen Filmemachers Denis Villeneuve zu erkunden.",
+      "text": "Seine Filme lassen das Publikum vollständig in ihre Geschichten eintauchen, und das gilt nicht nur für seine neueren, bombastischen Science-Fiction-Filme wie DUNE oder davor BLADE RUNNER 2049 (2017) und ARRIVAL (2016). Villeneuve erforscht die Beziehungen und Grenzen zwischen Mensch und Umwelt, wobei er die Menschen oft als Außerirdische in ihrer eigenen Welt darstellt, und seine handwerklichen Entscheidungen dienen dieser Gegenüberstellung von Vertrautem und Unheimlichem.\n\nDenis Villeneuve begann seine Karriere mit einer Reihe von düster-komischen, unkonventionellen Filmen, die mit den faszinierenden Science-Fiction-Themen gespickt waren, die in vielen seiner späteren Werke wiederkehren sollten. Nach einem beeindruckenden, technologisch vorausschauenden Beitrag zum Episodenfilm COSMOS gab Villeneuve sein Regiedebüt mit AUGUST 32nd ON EARTH, einem eigenwilligen existenziellen Drama, das ihn als eine der vitalsten neuen Stimmen des kanadischen Kinos etablierte. Sein Nachfolger, das kühne psychologische Märchen MAELSTRÖM, wird von einem Fisch erzählt, dessen Kopf auf einem Hackklotz liegt – ein klassischer Villeneuve-Touch von überraschendem Surrealismus.\n\nMit freundlicher Unterstützung des Bundesverband kommunale Filmarbeit e.V. beginnen wir im Februar mit der umfassenden Retrospektive DAS KINO VON DENIS VILLENEUVE.",
+      "hazards": [
+        "Removed a stale 'Filme' program teaser column containing a film-tile (Blade Runner 2049) that linked to the old-site page https://kinemathek-karlsruhe.de/film/blade-runner-2049/ and embedded a wp-content poster image — drop the old film link/tile; the full screening list did not survive.",
+        "The closing sentence contains a dated time anchor ('beginnen wir im Februar' / 'zum Start von Dune Teil 2', edition ~Feb 2024) — team should decide whether to keep as historical context or genericize, since this was a one-time retrospective tied to that release.",
+        "Kept the sponsor-support sentence ('Mit freundlicher Unterstützung des Bundesverband kommunale Filmarbeit e.V.') because it is a real, complete sentence rather than a dangling logo line.",
+        "Classified as 'reihe' (director retrospective). Does not appear to duplicate an existing curated page; verify it is not already covered under a Festivals/Reihen overview before publishing."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "doppelbelichtung",
+      "title": "Doppelbelichtung",
+      "category": "projekt",
+      "intro": "DOPPEL:BELICHTUNG ist eine Veranstaltungsreihe, bei der zwei Filme zur selben Zeit gezeigt werden und das zweimal hintereinander. So entsteht die Möglichkeit, beide nacheinander anzuschauen. In der großzügigen Pause zwischen den Vorführungen gibt es Raum zum Erfahrungsaustausch, Nachdenken und Nachfragen.",
+      "text": "Wer sich für die Veranstaltung anmeldet und damit verbindlich zusagt, beide Filme zu sehen, erhält freien Eintritt für die gesamte Veranstaltung, d.h. für beide Filme.\n\nIn der Pause gibt es etwas zu essen, auch das ist kostenlos.\n\nWegen der begrenzten Platzzahl ist eine Anmeldung erforderlich. Der Eintritt ist frei. Für die Anmeldung wenden Sie sich bitte an info@kinemathek-karlsruhe.de.",
+      "hazards": [
+        "Quelle ist eine Mischung aus Reihen-Beschreibung (evergreen) und einer einzelnen, datierten Edition 'SONDER:BELICHTUNG – 50 Jahre Kinemathek und der Neue Deutsche Film'. Die editionsspezifischen Inhalte wurden entfernt: konkrete Filmtitel („Das Brot der frühen Jahre“, „Ich bin ein Elefant, Madame“), der Ablaufplan (15 Uhr Einlass / 16 Uhr Filmprogramm 1 / 18 Uhr Essen / 19 Uhr Filmprogramm 2 / 21 Uhr Ende) sowie der Bezug auf das 50-jährige Jubiläum.",
+        "Die ursprüngliche Anmeldung lief vermutlich über ein Veranstaltungsformular (im HTML nicht als CF7/Ninja-Markup enthalten, aber 'Anmeldung erforderlich'). Ersetzt durch einen Hinweis auf info@kinemathek-karlsruhe.de – vom Team prüfen, ob ein echtes Anmeldeformular/Verfahren verlinkt werden soll.",
+        "Leere 'Filme'-Spalte mit Überschrift <h2>Filme</h2> war ein Teaser-/Karten-Bereich für verlinkte Film-Tiles und wurde komplett entfernt.",
+        "Mögliche DUPLIZIERUNG: Die bereits migrierte Seite 'Projekte' nennt Doppelbelichtung bereits. Team sollte entscheiden, ob diese Detailseite eigenständig bleibt oder in 'Projekte' aufgeht.",
+        "Doppelte/abweichende Schreibweisen im Original (Doppel:Belichtung vs. DOPPEL:BELICHTUNG, '2 Filme, 2 Suppen', '50 Jahre Kinemathek und der Neue Deutsche Film') – einheitliche Schreibweise vom Team festlegen."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "alfred-ehrhardt-der-filmende-bauhaeusler",
+      "title": "Alfred Ehrhardt – der filmende Bauhäusler",
+      "category": "reihe",
+      "intro": "Anlässlich ihres 20. Geburtstags bietet die Alfred Ehrhardt Stiftung drei Jubiläumsprogramme mit neudigitalisierten und farbrestaurierten Kurzfilmen von Alfred Ehrhardt an.",
+      "text": "Für den am Bauhaus geschulten Naturfilmer Ehrhardt, einen der bedeutenden Fotografen der Neuen Sachlichkeit, ist der Film primär Bildkunst. Optisches Erzählen mit modernen, elektronischen Musikkompositionen kennzeichnet seine Filme. Seine musikalische Ausbildung und die künstlerische Prägung im Bauhaus schlugen sich in der Beschäftigung mit Abstraktion, Archaik, Urform, Oberflächenstruktur, Materialverhalten, Ornament, Rhythmus, Polyphonie und Serialität nieder. Die vom Hamburger Filmhistoriker Thomas Tode kuratierten Programme umfassen 12 preisgekrönte Tonfilme, restauriert mit Mitteln der Filmförderungsanstalt in 4K Qualität im Rahmen der Digitalisierung des deutschen Filmerbes.\n\nThomas Tode wird die drei Filmprogramme mit Vorträgen begleiten.\n\nHerzlichen Dank an die [Alfred Ehrhardt Stiftung](https://www.aestiftung.de/), die uns das Material dafür zur Verfügung gestellt hat.\n\nThomas Tode arbeitet in Hamburg als freier Autor, Kurator (u.a. Hamburger Kinemathek, Cinepolis – Architektur & Stadt im Film) und Filmemacher. In seiner Forschung und Lehre (Universitäten Hamburg, Bochum, Zürich und Wien) beschäftigt er sich mit dem Essayfilm, der sowjetischen Avantgarde und dem politischen Dokumentarfilm. Ein besonderes Interesse gilt Filmen über Architektur, Archäologie und „Umerziehung\". Zu den von Tode kuratierten Filmprogrammen, Symposien und Ausstellungen gehören „Angesichts des Äußersten: Die Filme über die Befreiung der Konzentrationslager und der lange Schatten der Bilder\" (Univ. Hamburg, 2015), „Die erwartete Katastrophe. Luftkrieg und Städtebau 1940-45\" (Freie Akademie der Künste Hamburg, 2013), „PhotoFilm!\" (National Gallery of Art Washington, 2012; Tate Modern London, 2010) und „bauhaus & film\" (Barbican Centre London, 2012; Weimar, Dessau, Berlin, Hamburg 2009), für die er verloren geglaubte Film- und Lichtinstallationen von Bauhaus-Künstlern aufspürte.\n\n## Kurzbiografie des Filmemachers Alfred Ehrhardt\n\nvon Thomas Tode\n\nFür den am Bauhaus geschulten Filmemacher Alfred Ehrhardt, einen bedeutenden Fotografen der Neuen Sachlichkeit, ist Film primär Bildkunst. Ehrhardt (1901-1984) gehört mit seinen über 50 Filmen und seinen über 20 Fotografie-Bildbänden zu den wichtigsten Filmemachern und Fotografen der Bauhaus-Tradition. Für seine Filme erhielt er zahlreiche nationale wie internationale Auszeichnungen, darunter vier Bundesfilmpreise. 1948 wurde er gar als der „bedeutendste deutsche Nachkriegs-Kulturfilmschöpfer\" betitelt, heute würden wir eher von einem Altmeister des experimentellen Kultur- und Dokumentarfilms sprechen. Insbesondere in den Filmen Spiel der Spiralen, Tanz der Muscheln und Korallen – Skulpturen der Meere orientierte er sich an der Avantgardefotografie und am absoluten Film der 1920er Jahre – Werke, die noch heute von herausfordernder Modernität sind.\n\nEhrhardt war zunächst Orgelmusiker, Komponist, Maler und Kunstpädagoge, bevor er seine Interessen auf Fotografie und Film verlagerte. Nachdem er bereits als Kunstlehrer gearbeitet hatte, ließ er sich beurlauben, um am Dessauer Bauhaus 1928/29 zu studieren, vor allem bei Josef Albers. Er hospitierte auch bei Wassily Kandinsky und Oskar Schlemmer. 1930 wurde er an die Landeskunstschule Hamburg (heute: Hochschule für bildende Künste) berufen und leitete den ersten Vorkurs für Materialkunde außerhalb des Bauhauses. 1933 entließen ihn die Nationalsozialisten wegen seiner Bauhaus-Nähe und seiner modernen Kunsteinstellung. Er zog sich aufs Land zurück und nahm 1934 eine Stelle in seinem ersten Beruf als Organist und Chorleiter in Cuxhaven an. Dort erst wandte er sich der Fotografie und ab 1937 dem Film zu. In diese Zeit fallen seine ersten Fotoexkursionen im Elbe-Weser-Wattengebiet. Ehrhardt hatte schnell erkannt, dass „die Kamera das unverfänglich produzierte, was zu malen verboten – entartet – war\". 1937 erschien auch Ehrhardts erster Bildband „Das Watt\", der heute zu den herausragenden Bildleistungen der Avantgarde der 1930er Jahre gezählt wird, etwa in Martin Parrs und Gerry Badgers Standardwerk „The Photobook. A History\" (London 2004, S. 112).\n\nSeine musikalische Ausbildung als auch die künstlerische Prägung im Bauhaus schlugen sich in seinem filmischen Werk deutlich nieder, etwa in der Beschäftigung mit Abstraktion, Archaik, Urform, Oberflächenstruktur, Materialverhalten, Ornament, Rhythmus, Polyphonie und Serialität. Seine bereits in Malerei und Grafik angedeutete romantisch-metaphysische Weltsicht offenbart sich auch im Film in einer sich zeitlich entfaltenden, meditativen Naturbetrachtung. In meisterhaften Kompositionen nimmt er die „Lichtspiele\" der Natur mit der Kamera auf, zeigt ihre Arbeit als „Formmeister\" an Watt- und Sandstrukturen oder beim architektonischen Aufbau von Tiergehäusen. Schnecken und Muscheln drehen sich in einem abstrakt schwarzen Raum, legen ihre Baugeheimnisse bloß, zuweilen ‚gezeichnet' von farbigen Wuchsmerkmalen, die an abstrakte Kandinsky-Gemälde mahnen. Es geht um medial sichtbar gemachte Lebensprozesse, die nur die Film- und Fotokamera enthüllen kann. Unser ‚unbewaffnetes' Auge ist nicht fähig, sie zu erkennen, daher der Einsatz von genuin filmischen Techniken wie Zeitraffer, Zeitlupe, Mikro- und Makroaufnahmen.",
+      "hazards": [
+        "Empty 'Programm' heading with a separator (hr) but no program content remained in the source — the dated screening cards were already stripped; dropped the empty heading.",
+        "Removed three figure/image wrappers: Alfred Ehrhardt Stiftung logo (linked to aestiftung.de — link preserved inline in the text), a portrait photo of Thomas Tode, and a portrait of Alfred Ehrhardt (wp-content uploads). Re-upload images if the team wants them.",
+        "The intro paragraph and the second body paragraph partly overlap in wording (both describe Ehrhardt's Bauhaus training and his themes of Abstraktion/Archaik/etc.) — editorial team may want to trim the duplication.",
+        "External link kept as plain markdown: https://www.aestiftung.de/ (Alfred Ehrhardt Stiftung). No iframes, forms, or third-party embeds were present.",
+        "This is a one-time screening series tied to the Stiftung's 20th anniversary; classified as 'reihe'. It is date-bound (jubilee programs) — confirm whether it is still relevant or should be archived. Does not appear to duplicate existing curated pages."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "chantal-akerman",
+      "title": "Chantal Akerman",
+      "category": "reihe",
+      "intro": "Chantal Akerman war eine der einflussreichsten feministischen Regisseurinnen des 20. Jahrhunderts.",
+      "text": "Ihr Film JEANNE DIELMAN, 23, QUAI DU COMMERCE, 1080 BRUXELLES, die minutiöse Beschreibung des Tagesablaufs einer Witwe, die mit ihrem erwachsenen Sohn zusammenlebt, wurde erst kürzlich in der alle zehn Jahre erscheinenden Sight and Sound auf Platz 1 der besten Filme aller Zeiten gewählt. Wir zeigen sechs ihrer wichtigsten Filme, darunter ihr Filmdebut SAUTE MA VILLE und ihr erster Langspielfilm JE TU IL ELLE.\n\nDie Filmreihe wird begleitend von einem Workshop über Chantal Akerman mit der Kuratorin und Filmemacherin Nathalie David. Die Teilnahme ist kostenfrei, wir bitten um zeitnahe Anmeldung an vermittlung@kinemathek-karlsruhe.de\n\n## Nathalie David\n\nGeboren 1963 in Frankreich, lebt Nathalie David in Hamburg und Berlin. Sie studierte freie Kunst an der Villa Arson in Nizza und der HfbK Hamburg, mit anschließendem Zusatzstudium an der IHE von Ponthus Hùlten in Paris.\n\nSie bekam das Hamburg-Stipendium und das Fiacre-Stipendium und erhielt ein einjähriges Fellowship an der HFF Potsdam-Babelsberg bei Heike Misselwitz.\n\nSie sieht den dokumentarischen Blick als Genre und als spezifischen Kunst-Prozess. Ihre Arbeit umfasst Filme, Hörspiele, Fotografien und Zeichnungen.\n\nFilmographie (Auswahl)\nHarald Naegeli – Der Sprayer von Zürich (2021) nominiert für das Deutsche Dokumentarfilmpreis 2022 und den Sichtwechsel Preis beim Filmfest Hamburg 2021.\nVilla Flora | Ihre Sammler, Ihre Künstler (2015)\nGEGO, Gertrud Louise Goldschmidt (2013)\nKosmos Runge, der Morgen der Romantik (2010)\nPaula Modersohn-Becker, ein Atemzug, (2008)",
+      "hazards": [
+        "Removed stale workshop date that was inline in the lead text: 'Termin: So 12.11. 13:30 – 16:30'. If the workshop recurs, re-add a current date.",
+        "Removed empty 'Filme' heading/column that held the dated film cards (stale program state) — the actual screenings should come from the new Showings model.",
+        "Removed the WordPress image figure (wp-content/uploads/2023/11/1000022879-1024x1024.webp). Re-upload as a poster/still via the Panel if wanted.",
+        "Removed the <hr> separator and WP block wrappers/inline classes.",
+        "Kept the signup line as-is: it points to vermittlung@kinemathek-karlsruhe.de (a plain email signup, not a CF7/Ninja form). Confirm whether the workshop is still offered before publishing.",
+        "This is a director retrospective (reihe), not a duplicate of any existing curated page.",
+        "Decoded HTML: line-break tags inside paragraphs were collapsed into running prose; the filmography list kept its line breaks. No HTML entities required decoding."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "stellenausschreibung",
+      "title": "Stellenausschreibung",
+      "category": "organisation",
+      "intro": "Die Kinemathek Karlsruhe e. V. sucht für ihr Programmteam eine herausragende Persönlichkeit im Bereich der kulturellen Bildung und der damit verbundenen Programmgestaltung in unserem Kommunalen Kino.",
+      "text": "## EINFÜHRUNG\n\nDie Kinemathek ist das gemeinnützige Filmkunsthaus in Karlsruhe, das Filme entdeckt, bewahrt und zeigt. In sorgfältiger und kontinuierlicher Arbeit, im Austausch mit Verleihern und Archiven, in filmhistorischer Recherche und ästhetischer Reflexion werden Programmreihen kuratiert und vermittelnd begleitet. Mit Begeisterung und ehrenamtlichem Engagement bietet die Kinemathek seit 49 Jahren ein Filmprogramm, das zum Nachdenken und Diskutieren anregt, am Puls der Zeit ist und durch künstlerische Qualität überzeugt. Mit 600 Veranstaltungen und rund 18.000 Zuschauer*innen im Jahr 2019 gilt die Kinemathek als Plattform für sozialen Austausch und als Treffpunkt verschiedener Generationen, aber auch als Schule des Sehens inmitten der zeitgenössischen Medienflut. Der gemeinnützige Verein engagiert sich insbesondere im Bereich der kulturellen und politischen Bildung und ist mit über 70 Kooperationspartner*innen ein wichtiger Player in der Stadtgesellschaft.\n\n## STELLENAUSSCHREIBUNG\n\nDie Stelle ist auf drei Jahre befristet.\n\nDie 50%-Stelle wird in Anlehnung an TVöD 10 vergütet.\n\nDie Anstellung erfolgt im Rahmen des internationalen Horizon-2023-Projekts der EU „Exploring and Educating Cultural Literacy through Art (EXPECT_art)\". Ziel von EXPECT_art ist es, Chancen und Barrieren der Förderung von kultureller Literalität in (außer-)schulischen Bildungsräumen zu identifizieren, um Bildungsungleichheiten abzubauen. Beteiligt sind die Länder Deutschland, Dänemark, Ungarn, Polen, Slowenien und Spanien. Neben den beteiligten Universitäten sind Praxispartner*innen, also Kultureinrichtungen, an den jeweiligen Standorten Teil des internationalen Konsortiums. In diesem dreijährigen, von der EU geförderten Projekt sind die Kinemathek Karlsruhe als Filmbildungsinstitut zusammen mit der RPTU Landau als Forschungseinrichtung die deutschen Partner*innen.\n\n## TÄTIGKEITSBESCHREIBUNG: WER WIR SIND UND NACH WAS WIR SUCHEN\n\nMitarbeit im Programmteam der Kinemathek Karlsruhe mit Fokus auf Inklusion, Diversität und Partizipation bei möglichst flachen Hierarchien.\nMitarbeit bei der Ausrichtung von Partizipationsprojekten in der Stadtgesellschaft mit dem Schwerpunkt kultureller Literalität. Hier besteht die Möglichkeit, eigene Kinoprogramme zu kuratieren. Darüber hinaus ist damit die Mitarbeit bei Förderanträgen, Marketing und Kommunikation verbunden.\n\nKreative Projektgestaltung sowie Entwicklung und Erprobung medienpädagogischer Konzepte in enger Zusammenarbeit mit der Universität Landau und den europäischen Partnerorganisationen.\n\nTeilnahme an Forschungsprozessen und Teil eines europaweiten Think-Tanks, daher hohe Mobilität innerhalb Europas und gute Englischkenntnisse in Wort und Schrift.\n\nSchaffung einer guten Diskussionskultur durch Bürgernähe.\nDazu gehört die Betreuung einer großen Anzahl von Kooperationspartner*innen in der Stadtgesellschaft, insbesondere Schulen, Jugendhäuser und lokale Communities.\n\nKritisches Hinterfragen der etablierten Filmgeschichte und Entdecken von wenig beachteten oder vergessenen Inhalten. Dazu gehört auch eine machtkritische Auseinandersetzung mit dem Kino und dem Kinoraum sowie eine kritische Medienpädagogik.\n\nFlexibles und hybrides Arbeiten sowie Homeoffice nach Absprache möglich, physische Präsenz ist jedoch in hohem Maße erforderlich.\n\n## WER SIND SIE (IHR PROFIL)\n\n(angehende) Migrationspädagogin, Künstlerin, Medienpädagogin, Sozialpädagogin, Sozialarbeiterin, Sozialwissenschaftlerin, Erziehungswissenschaftlerin, Kulturvermittlerin\n\nAufgrund der europaweiten Vernetzung sind Englischkenntnisse in Wort und Schrift zwingend erforderlich. Weitere Sprachen sind willkommen.\n\nAusgezeichnete Kenntnisse der Filmgeschichte und Leidenschaft für Kino und Filmkunst\n\nInteresse für Kultur, Politik und Gesellschaft\n\nKommunikative Persönlichkeit\n\nHohes Maß an eigenverantwortlichem Arbeiten in Abstimmung mit dem Programmteam und den europäischen Partnern. Dies erfordert ein hohes Maß an Teamfähigkeit.\n\nFreundlicher Umgang mit kulturellen Partner*innen in der Stadtgesellschaft.\n\nIntensiver Austausch und Auseinandersetzung mit den Themen Diversität, Inklusion und Partizipation.\n\nMenschen mit Beeinträchtigung und Menschen mit Rassismus- und Diskriminierungserfahrungen werden bei gleicher Eignung bevorzugt.\n\nBitte senden Sie Ihre Bewerbungsunterlagen mit Motivationsschreiben, Lebenslauf und Zeugnissen an [info@kinemathek-karlsruhe.de](mailto:info@kinemathek-karlsruhe.de).\n\nBei spezifischen Fragen wenden Sie sich bitte ebenfalls an diese E-Mail-Adresse\n\nViel Erfolg,\ndas Team der Kinemathek Karlsruhe e. V.",
+      "hazards": [
+        "TIME-SENSITIVE / STALE: This is a 2023 job posting. Dropped the entire hiring timeline block (Bewerbungsschluss 30. November, Rückmeldung 4. Dezember 2023, Vorstellungsgespräche 10./11./12. Dezember 2023, Arbeitsbeginn 8. Januar 2024) and the closing deadline line 'Wir freuen uns auf Ihre Bewerbung bis spätestens 30. November 2023.' The position is almost certainly filled/expired — confirm whether this post should be published at all or unpublished/archived.",
+        "No migratable form was present: applications already go to info@kinemathek-karlsruhe.de in the verbatim text, which was kept as a mailto link. No CF7/Ninja form to replace.",
+        "WordPress mangled the gender-asterisk '*innen' into <em> italics on four words (Zuschauer*innen, Kooperationspartner*innen, Praxispartner*innen, Partner*innen). Restored to plain '*innen' to match the other paragraphs that use the literal asterisk; team should verify the intended spelling.",
+        "Decoded HTML entities: „ and \" (German quotes around the EXPECT_art project title). 'TÄTIGKEITSBESCHREIBUNG' section spanned two WP columns in the source; merged into one flow.",
+        "Possible thematic overlap: the EXPECT_art project is already mentioned on the migrated Projekte page. This HR post is distinct (a job ad) but references the same project — check for consistency / cross-linking.",
+        "Layout note: source used a two-column wp-block-columns layout; collapsed to single-column markdown. Section headings were bold paragraphs (EINFÜHRUNG / STELLENAUSSCHREIBUNG / TÄTIGKEITSBESCHREIBUNG / WER SIND SIE) — promoted to ## headings; verify heading levels fit the site."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "jean-luc-godard",
+      "title": "Jean-Luc Godard",
+      "category": "reihe",
+      "intro": "Der im letzten Jahr verstorbene französische Filmemacher und Pionier der *Nouvelle Vague* wollte mit seinen nicht-linearen Erzählstrukturen und starker politischer und sozialer Thematik den Film revolutionieren. In sechs ausgewählten Filmen bezeugen wir diese Revolution, angefangen mit WEEK-END, seinem Experimentalfilm über ein unglücklich verheiratetes Paar auf einem Wochenendtrip durch die Apokalypse und ZWEI ODER DREI DINGE, DIE ICH VON IHR WEISS über 24 Stunden im Leben der jungen Juliette Jeanson, die mit ihrem Mann Robert und ihren zwei Kindern in einem Hochhaus eines Pariser Vororts lebt.",
+      "text": "Die Filmreihe wird begleitend von einem Workshop rund um Jean-Luc Godard mit der Kuratorin und Filmemacherin Nathalie David. Die Teilnahme ist kostenfrei, wir bitten um zeitnahe Anmeldung an vermittlung@kinemathek-karlsruhe.de\n\n## Nathalie David\n\nGeboren 1963 in Frankreich, lebt Nathalie David in Hamburg und Berlin. Sie studierte freie Kunst an der Villa Arson in Nizza und der HfbK Hamburg, mit anschließendem Zusatzstudium an der IHE von Ponthus Hùlten in Paris.\n\nSie bekam das Hamburg-Stipendium und das Fiacre-Stipendium und erhielt ein einjähriges Fellowship an der HFF Potsdam-Babelsberg bei Heike Misselwitz.\n\nSie sieht den dokumentarischen Blick als Genre und als spezifischen Kunst-Prozess. Ihre Arbeit umfasst Filme, Hörspiele, Fotografien und Zeichnungen.\n\n### Filmographie (Auswahl)\n\n- Harald Naegeli – Der Sprayer von Zürich (2021) – nominiert für das Deutsche Dokumentarfilmpreis 2022 und den Sichtwechsel Preis beim Filmfest Hamburg 2021\n- Villa Flora | Ihre Sammler, Ihre Künstler (2015)\n- GEGO, Gertrud Louise Goldschmidt (2013)\n- Kosmos Runge, der Morgen der Romantik (2010)\n- Paula Modersohn-Becker, ein Atemzug (2008)",
+      "hazards": [
+        "Removed stale dated workshop term 'Termin: Sa 11.11. 13:30 – 16:30' (per-edition date). Verify whether the workshop is being re-run before re-adding any date.",
+        "Kept evergreen workshop signup email vermittlung@kinemathek-karlsruhe.de verbatim (not a CF7/Ninja form, so no form-to-email replacement needed). Confirm this is still the correct address for course/Vermittlung signups.",
+        "Removed a workshop poster image embed (wp-content webp: https://kinemathek-karlsruhe.de/wp-content/uploads/2023/11/Workshop_JLG-1-1024x1024.webp). Editorial team should re-upload the image as a proper file if still wanted.",
+        "Removed an empty 'Filme' (h2) column that was a placeholder for a now-stale screening grid of the six Godard films. The actual film listing should come from current Showings/films in the new CMS, not this page.",
+        "This is a director retrospective (reihe). Not an obvious duplicate of existing curated pages, but check the new site's Festivals/Reihen index so it is placed correctly and not duplicated."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "brandbrief-des-kulturrings",
+      "title": "Brandbrief des Kulturrings",
+      "category": "organisation",
+      "intro": "Kulturring Karlsruhe e.V. – Alter Schlachthof 19 – 76131 Karlsruhe",
+      "text": "Sehr geehrter Herr Oberbürgermeister Mentrup,\nsehr geehrter Herr Bürgermeister Käuflein,\nsehr geehrte Damen und Herren Stadträtinnen und Stadträte des Karlsruher Gemeinderats\n\nwir sind mit den angekündigten Kürzungen unserer Zuschüsse NICHT einverstanden,\nund fordern:\n**KEINE Kürzungen\neine Erhöhung der Zuschüsse um 10 Prozent.\ndie Dynamisierung der Zuschüsse gemäß dem Verbraucherpreisindex.**\n\nDas Delta zwischen den seit Jahren gleichbleibenden öffentlichen Zuschüssen und den jährlich steigenden Kosten: Mieten, Personalkosten, Energiekosten, etc. wächst. Dies bedeutet sowieso schon jährliche Kürzungen.\nDie Situation wächst sich bereits zu einem strukturellen Problem aus.\n\nUnsere Einrichtungen bieten seit Jahrzehnten verlässlich ein engagiertes, vielfältiges und internationales Kulturprogramm, für Karlsruhe und die Region und zwar für jedes Alter. Wir sind Empfänger von Kulturpreisen für hervorragende Programme und Ausrichter von Preisverleihungen. Das ist Stadtmarketing für Karlsruhe im besten Sinne.\n\nUnsere Einrichtungen übernehmen gesellschaftliche Verantwortung. Inklusion, Partizipation und Bildung ist für uns ein alltägliches Anliegen das wir in unseren Programmen umsetzen\nWir tragen zum gegenseitigen Verständnis bei und bieten Orientierung. Wir sind Identitätsstifter und Impulsgeber der Demokratie – und stellen uns dieser Aufgabe kontinuierlich.\n\nUnsere Einrichtungen öffnen die Türen für das Ehrenamt. Hier kann man sich problemlos engagieren, Einblicke in die Freie Szene erhalten und sich einbringen.\nMit unseren Räumen bieten wir Spielflächen und Voraussetzungen für bürgerliches und kulturelles Engagement.\n\nUnsere Einrichtungen nehmen sich seit einigen Jahren konsequent dem Thema Nachhaltigkeit an. Wir bieten Workshops, Vorträge und Kongresse an, lernen voneinander, vernetzen uns und sind Vorbilder, da Kultureinrichtungen nachweislich als glaubhaft gelten.\n\nUnsere Einrichtungen praktizieren einen basisdemokratischen Umgang und trainieren die Teams und damit auch die Besucher:innen in einem respektvollen Umgang miteinander.\nKontroverse und Diskurs sind an der Tagesordnung, und für uns die Voraussetzung für eine offene Gesellschaft.\n\nUnsere Einrichtungen engagieren sich in den jeweiligen Branchenverbänden, übernehmen dort ebenfalls kulturpolitische Verantwortung und entlasten durch bewilligte Zuschussanträge von Land und Bund das Stadtsäckel.\n\nDie Zeit der Pandemie haben die Einrichtungen des Kulturring Karlsruhe weitgehend selbst gemeistert:\nProjektideen, Zuschussanträge bei Bund und Land, vernetzte Programm-Angebote haben uns durch diese Zeit gerettet, und dem Publikum interessante Kulturbesuche ermöglicht.\nDankenswerterweise hat der Gemeinderat ein Kultur-Paket von 2,5 Mio geschnürt. Wir haben dieses Paket so gut wie gar nicht angerührt. Vor diesem Hintergrund sind die Kürzungen, die für den Ausgleich der Defizite nur einen Tropfen auf dem heißen Stein sind, für uns unbegreiflich!\n\nWir sind darauf angewiesen, dass die kulturelle Verantwortung, der wir gerecht werden von Ihnen mitgetragen wird – für die Stadtgesellschaft.\nDie kulturpolitischen Vertreter:innen der Fraktionen wissen bestens über uns Bescheid, Wir müssen uns nicht mehr erklären. Wir haben Veranstaltungszahlen- und Besucherzahlen geliefert, und wir haben über unsere finanzielle Ausstattung gesprochen.\n\nDie Vielfalt der kulturellen Angebote, die sich an vielen unterschiedlichen Identifikationsorten der Stadt abbildet, trägt nachweislich zum Zusammenhalt bei.\nJetzt liegt es an Ihnen wie sich Karlsruhe in den nächsten Jahren als Gesellschaft entwickelt.\n\nErkennen Sie diese Verantwortung ?\nSorgen Sie für eine solide finanzielle Ausstattung unserer Einrichtungen um Bestand und Weiterentwicklung zu ermöglichen.\n\nWir fordern:\nKEINE Kürzungen\neine Erhöhung der Zuschüsse um 10 Prozent.\ndie Dynamisierung der Zuschüsse gemäß dem Verbraucherpreisindex.\n\nMit freundlichen Grüßen\n\n**Das Sandkorn gGmbH\nDéjà Vu e.V. (Stummfilmfestival) NUN Kulturraum e.V.\nDie Anstoß e.V Panorama e.V.\ndokKA e.V. Sau e.V.\nFilmboard Karlsruhe e.V. Studentisches Kulturzentrum gGmbH\nJazzclub e.V. Substage e.V.\nJubez e.V. Werkraum e.V.\nKinemathek e.V.\nKOHI Kulturraum e.V.\nKulturhaus Mikado e.V.\nKulturküche Karlsruhe\nKulturzentrum Tempel e.V.**",
+      "hazards": [
+        "Reiner Fließtext-Brief (offener Brief / Brandbrief) – keine stale Programmdaten, keine Embeds, keine Formulare, keine PDF-/externen Links entfernt.",
+        "Original nutzte <mark>/<strong>-Hervorhebungen mit Inline-Styles für die Kernforderungen; Styles wurden entfernt, der erste Forderungsblock als **fett** beibehalten, Inhalt unverändert.",
+        "Die Zeilenumbrüche (ehemals <br>) wurden als weiche Umbrüche erhalten, um die Briefform (Anrede, Forderungsliste, Unterzeichner-Block) zu bewahren – ggf. von der Redaktion glätten.",
+        "Die Unterzeichner-Liste am Ende ist Teil des Briefes (wer unterzeichnet hat) und wurde als evergreen behalten, nicht als stale Programmzeile entfernt; Spaltenlayout des Originals ging verloren, Namen stehen jetzt teils paarweise in einer Zeile.",
+        "Im Original ein kleiner Tippfehler/Inkonsistenz ('Wir müssen' mit Großschreibung mitten im Satz, fehlende Satzzeichen) – verbatim übernommen, nicht korrigiert.",
+        "Inhaltlich org/kulturpolitisch (Brandbrief, Kürzungen) – passt zu 'organisation'. Kein offensichtliches Duplikat mit bestehenden kuratierten Seiten (Über uns etc.); Redaktion sollte prüfen, ob dieser zeitgebundene politische Aufruf überhaupt dauerhaft veröffentlicht bleiben soll."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "das-kinofest",
+      "title": "Das Kinofest",
+      "category": "festival",
+      "intro": "Wir feiern ein Fest für das Kino!",
+      "text": "Also kommt vorbei! Mit Familie, mit Freunden, allein oder als Pärchen! Wir freuen uns auf Euch!",
+      "hazards": [
+        "Removed stale 2023-edition program state: welcome line 'WILLKOMMEN ZUM KINOFEST 2023', the dated paragraph (9. & 10. September 2023, 'zweite Ausgabe', Sonderpreis 5 EUR). Editorial team should re-add the current edition's dates/price.",
+        "Removed a dangling '## Kinofestfilme' heading whose film-card column was empty in the source (program tiles stripped/missing on the old site).",
+        "The whole page is essentially the landing page for a single past edition (2023); very little evergreen prose survives. Consider whether 'Das Kinofest' should become a recurring festival page with per-edition content added by the team.",
+        "No forms, iframes/embeds, or external/PDF links were present in the source. Likely not a duplicate of any already-migrated curated page."
+      ],
+      "isStale": true
+    },
+    {
+      "slug": "wasser",
+      "title": "Wasser",
+      "category": "projekt",
+      "intro": "„Durstige Bäume kündigen den Sommer 2030 an. Der Regen trägt Botschaften hinfort, die an uns gerichtet sein könnten. Die Kinder staunend beim Anblick der Wüste. Das fließende Verschwinden bleibt ungehört – und der Brand schwillt unbesehen an.\"",
+      "text": "Die Installation behandelt das Thema Wasser, ein wichtiger Aspekt der 17 Ziele der Nachhaltigkeit. Wasser ist ein kostbares Gut und bestimmt über das weitere Fortbestehen der Menschheit. Rund zwei Milliarden Menschen weltweit haben keinen regelmäßigen Zugang zu sauberem Wasser. Eine unfassbare Zahl. Etwa 771 Millionen Menschen haben noch nicht einmal eine Grundversorgung mit Trinkwasser. Die Dürreperioden weiten sich rasant aus und führen weltweit zu Nahrungsmittelknappheit. Auch hier in Karlsruhe sind bereits heute die Auswirkungen der Trockenheit deutlich spürbar.\n\nEigens für die Dauer der Ausstellung haben wir eine einmalige Filmreihe und Vorträge zum Thema Wasser kuratiert.",
+      "hazards": [
+        "Stale entfernt: konkrete Ausstellungsdauer 'von Mitte April bis Mitte Mai' wurde aus dem letzten Satz gekürzt (datierter Programmstand). Bitte prüfen, ob die Reihe je wiederkehrt oder ein Einmalprojekt war.",
+        "Stale entfernt: Satz zum Eröffnungsabend ('Zwei der Filme, DIE SCHWEIGENDE WELT und BIS ZUM LETZTEN TROPFEN, werden bereits am Eröffnungsabend präsentiert.') wurde gestrichen — bezieht sich auf einen vergangenen Termin.",
+        "Leere '## Filme'-Überschrift entfernt: im Original folgte keine evergreen Prosa, die zugehörige Filmliste war als Bildspalte (nur dekorative Stills) ausgeführt.",
+        "Bilder entfernt: 5 dekorative Still-Grafiken aus wp-content (Thirst-Stills_*.png) — falls erwünscht, müssen sie neu als lokale Dateien hochgeladen werden (keine externen Hotlinks zulassen).",
+        "Mögliche Platzierung: Dies ist ein Themen-/Installationsprojekt rund um Nachhaltigkeit/Wasser. Die bestehende Projekte-Seite nennt EXPECT_art, Quartierskino, Doppelbelichtung, Nachklang — 'Wasser' ist dort NICHT aufgeführt, also kein Duplikat. Team entscheidet, ob es als eigener Projekt-Eintrag bleibt oder unter sonstiges/Archiv geführt wird."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "giallo",
+      "title": "Giallo",
+      "category": "reihe",
+      "intro": "Giallo all'italiana, bezeichnet eine Filmrichtung, die in den 1960er Jahren in Italien entstand und in den 70er Jahren seine Krimielemente zunehmend mit denen des Thriller- und Horrorkinos mischte.",
+      "text": "## Quattro gialli all'italiana\n\nGiallo all'italiana, bezeichnet eine Filmrichtung, die in den 1960er Jahren in Italien entstand und in den 70er Jahren seine Krimielemente zunehmend mit denen des Thriller- und Horrorkinos mischte.\nGiallo, wörtlich übersetzt „gelb\", bezieht sich dabei auf die gelben Einbände der sensationslüsternen italienischen Groschenromane, denen diese Filme eindeutig ähneln. Im Schatten der international gefeierten Fellinis und Antonionis erschufen Regisseure wie Dario Argento und Mario Bava auf der kommerziellen Seite von Cinecittà höchst dekorative Italo-Thriller, die sich meist weniger um die Logik der Geschichten, als vielmehr um ihre pittoresken Schreckensbilder kümmerten. Beeinflusst von Hitchcock, Freud, Agatha Christie und den deutschen Edgar Wallace – Krimis lassen sie immer wieder vermummte Killer mit schwarzen Handschuhen und blitzendem Messer Rom/Turin/Mailand von ihren Sündern befreien.\n\nWir zeigen jeden zweiten Donnerstag vier der wichtigsten und schönsten Filme eines Genres, das als pures Kino verstanden werden kann. Wir spielen immer die ungeschnittenen Originalfassungen. Obwohl es produktionsbedingt keinen „Originalton\" dieser Filme gibt, da in Italien alles synchronisiert wurde und die meist internationalen Stars und Starlets in ihrer Heimatsprache spielten, zeigen wir die italienischen Sprachfassungen mit deutschen Untertiteln.\n\nDie Filme werden vorab kurz eingeführt und es besteht die Möglichkeit, nach dem Film im Foyer sich darüber auszutauschen. Dazu wird es exklusiv zu den vier Giallo-Abenden möglich sein an unserer Kinobar einen „Giallo Sour\" zu genießen.",
+      "hazards": [
+        "Removed an empty 'Filme' column/heading from the source — it was a now-stale program grid (the actual film cards/teasers had no content in the payload).",
+        "Removed the stale edition start date 'ab 9. März' from the second body paragraph (kept the evergreen 'jeden zweiten Donnerstag' rhythm). Editorial team should re-add the concrete dates for the current edition.",
+        "Decoded HTML entities: all'italiana, „gelb\", –, and the umlauts. Verify the German typographic quotes match house style.",
+        "No iframes, forms, PDFs, or third-party embeds were present.",
+        "Likely NOT a duplicate of an existing curated page — 'Giallo' is a themed film series (Reihe), not yet covered by the new site's standing pages."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "recht-und-gerechtigkeit",
+      "title": "Recht und Gerechtigkeit",
+      "category": "koop",
+      "intro": "Liebe, Hass oder das Streben nach Gerechtigkeit stehen am Anfang einer jeden spannenden Filmgeschichte von Pasolini bis Tarantino. Dabei ist die Vorstellung von Gerechtigkeit im Alltag so persönlich und verschieden, wie auch der Maßstab für Unrecht.",
+      "text": "Aber was verstehen wir im Alltag eigentlich unter Gerechtigkeit?\nWer legt fest was Recht und gerecht ist?\nUnd was hat das mit dem Rechtsstaat zu tun?\n\nDiesen und anderen Fragen geht die Stiftung Forum Recht in Kooperation mit der Kinemathek Karlsruhe in einer mehrteiligen interdisziplinären Film- und Gesprächsreihe nach.\n\nVideo ansehen: https://kinemathek-karlsruhe.de/wp-content/uploads/2022/10/2022-rechtundgerechtigkeit-3-HD.mp4",
+      "hazards": [
+        "Eingebettetes <video> (selbst gehostete MP4) ersetzt durch eine einfache Linkzeile 'Video ansehen: ...'. Video-Datei liegt auf der ALTEN Seite: https://kinemathek-karlsruhe.de/wp-content/uploads/2022/10/2022-rechtundgerechtigkeit-3-HD.mp4 — Team sollte das Trailer-/Intro-Video bei Bedarf neu einbinden bzw. die Datei migrieren.",
+        "Leere Programmgerueste entfernt: Ueberschrift 'Filme' (ohne Inhalt) und 'Vergangene Vorstellungen' (ohne Inhalt) — das waren dynamische Programmlisten der alten Seite.",
+        "Kooperationsprogramm der Stiftung Forum Recht mit der Kinemathek Karlsruhe. Externer Partner 'Stiftung Forum Recht' im Text genannt (kein Link in der Quelle vorhanden).",
+        "Datierte Vorstellungen waren auf der alten Seite leer/dynamisch — keine konkreten Termine zum Uebernehmen vorhanden."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "pride-pictures",
+      "title": "Pride Pictures",
+      "category": "festival",
+      "intro": "Das einzigartige Queer-Filmfestival in Karlsruhe findet inzwischen in der Kinemathek statt. Auf der Kinoleinwand und in der Öffentlichkeit geben das Team der PRIDE PICTURES queeren Geschichten und der Queer-Community in allen Facetten ihren Raum.",
+      "text": "## Eine ganze Woche queeres Kino!",
+      "hazards": [
+        "Edition-specific framing removed: the source was the 29th edition (2022). Dropped the heading '29. PRIDE PICTURES' and the phrase 'zum 29. Mal' from the intro sentence to keep it evergreen — verify the team is OK with the de-edition wording (rest of the sentence is verbatim).",
+        "Dropped a stale per-edition program paragraph describing the 2022 lineup ('elf hochkarätige internationale Spielfilme und drei Kurzfilmprogramme ...').",
+        "Dropped a fully stale dated paragraph: Pre-Opening-Party (Sa 22.10.2022, Alte Hackerei), Podium (So 23.10. mit dem Jungen Staatstheater Karlsruhe). It contained external links into a specific edition (pridepictures.org/festival-2022/#... and staatstheater.karlsruhe.de) — all removed as stale program state.",
+        "Possible duplication: the new site already has a curated 'Festivals' page; Pride Pictures may already be listed there. Check before publishing to avoid a duplicate festival page.",
+        "External canonical link from the source 'link' field: https://www.pridepictures.de/ — not placed in body; the team may want to add it as the official festival site.",
+        "Almost nothing evergreen survives beyond the two-sentence festival identity description; consider merging into the existing Festivals page rather than keeping a standalone post."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "spanien-espana",
+      "title": "Spanien – España",
+      "category": "reihe",
+      "intro": "In Kooperation mit dem Instituto Cervantes Frankfurt sowie Acción Cultural Española und im Rahmen der Frankfurter Buchmesse, deren Ehrengast in diesem Jahr Spanien ist, präsentiert die Kinemathek eine Auswahl an zeitgenössischen spanischen Dokumentarfilmen.",
+      "text": "### Zeitgenössische spanische Dokumentarfilme\n\n**La realidad desbordante. Cine independiente español (2015-2020) / Grenzenlose Wirklichkeit. Spanisches Independent-Kino (2015-2020)**\n\nDie Arbeiten von 2015 bis 2020 geben Einblick in verschiedene Positionen, die sich mit der spanischen Gegenwart und Geschichte auseinandersetzen und dabei innovativ mit Grenzen des Dokumentarischen und Fiktionalen arbeiten.\n\nWir veranstalten die Reihe in Kooperation mit der DSG. Die Deutsch-Spanische Gesellschaft Karlsruhe e.V. ist eine gemeinnützige Gesellschaft, die seit 1957 besteht und das Interesse für die Iberische Halbinsel und Lateinamerika in Deutschland fördert. Dies erfolgt insbesondere durch kulturelle Veranstaltungen, Ausflüge, Konversation und Spanisch-Sprach-/kommunikationskurse. Die Mitglieder der Gesellschaft bilden u.a. einen wichtigen Teil zur Integration spanischsprechender Einwanderer.\n\nEine Kooperation mit DSG Deutsch-Spanische Gesellschaft Karlsruhe e.V.\n\nEn cooperación con la DSG Sociedad Hispano-Alemana Sociedad Iberoamericano-Alemana",
+      "hazards": [
+        "The original lead paragraph contained a stale program date ('ab dem 21.10.') which was removed from the intro; the team should re-add a current date/edition context if reviving this series.",
+        "This is tied to a specific past edition (Frankfurter Buchmesse 2021, honorary guest Spain) — the 'in diesem Jahr' phrasing in the intro is now temporally stale and may need rewording.",
+        "No screening grid, teaser tiles, forms, embeds, or PDF links were present in the source — the page was already mostly evergreen prose.",
+        "Possible overlap with the new site's curated cooperation/Festivals areas; this Spanish documentary series is a themed Reihe (cooperation with Instituto Cervantes Frankfurt, Acción Cultural Española and DSG Deutsch-Spanische Gesellschaft Karlsruhe e.V.) — verify it does not duplicate an existing migrated cooperation page."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "oekumene",
+      "title": "Oekumene",
+      "category": "koop",
+      "intro": "Zur 11. Vollversammlung des Ökumenischen Rats der Kirchen kommen bis zu 5.000 internationale Gäste aus 350 Mitgliedskirchen. Ein Ereignis, das nur alle acht Jahre stattfindet, und zum ersten Mal in seiner über 70-jährigen Geschichte in Deutschland.",
+      "text": "Wir haben ein Programm zusammengestellt, welches die Oekumene in Karlsruhe filmisch begleiten soll.",
+      "hazards": [
+        "Dangling '### Filme' heading dropped: in this payload it was followed by no content (the film grid/cards were already stripped from content.rendered) — evergreen description only.",
+        "Time-bound content: this program accompanied the 11th WCC Assembly in Karlsruhe (a past, one-off 2022 event). The team should decide whether to keep it as an archive/cooperation entry or retire it.",
+        "No forms, iframes, PDFs, or teaser tiles present in the source. No third-party requests introduced.",
+        "Likely NOT a duplicate of an existing curated page; it is a one-off cooperation program, not part of Festivals/Filmbildung/Projekte. Verify category 'koop' fits editorial taxonomy (could also be 'sonstiges')."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "fair-un-moeglich",
+      "title": "Fair (un)möglich",
+      "category": "reihe",
+      "intro": "Im Rahmen der Fairen Wochen veranstaltet die Kinemathek Karlsruhe eine eigene Reihe mit dem Titel \"fair (un)möglich\", in der sie den Begriff \"Fairness\" auf vielfältige Art und Weise beleuchtet.",
+      "text": "Vor der Küste Ghanas wird 2007 eine der größten Ölquellen Afrikas gefunden. Die Langzeitdokumentation \"Oil Promises – Ghanas Traum vom Schwarzen Gold\" schildert die Auswirkungen der neuen Einnahmequellen auf eine verschlafene Küstenregion, in der die Menschen bislang von Fischfang oder Kautschukanbau leben.\n\nRhythmisch und lebendig erzählt \"Aşk, Mark ve Ölüm – Liebe, D-Mark und Tod\" die Geschichte der eigenständigen und weitgehend unbekannten Musik der Einwanderer:innen aus der Türkei sowie ihrer Kinder und Enkelkinder in Deutschland.\n\nDer Dokumentarfilm \"Landretter\" porträtiert vier Menschen und deren Schicksale. Alle haben sie sehr unterschiedliche Hintergründe: eine Bürgermeisterin, ein Astronom, ein Gastronom, eine Bäuerin, die sich im Europaparlament engagiert. Beheimatet sind sie alle auf dem Land in Sachsen, im Allgäu und in Österreich. Am Ende vereint sie der gemeinsame Kampf für ihre jeweilige Heimat.\n\n\"Thank You for the Rain\": Vor fünf Jahren greift der kenianische Bauer Kisilu Musya erstmals zur Kamera und beginnt das Leben seiner Familie, seines Dorfes und die desaströsen Auswirkungen des Klimawandels zu filmen. Der Regen – normalerweise ein Segen für das Dürregebiet – wird zu einer zerstörerischen Macht, der die sorgsam gehegten Pflanzen und damit die Lebensgrundlage der kenianischen Familie mit sich reißt.\n\nIn „Machines\" zeigt Regisseur Rahul Jain, Arbeiter:innen der indischen Textilfabriken, die jeden Tag in derselben Umgebung schuften und leben. Es entstand ein ernüchterndes Dokument systematischer Ausbeutung.\n\nUnter folgendem Link spricht unsere Kollegin Carmen Beckenbach über die von ihr initiierte Reihe:\n\n[Radio-Interview mit Carmen Beckenbach | Schwarzwald-Radio](https://www.schwarzwaldradio.com/sites/default/files/2022-09/0916kikkinemathekfaircarmenbeckenbachtschminke.mp3)\n\n#### Videobotschaft von Cem Özdemir für Aşk, Mark ve Ölüm – Liebe, D-Mark und Tod\n\nVideo ansehen: https://kinemathek-karlsruhe.de/wp-content/uploads/2022/09/IMG_0574.mov",
+      "hazards": [
+        "Dropped the stale 'Programmpunkte' section: per-edition dated screenings/discussions (SA 1.10., SO 2.10., Mi 5.10., Mi 12.10., Di 18.10. 2022) with associated cooperation/discussion partners (Büro für Integration der Stadt Karlsruhe, Amnesty International Karlsruhe, Weltladen/AEW e.V., SIMAMA-STEH AUF e.V.). Editorial team should re-attach these as Showings/Events if the series ever recurs.",
+        "Replaced an embedded self-hosted <video> (Cem Özdemir Videobotschaft, wp-content/uploads/2022/09/IMG_0574.mov) with a plain 'Video ansehen:' link. The .mov is hosted on the old WordPress domain and will break once that site is decommissioned — re-host the file or remove.",
+        "Kept an external audio link (Schwarzwald-Radio .mp3 interview with Carmen Beckenbach) as a plain markdown link. Third-party host; verify it still resolves.",
+        "This is a dated 2022 edition of a one-off themed series tied to the 'Faire Wochen'. Likely not a recurring series — confirm whether it should be published at all or kept as historical archive.",
+        "No Contact Form 7 / Ninja Forms or third-party iframe embeds were present.",
+        "Smart quotes („…\") preserved verbatim from the German source; mixed with straight quotes as in the original — editorial may want to normalize."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "farsi-film-festival-2022",
+      "title": "Farsi Film Festival",
+      "category": "festival",
+      "intro": "Das Farsi Film Festival Karlsruhe wird in Kooperation mit Kuratorin Mahsa Vafaie veranstaltet.",
+      "text": "Das Festival wird Filme zeigen, die in der Sprache Farsi produziert wurden, um diese über Karlsruhe im deutschsprachingen Raum ins Rampenlicht zu rücken. Kurzfilme, Spielfilme und Dokumentarfilme von iranischen und afghanischen Regisseuren werden in Originalsprache und mit deutschen und teilweise englischen Untertiteln gezeigt.\n\nKunst ist eine universelle Sprache. Indem wir eine Auswahl von Filmen aus der persisch sprechenden Welt zeigen, hoffen wir, Menschen mithilfe der Sprache der Kunst näher zusammenzubringen. Andererseits glauben wir, dass Inklusion und Integration zwei Seiten derselben Medaille sind.\n\nDieses Festival ist auch ein Versuch, Solidarität zu fördern, indem Geschichten geteilt werden, die von iranischen und afghanischen Regisseuren erzählt wurden. Wir möchten schlußendlich auch junge Künstler vorstellen und unterstützen.",
+      "hazards": [
+        "Original WP-Heading lautete '2. Farsi Film Festival' — die Editions-Nummer wurde als datierter Zustand entfernt, Titel auf 'Farsi Film Festival' normalisiert.",
+        "Datierter Editions-Header entfernt: 'Das 2. Farsi Film Festival wird diesen Sommer bereits zum zweiten Mal stattfinden' samt Datumszeile '24.+ 25. Juni & 1.+ 2. Juli 2023'. Die Intro-Formulierung wurde editionsneutral gefasst; bitte prüfen.",
+        "Stale Programm-Platzhalter entfernt: 'Das Programm des 2. Farsi Film Festival wird bald hier veröffentlicht.'",
+        "Leere Spalte mit Überschrift 'Programm (letztes Jahr)' (ohne Inhalt) entfernt — alter WP-Programmgrid-Platzhalter.",
+        "Schluss-Satz des WP-Originals entfernt (editionsbezogen): 'Wir hoffen auf rege Teilnahme und freuen uns auf zwei schöne Wochenenden!' — kann bei Bedarf wieder aufgenommen werden.",
+        "Externer Link aus dem Quelldatensatz (link-Feld): https://farsifilmfestival.de — nicht im Fließtext gesetzt; ggf. als offizielle Festival-Website verlinken.",
+        "Mögliche Dublette: Festivals werden bereits auf der kuratierten Festivals-Seite des neuen Sites gepflegt — abgleichen, ob das Farsi Film Festival dort schon gelistet ist."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "piazza-del-cinema",
+      "title": "Piazza del Cinema",
+      "category": "koop",
+      "intro": "Open-Air-Kino im Alten Schlachthof, veranstaltet von der Kinemathek Karlsruhe im Rahmen des Kulturfestivals Toujours Kultur.",
+      "text": "## Open-Air-Kino im Alten Schlachthof\n\nIn den beiden Corona-Sommern demonstrierte der Titel **Toujours Kultur**, dass sich die Karlsruher Kulturszene von einer Pandemie nicht unterkriegen lässt. Unter diesem trotzigen Motto gibt es ein vornehmlich auf die Wochenenden konzentriertes Kulturfestival auf dem Gelände des Alten Schlachthofs mit Open-Air-Kino (veranstaltet von der [Kinemathek Karlsruhe](https://kinemathek-karlsruhe.de/)), und indoor fünf Kunstausstellungen in der Fleischmarkthalle und Musikperformances (veranstaltet vom [KOHI Kulturraum](https://kulturring-karlsruhe.de/mitglieder/kohi-kulturraum-e-v/), dem [Kulturzentrum Tempel](https://kulturring-karlsruhe.de/mitglieder/kulturverein-tempel-e-v/) und anderen) sowie einer kreativen Sommerakademie.\n\nAktuelle und ergänzende Infos zu den Ausstellungen wie auch den Einzelveranstaltungen gibt es ausführlich auf [dieser Website](https://www.toujours-kultur.de/) und tagesaktuell in den Sozialen Medien Facebook und Instagram, wo der Kulturring Karlsruhe und Toujours Kultur unter @KulturringKarlsruhe zu finden ist.\n\nToujours Kultur ist das Festivalformat des Kulturring Karlsruhe e.V. in Kooperation mit der Sommerakademie, Bessau/Steininger/Fitterer und Circus3000.",
+      "hazards": [
+        "Removed the entire 'Filmprogramm' section: a per-edition (2022) dated list of ~20 screenings with deep links into the old-site program at toujours-kultur.de (?v=22-07-...#details). All stale program state.",
+        "The source post is titled 'Piazza del Cinema' but its body is entirely about 'Open-Air-Kino im Alten Schlachthof' / 'Toujours Kultur'. Title may be a mismatch or an older edition name — editorial team should confirm the correct title.",
+        "Edition-specific phrasing was trimmed from the lead to keep it evergreen: dropped 'Auch in diesem Jahr', the dated run 'vom 14. Juli bis zum 4. September', the 2022-only note 'Eine Open-Air-Bühne allerdings wird es in diesem Jahr nicht geben...', and 'komplett bei freiem Eintritt ... Spenden willkommen' (edition-specific pricing). Re-add per edition if still accurate. No German prose was rewritten beyond removing these dated clauses; remaining wording is verbatim.",
+        "Kept external partner links as plain markdown: toujours-kultur.de, kulturring-karlsruhe.de member pages (KOHI, Tempel). All first-party-safe plain <a> navigations, no embeds/iframes/forms in source.",
+        "This is a cooperation/open-air programme with the Kulturring Karlsruhe; classified as 'koop'. Not in the project's named-festival set. Likely NOT a duplicate of an existing curated page, but verify it isn't already covered under Festivals/Kooperationen."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "1001-lights",
+      "title": "1001 Lights",
+      "category": "sonstiges",
+      "intro": "Anlässlich von 1700 Jahren jüdischen Lebens in Deutschland zeigt die Kinemathek die Installation „1001 Lights\" von Marlene Millar und Philip Szporer aus Kanada im Foyer.",
+      "text": "Ihre Installation bezieht sich auf das jüdische Leben. Sie stellt Fragen nach dem Ritual: Was gibt es uns? Was sind für uns besondere Momente? Was bedeutet Kerzenlicht? Die 15-minütige Videoinstallation läuft im Loop (Dauerschleife) und arbeitet mit den Mitteln der Videokunst und der Choreografie. Dabei werden choreografierte Bewegungen von professionellen Tänzerinnen ebenso wie die ritualisierten Handbewegungen der praktizierenden Frauen verarbeitet.",
+      "hazards": [
+        "Dropped dated run window 'vom 2. Juni – 30. Juni' from the intro (stale program state). Restore an actual run/edition date if this page is re-used.",
+        "Dropped the dated opening-night screening on 2. Juni 19:00 Uhr of 'Mein Leben – Teil 2' von Angelika Levi, which carried a film-teaser link into the old site (/film/mein-leben-teil-2/). If that film returns to the program, link it as a proper Showing instead.",
+        "Dropped the dated opening event (sunset / ca. ab 21.00 Uhr) with Livemusik by the Judith Genske Trio (Speyer/Wuppertal/Düsseldorf), 'Verwehte Lieder' – Chansons und Lieder der 1920er und 30er Jahre von jüdischen Komponist*innen. Re-add as an Event if the program returns.",
+        "Removed a wp-content figure/image (https://kinemathek-karlsruhe.de/wp-content/uploads/2022/05/IMG_6635-k-682x1024.jpg). Re-upload to the new media library if still wanted.",
+        "Classified as 'sonstiges': a one-off video art installation tied to an occasion (1700 Jahre jüdischen Lebens), not a named festival/series. Editorial may prefer a different bucket.",
+        "Does not appear to duplicate any already-migrated curated page."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "lina-wertmueller",
+      "title": "Lina Wertmüller",
+      "category": "reihe",
+      "intro": "Am 9. Dezember 2021 verstarb die italienische Regisseurin Lina Wertmüller. Die Filmemacherin mit der charakteristischen weißen Brille, den kurzen Haaren und dem ausufernden Namen – eigentlich heißt sie bürgerlich nämlich Arcangela Felice Assunta Wertmüller von Elgg Spanol von Braueich – revolutionierte vor allem in den späten 1960ern, den 1970ern und auch den 1980er Jahren das italienische Kino und verband Commedia dell’Arte mit Commedia all’italiana, Feminismus mit beißender Gesellschaftskritik, Tragik und Groteske und war die erste Frau überhaupt, die für einen Academy Award als beste Regisseurin nominiert war (für Pasqualino Settebellezze / Sieben Schönheiten). Zu Ehren dieser außergewöhnlichen Regisseurin zeigen wir einen Querschnitt durch ihr Schaffen und verneigen uns vor einer wahren Maestra ihres Fachs.",
+      "text": "",
+      "hazards": [
+        "Dropped a stale '## Filme' heading that had no content in the source — it was the wrapper for the screening grid / film-teaser tiles (dated program state), which is not migrated.",
+        "No screenings, dates, ticket links, embeds, forms, PDFs, or sponsor lines were present in the source HTML.",
+        "Category set to 'reihe' (director retrospective). The new site has no dedicated retrospective hub yet; team should decide final placement.",
+        "Low duplication risk — this specific Wertmüller retrospective is not among the already-migrated curated pages."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "quartierskino",
+      "title": "Quartierskino",
+      "category": "projekt",
+      "intro": "Anknüpfend an die erfolgreiche erste Ausgabe des Quartierskino möchten wir Ihnen erneut einen eigens für den Stadtteil ausgesuchten Film präsentieren. Dabei darf natürlich als besondere Attraktion auch die Liveshow mit Filmgespräch nicht fehlen, bei der Menschen aus dem Stadtteil über sich und ihren ganz besonderen Bezug zu ihrem Quartier sprechen. Selbstverständlich wird die Show auch über YouTube gestreamt.",
+      "text": "",
+      "hazards": [
+        "Edition-specific content dropped: the 'Oberreut' section (heading + neighbourhood description) and its 'Hier können Sie die aktuelle Anzeige herunterladen' link described one specific April-2022 edition, so it is stale per-edition program state. If the team wants the Oberreut neighbourhood blurb kept as evergreen colour, it can be re-added.",
+        "Dropped a 'Liveshows' gallery of ~10 past Q-Show videos (dated 2021/2022: Beiertheim, Oststadt, Oberreut, Mühlburg, Daxlanden, Grünwinkel, Waldstadt, Neureut-Heide, Sommerfest 2021, Eröffnungsshow) — all stale dated program state with YouTube embeds/thumbnails.",
+        "Removed YouTube iframe embeds and thumbnail-link tiles entirely (rule 4 would normally convert an embed to a 'Video ansehen: <url>' link, but here every video was part of the dropped stale gallery, so none were carried over). If any single Q-Show recording should remain, add it back as a plain link, e.g. Video ansehen: https://www.youtube.com/watch?v=POZW2gQ9obA",
+        "Dropped PDF link to old-site asset: /wp-content/uploads/2022/04/2022-03-28-Quartierskino-Oberreut-April-22.pdf — a dated April-2022 advertisement; not migrated.",
+        "LIKELY DUPLICATE: the new site's curated 'Projekte' page already mentions Quartierskino. Confirm whether this should be a standalone project page or folded into Projekte before publishing.",
+        "After removing stale state, only the evergreen lead paragraph (now the intro) survives; the body is empty. Verify the project is still active before keeping a dedicated page."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "internationale-wochen-gegen-rassismus",
+      "title": "Internationale Wochen gegen Rassismus",
+      "category": "koop",
+      "intro": "Im Rahmen der Internationalen Wochen gegen Rassismus zeigen wir wieder eine begleitende Filmreihe.",
+      "text": "Seit Januar 2016 werden die Internationalen Wochen gegen Rassismus (IWgR) von einer Stiftung koordiniert. Die Stiftung hat diese Aufgabe vom Interkulturellen Rat e.V. übernommen, der seit 1995 die Aktivitäten rund um den 21. März in Deutschland initiiert.\n\nAlle Veranstaltungen werden mit einer Einführung und Filmgespräch begleitet.",
+      "hazards": [
+        "Removed the dated edition logo image (wp-content/uploads/2023/03/iwgr-ka-logo-2023-1024x1024.png) — stale per-edition asset; a current logo can be re-added by the team if wanted.",
+        "Removed a dangling 'Filme' heading (<h2>) whose column body was empty — it headed a stale per-edition screening list that was not present in the payload. The accompanying film programme for each year must be re-curated as Showings.",
+        "Title was abbreviated in the source ('Internat. Wochen gegen Rassismus'); expanded to the full name used verbatim in the body. Confirm preferred display title.",
+        "Category set to 'koop' (cooperation): this is a film series accompanying an external annual campaign coordinated by a foundation, not an in-house festival or recurring series — verify placement.",
+        "No third-party embeds, forms, or PDF links were present in the source."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "commodores-cocktail-cinema",
+      "title": "Commodore's Cocktail Cinema",
+      "category": "koop",
+      "intro": "Der Commodore Craig Judkins teilt seine Lieblingsfilme aus den 70er – 90er Jahren in Kooperation mit der Kinemathek Karlsruhe. Vor und nach dem Film gibt es Cocktails und Musik.",
+      "text": "## Commodore Presents\n\nVideo ansehen: https://www.youtube.com/watch?v=BRmohsj-7L0\n\nVideo ansehen: https://www.youtube.com/watch?v=gjr3IBiLp6c",
+      "hazards": [
+        "Two YouTube iframe embeds replaced with plain 'Video ansehen' links (privacy: no third-party embeds). First video: 'Commodore's Cocktail Cinema (Season 4)' trailer. Second video: 'KAVAPORTRAIT über CRAIG JUDKINS @ ELECTRIC EEL in KARLSRUHE (2020)'. Team should confirm both links are still wanted/current.",
+        "Dropped the empty second column heading 'Filme' — it contained only a video embed and no film listing or evergreen prose.",
+        "Classified as 'koop' (cooperation programme) per the explicit 'in Kooperation mit der Kinemathek Karlsruhe' framing; could alternatively be 'reihe' as a recurring themed film series. Editorial team to confirm placement.",
+        "Source page is very thin — essentially one descriptive paragraph plus two videos. No per-edition dates, film teasers, or program grid were present to remove. Verify there isn't a richer current source for this series."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "basarbizarr",
+      "title": "Basar Bizarr",
+      "category": "reihe",
+      "intro": "Im Basar Bizarr zeigen wir Filme, die richtig zur Geltung kommen, wenn der Nachhauseweg so dunkel wie der Kinosaal ist: Grusel, Horror, Science-Fiction, Fantasy, Phantastik.",
+      "text": "",
+      "hazards": [
+        "Removed empty 'Filme' heading/column wrapper and a 'Vergangene Vorstellungen' section that contained a single film-teaser tile linking to the old site (/film/so-finster-die-nacht/). No evergreen body remained beyond the lead sentence.",
+        "Removed a separator (hr) and WP Theatre (wpt_listing) markup carrying stale screening state.",
+        "The only evergreen content is the one-sentence intro describing the series; the body 'text' is empty. Page kept as not-stale because the intro is a genuine evergreen description of the reihe.",
+        "Classified as 'reihe' (recurring themed horror/sci-fi/fantasy film series). Not an obvious duplicate of existing curated pages, but verify it doesn't overlap with an existing Reihen/Spielplan entry."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "neu-im-kino",
+      "title": "Premiere",
+      "category": "reihe",
+      "intro": "In der Rubrik PREMIERE zeigen wir aktuelle Kinostarts: neue Arthousefilme, Dokumentarfilme und weitere herausragende Produktionen, die erstmals regulär im Kino zu sehen sind. Das Programm bildet das zeitgenössische Kino in seiner Vielfalt ab und ergänzt den Spielplan um aktuelle Positionen jenseits des Mainstreams.",
+      "text": "",
+      "hazards": [
+        "Removed a stale WP Theatre listing grid (wpt_listing) of 9 dated film-teaser cards: Ein Sommer in Paris, Dao, Mein neues altes Ich, Silent Flood, Sudan Remember Us, Resurrection, It Happened on our Ground, Cotton Queen — each linked to old-site /film/<slug>/ pages with stale screening dates (11.6.-31.7.) and technical specs. None migrated.",
+        "One card carried the premiere-type label 'Ukrainer in Karlsruhe' (Silent Flood) — dropped with its card; flag if that sub-label should survive as a tag/series.",
+        "This is an evergreen rubric/landing page ('PREMIERE' = current cinema releases). The actual film entries belong in the new Film archive + Showings, not as static post body. The team should decide whether 'Premiere' becomes a category/series tag rather than an editorial post.",
+        "No forms, no embeds, no PDFs in the source. Only evergreen content surviving is the single lead paragraph (placed in intro)."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "goettinnen-des-jugendstils",
+      "title": "Göttinnen des Jugendstils",
+      "category": "reihe",
+      "intro": "In der Sonderausstellung [Göttinnen des Jugendstils](https://www.landesmuseum.de/jugendstil) des *Badischen Landesmuseums* (18.12.2021 – 19.6.2022) können Besucher die vielen Facetten der Kunstbewegung des Jugenstils erleben: zunächst natürlich die Formensprache mit ihren mystischen Frauengestalten, von Fabelwesen bevölkerten Naturlandschaften und die floralen Ornamente und warmen Farbtöne. Die bewegte Zeit seiner Entstehungsperiode , geprägt von Industrialisierung und Nationalismus und in besonderem Maße die Künstlerinnen, welche Ende des 19. Jahrhunderts erstmals stärker in die Männerdomäne des Künstlertums vordrangen.",
+      "text": "Unsere Filmreihe trägt denselben Namen und begleitet die Ausstellung drei ausgewählte Filme lang, die das Leben und Schaffen dieser Künstlerinnen genauer beleuchten.\n\nHinweis: *Die Eintrittskarten der beiden Einrichtungen ermöglichen jeweils einen reduzierten Eintritt. Kinobesucher\\*innen erhalten bei Vorlage des Kinotickets eine Preisermäßigung von 1 Euro/Person im Museum. Mit der Museumseintrittskarte erhalten Besucher\\*innen der Ausstellung eine Preisermäßigung von 1 Euro/Person zu einem begleitenden Film.*",
+      "hazards": [
+        "Klassifiziert als 'reihe' (Filmreihe begleitend zu einer Museumsausstellung); je nach Sichtweise auch 'koop' (Kooperation mit dem Badischen Landesmuseum) denkbar.",
+        "Stale Daten in der Intro beibehalten: Ausstellungslaufzeit (18.12.2021 – 19.6.2022) ist abgelaufen — Team sollte prüfen/entfernen.",
+        "Der Hinweis zur ermäßigten Eintrittskarte bezieht sich auf die konkrete Kooperation während der damaligen Ausstellungslaufzeit; vermutlich nicht mehr aktuell.",
+        "Externer Partner-Link zum Badischen Landesmuseum (landesmuseum.de/jugendstil) beibehalten — Team sollte Gültigkeit prüfen (Ausstellung beendet, Seite ggf. offline).",
+        "Konkrete Filme der Reihe (drei Titel) waren im Original nicht als Prosa enthalten — nur als (gedroppte) Programmteile zu erwarten. Falls gewünscht, Filmliste vom Team ergänzen lassen.",
+        "Quelltext enthielt nur einen Inhaltsabsatz plus leere wp-block-group-Wrapper; keine Formulare, Embeds oder Teaser-Kacheln vorhanden."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "junge-alte",
+      "title": "Junge Alte",
+      "category": "koop",
+      "intro": "In Kooperation mit der Evangelischen Erwachsenenbildung Karlsruhe bieten wir seit 2018 das Programm “junge alte” an. Dabei geht es um die Begegnung im Kino, das gemeinsame Filmerleben und den Austausch im Anschluss.",
+      "text": "Einmal im Monat steht ein ausgewählter Film im Mittelpunkt. Gezeigt werden besondere Filme: von Dokumentarfilmen über aktuelle gesellschaftliche Themen, französischen Dramödien bis hin zu Oscarprämierten Filmperlen. Filme, die uns unterhalten und unser Leben bereichern.\nHerzlich eingeladen sind alle von jung bis jung geblieben.\n\njunge alte ist ein Bildungsprogramm der Evangelischen Erwachsenenbildung, welche auf Menschen ab 50 und darüber addressiert ist. Wie der Name schon sagt, handelt es sich bei junge alte um ein Programm, das die Interessen wissbegieriger und lernfreudiger Menschen aufnimmt. Es achtet die Lebenserfahrung und das Wissen der Teilnehmer*innen. Es erhält, vernetzt und erweitert, was älterwerdende Menschen an Fülle des Lebens schon mitbringen.\nQuelle: [Evangelische Erwachsenenbildung Karlsruhe](https://www.eeb-karlsruhe.de/junge-alte-3/)",
+      "hazards": [
+        "Removed a film-teaser grid card linking to the old-site film page /film/die-leisen-und-die-grossen-toene/ with a stale dated screening run '18.6. bis zum 20.6.' — dropped as stale program state.",
+        "Removed the decorative EEB logo image (hosted at wp-content/uploads/2022/03/eeb_logo_junge_alte_quad_rgb_gruen_142px.webp). The partner link it pointed to (eeb-karlsruhe.de/junge-alte-3/) was preserved as a plain markdown link on the 'Quelle' line; team may want to re-add the logo as a proper local image asset.",
+        "Verbatim German prose kept as-is, including the original typo 'addressiert' (should be 'adressiert') in the source — left unchanged per verbatim rule; team may correct.",
+        "Possible overlap: this is a recurring cooperation series. It is NOT in the curated 'Projekte' list, but could be considered for a cooperations/Reihen section. Not an obvious duplicate of an existing migrated page."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "essenzen",
+      "title": "Essenzen",
+      "category": "reihe",
+      "intro": "Im ersten Quartal des neuen Jahres bringen wir unsere Auswahl der Höhepunkte aus dem vergangenen Kinojahr erneut auf die große Leinwand. Eine schöne Möglichkeit, die Highlights des Jahres 2025 nachzuholen oder nochmals zu erleben.",
+      "text": "Die Bandbreite unserer persönlichen Bestenliste reicht dabei von Festivalhits über prämierte internationale Highlights bis hin zu übersehenen Perlen des Kinos.",
+      "hazards": [
+        "Removed the entire 'Filme' column: a wpt_listing grid of 7 dated film-teaser tiles (The Smashing Machine, Armand, Sinners, Sirât, Harvest, The Secret Agent, Sentimental Value), each linking to old-site /film/<slug>/ pages with wp-content poster images. This is stale per-edition program state — these should be re-entered as proper Showings in the new CMS, not as body prose.",
+        "Intro is edition-specific: the second sentence names 'die Highlights des Jahres 2025'. Kept verbatim per the wording rule, but the team should update the year (or genericize) for each new edition since this is an annual recurring series.",
+        "Classified as 'reihe' (annual recurring best-of series). No exact equivalent on the new curated pages, so this is likely NOT a duplicate — but confirm it isn't already covered as a Spielplan/program reihe before publishing.",
+        "No forms, no iframes/embeds, and no external/PDF links were present in the source."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "dokumente",
+      "title": "Dokumente",
+      "category": "reihe",
+      "intro": "Traditionell fühlen wir ins dem dokumentarischen Kino besonders verbunden – und das liegt nicht nur an unserer engen Zusammenarbeit mit dem dokKA-Festival, sondern auch daran, dass das Kino für uns nicht (nur) eine kleine Flucht aus der Welt bedeutet, sondern umgekehrt eben auch den genauen Blick auf die Welt, auf das Schöne wie Schreckliche, auf die Wahrheit und die Lügen, auf Politik und Gesellschaft, Kunst und Kultur – und auf die Menschen. Und wenn es sich ergibt, dann wollen wir über diese Filme auch ins Gespräch miteinander kommen: Mit Filmemacher*innen, Expert*innen und unserem Publikum.",
+      "text": "",
+      "hazards": [
+        "Removed a stale screening grid (WP Theatre 'wpt_listing'/'wp_theatre_prod' tiles): 7 dated film-teaser cards linking to old-site /film/<slug>/ pages with per-edition dates (19.6.–bis 29.7.) and technical specs. These are stale program state — re-create as Showings/Film entries if still relevant.",
+        "Dropped film teasers: 'Margarete Schütte-Lihotzky – Architektin, Kommunistin, Widerstandskämpferin', 'Mein neues altes Ich', 'Silent Flood' (Ukrainer in Karlsruhe), 'Sudan, Remember Us', 'Kassensturz - Kommunen vor dem Kollaps' (SWR), 'It Happened on our Ground', 'Die Eiche - Mein Zuhause'.",
+        "Source intro has a likely typo in the original WP text ('fühlen wir ins dem dokumentarischen Kino') — kept verbatim per the verbatim-German rule; editorial team may want to fix to 'uns dem'.",
+        "Gendering asterisks reconstructed from broken inline <em> markup ('Filmemacher<em>innen</em>' -> 'Filmemacher*innen', 'Expert<em>innen</em>' -> 'Expert*innen'); confirm the desired gendering form.",
+        "Mentions the dokKA-Festival — that named festival likely has its own migrated/curated entry under Festivals; cross-link rather than duplicate.",
+        "After removing the stale grid, only the single evergreen lead paragraph survives; placed in 'intro', body 'text' left empty."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "black-history-month",
+      "title": "Black History Month",
+      "category": "reihe",
+      "intro": "Der Black History Month (auch bekannt als African American History Month) ist ein jährliches Ereignis, das im Februar stattfindet und dessen Ziel es ist, die Geschichte und Kultur afroamerikanischer Menschen zu feiern und zu ehren.",
+      "text": "Der Monat wurde erstmals 1976 vom amerikanischen Präsidenten Gerald Ford anerkannt und hat seinen Ursprung in den 1920er Jahren, als der Historiker Carter G. Woodson die „Negro History Week\" ins Leben rief. Die Woche sollte eine Gelegenheit bieten, die Beiträge afroamerikanischer Menschen zur amerikanischen Geschichte und Kultur zu würdigen. Im Laufe der Jahre wurde die Woche zum Monat erweitert und ist heute ein fester Bestandteil des amerikanischen Kalenders.\n\nWir nehmen diesen Ansatz hier in der Kinemathek auf und zeigen verstärkt im Februar unter dem Namen BLACK HISTORY MONTH Filme, von denen wir meinen, dass sie einen wertvollen Beitrag dazu bieten können. Uns stehen dazu Partner zur Seite, die uns dabei helfen, Filmgespräche und andere Rahmenprogramme zu BLACK HISTORY MONTH anbieten zu können, darunter SIMAMA ® – STEH AUF e.V.\nWir laden Sie herzlich zu diesen Filme ein.",
+      "hazards": [
+        "Right column held only an empty '## Filme' heading with no items (the dated film grid was empty in the source). Dropped the dangling heading as stale program state.",
+        "Partner named in evergreen prose: 'SIMAMA ® – STEH AUF e.V.' — kept verbatim; no link existed in source.",
+        "Recurring annual series (each February). Classified as 'reihe'. No existing migrated page appears to duplicate this; check it does not belong under Festivals.",
+        "No forms, embeds, iframes, PDFs, or teaser links were present in the source."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "arsenal-filmerbe",
+      "title": "arsenal Filmerbe",
+      "category": "koop",
+      "intro": "Dank des Förderprogramms Filmerbe konnte das Arsenal – Institut für Film und Videokunst e.V. einige bemerkenswerte historische Filme aus ihrem Archiv restaurieren. Dabei standen Filme von Frauen, vor dem Hintergrund verschiedener Migrationserfahrungen und einer transnationalen Perspektive in dem Fokus.",
+      "text": "## Neue digitale Restaurierungen des arsenal – Institut für Film und Videokunst e.V.",
+      "hazards": [
+        "Source page is almost entirely evergreen prose: one H2 plus one descriptive paragraph. No dated screenings, film-teaser tiles, edition lists, forms, embeds, or sponsor lines were present to remove.",
+        "Stripped empty WordPress wp-block-group wrapper divs (no content inside).",
+        "Category guess is 'koop' because this is a cooperation programme with the Arsenal – Institut für Film und Videokunst e.V.; could also be 'reihe' if the team treats it as a standalone themed film series. Editorial review needed.",
+        "Likely a one-off program/series page rather than evergreen org content; check whether it should live under Festivals/Reihen or be retired once the screenings have passed. No obvious duplicate among existing curated pages."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "ukraine",
+      "title": "Ukraine – Україна",
+      "category": "reihe",
+      "intro": "Aus aktuellem Anlass möchten wir ukrainische Filme sehen, zeigen und besprechen.",
+      "text": "Wir laden Sie ein zu einer mehrteiligen Filmreihe mit Dokumentationen und Spielfilmen aus der Ukraine.",
+      "hazards": [
+        "Removed an empty wp-block-group wrapper at the end of the source — this is where the stale program grid/cards of dated screenings most likely lived; verify against the live old-site page whether specific film teasers/dates need re-curating.",
+        "Series text uses 'Aus aktuellem Anlass' — wording is time-sensitive (tied to the 2022 invasion context); editorial team should confirm it still reads as intended for an evergreen series page.",
+        "Title contains the Ukrainian word 'Україна' (Cyrillic) preserved verbatim alongside the German 'Ukraine'.",
+        "No forms, iframes/embeds, or PDF links were present in the source. No third-party requests introduced.",
+        "Possible overlap with the existing curated 'Festivals'/series structure on the new site — check whether a Ukraine film series already exists before publishing to avoid duplication."
+      ],
+      "isStale": false
+    },
+    {
+      "slug": "nuklearer-fruhling",
+      "title": "Nuklearer Frühling",
+      "category": "reihe",
+      "intro": "",
+      "text": "Aktuell sind in Deutschland noch drei AKW am Netz. Gemäß Atomgesetz werden die drei jüngsten Reaktoren spätestens Ende 2022 abgeschaltet. Am 2.2.2022 hat die EU entschieden, dass Atomenergie nachhaltig ist. Sind wir zu früh ausgestiegen?\nDie Filmreihe NUKLEARER FRÜHLING möchte dieser und weiterer Fragen um die Atomkraft im April und Mai nachgehen. Sie begleitet die PhonoLuxMachinen Ausstellung [TRINITY TWINS](https://phonolux.kinemathek-karlsruhe.de/trinity-twins/) von Michael Saup, die aktuell in unserer Lobby besucht werden kann.",
+      "hazards": [
+        "Klassifiziert als 'reihe' (themed Filmreihe zur Atomkraft). Falls die Reihe konzeptionell zu Festivals/Projekten gehört, ggf. anders einordnen.",
+        "Evergreen-Prosa verbatim behalten, enthält aber stale/dated Bezüge: 'spätestens Ende 2022', 'Am 2.2.2022', 'im April und Mai' (Edition Frühjahr 2022). Team sollte Zeitbezüge prüfen/aktualisieren.",
+        "'aktuell ... in unserer Lobby besucht werden kann' ist veralteter Ausstellungs-Status (TRINITY TWINS) – nicht mehr aktuell, ggf. anpassen.",
+        "Externer Link auf Subdomain behalten: https://phonolux.kinemathek-karlsruhe.de/trinity-twins/ – prüfen, ob noch erreichbar.",
+        "Leere wp-block-group-Wrapper am Ende entfernt; keine Screening-Grids/Teaser im Quelltext.",
+        "Keine offensichtliche Dublette zu bereits migrierten kuratierten Seiten."
+      ],
+      "isStale": false
+    }
+  ],
+  "failed": []
+}

@@ -91,6 +91,13 @@ columns:
             icon: ticket
             translate: false
             help: Externer Link. Keine Zahlung / kein iframe auf der Website (SPEC §6).
+          freeAdmission:
+            label: Freier Eintritt
+            type: toggle
+            translate: false
+            text:
+              - "Nein"
+              - "Ja"
 
   # Sidebar: routing/facets and the key visual.
   sidebar:

@@ -53,10 +53,12 @@ $image = $page->content()->get('image')->toFile();
         <div class="d-syn"><?= $page->text()->kt() ?></div>
       <?php endif ?>
       <p class="d-actions">
-        <?php if (!$isPast && $page->ticketUrl()->isNotEmpty()): ?>
-          <a class="btn" href="<?= $page->ticketUrl()->esc() ?>" rel="noopener noreferrer"><?= html(t('kinemathek.tickets', 'Tickets')) ?></a>
-        <?php endif ?>
         <?php if (!$isPast): ?>
+          <?php if ($page->freeAdmission()->toBool()): ?>
+            <span class="free"><?= html(t('kinemathek.free', 'Freier Eintritt')) ?></span>
+          <?php elseif ($page->ticketUrl()->isNotEmpty()): ?>
+            <a class="btn" href="<?= $page->ticketUrl()->esc() ?>" rel="noopener noreferrer"><?= html(t('kinemathek.tickets', 'Tickets')) ?></a>
+          <?php endif ?>
           <?php snippet('add-to-calendar', ['page' => $page, 'class' => 'btn']) ?>
         <?php endif ?>
         <a class="btn" href="<?= $site->find('events')?->url() ?? $site->url() ?>"><?= html(t('kinemathek.mb.nav.events')) ?></a>

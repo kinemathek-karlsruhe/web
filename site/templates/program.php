@@ -5,6 +5,7 @@
  * then the shared listing snippet (filter bar + day-grouped program).
  *
  * @var \Kirby\Cms\Page  $page
+ * @var bool   $past       archive mode (screening history) vs upcoming program
  * @var array  $days       day key (Y-m-d) => Page[] (Showings + Events)
  * @var array  $dayMeta    day key => [dow, num, month|null, detailDate]
  * @var string $todayKey
@@ -28,6 +29,7 @@
   <?php /* everything below the masthead is the pivot's swappable region */ ?>
   <div id="pivot-content">
 
+  <?php if (!$past): ?>
   <figure class="hero<?= $heroFile ? '' : ' no-image' ?>">
     <?php if ($heroFile): ?>
       <img src="<?= $heroFile->resize(1280)->url() ?>"
@@ -55,11 +57,14 @@
       </div>
     <?php endif ?>
   </figure>
+  <?php endif /* !$past */ ?>
 
   <?php snippet('monatsblatt-listing', [
-      'days'     => $days,
-      'dayMeta'  => $dayMeta,
-      'todayKey' => $todayKey,
+      'days'          => $days,
+      'dayMeta'       => $dayMeta,
+      'todayKey'      => $todayKey,
+      'past'          => $past,
+      'archiveToggle' => true,  // the Archiv button lives in the filter row (Spielplan only)
   ]) ?>
 
   <?php snippet('monatsblatt-colophon') ?>

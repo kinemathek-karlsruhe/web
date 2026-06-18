@@ -25,6 +25,12 @@ Icon
 /media/*
 !/media/index.html
 
+# Migration scratch (scripts/import) — cached scrape HTML + Python bytecode.
+# The *.json scrape outputs ARE committed (reproducibility), like old-site-program.json.
+# ----------------------------------------------------------------------------
+/scripts/import/.archive-cache/
+**/__pycache__/
+
 # Lock files
 # ---------------
 .lock

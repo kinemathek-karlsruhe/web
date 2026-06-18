@@ -34,7 +34,9 @@ $parts = [];
 if ($page->text()->isNotEmpty()) {
     $parts[] = $page->text()->value();
 }
-if ($page->ticketUrl()->isNotEmpty()) {
+if ($page->freeAdmission()->toBool()) {
+    $parts[] = t('kinemathek.free', 'Freier Eintritt');
+} elseif ($page->ticketUrl()->isNotEmpty()) {
     $parts[] = t('kinemathek.tickets', 'Tickets') . ': ' . $page->ticketUrl()->value();
 }
 

@@ -21,14 +21,19 @@ return function ($site, $page, $kirby) {
     // "include today" can be toggled via ?today=0 (defaults to including today).
     $includeToday = get('today', '1') !== '0';
 
+    // Archive toggle: ?past=1 shows the screening history (most-recent first)
+    // instead of the upcoming program. Same listing + facet filters.
+    $past = get('past', '0') === '1';
+
     // Optional placement restriction, e.g. ?category=koop.
     $categoryParam = get('category');
     $categories    = $categoryParam ? explode(',', $categoryParam) : null;
 
-    // Base future program (optionally category-restricted) before facet filtering.
+    // Base program (future, or past history) — category-restricted before facets.
     $program = $site->program([
         'includeToday' => $includeToday,
         'categories'   => $categories,
+        'past'         => $past,
     ]);
 
     $results = Kinemathek::filterByFacets($program, [
@@ -52,7 +57,8 @@ return function ($site, $page, $kirby) {
         }
         $days[date('Y-m-d', $ts)][] = $item;
     }
-    ksort($days);
+    // Future: oldest-first (soonest screening at the top). Past: newest-first.
+    $past ? krsort($days) : ksort($days);
 
     $dayMeta   = [];
     $prevMonth = null;
@@ -80,38 +86,45 @@ return function ($site, $page, $kirby) {
     }
     $stripItems = $stripKey !== null ? $days[$stripKey] : [];
 
-    // Hero: first strip item whose film has artwork (still preferred).
-    // (-> FilmPage::artwork() once the plugin unfreezes; same policy in the
-    //     template's $entryData.)
+    // Hero: first strip item with artwork. A Showing uses its film's still
+    // (preferred) or poster; an Event has no film, so fall back to the event's
+    // own `image` (read via content()->get('image') — ->image() is a native
+    // Page method, same trap the listing snippet works around).
     $heroFile  = null;
     $heroTitle = null;
     foreach ($stripItems as $item) {
-        if (!$film = $item->film()) {
-            continue;
+        if ($film = $item->film()) {
+            $file  = $film->stills()->toFiles()->first() ?? $film->posterFile();
+            $title = $film->title()->value();
+        } else {
+            $file  = $item->content()->get('image')->toFile();
+            $title = $item->displayTitle();
         }
-        $file = $film->stills()->toFiles()->first() ?? $film->posterFile();
         if ($file) {
             $heroFile  = $file;
-            $heroTitle = $film->title()->value();
+            $heroTitle = $title;
             break;
         }
     }
 
-    // Masthead month range ("Juni/Juli" + two-digit year superscript).
-    $dayKeys = array_keys($days);
-    if ($dayKeys !== []) {
-        $firstTs = strtotime(reset($dayKeys) . ' 12:00');
-        $lastTs  = strtotime(end($dayKeys) . ' 12:00');
-        $m1 = Kinemathek::localDate($firstTs, 'month');
-        $m2 = Kinemathek::localDate($lastTs, 'month');
-        $titleMonths = $m1 === $m2 ? $m1 : $m1 . '/' . $m2;
-        $titleYear   = date('y', $firstTs);
+    // Masthead month label ("Juni/Juli" + two-digit year superscript),
+    // anchored to the current calendar month — NOT the scheduled range, so
+    // next month's already-published showings (visible in the listing below)
+    // never bleed into the title. June + July are published as one combined
+    // summer issue, so months 6+7 are the ONLY double label; every other
+    // month is single. Both summer months share the current year.
+    $year  = (int)date('Y');
+    $month = (int)date('n');
+    if ($month === 6 || $month === 7) {
+        $titleMonths = Kinemathek::localDate(mktime(12, 0, 0, 6, 15, $year), 'month')
+            . '/' . Kinemathek::localDate(mktime(12, 0, 0, 7, 15, $year), 'month');
     } else {
         $titleMonths = Kinemathek::localDate(time(), 'month');
-        $titleYear   = date('y');
     }
+    $titleYear = date('y');
 
     return [
+        'past'        => $past,
         'days'        => $days,
         'dayMeta'     => $dayMeta,
         'todayKey'    => $todayKey,
