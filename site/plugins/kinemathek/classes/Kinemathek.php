@@ -228,6 +228,47 @@ class Kinemathek
     }
 
     /**
+     * Every distinct value a facet actually carries across the content, for
+     * Panel pre-filter option lists ("presets" the editor can pick instead of
+     * free-typing). Read live in the Panel, so the list always reflects the
+     * real archive — including this environment's content, which is not in the
+     * repo. Source follows the facet's 'on': film-facets (series/Reihe,
+     * genre, country, language) come from the film archive; per-occurrence and
+     * 'both' facets also read showings/events.
+     *
+     * Original casing is preserved (first seen wins) and values are sorted
+     * naturally + case-insensitively, like a human would expect a picker.
+     *
+     * @return string[] distinct, original-cased values
+     */
+    public static function facetOptions(string $facet): array
+    {
+        $config = static::FACETS[$facet] ?? null;
+        if ($config === null) {
+            return [];
+        }
+
+        $pages = match ($config['on']) {
+            'self' => static::showings()->merge(static::events()),
+            'both' => static::films()->merge(static::showings())->merge(static::events()),
+            default => static::films(), // 'film'
+        };
+
+        // Read the facet field directly on each page in the chosen source (the
+        // source already targets where the value lives, so no film-hop here).
+        $values = [];
+        foreach ($pages as $page) {
+            foreach (static::splitField($page->{$facet}()) as $value) {
+                $values[mb_strtolower($value)] ??= $value; // de-dupe, keep first casing
+            }
+        }
+
+        $values = array_values($values);
+        natcasesort($values);
+        return array_values($values);
+    }
+
+    /**
      * Resolve the value(s) of a facet for a single item, following the
      * 'self' / 'film' / 'both' indirection.
      *

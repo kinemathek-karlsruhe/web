@@ -66,6 +66,12 @@ App::plugin('kinemathek/core', [
         /** The single next item on the program (homepage "today/next", SPEC §8). */
         'nextOnProgram' => fn (bool $includeToday = true) =>
             Kinemathek\Kinemathek::program(['includeToday' => $includeToday, 'limit' => 1])->first(),
+
+        /**
+         * Distinct values a facet carries across the content — for Panel
+         * pre-filter option lists, e.g. `query: site.facetOptions("series")`.
+         */
+        'facetOptions' => fn (string $facet = ''): array => Kinemathek\Kinemathek::facetOptions($facet),
     ],
 
     'fieldMethods' => [

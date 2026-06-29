@@ -8,6 +8,7 @@
  * @var array  $days
  * @var array  $dayMeta
  * @var string $todayKey
+ * @var bool   $configured  page is scoped by category and/or a pre-filter
  */
 ?>
 <?php snippet('header', ['languageNav' => false]) ?>
@@ -29,7 +30,7 @@
         'dayMeta'  => $dayMeta,
         'todayKey' => $todayKey,
     ]) ?>
-  <?php elseif ($page->categories()->isNotEmpty()): ?>
+  <?php elseif ($configured): ?>
     <p class="collection-none"><?= html(t('kinemathek.mb.collection.none')) ?></p>
   <?php endif ?>
 
