@@ -45,6 +45,3 @@ sections:
   subpages:
     type: pages
     label: Unterseiten
-    templates:
-      - text
-      - custom
