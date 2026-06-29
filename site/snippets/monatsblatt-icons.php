@@ -6,6 +6,7 @@
  *
  *  #i-ut    subtitle rectangle (Originalfassung mit Untertiteln)
  *  #i-talk  speech bubble (Einführung/Filmgespräch)
+ *  #i-free  ticket with stub (Freier Eintritt) — filter chip only
  */
 ?>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -20,5 +21,11 @@
           fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/>
     <line x1="5.4" y1="6.2" x2="20.6" y2="6.2" stroke="currentColor" stroke-width="1.7"/>
     <line x1="5.4" y1="9.8" x2="16.2" y2="9.8" stroke="currentColor" stroke-width="1.7"/>
+  </symbol>
+  <symbol id="i-free" viewBox="0 0 26 18">
+    <rect x="1.2" y="2.6" width="23.6" height="12.8" rx="2.4"
+          fill="none" stroke="currentColor" stroke-width="1.9"/>
+    <line x1="17.4" y1="3.2" x2="17.4" y2="14.8"
+          stroke="currentColor" stroke-width="1.6" stroke-dasharray="2 2.2"/>
   </symbol>
 </svg>

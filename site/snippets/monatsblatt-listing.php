@@ -100,6 +100,7 @@ $entryData = function (\Kirby\Cms\Page $item, string $detailDate) use ($markMap,
         'marks'      => $marks,
         'omu'        => $omu,
         'talk'       => $item->hasDiscussion()->toBool(),
+        'free'       => $item->freeAdmission()->toBool(),
         'note'       => trim($item->sonderinfo()->value() ?? ''),
         'still'      => $still,
         'synopsis'   => trim(($film ? $film->synopsis()->value() : $item->text()->value()) ?? ''),
@@ -135,6 +136,9 @@ usort($allSeries, 'strcasecmp');
   </button>
   <button type="button" class="chip" data-flag="talk" aria-pressed="false">
     <svg class="icon" aria-hidden="true"><use href="#i-talk"/></svg> <?= html(t('kinemathek.mb.talk')) ?>
+  </button>
+  <button type="button" class="chip" data-flag="free" aria-pressed="false">
+    <svg class="icon" aria-hidden="true"><use href="#i-free"/></svg> <?= html(t('kinemathek.free', 'Freier Eintritt')) ?>
   </button>
   <?php if ($allSeries !== []): ?>
     <label class="reihe">

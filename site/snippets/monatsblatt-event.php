@@ -15,6 +15,7 @@
  * @var array  $marks     subtitle markers: [icon(bool), note(string), label(string)]
  * @var bool   $omu
  * @var bool   $talk
+ * @var bool   $free
  * @var string $note
  */
 ?>
@@ -26,6 +27,7 @@
          <?php if ($series !== ''): ?>data-series="<?= html($series) ?>"<?php endif ?>
          <?= $omu ? 'data-omu' : '' ?>
          <?= $talk ? 'data-talk' : '' ?>
+         <?= $free ? 'data-free' : '' ?>
          data-detail="#<?= $detailId ?>">
   <span class="time"><?= $timeH ?><sup><?= $timeM ?></sup></span>
   <span class="head">
