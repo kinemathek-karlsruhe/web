@@ -7,22 +7,11 @@ options:
   template:
     - collection
     - custom
-    - partner
 
 status:
   draft: Entwurf
   unlisted: Versteckt (nur per Link erreichbar)
   listed: Im Seitenmenü (Pivot-Navigation)
-
-sections:
-  subpages:
-    type: pages
-    label: Unterseiten
-    templates:
-      - text
-      - partner
-      - custom
-    empty: Keine Unterseiten.
 
 fields:
   intro:

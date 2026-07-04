@@ -1,0 +1,23 @@
+title: Bild
+icon: image
+
+accept:
+  mime:
+    - image/jpeg
+    - image/png
+    - image/webp
+    - image/svg+xml
+
+fields:
+  alt:
+    label: Alt-Text / Bildunterschrift
+    type: text
+    icon: text
+    help: Beschreibung für Screenreader; dient auch als Lightbox-Unterschrift.
+  link:
+    label: Link (optional)
+    type: url
+    icon: url
+    help: >-
+      Wenn gesetzt, öffnet ein Klick auf das Bild diese Adresse (statt der
+      Lightbox) — z. B. die Website eines Partners.

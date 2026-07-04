@@ -16,110 +16,132 @@ status:
   unlisted: Versteckt (nur per Link erreichbar)
   listed: Im Seitenmenü (Pivot-Navigation)
 
-# NB: top-level `fields:` is shorthand for a fields section — it must NOT be
-# combined with a sibling `sections:` (the pages section silently vanishes).
-sections:
-  content:
-    type: fields
-    fields:
-      intro:
-        label: Einleitung
-        type: textarea
-        size: small
-      categories:
-        label: Programm-Kategorien
-        type: multiselect
-        translate: false
-        options:
-          spielplan: Spielplan
-          koop: Koop
-          festival: Festival
-          filmbildung: Filmbildung
-        help: >-
-          Kommende Vorstellungen/Events mit diesen Kategorien erscheinen
-          automatisch unter der Einleitung.
-      text:
-        label: Weiterer Text
-        type: textarea
-        size: large
-  # Optional pre-filters: narrow the automatic listing above to matching
-  # showings/films. Read generically in the controller by facet name
-  # (filterSeries -> the "series"/Reihe facet in Kinemathek::FACETS), then run
-  # through the same filterByFacets() as the Spielplan's query-string facets.
-  # AND across fields, OR within one. translate: mirrors the field contract —
-  # series/genre/keywords are translatable, country/language/subtitles/discussion
-  # are invariant (codes).
-  vorfilter:
-    type: fields
-    fields:
-      filterInfo:
-        type: info
-        text: >-
-          Optional: schränkt die automatische Programmliste oben zusätzlich auf
-          passende Vorstellungen ein – z. B. nur eine bestimmte Reihe. Mehrere
-          Felder wirken zusammen (UND), mehrere Werte in einem Feld als ODER.
-          Leer lassen = keine zusätzliche Einschränkung.
-      # Each tags field's option list is pulled live from the content
-      # (site.facetOptions -> Kinemathek::facetOptions) so editors pick from the
-      # Reihen/Genres that actually exist — yet may still type a custom value.
-      filterSeries:
-        label: Reihe
-        type: tags
-        icon: layers
-        width: 1/1
-        options:
-          type: query
-          query: 'site.facetOptions("series")'
-      filterGenre:
-        label: Genre
-        type: tags
-        icon: tag
-        width: 1/2
-        options:
-          type: query
-          query: 'site.facetOptions("genre")'
-      filterKeywords:
-        label: Schlagworte
-        type: tags
-        icon: tag
-        width: 1/2
-        options:
-          type: query
-          query: 'site.facetOptions("keywords")'
-      filterCountry:
-        label: Land
-        type: tags
-        translate: false
-        icon: flag
-        width: 1/2
-        options:
-          type: query
-          query: 'site.facetOptions("country")'
-      filterLanguage:
-        label: Originalsprache
-        type: tags
-        translate: false
-        icon: globe
-        width: 1/2
-        options:
-          type: query
-          query: 'site.facetOptions("language")'
-      filterSubtitles:
-        label: Untertitel / Fassung
-        type: multiselect
-        translate: false
-        icon: globe
-        width: 1/2
-        options:
-          OmU: OmU
-          OmeU: OmeU
-          OF: Originalfassung
-          dtF: dt. Fassung
-      filterDiscussion:
-        label: Mit Filmgespräch
-        type: toggle
-        translate: false
-        width: 1/2
-  subpages:
-    type: pages
-    label: Unterseiten
+columns:
+
+  # ── Hauptspalte (2/3) ────────────────────────────────────────────────────
+  main:
+    width: 2/3
+    sections:
+
+      content:
+        type: fields
+        fields:
+          intro:
+            label: Einleitung
+            type: textarea
+            size: small
+          categories:
+            label: Programm-Kategorien
+            type: multiselect
+            translate: false
+            options:
+              spielplan: Spielplan
+              koop: Koop
+              festival: Festival
+              filmbildung: Filmbildung
+            help: >-
+              Kommende Vorstellungen/Events mit diesen Kategorien erscheinen
+              automatisch unter der Einleitung.
+          text:
+            label: Weiterer Text
+            type: textarea
+            size: large
+
+      # Optional pre-filters: narrow the automatic listing above to matching
+      # showings/films. Read generically in the controller by facet name
+      # (filterSeries -> the "series"/Reihe facet in Kinemathek::FACETS), then
+      # run through the same filterByFacets() as the Spielplan's query-string
+      # facets. AND across fields, OR within one. translate: mirrors the field
+      # contract — series/genre/keywords are translatable,
+      # country/language/subtitles/discussion are invariant (codes).
+      vorfilter:
+        type: fields
+        fields:
+          filterInfo:
+            type: info
+            text: >-
+              Optional: schränkt die automatische Programmliste oben zusätzlich
+              auf passende Vorstellungen ein – z. B. nur eine bestimmte Reihe.
+              Mehrere Felder wirken zusammen (UND), mehrere Werte in einem Feld
+              als ODER. Leer lassen = keine zusätzliche Einschränkung.
+          filterSeries:
+            label: Reihe
+            type: tags
+            icon: layers
+            width: 1/1
+            options:
+              type: query
+              query: 'site.facetOptions("series")'
+          filterGenre:
+            label: Genre
+            type: tags
+            icon: tag
+            width: 1/2
+            options:
+              type: query
+              query: 'site.facetOptions("genre")'
+          filterKeywords:
+            label: Schlagworte
+            type: tags
+            icon: tag
+            width: 1/2
+            options:
+              type: query
+              query: 'site.facetOptions("keywords")'
+          filterCountry:
+            label: Land
+            type: tags
+            translate: false
+            icon: flag
+            width: 1/2
+            options:
+              type: query
+              query: 'site.facetOptions("country")'
+          filterLanguage:
+            label: Originalsprache
+            type: tags
+            translate: false
+            icon: globe
+            width: 1/2
+            options:
+              type: query
+              query: 'site.facetOptions("language")'
+          filterSubtitles:
+            label: Untertitel / Fassung
+            type: multiselect
+            translate: false
+            icon: globe
+            width: 1/2
+            options:
+              OmU: OmU
+              OmeU: OmeU
+              OF: Originalfassung
+              dtF: dt. Fassung
+          filterDiscussion:
+            label: Mit Filmgespräch
+            type: toggle
+            translate: false
+            width: 1/2
+
+      subpages:
+        type: pages
+        label: Unterseiten
+
+  # ── Seitenleiste (1/3) — Bilder im Cards-Format ──────────────────────────
+  sidebar:
+    width: 1/3
+    sections:
+      bilder:
+        type: fields
+        fields:
+          bilderHeadline:
+            label: Bilder
+            type: headline
+          bilder:
+            label: Bilder
+            type: files
+            layout: cards          # Karten-Ansicht
+            multiple: true         # mehrere Bilder erlaubt
+            translate: false       # ein Bildersatz für alle Sprachen
+            uploads:
+              template: bild
