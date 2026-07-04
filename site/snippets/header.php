@@ -37,7 +37,7 @@ foreach ([
         break;
     }
 }
-$metaDescription = $metaDescription ?: t('kinemathek.mb.eyebrow', 'Kino in der Kaiserpassage');
+$metaDescription = $metaDescription ?: t('kinemathek.mb.eyebrow', 'Barrierearm, klimatisiert und stillfreundlich');
 
 // Image: a film's first still (landscape previews better than the portrait
 // poster), then the poster; Events/static pages use their own image field.

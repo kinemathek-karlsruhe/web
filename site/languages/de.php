@@ -91,7 +91,7 @@ return [
         'kinemathek.event.discussion'   => 'Mit Gespräch.',
 
         // Monatsblatt (the designed Spielplan view)
-        'kinemathek.mb.eyebrow'          => 'Kino in der Kaiserpassage',
+        'kinemathek.mb.eyebrow'          => 'Barrierearm, klimatisiert und stillfreundlich',
         'kinemathek.mb.inCinema'         => 'im Kino',
         'kinemathek.mb.today'            => 'Heute',
         'kinemathek.mb.soon'             => 'Demnächst',

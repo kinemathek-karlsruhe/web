@@ -240,6 +240,7 @@ body {
   width: clamp(6.5rem, 11vw, 9rem);
   height: auto;
 }
+.brand-logo svg { display: block; width: 100%; height: auto; }
 .brand-logo .bg { fill: var(--paper); }
 .brand-logo .fg { fill: var(--ink); }
 
@@ -354,6 +355,16 @@ body {
 .hs-event .vtag.saal { border-color: var(--paper); }
 .hs-event .vtag.box { background: var(--paper); color: var(--ink); border-color: var(--paper); }
 .hs-event .vtag.unterwegs { border-color: var(--paper); }
+
+/* phones: the strip easily wraps to two or three rows and eats the photo —
+   tighter type and padding keep more of the image visible */
+@media (max-width: 760px) {
+  .heute-strip { gap: .2rem 1rem; padding: .35rem .7rem .4rem; }
+  .hs-label { font-size: .68rem; }
+  .hs-time { font-size: .9rem; }
+  .hs-title { font-size: 1rem; }
+  .heute-strip .vtag { font-size: .52rem; }
+}
 
 /* ---------- Filter bar ---------- */
 

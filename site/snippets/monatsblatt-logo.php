@@ -4,9 +4,13 @@
  * fills can bind to the theme variables (.bg -> paper, .fg -> ink; see
  * .brand-logo in assets/css/index.css). The source SVG ships opaque white
  * shapes — inlining keeps the lettering exactly on the page colour.
+ *
+ * Wrapped in a link back to the homepage — the SVG carries no semantics of
+ * its own (aria-hidden), the link is the accessible "Kinemathek Karlsruhe".
  */
 ?>
-<svg class="brand-logo" viewBox="0 0 336.9 283.5" role="img" aria-label="Kinemathek Karlsruhe" xmlns="http://www.w3.org/2000/svg">
+<a class="brand-logo" href="<?= $site->url() ?>" aria-label="Kinemathek Karlsruhe">
+<svg viewBox="0 0 336.9 283.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
   <polygon class="bg" points="309.2,273 43.6,211.7 43.6,10.4 309.2,71.8"/>
   <polygon class="fg" points="317.4,283.5 35.3,218.3 35.3,218.3 35.3,137.7 43.6,135.8 43.6,211.7 309.2,273 309.2,71.8 43.6,10.4 43.6,119.6 35.3,121.5 35.3,0 317.5,65.2 316.9,102 326.3,70.8 334.5,68.9 324.4,103 336.9,134.8 328.3,136.8 317.5,107.2"/>
   <path class="fg" d="M154.2,209.3l6.4,16.2l-4.4,1l-5.5-15v16.3l-4.2,1V195l4.2-1l-0.3,14.8l4.7-15.8l4.2-1L154.2,209.3z"/>
@@ -27,3 +31,4 @@
   <path class="fg" d="M256,122.7l-8.6,2v30.9l-8.2,1.9V90.8l8.2-1.9l-0.1,28.2l8.7-2l0-28.2l8.2-1.8v66.7l-8.4,1.9L256,122.7z"/>
   <path class="fg" d="M285,116.3v22.4l13.7-3.2v8.1l-22.2,5.1V82l20.4-4.7v7.8L285,87.9v20.4l11-2.5l0,8L285,116.3z"/>
 </svg>
+</a>

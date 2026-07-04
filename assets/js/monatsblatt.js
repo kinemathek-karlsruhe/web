@@ -192,6 +192,44 @@
     goPivot(item, true);
   });
 
+  /* Mobile: the strip is a WP7 panorama, so swiping the masthead moves
+     through the same sections a tap would — a phone-width, text-only strip
+     is a small target. Left = next, right = previous (in list order); the
+     move itself is still the forward-only slide goPivot always does. */
+  var masthead = document.querySelector('.masthead');
+  if (masthead) {
+    var touchStartX = null;
+    var touchStartY = null;
+
+    masthead.addEventListener('touchstart', function (e) {
+      if (e.touches.length !== 1) return;
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+
+    masthead.addEventListener('touchend', function (e) {
+      if (touchStartX === null || !window.matchMedia('(max-width: 760px)').matches) {
+        touchStartX = touchStartY = null;
+        return;
+      }
+      var touch = e.changedTouches[0];
+      var dx = touch.clientX - touchStartX;
+      var dy = touch.clientY - touchStartY;
+      touchStartX = touchStartY = null;
+      if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
+
+      var idx = pivotItems.indexOf(pivotItems.filter(function (i) {
+        return i.dataset.pivot === pivotCurrent;
+      })[0]);
+      if (idx === -1) return;
+      var nextIdx = dx < 0
+        ? (idx + 1) % pivotItems.length
+        : (idx - 1 + pivotItems.length) % pivotItems.length;
+      var item = pivotItems[nextIdx];
+      if (item.href) goPivot(item, true);
+    }, { passive: true });
+  }
+
   window.addEventListener('popstate', function () {
     var path = location.pathname.replace(/\/$/, '');
     var item = pivotItems.filter(function (i) {

@@ -83,7 +83,7 @@ return [
         'kinemathek.event.discussion'   => 'With talk.',
 
         // Monatsblatt (the designed Spielplan view)
-        'kinemathek.mb.eyebrow'          => 'Cinema in the Kaiserpassage',
+        'kinemathek.mb.eyebrow'          => 'Low-barrier, air-conditioned and breastfeeding-friendly',
         'kinemathek.mb.inCinema'         => 'at the cinema',
         'kinemathek.mb.today'            => 'Today',
         'kinemathek.mb.soon'             => 'Coming up',
