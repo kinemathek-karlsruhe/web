@@ -12,6 +12,7 @@
   var strip = document.querySelector('.pivot-strip');
   var pivotContent = document.getElementById('pivot-content');
   if (!strip || !pivotContent) return;
+  var masthead = document.querySelector('.masthead');
 
   var pivotItems = Array.prototype.slice.call(strip.querySelectorAll('.pivot-item'));
   var activeItem = strip.querySelector('.pivot-item.is-active') || pivotItems[0];
@@ -176,7 +177,6 @@
       setTimeout(function () { pivotContent.classList.remove('pivot-in'); }, 450);
       if (push) history.pushState({ pivot: key }, '', item.href);
       /* per-section masthead extras (e.g. the legend) follow the section */
-      var masthead = document.querySelector('.masthead');
       if (masthead) masthead.dataset.section = key;
       /* page-specific scripts (program.js) (re)initialise on this */
       document.dispatchEvent(new CustomEvent('pivot:content', { detail: { key: key } }));
@@ -196,15 +196,21 @@
      through the same sections a tap would — a phone-width, text-only strip
      is a small target. Left = next, right = previous (in list order); the
      move itself is still the forward-only slide goPivot always does. */
-  var masthead = document.querySelector('.masthead');
   if (masthead) {
     var touchStartX = null;
     var touchStartY = null;
 
     masthead.addEventListener('touchstart', function (e) {
-      if (e.touches.length !== 1) return;
+      /* a second finger (pinch-zoom) voids the gesture — otherwise its
+         touchend pairs the old start point with the new end and fires a
+         phantom swipe */
+      if (e.touches.length !== 1) { touchStartX = touchStartY = null; return; }
       touchStartX = e.touches[0].clientX;
       touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+
+    masthead.addEventListener('touchcancel', function () {
+      touchStartX = touchStartY = null;
     }, { passive: true });
 
     masthead.addEventListener('touchend', function (e) {
@@ -218,22 +224,26 @@
       touchStartX = touchStartY = null;
       if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
 
-      var idx = pivotItems.indexOf(pivotItems.filter(function (i) {
+      var idx = pivotItems.findIndex(function (i) {
         return i.dataset.pivot === pivotCurrent;
-      })[0]);
+      });
       if (idx === -1) return;
-      var nextIdx = dx < 0
-        ? (idx + 1) % pivotItems.length
-        : (idx - 1 + pivotItems.length) % pivotItems.length;
-      var item = pivotItems[nextIdx];
-      if (item.href) goPivot(item, true);
+      /* step over the href-less self item (unlisted pages) instead of
+         letting one swipe direction go permanently dead on it */
+      var len = pivotItems.length;
+      var step = dx < 0 ? 1 : -1;
+      for (var n = 1; n < len; n++) {
+        var item = pivotItems[(((idx + step * n) % len) + len) % len];
+        if (item.href) { goPivot(item, true); return; }
+      }
     }, { passive: true });
   }
 
   window.addEventListener('popstate', function () {
     var path = location.pathname.replace(/\/$/, '');
     var item = pivotItems.filter(function (i) {
-      return new URL(i.href).pathname.replace(/\/$/, '') === path;
+      /* the self-title item is a plain span without href */
+      return i.href && new URL(i.href).pathname.replace(/\/$/, '') === path;
     })[0] || pivotItems[0];
     goPivot(item, false);
   });
