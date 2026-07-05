@@ -238,8 +238,8 @@ body {
   z-index: 5;
   display: block;
   width: clamp(6.5rem, 11vw, 9rem);
-  height: auto;
 }
+.brand-logo:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 .brand-logo svg { display: block; width: 100%; height: auto; }
 .brand-logo .bg { fill: var(--paper); }
 .brand-logo .fg { fill: var(--ink); }
@@ -363,7 +363,7 @@ body {
   .hs-label { font-size: .68rem; }
   .hs-time { font-size: .9rem; }
   .hs-title { font-size: 1rem; }
-  .heute-strip .vtag { font-size: .52rem; }
+  /* .vtag keeps its base .6rem — already the floor for legible uppercase */
 }
 
 /* ---------- Filter bar ---------- */
