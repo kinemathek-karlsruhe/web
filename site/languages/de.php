@@ -90,6 +90,11 @@ return [
         'kinemathek.showing.others'     => 'Weitere Termine dieses Films',
         'kinemathek.event.discussion'   => 'Mit Gespräch.',
 
+        // Meta-description fallback (search/share snippets) — deliberately its
+        // own key: the visible eyebrow line can change without silently
+        // rewriting the site's SEO description (and vice versa)
+        'kinemathek.meta.description'    => 'Kino in der Kaiserpassage',
+
         // Monatsblatt (the designed Spielplan view)
         'kinemathek.mb.eyebrow'          => 'Barrierearm, klimatisiert und stillfreundlich',
         'kinemathek.mb.inCinema'         => 'im Kino',

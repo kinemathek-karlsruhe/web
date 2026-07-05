@@ -22,7 +22,8 @@ $metaTitle = method_exists($page, 'displayTitle')
     : $page->title()->value();
 
 // Description: the page's first prose field — a Showing borrows its Film's
-// synopsis; container pages (program/films/events) fall back to the eyebrow.
+// synopsis; container pages (program/films/events) fall back to the fixed
+// site description (kinemathek.meta.description).
 $film = $page instanceof \Kinemathek\ShowingPage ? $page->film() : null;
 $metaDescription = null;
 foreach ([
@@ -37,7 +38,7 @@ foreach ([
         break;
     }
 }
-$metaDescription = $metaDescription ?: t('kinemathek.mb.eyebrow', 'Barrierearm, klimatisiert und stillfreundlich');
+$metaDescription = $metaDescription ?: t('kinemathek.meta.description', 'Kino in der Kaiserpassage');
 
 // Image: a film's first still (landscape previews better than the portrait
 // poster), then the poster; Events/static pages use their own image field.

@@ -82,6 +82,9 @@ return [
         'kinemathek.showing.others'     => 'More dates for this film',
         'kinemathek.event.discussion'   => 'With talk.',
 
+        // Meta-description fallback (search/share snippets) — own key, see de.php
+        'kinemathek.meta.description'    => 'Cinema in the Kaiserpassage',
+
         // Monatsblatt (the designed Spielplan view)
         'kinemathek.mb.eyebrow'          => 'Low-barrier, air-conditioned and breastfeeding-friendly',
         'kinemathek.mb.inCinema'         => 'at the cinema',
