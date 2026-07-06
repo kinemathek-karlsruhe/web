@@ -17,9 +17,9 @@
  * @var string $credits
  * @var array  $marks
  * @var bool   $talk
- * @var string $note
+ * @var string $noteHtml  Sonderinfo as rendered KirbyText (images, rules, bold)
  * @var ?\Kirby\Cms\File $still
- * @var string $synopsis
+ * @var string $synHtml   film synopsis / event text as rendered KirbyText
  * @var bool   $past      archive mode: no ticket/calendar CTAs (history only)
  */
 $past = $past ?? false;
@@ -46,7 +46,7 @@ $past = $past ?? false;
           <?php endif ?>
         </ul>
       <?php endif ?>
-      <?php if ($note !== ''): ?><p class="d-note"><?= html($note) ?></p><?php endif ?>
+      <?php if ($noteHtml !== ''): ?><div class="d-note"><?= $noteHtml ?></div><?php endif ?>
       <?php if ($still): ?>
         <figure class="d-still">
           <?php /* data-src: fetched on first open (program.js), not on page load —
@@ -55,7 +55,7 @@ $past = $past ?? false;
                alt="<?= $still->alt()->or($title)->esc() ?>">
         </figure>
       <?php endif ?>
-      <?php if ($synopsis !== ''): ?><p class="d-syn"><?= nl2br(html($synopsis)) ?></p><?php endif ?>
+      <?php if ($synHtml !== ''): ?><div class="d-syn"><?= $synHtml ?></div><?php endif ?>
       <p class="d-actions">
         <?php /* past screenings are history: their ticket link is dead and a
                  calendar export is moot — only the film page stays useful */ ?>

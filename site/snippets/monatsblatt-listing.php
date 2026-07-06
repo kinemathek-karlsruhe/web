@@ -101,9 +101,14 @@ $entryData = function (\Kirby\Cms\Page $item, string $detailDate) use ($markMap,
         'omu'        => $omu,
         'talk'       => $item->hasDiscussion()->toBool(),
         'free'       => $item->freeAdmission()->toBool(),
-        'note'       => trim($item->sonderinfo()->value() ?? ''),
+        // Sonderinfo is KirbyText (showing.php renders it with ->kt()): the
+        // compact entry gets the stripped plain text, the detail panel the
+        // full HTML — a raw ->value() would leak literal (image:…) tags.
+        'note'       => trim($item->sonderinfo()->excerpt(0)->value() ?? ''),
+        'noteHtml'   => trim($item->sonderinfo()->kt()->value() ?? ''),
         'still'      => $still,
-        'synopsis'   => trim(($film ? $film->synopsis()->value() : $item->text()->value()) ?? ''),
+        // Same deal as the note: an Event's text is KirbyText — render it.
+        'synHtml'    => trim(($film ? $film->synopsis() : $item->text())->kt()->value() ?? ''),
     ];
 };
 
