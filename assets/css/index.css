@@ -729,13 +729,14 @@ body {
 .d-flags li::before { content: "— "; }
 .d-note { margin: 0 0 .5rem; font-size: .76rem; color: var(--ink-soft); }
 /* rendered KirbyText (Sonderinfo may carry images and --- separators; a
-   line directly above --- parses as a Markdown h2 — keep it note-sized) */
-.d-note p { margin: 0 0 .35rem; }
-.d-note p:last-child { margin-bottom: 0; }
-.d-note :is(h1, h2, h3, h4) { margin: 0 0 .35rem; font-size: 1em; }
-.d-note hr { border: 0; margin: .35rem 0; }
-.d-note img, .d-syn img { display: block; height: auto; margin: .4rem 0; }
-.d-note figure, .d-syn figure { margin: 0; }
+   line directly above --- parses as a Markdown h2 — keep it note-sized).
+   .sr-note is the same field on a film page's showing rows. */
+.d-note p, .sr-note p { margin: 0 0 .35rem; }
+.d-note p:last-child, .sr-note p:last-child { margin-bottom: 0; }
+.d-note :is(h1, h2, h3, h4), .sr-note :is(h1, h2, h3, h4) { margin: 0 0 .35rem; font-size: 1em; }
+.d-note hr, .sr-note hr { border: 0; margin: .35rem 0; }
+.d-note img, .d-syn img, .sr-note img { display: block; height: auto; margin: .4rem 0; }
+.d-note figure, .d-syn figure, .sr-note figure { margin: 0; }
 .d-syn p { margin: 0 0 .5rem; }
 .d-syn p:last-child { margin-bottom: 0; }
 .d-still {
@@ -949,6 +950,8 @@ body {
 .show-row .vtag { margin-left: 0; align-self: center; }
 .show-row .sr-subs { font-size: .76rem; color: var(--ink-soft); }
 .show-row .sr-actions { margin-left: auto; display: flex; gap: .4rem; }
+/* Sonderinfo under the row line: full flex-wrap width, listing-note look */
+.show-row .sr-note { flex-basis: 100%; font-size: .76rem; color: var(--ink-soft); margin: .05rem 0 .1rem; max-width: 44rem; }
 .show-row.past { opacity: .5; }
 
 /* ---------- Single showing/event card ---------- */

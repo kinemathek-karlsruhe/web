@@ -53,6 +53,11 @@ $showRow = function (\Kirby\Cms\Page $showing, bool $clickable) {
           <?php snippet('add-to-calendar', ['page' => $showing, 'class' => 'btn']) ?>
         </span>
       <?php endif ?>
+      <?php /* Sonderinfo as KirbyText, upcoming rows only — history stays lean;
+               last child so the full-width note wraps under the row line */ ?>
+      <?php if ($clickable && $showing->sonderinfo()->isNotEmpty()): ?>
+        <div class="sr-note"><?= $showing->sonderinfo()->kt() ?></div>
+      <?php endif ?>
     </li>
     <?php
 };
