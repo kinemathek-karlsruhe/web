@@ -48,8 +48,12 @@ $still = $film ? ($film->stills()->toFiles()->first() ?? $film->posterFile()) : 
         <span class="vtag <?= $page->venueKey() ?>"><?= html($page->venueLabel()) ?></span>
         <?php if ($isPast): ?><span class="past-tag"><?= html(t('kinemathek.past', '(vergangen)')) ?></span><?php endif ?>
       </header>
-      <?php if ($film && $film->series()->isNotEmpty()): ?>
-        <p class="d-series"><?= html(Kinemathek::splitField($film->series())[0] ?? '') ?></p>
+      <?php
+      $series    = $film ? (Kinemathek::splitField($film->series())[0] ?? '') : '';
+      $seriesUrl = $series !== '' ? Kinemathek::seriesPage($series)?->url() : null;
+      ?>
+      <?php if ($series !== ''): ?>
+        <p class="d-series"><?php if ($seriesUrl): ?><a href="<?= $seriesUrl ?>"><?= html($series) ?></a><?php else: ?><?= html($series) ?><?php endif ?></p>
       <?php endif ?>
       <h2 class="d-title"><?= html($page->displayTitle()) ?></h2>
       <?php if ($credits !== ''): ?><p class="d-credits"><?= html($credits) ?></p><?php endif ?>
@@ -87,6 +91,9 @@ $still = $film ? ($film->stills()->toFiles()->first() ?? $film->posterFile()) : 
         <?php endif ?>
         <?php if ($film): ?>
           <a class="btn" href="<?= $film->url() ?>"><?= html(t('kinemathek.mb.filmpage')) ?></a>
+        <?php endif ?>
+        <?php if ($seriesUrl): ?>
+          <a class="btn" href="<?= $seriesUrl ?>"><?= html(t('kinemathek.mb.seriespage', 'Zur Reihe')) ?></a>
         <?php endif ?>
         <a class="btn" href="<?= $site->url() ?>"><?= html(t('kinemathek.program', 'Spielplan')) ?></a>
       </p>

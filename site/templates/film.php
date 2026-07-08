@@ -75,7 +75,17 @@ $showRow = function (\Kirby\Cms\Page $showing, bool $clickable) {
     <div class="fp-head">
       <div class="fp-text">
         <?php if ($page->series()->isNotEmpty()): ?>
-          <p class="d-series"><?= html($page->series()->commaList()) ?></p>
+          <p class="d-series"><?php
+            // each Reihe links to its Bereichsseite, when one is curated for it
+            $reihen = [];
+            foreach (Kinemathek::splitField($page->series()) as $reihe) {
+                $target   = Kinemathek::seriesPage($reihe);
+                $reihen[] = $target
+                    ? '<a href="' . $target->url() . '">' . html($reihe) . '</a>'
+                    : html($reihe);
+            }
+            echo implode(', ', $reihen);
+          ?></p>
         <?php endif ?>
         <h2 class="fp-title"><?= html($page->title()) ?></h2>
         <?php if ($credits !== ''): ?><p class="fp-credits"><?= html($credits) ?></p><?php endif ?>

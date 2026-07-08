@@ -116,6 +116,7 @@ return [
         'kinemathek.mb.nav.events'       => 'Events',
         'kinemathek.mb.talk'             => 'Filmgespräch',
         'kinemathek.mb.filmpage'         => 'Zur Filmseite',
+        'kinemathek.mb.seriespage'       => 'Zur Reihe',
         'kinemathek.mb.legend.omuVariants' => '(e) engl. UT',
         'kinemathek.mb.legend.talk'      => 'Vorstellung mit Einführung/Filmgespräch',
         'kinemathek.mb.legend.saal'      => 'Veranstaltung im Saal',

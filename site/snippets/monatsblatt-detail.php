@@ -13,6 +13,7 @@
  * @var string $timeH
  * @var string $timeM
  * @var string $series
+ * @var ?string $seriesUrl  Bereichsseite of the Reihe (null: plain label)
  * @var string $title
  * @var string $credits
  * @var array  $marks
@@ -22,7 +23,8 @@
  * @var string $synHtml   film synopsis / event text as rendered KirbyText
  * @var bool   $past      archive mode: no ticket/calendar CTAs (history only)
  */
-$past = $past ?? false;
+$past      = $past ?? false;
+$seriesUrl = $seriesUrl ?? null;
 ?>
 <div class="event-detail" id="<?= $detailId ?>">
   <div class="clip">
@@ -33,7 +35,9 @@ $past = $past ?? false;
         <span class="vtag <?= $venueKey ?>"><?= html($venueLabel) ?></span>
         <button type="button" class="d-close" aria-label="<?= html(t('kinemathek.mb.close')) ?>">&times;</button>
       </header>
-      <?php if ($series !== ''): ?><p class="d-series"><?= html($series) ?></p><?php endif ?>
+      <?php if ($series !== ''): ?>
+        <p class="d-series"><?php if ($seriesUrl): ?><a href="<?= $seriesUrl ?>"><?= html($series) ?></a><?php else: ?><?= html($series) ?><?php endif ?></p>
+      <?php endif ?>
       <h3 class="d-title"><?= html($title) ?></h3>
       <?php if ($credits !== ''): ?><p class="d-credits"><?= html($credits) ?></p><?php endif ?>
       <?php if ($marks !== [] || $talk): ?>
@@ -69,6 +73,9 @@ $past = $past ?? false;
         <?php endif ?>
         <?php if ($film): ?>
           <a class="btn" href="<?= $film->url() ?>"><?= html(t('kinemathek.mb.filmpage')) ?></a>
+        <?php endif ?>
+        <?php if ($seriesUrl): ?>
+          <a class="btn" href="<?= $seriesUrl ?>"><?= html(t('kinemathek.mb.seriespage', 'Zur Reihe')) ?></a>
         <?php endif ?>
       </p>
     </div>

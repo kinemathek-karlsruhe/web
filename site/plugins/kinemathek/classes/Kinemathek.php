@@ -269,6 +269,38 @@ class Kinemathek
     }
 
     /**
+     * Resolve a Reihe name to its Bereichsseite: the first non-draft
+     * collection page whose "Reihe" pre-filter (filterSeries) carries the
+     * value — or, as a fallback, whose "Schlagworte" pre-filter does (some
+     * Reihen, e.g. Maschenkino, scope their page by keyword so that non-film
+     * events can join the listing). Lets templates link a series label to the
+     * curated series page without storing a relation anywhere.
+     * Case-insensitive; memoised per content language (both filter fields are
+     * translatable).
+     */
+    public static function seriesPage(string $series): ?Page
+    {
+        static $maps = [];
+
+        $lang = kirby()->language()?->code() ?? 'default';
+        if (isset($maps[$lang]) === false) {
+            $map   = [];
+            $pages = site()->index()->filterBy('intendedTemplate', 'collection');
+            // two passes: an explicit Reihe filter always beats a keyword one
+            foreach (['filterSeries', 'filterKeywords'] as $field) {
+                foreach ($pages as $page) {
+                    foreach (static::listValues($page->{$field}()) as $value) {
+                        $map[$value] ??= $page; // first page wins on duplicates
+                    }
+                }
+            }
+            $maps[$lang] = $map;
+        }
+
+        return $maps[$lang][mb_strtolower(trim($series))] ?? null;
+    }
+
+    /**
      * Resolve the value(s) of a facet for a single item, following the
      * 'self' / 'film' / 'both' indirection.
      *

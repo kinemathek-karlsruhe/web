@@ -56,6 +56,8 @@ $entryData = function (\Kirby\Cms\Page $item, string $detailDate) use ($markMap,
     } elseif ($isEvent) {
         $series = Kinemathek::splitField($item->keywords())[0] ?? '';
     }
+    // Detail-panel link target: the Bereichsseite curated for this Reihe, if any
+    $seriesUrl = $series !== '' ? Kinemathek::seriesPage($series)?->url() : null;
 
     // Credits line, print style: "P. Cortellesi, IT 2024; 118′"
     $credits = '';
@@ -95,6 +97,7 @@ $entryData = function (\Kirby\Cms\Page $item, string $detailDate) use ($markMap,
         'timeH'      => date('G', $ts),
         'timeM'      => date('i', $ts),
         'series'     => $series,
+        'seriesUrl'  => $seriesUrl,
         'title'      => $item->displayTitle(),
         'credits'    => $credits,
         'marks'      => $marks,

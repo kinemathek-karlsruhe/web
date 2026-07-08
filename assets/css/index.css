@@ -712,6 +712,14 @@ body {
   letter-spacing: .04em;
   color: var(--ink-soft);
 }
+/* Reihe label linking to its Bereichsseite: visibly clickable, but quiet */
+.d-series a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .18em;
+}
+.d-series a:hover { color: var(--ink); }
 .d-title {
   margin: .1rem 0 .2rem;
   font-size: 1.45rem;

@@ -29,8 +29,13 @@ $image = $page->content()->get('image')->toFile();
         <span class="vtag <?= $page->venueKey() ?>"><?= html($page->venueLabel()) ?></span>
         <?php if ($isPast): ?><span class="past-tag"><?= html(t('kinemathek.past', '(vergangen)')) ?></span><?php endif ?>
       </header>
-      <?php $series = Kinemathek::splitField($page->keywords())[0] ?? ''; ?>
-      <?php if ($series !== ''): ?><p class="d-series"><?= html($series) ?></p><?php endif ?>
+      <?php
+      $series    = Kinemathek::splitField($page->keywords())[0] ?? '';
+      $seriesUrl = $series !== '' ? Kinemathek::seriesPage($series)?->url() : null;
+      ?>
+      <?php if ($series !== ''): ?>
+        <p class="d-series"><?php if ($seriesUrl): ?><a href="<?= $seriesUrl ?>"><?= html($series) ?></a><?php else: ?><?= html($series) ?><?php endif ?></p>
+      <?php endif ?>
       <h2 class="d-title"><?= html($page->displayTitle()) ?></h2>
       <?php
       $flags = [];
@@ -60,6 +65,9 @@ $image = $page->content()->get('image')->toFile();
             <a class="btn" href="<?= $page->ticketUrl()->esc() ?>" rel="noopener noreferrer"><?= html(t('kinemathek.tickets', 'Tickets')) ?></a>
           <?php endif ?>
           <?php snippet('add-to-calendar', ['page' => $page, 'class' => 'btn']) ?>
+        <?php endif ?>
+        <?php if ($seriesUrl): ?>
+          <a class="btn" href="<?= $seriesUrl ?>"><?= html(t('kinemathek.mb.seriespage', 'Zur Reihe')) ?></a>
         <?php endif ?>
         <a class="btn" href="<?= $site->find('events')?->url() ?? $site->url() ?>"><?= html(t('kinemathek.mb.nav.events')) ?></a>
       </p>
