@@ -53,6 +53,15 @@ $bilder = $page->bilder()->toFiles();
     display: block;
     object-fit: contain;        /* Originalformat, nicht beschnitten */
   }
+  /* Darstellung "Groß" (bild.yml): volle Spaltenbreite, natürliches
+     Seitenverhältnis statt Logo-Quadrat */
+  .tc-img.is-large {
+    grid-column: 1 / -1;
+    aspect-ratio: auto;
+    padding: 0;
+  }
+  .tc-img.is-large a { display: block; height: auto; }
+  .tc-img.is-large img { width: 100%; max-height: none; }
   @media (max-width: 720px) {
     .two-cols { grid-template-columns: 1fr; }
   }
@@ -108,14 +117,15 @@ $bilder = $page->bilder()->toFiles();
     <aside class="tc-side">
       <?php foreach ($bilder as $bild): ?>
         <?php $caption = $bild->alt()->or($bild->filename())->esc() ?>
-        <figure class="tc-img">
+        <?php $gross = $bild->groesse()->value() === 'gross' ?>
+        <figure class="tc-img<?= $gross ? ' is-large' : '' ?>">
           <?php if ($bild->link()->isNotEmpty()): /* eigener Link → öffnet die Adresse */ ?>
             <a href="<?= $bild->link()->esc() ?>" rel="noopener noreferrer" target="_blank">
           <?php else: /* kein Link → Lightbox */ ?>
             <a href="<?= $bild->url() ?>" data-fancybox="collection-bilder" data-caption="<?= $caption ?>">
           <?php endif ?>
             <img
-              src="<?= $bild->resize(300)->url() ?>"
+              src="<?= $bild->resize($gross ? 900 : 300)->url() ?>"
               alt="<?= $caption ?>"
               loading="lazy"
             >

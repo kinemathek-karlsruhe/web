@@ -14,6 +14,19 @@ fields:
     type: text
     icon: text
     help: Beschreibung für Screenreader; dient auch als Lightbox-Unterschrift.
+  groesse:
+    label: Darstellung
+    type: radio
+    translate: false
+    default: klein
+    columns: 2
+    options:
+      klein: Klein (Logo-Kachel)
+      gross: Groß (volle Breite)
+    help: >-
+      Klein = quadratische Kachel im Logo-Raster. Groß = Bild über die volle
+      Breite der Bildspalte im Original-Seitenverhältnis — für Fotos, Plakate
+      oder Flyer.
   link:
     label: Link (optional)
     type: url
