@@ -989,6 +989,31 @@ body {
 .d-others { margin: .7rem 0 0; font-size: .78rem; }
 .d-others a { color: inherit; margin-right: .6em; }
 
+/* Desktop: the standalone card goes two-column — text left, still right —
+   instead of one long narrow stack. Scoped to .single-card (and only when a
+   still exists); the Monatsblatt detail panels share the .d-* building blocks
+   but keep their layout untouched. */
+@media (min-width: 900px) {
+  .single-card:has(.d-still) { max-width: 66rem; }
+  .single-card .detail:has(.d-still) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, 24rem);
+    column-gap: 2.2rem;
+    align-items: start;
+    padding: 1.3rem 1.6rem 1.4rem;
+  }
+  .single-card .detail:has(.d-still) > * { grid-column: 1; }
+  /* the still owns the right column from the top; surplus spanned rows stay
+     empty and collapse to zero height */
+  .single-card .detail:has(.d-still) .d-still {
+    grid-column: 2;
+    grid-row: 1 / span 20;
+    margin: 0;
+  }
+  .single-card .detail:has(.d-still) .d-title { font-size: 1.9rem; }
+  .single-card .detail:has(.d-still) .d-syn { font-size: .9rem; max-width: 38rem; }
+}
+
 /* ---------- Static pages: text / collection / custom ---------- */
 
 .text-page {
