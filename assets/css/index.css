@@ -957,6 +957,7 @@ body {
 .show-row .time sup { font-size: .58em; font-weight: 700; line-height: 0; vertical-align: baseline; position: relative; top: -0.55em; }
 .show-row .vtag { margin-left: 0; align-self: center; }
 .show-row .sr-subs { font-size: .76rem; color: var(--ink-soft); }
+.show-row .sr-subs .ut-note { font-size: .88em; vertical-align: .08em; }
 .show-row .sr-actions { margin-left: auto; display: flex; gap: .4rem; }
 /* Sonderinfo under the row line: full flex-wrap width, listing-note look.
    NB: flex line-breaking uses the max-width-clamped size, so capping the note

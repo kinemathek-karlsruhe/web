@@ -29,8 +29,24 @@ if ($page->runtime()->isNotEmpty()) {
     $credits .= ($credits !== '' ? '; ' : '') . $page->runtime()->value() . '′';
 }
 
-$showRow = function (\Kirby\Cms\Page $showing, bool $clickable) {
+// Subtitle markers, same dialect as the Monatsblatt listing ($markMap there —
+// wants to be a shared helper once the plugin unfreezes): icon?, printed note
+$markMap = [
+    'omu'  => ['icon' => true,  'note' => ''],
+    'omeu' => ['icon' => true,  'note' => '(e)'],
+    'of'   => ['icon' => false, 'note' => 'OF'],
+    'dtf'  => ['icon' => false, 'note' => 'DF'],
+];
+
+$showRow = function (\Kirby\Cms\Page $showing, bool $clickable) use ($markMap) {
     $ts = $showing->timestamp();
+    $marks = [];
+    foreach (Kinemathek::splitField($showing->subtitles()) as $sub) {
+        $key     = strtolower($sub);
+        $marks[] = ($markMap[$key] ?? ['icon' => false, 'note' => $sub])
+            + ['label' => t('kinemathek.version.' . $key, $sub)];
+    }
+    $talk = $showing->hasDiscussion()->toBool();
     ?>
     <li class="show-row<?= $clickable ? '' : ' past' ?>">
       <span class="sr-date">
@@ -40,8 +56,19 @@ $showRow = function (\Kirby\Cms\Page $showing, bool $clickable) {
       </span>
       <span class="time"><?= date('G', $ts) ?><sup><?= date('i', $ts) ?></sup></span>
       <span class="vtag <?= $showing->venueKey() ?>"><?= html($showing->venueLabel()) ?></span>
-      <?php if ($showing->subtitles()->isNotEmpty()): ?>
-        <span class="sr-subs"><?= html($showing->subtitles()->commaList()) ?></span>
+      <?php if ($marks !== [] || $talk): ?>
+        <span class="sr-subs">
+          <?php foreach ($marks as $mark): ?>
+            <?php if ($mark['icon']): ?>
+              <svg class="icon" role="img" aria-label="<?= html($mark['label']) ?>"><use href="#i-ut"/></svg><?php if ($mark['note'] !== ''): ?><span class="ut-note"><?= html($mark['note']) ?></span><?php endif ?>
+            <?php else: ?>
+              <span class="ut-note" title="<?= html($mark['label']) ?>"><?= html($mark['note']) ?></span>
+            <?php endif ?>
+          <?php endforeach ?>
+          <?php if ($talk): ?>
+            <svg class="icon" role="img" aria-label="<?= html(t('kinemathek.mb.legend.talk')) ?>"><use href="#i-talk"/></svg>
+          <?php endif ?>
+        </span>
       <?php endif ?>
       <?php if ($clickable): ?>
         <span class="sr-actions">
