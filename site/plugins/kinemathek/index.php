@@ -50,6 +50,25 @@ App::plugin('kinemathek/core', [
         ],
     ],
 
+    'hooks' => [
+        /**
+         * Editors write "(image: … width: 100px)" — but the HTML width/height
+         * attribute is a bare number, so browsers ignore "100px" and render
+         * the image at its natural size (a small inline logo suddenly blows up
+         * a showing row). Strip the unit inside image/file tags before parsing.
+         */
+        'kirbytags:before' => function (?string $text = null) {
+            if ($text === null || str_contains($text, '(') === false) {
+                return $text;
+            }
+            return preg_replace_callback(
+                '/\((?:image|file):[^)]*\)/i',
+                fn (array $m) => preg_replace('/\b(width|height):\s*(\d+)\s*px\b/i', '$1: $2', $m[0]),
+                $text
+            );
+        },
+    ],
+
     'siteMethods' => [
         /**
          * The unified, chronological "what's on" program (SPEC §3 / §8):
