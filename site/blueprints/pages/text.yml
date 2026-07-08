@@ -13,18 +13,25 @@ status:
   unlisted: Versteckt (nur per Link erreichbar)
   listed: Im Seitenmenü (Pivot-Navigation)
 
-fields:
-  intro:
-    label: Einleitung
-    type: textarea
-    size: small
-    help: Optionaler Vorspann — wird größer gesetzt.
-  text:
-    label: Text
-    type: textarea
-    size: huge
-  mainimage:
-    label: Bild
-    type: files
-    multiple: false
-    uploads: true
+sections:
+  content:
+    type: fields
+    fields:
+      intro:
+        label: Einleitung
+        type: textarea
+        size: small
+        help: Optionaler Vorspann — wird größer gesetzt.
+      text:
+        label: Text
+        type: textarea
+        size: huge
+      mainimage:
+        label: Bild
+        type: files
+        multiple: false
+        uploads: true
+
+  subpages:
+    type: pages
+    label: Unterseiten
