@@ -190,10 +190,34 @@
       if (e.key === 'Escape') closeOpen(true);
     });
 
-    /* Heute-Strip anchors: if the target day is filtered away, clear the
-       filters first so the jump lands somewhere */
+    /* ----- mobile fold: on phones the listing (.mb-fold) starts collapsed
+       behind the reveal button; opening is one-way. Desktop is unaffected
+       (the CSS only hides the fold on narrow screens). ----- */
+    var fold = scope.querySelector('.mb-fold');
+    var revealBtn = scope.querySelector('.mb-reveal');
+
+    function openFold(scroll) {
+      if (!fold || fold.classList.contains('open')) return;
+      fold.classList.add('open');
+      if (revealBtn) revealBtn.setAttribute('aria-expanded', 'true');
+      layoutColumns(); /* day heights were 0 while display:none */
+      if (scroll) {
+        var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        fold.scrollIntoView({ block: 'start', behavior: reduced ? 'auto' : 'smooth' });
+      }
+    }
+
+    if (revealBtn) {
+      revealBtn.addEventListener('click', function () { openFold(true); });
+    }
+    /* deep links (#tag-… day anchors, shared filter state) need the listing */
+    if (location.hash) openFold(false);
+
+    /* Heute-Strip anchors: open the fold so the target day exists on screen;
+       if it is filtered away, clear the filters first so the jump lands */
     scope.querySelectorAll('.heute-strip .hs-event').forEach(function (a) {
       a.addEventListener('click', function () {
+        openFold(false);
         var target = program.querySelector(a.getAttribute('href'));
         if (target && target.classList.contains('hidden')) resetFilters();
       });

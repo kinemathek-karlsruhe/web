@@ -223,6 +223,14 @@ Validated repeatedly this session via live HTTP smoke tests and Kirby-boot harne
   `.ics` renders in both languages; `update($vals,'en')` writes translatable fields into
   `film.en.txt`, silently drops `translate:false` fields, leaves German untouched, and
   untranslated fields fall back to German.
+- **Mobile start (phones ≤760px only):** the Spielplan opens with hero + curated
+  Reihen tiles (`reihen` pages field on the program page, Panel-picked Bereichsseiten;
+  tile image = first `bilder` file, else first page image, else striped placeholder) and
+  a „Spielplan anzeigen" button; the listing + colophon sit in a `.mb-fold` wrapper that
+  program.js opens (button, Heute-Strip tap, or any `location.hash` deep link — archive
+  `?past=1` renders unfolded, desktop/print unaffected). Verified via CLI render harness
+  + browser preview both viewports. NB: tile class is `.reihe-tile` — the filter bar's
+  series `<label>` already owns `.reihe`.
 
 ---
 

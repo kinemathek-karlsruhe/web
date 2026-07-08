@@ -123,6 +123,8 @@ return [
         'kinemathek.mb.legend.box'       => 'Veranstaltung in der Box',
         'kinemathek.mb.legend.unterwegs' => 'Open Air & andere Orte',
         'kinemathek.mb.collection.none'  => 'Zurzeit nichts im Spielplan — sobald hier etwas ansteht, erscheint das Programm automatisch an dieser Stelle.',
+        'kinemathek.mb.reihen'           => 'Aktuelle Reihen',
+        'kinemathek.mb.showProgram'      => 'Spielplan anzeigen',
         'kinemathek.venue.unterwegs'     => 'Unterwegs',
         'kinemathek.mb.support'          => 'Mit freundlicher Unterstützung von Filmförderung Baden-Württemberg und Stadt Karlsruhe',
 

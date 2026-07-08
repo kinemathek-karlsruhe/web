@@ -12,6 +12,29 @@ options:
   changeTemplate: false
 
 sections:
+  # Mobile Startseite: kuratierte Reihen-Kacheln. Nur auf schmalen Bildschirmen
+  # sichtbar — dort startet die Seite mit Herobild + diesen Kacheln, der
+  # Spielplan klappt erst per Knopf auf. Kachelbild = erstes Bild der
+  # gewählten Bereichsseite, Unterschrift = deren Seitentitel.
+  mobil:
+    type: fields
+    fields:
+      reihen:
+        label: Aktuelle Reihen (mobile Startseite)
+        type: pages
+        translate: false
+        query: site.index.filterBy("intendedTemplate", "collection")
+        layout: cards
+        size: tiny
+        image:
+          query: page.bilder.toFiles.first
+          cover: true
+        empty: Keine Reihen ausgewählt — mobil erscheint dann nur Herobild + Spielplan-Knopf.
+        help: >-
+          Nur in der Mobil-Ansicht sichtbar: Diese Bereichsseiten erscheinen als
+          Bild-Kacheln unter dem Herobild. Das Bild ist das erste Bild der
+          jeweiligen Bereichsseite, die Unterschrift ihr Titel.
+
   showings:
     headline: Vorstellungen (chronologisch)
     label: Vorstellungen

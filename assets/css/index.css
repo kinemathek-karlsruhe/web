@@ -366,6 +366,58 @@ body {
   /* .vtag keeps its base .6rem — already the floor for legible uppercase */
 }
 
+/* ---------- Mobile start: Reihen tiles + folded listing (phones only) ----------
+
+   On phones the sheet opens with just the hero, the curated Reihen tiles and
+   a reveal button; the listing (.mb-fold) stays collapsed until program.js
+   adds .open (button click, Heute-Strip tap or a deep link). Desktop and
+   print are untouched: everything below is gated to narrow screens, and the
+   tiles/button simply don't display elsewhere. */
+
+.reihen, .mb-reveal { display: none; }
+
+@media screen and (max-width: 760px) {
+  .mb-fold:not(.open) { display: none; }
+
+  .reihen { display: block; }
+  .reihen-label {
+    margin: 1.1rem 0 0;
+    font-weight: 700;
+    font-size: .8rem;
+    text-transform: uppercase;
+    letter-spacing: .16em;
+  }
+  /* .reihe-tile, not .reihe — the filter bar's series <label> owns that name */
+  .reihe-tile {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+  .reihe-tile .hero { aspect-ratio: 21 / 9; min-height: 0; }
+
+  .mb-reveal {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: .6rem;
+    margin-top: 1.1rem;
+    padding: .85rem .95rem;
+    border: 1px solid var(--ink);
+    background: var(--ink);
+    color: var(--paper);
+    font: inherit;
+    font-weight: 700;
+    font-size: .9rem;
+    text-transform: uppercase;
+    letter-spacing: .16em;
+    cursor: pointer;
+  }
+  .mb-reveal .icon { width: .9rem; height: .9rem; }
+  .mb-reveal:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+  .mb-reveal[aria-expanded="true"] { display: none; }
+}
+
 /* ---------- Filter bar ---------- */
 
 .filters {

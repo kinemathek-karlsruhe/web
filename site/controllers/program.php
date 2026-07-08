@@ -107,6 +107,22 @@ return function ($site, $page, $kirby) {
         }
     }
 
+    // Mobile start tiles: editor-curated Bereichsseiten (the `reihen` pages
+    // field on the Spielplan page). Tile image = the Bereichsseite's first
+    // `bilder` file, caption = its title; pages without an image still render
+    // (striped placeholder, like the hero). Shown on phones only.
+    $reihen = [];
+    if (!$past) {
+        foreach ($page->reihen()->toPages() as $reihePage) {
+            $reihen[] = [
+                'url'   => $reihePage->url(),
+                'title' => $reihePage->title()->value(),
+                'file'  => $reihePage->bilder()->toFiles()->first()
+                    ?? $reihePage->images()->first(),
+            ];
+        }
+    }
+
     // Masthead month label ("Juni/Juli" + two-digit year superscript),
     // anchored to the current calendar month — NOT the scheduled range, so
     // next month's already-published showings (visible in the listing below)
@@ -132,6 +148,7 @@ return function ($site, $page, $kirby) {
         'stripItems'  => $stripItems,
         'heroFile'    => $heroFile,
         'heroTitle'   => $heroTitle,
+        'reihen'      => $reihen,
         'titleMonths' => $titleMonths,
         'titleYear'   => $titleYear,
     ];

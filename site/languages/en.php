@@ -113,6 +113,8 @@ return [
         'kinemathek.mb.legend.box'       => 'Held in the Box',
         'kinemathek.mb.legend.unterwegs' => 'open air & other venues',
         'kinemathek.mb.collection.none'  => 'Nothing scheduled right now — as soon as something is coming up, the programme appears here automatically.',
+        'kinemathek.mb.reihen'           => 'Current series',
+        'kinemathek.mb.showProgram'      => 'Show programme',
         'kinemathek.venue.unterwegs'     => 'Out & about',
         'kinemathek.mb.support'          => 'Kindly supported by Filmförderung Baden-Württemberg and the City of Karlsruhe',
 
