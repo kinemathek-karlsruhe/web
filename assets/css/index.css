@@ -783,11 +783,12 @@ body {
   margin: 0 0 .5rem;
   padding: 0;
   list-style: none;
-  font-size: .76rem;
-  color: var(--ink-soft);
+  font-size: .85rem;
+  font-weight: 500;
+  color: var(--ink);
 }
 .d-flags li::before { content: "— "; }
-.d-note { margin: 0 0 .5rem; font-size: .76rem; color: var(--ink-soft); }
+.d-note { margin: 0 0 .5rem; font-size: .85rem; font-weight: 500; line-height: 1.45; color: var(--ink); }
 /* rendered KirbyText (Sonderinfo may carry images and --- separators; a
    line directly above --- parses as a Markdown h2 — keep it note-sized).
    .sr-note is the same field on a film page's showing rows. */
@@ -1016,7 +1017,7 @@ body {
    itself would let it share the row's flex line on wide screens — the line
    inflates to the note's height and the centered vtag sags into it. Full-basis
    item; the readable 44rem measure sits on the children instead. */
-.show-row .sr-note { flex-basis: 100%; font-size: .76rem; color: var(--ink-soft); margin: .05rem 0 .1rem; }
+.show-row .sr-note { flex-basis: 100%; font-size: .85rem; font-weight: 500; line-height: 1.45; color: var(--ink); margin: .05rem 0 .1rem; }
 .show-row .sr-note > * { max-width: 44rem; }
 .show-row.past { opacity: .5; }
 
