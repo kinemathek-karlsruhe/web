@@ -107,6 +107,7 @@ return [
         'kinemathek.mb.nav.events'       => 'Events',
         'kinemathek.mb.talk'             => 'Film talk',
         'kinemathek.mb.filmpage'         => 'Film page',
+        'kinemathek.mb.eventpage'        => 'Event details',
         'kinemathek.mb.seriespage'       => 'Series page',
         'kinemathek.mb.legend.omuVariants' => '(e) English subtitles',
         'kinemathek.mb.legend.talk'      => 'Screening with introduction/film talk',

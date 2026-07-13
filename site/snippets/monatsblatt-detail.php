@@ -7,6 +7,7 @@
  *
  * @var \Kirby\Cms\Page  $item
  * @var ?\Kirby\Cms\Page $film
+ * @var bool  $isEvent   Event entry: link its standalone page ("Eventdetails")
  * @var string $detailId
  * @var string $detailDate
  * @var string $venueKey
@@ -70,6 +71,11 @@ $seriesUrl = $seriesUrl ?? null;
             <a class="btn" href="<?= $item->ticketUrl()->esc() ?>" rel="noopener noreferrer"><?= html(t('kinemathek.tickets', 'Tickets')) ?></a>
           <?php endif ?>
           <?php snippet('add-to-calendar', ['page' => $item, 'class' => 'btn']) ?>
+        <?php endif ?>
+        <?php /* events get a link to their standalone page — shareable full
+                 view of the event (also in archive mode: the page stays up) */ ?>
+        <?php if ($isEvent ?? false): ?>
+          <a class="btn" href="<?= $item->url() ?>"><?= html(t('kinemathek.mb.eventpage', 'Eventdetails')) ?></a>
         <?php endif ?>
         <?php if ($film): ?>
           <a class="btn" href="<?= $film->url() ?>"><?= html(t('kinemathek.mb.filmpage')) ?></a>
