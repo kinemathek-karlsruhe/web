@@ -155,26 +155,25 @@ $showRow = function (\Kirby\Cms\Page $showing, bool $clickable) use ($markMap) {
     <?php endif ?>
 
     <section class="fp-shows">
-      <h3 class="daybar"><span class="dow"><?= html(t('kinemathek.film.upcoming', 'Kommende Vorstellungen')) ?></span></h3>
-      <?php if ($upcoming->count() === 0): ?>
-        <p class="program-empty" style="display:block"><?= html(t('kinemathek.program.none', 'Derzeit keine Termine.')) ?></p>
-      <?php else: ?>
-        <ul class="show-list">
-          <?php foreach ($upcoming as $showing) $showRow($showing, true) ?>
-        </ul>
-      <?php endif ?>
-
-      <?php if ($past->count() > 0): ?>
-        <h3 class="daybar"><span class="dow"><?= html(t('kinemathek.film.past', 'Frühere Vorstellungen')) ?></span></h3>
-        <ul class="show-list">
-          <?php /* past showings are visible but NOT clickable (SPEC §3) */ ?>
-          <?php foreach ($past as $showing) $showRow($showing, false) ?>
-        </ul>
+      <?php /* "Kommende Vorstellungen" with its "keine Termine" empty state
+               only when it carries information: with no upcoming showing but
+               an upcoming related event, the message would contradict the
+               event date right below — skip the whole block instead. */ ?>
+      <?php if ($upcoming->count() > 0 || $events->count() === 0): ?>
+        <h3 class="daybar"><span class="dow"><?= html(t('kinemathek.film.upcoming', 'Kommende Vorstellungen')) ?></span></h3>
+        <?php if ($upcoming->count() === 0): ?>
+          <p class="program-empty" style="display:block"><?= html(t('kinemathek.program.none', 'Derzeit keine Termine.')) ?></p>
+        <?php else: ?>
+          <ul class="show-list">
+            <?php foreach ($upcoming as $showing) $showRow($showing, true) ?>
+          </ul>
+        <?php endif ?>
       <?php endif ?>
 
       <?php /* Event-first programming that shows this film (Event.relatedFilm
                reverse lookup) — its own section, NOT part of the screenings:
-               the row carries the EVENT's title and links to the event page. */ ?>
+               the row carries the EVENT's title and links to the event page.
+               Upcoming, so it sits before the screening history. */ ?>
       <?php if ($events->count() > 0): ?>
         <h3 class="daybar"><span class="dow"><?= html(t('kinemathek.film.events', 'Veranstaltungen mit diesem Film')) ?></span></h3>
         <ul class="show-list">
@@ -196,6 +195,14 @@ $showRow = function (\Kirby\Cms\Page $showing, bool $clickable) use ($markMap) {
               </span>
             </li>
           <?php endforeach ?>
+        </ul>
+      <?php endif ?>
+
+      <?php if ($past->count() > 0): ?>
+        <h3 class="daybar"><span class="dow"><?= html(t('kinemathek.film.past', 'Frühere Vorstellungen')) ?></span></h3>
+        <ul class="show-list">
+          <?php /* past showings are visible but NOT clickable (SPEC §3) */ ?>
+          <?php foreach ($past as $showing) $showRow($showing, false) ?>
         </ul>
       <?php endif ?>
     </section>
