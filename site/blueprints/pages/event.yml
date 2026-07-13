@@ -100,6 +100,14 @@ columns:
           inhaltHeadline:
             label: Inhalt
             type: headline
+          sonderinfo:
+            label: Sonderinfo
+            type: textarea
+            icon: text
+            help: >-
+              Kurzer Zusatzsatz — steht im Monatsprogramm klein unter dem
+              Titel (dort, wo bei Filmen die Credits stehen). Z. B. Gast,
+              Thema der Ausgabe, „mit Gespräch" + mit wem.
           text:
             label: Beschreibung
             type: textarea

@@ -31,6 +31,9 @@ if ($end === null || $end <= $start) {
 }
 
 $parts = [];
+if ($page->sonderinfo()->isNotEmpty()) {
+    $parts[] = $page->sonderinfo()->value();
+}
 if ($page->text()->isNotEmpty()) {
     $parts[] = $page->text()->value();
 }

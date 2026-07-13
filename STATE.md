@@ -85,7 +85,7 @@ session (= a cookie), violating SPEC §7; switching is two plain links in the he
 
 **Translation contract** (enforced via `translate: false` in the blueprints): translatable
 are Film `title/synopsis/genre/series/keywords`, Showing `title/sonderinfo/keywords`,
-Event `title/text/keywords`, file `alt/caption`. Everything else (dates, numbers, person
+Event `title/sonderinfo/text/keywords`, file `alt/caption`. Everything else (dates, numbers, person
 structures, ISO codes, routing categories, subtitle codes, URLs, file refs, `tmdbId`,
 `manualOverride`, `source`) is language-invariant and lives in the default language;
 untranslated fields fall back to German automatically. Frontend UI strings resolve via

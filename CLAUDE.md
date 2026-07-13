@@ -83,7 +83,9 @@ override), `date`(date,time:true,req), `venue`(text), `sonderinfo`(textarea), `t
 `FilmPage::relatedEvents()`/`upcomingRelatedEvents()`, NEVER a screening or facet source —
 `EventPage::film()` stays `null` on purpose), `date`(date,time:true,req),
 `endDate`(date,time:true,optional multi-day), `venue`(text), `hasDiscussion`(toggle),
-`text`(textarea — the description, **named `text`, not `synopsis`**), `ticketUrl`(url),
+`sonderinfo`(textarea — one-line teaser shown where films show credits; flows through the
+same listing/detail/ICS plumbing as the Showing's), `text`(textarea — the description,
+**named `text`, not `synopsis`**), `ticketUrl`(url),
 `freeAdmission`(toggle — hides the ticket button, shows „Freier Eintritt" instead),
 `categories`(multiselect), `subtitles`(multiselect), `keywords`(tags), `image`(files,max1).
 **No required `film` field** (that stays Showing-only, so events can't enter the archive).
@@ -94,7 +96,7 @@ override), `date`(date,time:true,req), `venue`(text), `sonderinfo`(textarea), `t
 **Translation contract** (multilang; enforced via `translate: false` in the blueprints —
 keep blueprint, TMDB sync and this list in agreement): TRANSLATABLE are Film
 `title/synopsis/genre/series/keywords`, Showing `title/sonderinfo/keywords`, Event
-`title/text/keywords`, file `alt/caption`. Everything else is `translate: false`
+`title/sonderinfo/text/keywords`, file `alt/caption`. Everything else is `translate: false`
 (invariant, default language only): dates, numbers, `directors`/`cast`, `originalTitle`,
 `country`/`language` (codes), `subtitles`/`categories` (option keys), `venue`,
 `ticketUrl`, `tmdbId`, `manualOverride`, `poster`/`stills`/`image` (file refs),

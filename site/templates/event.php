@@ -55,6 +55,9 @@ $relatedFilm = $page->relatedFilm();
         <p class="d-credits"><?= html(t('kinemathek.showing.film', 'Film')) ?>:
           <a href="<?= $relatedFilm->url() ?>"><?= html($relatedFilm->title()) ?></a><?php if ($relatedFilm->year()->isNotEmpty()): ?> (<?= html($relatedFilm->year()) ?>)<?php endif ?></p>
       <?php endif ?>
+      <?php if ($page->sonderinfo()->isNotEmpty()): ?>
+        <div class="d-note"><?= $page->sonderinfo()->kt() ?></div>
+      <?php endif ?>
       <?php if ($image): ?>
         <figure class="d-still">
           <img src="<?= $image->resize(900)->url() ?>" alt="<?= $image->alt()->or($page->displayTitle())->esc() ?>">
