@@ -1,9 +1,12 @@
 title: Veranstaltung
 icon: megaphone
 
-# Standalone, non-film programming (SPEC §2.3): a lecture, talk, festival item
-# without a single attached film. Reuses the Showing occurrence mechanics but
-# has NO film link, and lives under events/ so it never reaches the archive.
+# Standalone, event-first programming (SPEC §2.3): a lecture, talk, festival
+# item. Reuses the Showing occurrence mechanics and lives under events/ so it
+# never reaches the archive. It has NO required `film` field — but it MAY
+# reference a film via the optional `relatedFilm` field (event shows a film,
+# emphasis stays on the event). That reference is display-only: the film page
+# lists the event in its own section, without counting it as a screening.
 num: "{{ page.date.toDate('YmdHi') }}"
 
 # Header: surface the date prominently (categories shown in the sidebar facet).
@@ -28,6 +31,23 @@ columns:
             type: text
             required: true
             icon: title
+          relatedFilm:
+            label: Film (optional)
+            type: pages
+            max: 1
+            multiple: false
+            # Page ref — structural, never per-language.
+            translate: false
+            query: site.find("films").children
+            image:
+              query: page.poster.toFile
+              cover: true
+            info: "{{ page.year }}"
+            icon: video
+            help: >-
+              Nur ausfüllen, wenn bei der Veranstaltung ein Film gezeigt wird.
+              Die Veranstaltung erscheint dann zusätzlich auf der Filmseite
+              (als Veranstaltung, nicht als reguläre Vorstellung).
 
       termin:
         type: fields

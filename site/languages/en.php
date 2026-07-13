@@ -74,6 +74,7 @@ return [
         'kinemathek.film.stills'        => 'Stills',
         'kinemathek.film.upcoming'      => 'Upcoming screenings',
         'kinemathek.film.past'          => 'Past screenings',
+        'kinemathek.film.events'        => 'Events featuring this film',
 
         // Single showing / event
         'kinemathek.showing.version'    => 'Version',

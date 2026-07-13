@@ -10,6 +10,7 @@ use Kinemathek\Kinemathek;
  * @var \Kirby\Cms\Page $page
  * @var \Kirby\Cms\Pages $upcoming
  * @var \Kirby\Cms\Pages $past
+ * @var \Kirby\Cms\Pages $events
  * @var \Kirby\Content\Structure $directors
  */
 
@@ -168,6 +169,33 @@ $showRow = function (\Kirby\Cms\Page $showing, bool $clickable) use ($markMap) {
         <ul class="show-list">
           <?php /* past showings are visible but NOT clickable (SPEC §3) */ ?>
           <?php foreach ($past as $showing) $showRow($showing, false) ?>
+        </ul>
+      <?php endif ?>
+
+      <?php /* Event-first programming that shows this film (Event.relatedFilm
+               reverse lookup) — its own section, NOT part of the screenings:
+               the row carries the EVENT's title and links to the event page. */ ?>
+      <?php if ($events->count() > 0): ?>
+        <h3 class="daybar"><span class="dow"><?= html(t('kinemathek.film.events', 'Veranstaltungen mit diesem Film')) ?></span></h3>
+        <ul class="show-list">
+          <?php foreach ($events as $event): $ts = $event->timestamp(); ?>
+            <li class="show-row">
+              <span class="sr-date">
+                <a href="<?= $event->url() ?>"><?= html(rtrim(Kinemathek::localDate($ts, 'detail'), '.')) ?></a>
+              </span>
+              <span class="time"><?= date('G', $ts) ?><sup><?= date('i', $ts) ?></sup></span>
+              <span class="vtag <?= $event->venueKey() ?>"><?= html($event->venueLabel()) ?></span>
+              <span class="sr-title"><a href="<?= $event->url() ?>"><?= html($event->displayTitle()) ?></a></span>
+              <span class="sr-actions">
+                <?php if ($event->freeAdmission()->toBool()): ?>
+                  <span class="free"><?= html(t('kinemathek.free', 'Freier Eintritt')) ?></span>
+                <?php elseif ($event->ticketUrl()->isNotEmpty()): ?>
+                  <a class="btn" href="<?= $event->ticketUrl()->esc() ?>" rel="noopener noreferrer"><?= html(t('kinemathek.tickets', 'Tickets')) ?></a>
+                <?php endif ?>
+                <?php snippet('add-to-calendar', ['page' => $event, 'class' => 'btn']) ?>
+              </span>
+            </li>
+          <?php endforeach ?>
         </ul>
       <?php endif ?>
     </section>

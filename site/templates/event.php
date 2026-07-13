@@ -13,6 +13,8 @@ use Kinemathek\Kinemathek;
 $ts = $page->timestamp();
 // NB: ->image() is a native Page method — read the files field explicitly
 $image = $page->content()->get('image')->toFile();
+// Optional related film (event shows a film, emphasis stays on the event)
+$relatedFilm = $page->relatedFilm();
 ?>
 <?php snippet('header', ['languageNav' => false]) ?>
 <div class="sheet">
@@ -49,6 +51,10 @@ $image = $page->content()->get('image')->toFile();
       <?php if ($flags !== []): ?>
         <ul class="d-flags"><?php foreach ($flags as $flag): ?><li><?= html($flag) ?></li><?php endforeach ?></ul>
       <?php endif ?>
+      <?php if ($relatedFilm): ?>
+        <p class="d-credits"><?= html(t('kinemathek.showing.film', 'Film')) ?>:
+          <a href="<?= $relatedFilm->url() ?>"><?= html($relatedFilm->title()) ?></a><?php if ($relatedFilm->year()->isNotEmpty()): ?> (<?= html($relatedFilm->year()) ?>)<?php endif ?></p>
+      <?php endif ?>
       <?php if ($image): ?>
         <figure class="d-still">
           <img src="<?= $image->resize(900)->url() ?>" alt="<?= $image->alt()->or($page->displayTitle())->esc() ?>">
@@ -65,6 +71,9 @@ $image = $page->content()->get('image')->toFile();
             <a class="btn" href="<?= $page->ticketUrl()->esc() ?>" rel="noopener noreferrer"><?= html(t('kinemathek.tickets', 'Tickets')) ?></a>
           <?php endif ?>
           <?php snippet('add-to-calendar', ['page' => $page, 'class' => 'btn']) ?>
+        <?php endif ?>
+        <?php if ($relatedFilm): ?>
+          <a class="btn" href="<?= $relatedFilm->url() ?>"><?= html(t('kinemathek.mb.filmpage', 'Zur Filmseite')) ?></a>
         <?php endif ?>
         <?php if ($seriesUrl): ?>
           <a class="btn" href="<?= $seriesUrl ?>"><?= html(t('kinemathek.mb.seriespage', 'Zur Reihe')) ?></a>

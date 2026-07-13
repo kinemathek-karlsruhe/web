@@ -38,7 +38,8 @@ node --check site/plugins/kinemathek-tmdb/index.js   # the Panel field is no-bui
 - **The Film↔Showing relation lives only on the Showing**, in its `film` pages field. A Film
   has no screening field — it discovers screenings by **reverse lookup**
   (`FilmPage::showings()` → `upcomingShowings()`/`pastShowings()`), memoised per request.
-  Events have **no** `film` field, so they can never enter the archive.
+  Events have **no** `film` field, so they can never enter the archive; their optional
+  `relatedFilm` is display-only (film page section + backlink), never a screening.
 - **Two plugins**: `kinemathek/core` (`site/plugins/kinemathek/`) = the data model, program,
   faceting, ICS; `kinemathek/tmdb` (`site/plugins/kinemathek-tmdb/`) = the server-side, cached
   TMDB sync + the Panel lookup field. Page behaviour lives on **page models**
@@ -77,12 +78,15 @@ override), `date`(date,time:true,req), `venue`(text), `sonderinfo`(textarea), `t
 `categories`(multiselect spielplan/koop/festival/filmbildung), `keywords`(tags).
 `num: "{{ page.date.toDate('YmdHi') }}"`.
 
-**Event** (`event.yml` / `EventPage`): `title`(text,req), `date`(date,time:true,req),
+**Event** (`event.yml` / `EventPage`): `title`(text,req), `relatedFilm`(pages,optional,max1
+— event shows a film but stays event-first; display-only: film page lists it via
+`FilmPage::relatedEvents()`/`upcomingRelatedEvents()`, NEVER a screening or facet source —
+`EventPage::film()` stays `null` on purpose), `date`(date,time:true,req),
 `endDate`(date,time:true,optional multi-day), `venue`(text), `hasDiscussion`(toggle),
 `text`(textarea — the description, **named `text`, not `synopsis`**), `ticketUrl`(url),
 `freeAdmission`(toggle — hides the ticket button, shows „Freier Eintritt" instead),
 `categories`(multiselect), `subtitles`(multiselect), `keywords`(tags), `image`(files,max1).
-**No `film` field.**
+**No required `film` field** (that stays Showing-only, so events can't enter the archive).
 
 **Poster/Still files** (`poster.yml`/`still.yml`): `alt`(text), `source`(text, default TMDB),
 `caption`(text / textarea). Written by `attachPoster()`.
@@ -93,7 +97,8 @@ keep blueprint, TMDB sync and this list in agreement): TRANSLATABLE are Film
 `title/text/keywords`, file `alt/caption`. Everything else is `translate: false`
 (invariant, default language only): dates, numbers, `directors`/`cast`, `originalTitle`,
 `country`/`language` (codes), `subtitles`/`categories` (option keys), `venue`,
-`ticketUrl`, `tmdbId`, `manualOverride`, `poster`/`stills`/`image` (file refs), `source`.
+`ticketUrl`, `tmdbId`, `manualOverride`, `poster`/`stills`/`image` (file refs),
+`relatedFilm` (page ref), `source`.
 The TMDB sync writes `Client::TRANSLATABLE = title/synopsis/genre` into non-default
 languages — keep that const in sync with this contract.
 

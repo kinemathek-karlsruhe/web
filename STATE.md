@@ -55,8 +55,13 @@ content/
 - **Showing** (Vorstellung) — a dated screening of **one** Film. The relation lives
   **only here**, in the `film` pages field. Sibling of all other showings under
   `program/` (not nested under its film), so the site-wide program is a single sort.
-- **Event** (Veranstaltung) — standalone non-film programming. **No `film` field**;
-  separate template + parent ⇒ can never enter the film archive.
+- **Event** (Veranstaltung) — standalone event-first programming. **No `film` field**;
+  separate template + parent ⇒ can never enter the film archive. It MAY reference a film
+  it shows via the optional `relatedFilm` pages field (max 1) — display-only: the film
+  page lists such events in an own "Veranstaltungen mit diesem Film" section
+  (`FilmPage::relatedEvents()`/`upcomingRelatedEvents()`), the event page/detail panel
+  links back ("Zur Filmseite"). Deliberately NOT wired into `film()`, so it never counts
+  as a screening and never feeds facets, `hasUpcoming()` or the archive.
 - A Film discovers its screenings by **reverse lookup** (`FilmPage::showings()` →
   `upcomingShowings()`/`pastShowings()`), memoised per request.
 - **Categories** (multiselect: spielplan/koop/festival/filmbildung) = *placement/routing*;

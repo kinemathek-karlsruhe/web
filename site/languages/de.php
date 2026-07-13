@@ -82,6 +82,7 @@ return [
         'kinemathek.film.stills'        => 'Szenenbilder',
         'kinemathek.film.upcoming'      => 'Kommende Vorstellungen',
         'kinemathek.film.past'          => 'Frühere Vorstellungen',
+        'kinemathek.film.events'        => 'Veranstaltungen mit diesem Film',
 
         // Single showing / event
         'kinemathek.showing.version'    => 'Fassung',

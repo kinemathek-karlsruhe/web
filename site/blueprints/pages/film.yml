@@ -312,3 +312,23 @@ tabs:
               back: light
             info: "{{ page.date.toDate('d.m.Y H:i') }} Uhr"
             empty: Noch keine vergangenen Vorstellungen archiviert.
+      events:
+        width: 1/1
+        sections:
+          relatedEvents:
+            type: pages
+            label: Veranstaltungen mit diesem Film
+            headline: Veranstaltungen mit diesem Film
+            # Reverse lookup over Event.relatedFilm (event-first programming
+            # that shows this film) — informational, NOT screenings. Linked on
+            # the Veranstaltung under Events, not here.
+            query: page.relatedEvents
+            layout: list
+            create: false
+            sortable: false
+            search: false
+            image:
+              icon: megaphone
+              back: light
+            info: "{{ page.date.toDate('d.m.Y H:i') }} Uhr"
+            empty: Keine Veranstaltung verweist auf diesen Film.

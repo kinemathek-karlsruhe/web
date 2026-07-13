@@ -19,6 +19,9 @@ class FilmPage extends Page
     /** Per-request memo: the films archive calls showings() many times per film. */
     protected ?Pages $showingsCache = null;
 
+    /** Per-request memo for the related-events reverse lookup. */
+    protected ?Pages $relatedEventsCache = null;
+
     /** All showings that reference this film, regardless of date. */
     public function showings(): Pages
     {
@@ -55,6 +58,37 @@ class FilmPage extends Page
     public function hasUpcoming(bool $includeToday = true): bool
     {
         return $this->upcomingShowings($includeToday)->count() > 0;
+    }
+
+    /**
+     * Events that reference this film via their optional `relatedFilm` field
+     * (event-first programming that happens to show the film, SPEC §2.3) —
+     * most recent first. Reverse lookup like showings(), but deliberately
+     * SEPARATE from it: related events are not screenings, so they never feed
+     * hasUpcoming(), the archive facets or the screening history.
+     */
+    public function relatedEvents(): Pages
+    {
+        if ($this->relatedEventsCache !== null) {
+            return $this->relatedEventsCache;
+        }
+
+        $id = $this->id();
+        return $this->relatedEventsCache = Kinemathek::events()
+            ->filter(function (Page $event) use ($id) {
+                $film = $event->relatedFilm();
+                return $film !== null && $film->id() === $id;
+            })
+            ->sortBy(fn (Page $e) => $e->timestamp() ?? 0, 'desc');
+    }
+
+    /** Upcoming related events — soonest first (shown on the film page). */
+    public function upcomingRelatedEvents(bool $includeToday = true): Pages
+    {
+        $boundary = Kinemathek::now($includeToday);
+        return $this->relatedEvents()
+            ->filter(fn (Page $e) => ($ts = $e->timestamp()) !== null && $ts >= $boundary)
+            ->sortBy(fn (Page $e) => $e->timestamp(), 'asc');
     }
 
     /**

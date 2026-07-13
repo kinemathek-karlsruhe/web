@@ -8,8 +8,9 @@
  */
 return function ($page) {
     return [
-        'upcoming'  => $page->upcomingShowings(), // soonest first
-        'past'      => $page->pastShowings(),     // most recent first
+        'upcoming'  => $page->upcomingShowings(),       // soonest first
+        'past'      => $page->pastShowings(),           // most recent first
+        'events'    => $page->upcomingRelatedEvents(),  // event-first programming showing this film
         'directors' => $page->directors(),
     ];
 };

@@ -87,7 +87,11 @@ $entryData = function (\Kirby\Cms\Page $item, string $detailDate) use ($markMap,
 
     return [
         'item'       => $item,
-        'film'       => $film,
+        // 'film' only drives the detail panel's "Zur Filmseite" button — an
+        // event's optional relatedFilm joins in HERE (after the content above
+        // was computed), so the panel keeps the EVENT's text/image/credits
+        // but still links to the film it shows.
+        'film'       => $film ?? ($isEvent ? $item->relatedFilm() : null),
         'isEvent'    => $isEvent,
         'past'       => $past,
         'detailId'   => 'detail-' . str_replace('/', '-', $item->id()),
