@@ -111,7 +111,10 @@ $entryData = function (\Kirby\Cms\Page $item, string $detailDate) use ($markMap,
         // Sonderinfo is KirbyText (showing.php renders it with ->kt()): the
         // compact entry gets the stripped plain text, the detail panel the
         // full HTML — a raw ->value() would leak literal (image:…) tags.
-        'note'       => trim($item->sonderinfo()->excerpt(0)->value() ?? ''),
+        // Html::decode (not ->excerpt()) because the plain text gets html()-
+        // escaped again in the entry — excerpt keeps entities, so "&" would
+        // render as "&amp;".
+        'note'       => trim(\Kirby\Toolkit\Html::decode($item->sonderinfo()->kt()->value() ?? '')),
         'noteHtml'   => trim($item->sonderinfo()->kt()->value() ?? ''),
         'still'      => $still,
         // Same deal as the note: an Event's text is KirbyText — render it.
