@@ -22,7 +22,7 @@ WordPress site via `scripts/import-program.php` and `scripts/import-static.php`
 was frozen by concurrent work when the Monatsblatt landed): move the template's
 venue classifier to `OccurrenceTrait::venueKey()`, the still-beats-poster pick to
 `FilmPage::artwork()`, the credits line to `FilmPage::creditsLine()`, and add
-`EventPage::imageFile()` for the native-`image()` trap. Last updated 2026-06-10.
+`EventPage::imageFile()` for the native-`image()` trap. Last updated 2026-07-17.
 
 ---
 
@@ -129,7 +129,11 @@ other language; fill-empty is evaluated **per language** against the raw stored
 translation (`$page->version()->read($lang)` — the Content object's default-language
 fallback would make untranslated fields look non-empty). `search()` follows the Panel's
 current content language (`x-language` header). `src/Client.php`: multi-candidate `search()`,
-`movie()` (+credits), `images()` (backdrops), `mapToFilm()`, `attachPoster()` +
+`movie()` (+credits,videos), `images()` (backdrops), `mapToFilm()` (incl. `trailerUrl` —
+best official trailer (YouTube or Vimeo) via `trailerUrl()`, rendered public as a **plain
+external link** in `film.php` whose label names the destination platform, same navigation
+dialect as the ticket links; a Zwei-Klick embed was built and deliberately reverted to
+keep the Datenschutzerklärung untouched), `attachPoster()` +
 `attachStills()` (download poster + best textless backdrops into local first-party files
 under deterministic `tmdb-poster-{id}` / `tmdb-still-{id}-{img}` names — byte-identical
 re-syncs reuse the file, changed artwork replaces it, `removeTmdbImages()` cleans up

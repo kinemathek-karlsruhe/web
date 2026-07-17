@@ -14,7 +14,7 @@ use Kirby\Toolkit\Str;
  *
  * Endpoints used (TMDB API v3, https://api.themoviedb.org/3):
  *   - GET search/movie         multi-candidate title search
- *   - GET movie/{id}           canonical detail (+credits via append_to_response)
+ *   - GET movie/{id}           canonical detail (+credits,videos via append_to_response)
  *   - GET configuration        image base url + sizes
  * Images: https://image.tmdb.org/t/p/{size}{poster_path}
  *
@@ -259,8 +259,73 @@ class Client
         $lang = $this->language($kirbyLang);
         return $this->get('movie/' . $id, [
             'language'           => $lang,
-            'append_to_response' => 'credits',
-        ], 'movie/' . $lang . '/' . $id, self::TTL_MOVIE);
+            'append_to_response' => 'credits,videos',
+            // Videos are language-filtered like images: without this, a de-DE
+            // request hides the (far more common) English-tagged trailers.
+            'include_video_language' => implode(',', array_unique([
+                substr($lang, 0, 2), 'de', 'en', 'null',
+            ])),
+            // 'v2': the pre-trailer cache entries lack the videos payload and
+            // live for 30 days — a new key prevents serving them.
+        ], 'movie/v2/' . $lang . '/' . $id, self::TTL_MOVIE);
+    }
+
+    // ---- trailer (YouTube watch URL from the videos payload) ---------------
+
+    /**
+     * Best trailer as a plain watch URL (YouTube or Vimeo — the two sites
+     * TMDB hosts video keys for), or null. Preference: Trailer over Teaser,
+     * official over fan uploads, German over English over rest — trailerUrl
+     * is translate:false, so only the default-language (German) mapping is
+     * ever stored. The public film template renders this as a plain external
+     * link (a navigation like the ticket links — never an embed, SPEC §7).
+     */
+    public function trailerUrl(array $bundle): ?string
+    {
+        // key shape + watch-URL builder per supported TMDB video site
+        $sites = [
+            'YouTube' => [
+                'pattern' => '/^[A-Za-z0-9_-]{5,20}$/',
+                'url'     => fn (string $key) => 'https://www.youtube.com/watch?v=' . $key,
+            ],
+            'Vimeo' => [
+                'pattern' => '/^[0-9]{5,15}$/',
+                'url'     => fn (string $key) => 'https://vimeo.com/' . $key,
+            ],
+        ];
+
+        $best  = null;
+        $score = -1;
+
+        foreach ($bundle['videos']['results'] ?? [] as $video) {
+            $site = $sites[$video['site'] ?? ''] ?? null;
+            if ($site === null) {
+                continue;
+            }
+            $key = (string) ($video['key'] ?? '');
+            if (preg_match($site['pattern'], $key) !== 1) {
+                continue;
+            }
+            $type = (string) ($video['type'] ?? '');
+            if ($type !== 'Trailer' && $type !== 'Teaser') {
+                continue;
+            }
+
+            $s = ($type === 'Trailer' ? 8 : 0)
+                + (($video['official'] ?? false) === true ? 4 : 0)
+                + (match ($video['iso_639_1'] ?? '') {
+                    'de'    => 2,
+                    'en'    => 1,
+                    default => 0,
+                });
+
+            if ($s > $score) {
+                $score = $s;
+                $best  = $site['url']($key);
+            }
+        }
+
+        return $best;
     }
 
     // ---- movie images (backdrops -> Szenenbilder) -------------------------
@@ -371,6 +436,7 @@ class Client
             'cast'          => $cast,
             'directors'     => $directors,
             'tmdbId'        => (int) ($b['id'] ?? 0),
+            'trailerUrl'    => $this->trailerUrl($b),
             // Source URL only; the caller downloads this into a real file.
             'poster'        => $this->imageUrl($b['poster_path'] ?? null, $this->posterSize()),
         ];

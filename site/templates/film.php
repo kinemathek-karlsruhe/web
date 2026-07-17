@@ -154,6 +154,27 @@ $showRow = function (\Kirby\Cms\Page $showing, bool $clickable) use ($markMap) {
       </ul>
     <?php endif ?>
 
+    <?php /* Trailer as a plain external navigation, same dialect as the Mars
+             EDV ticket links (SPEC §6/§7: navigations, not embeds — no iframe,
+             no third-party request from this page). The label names the
+             destination platform so visitors know where the link takes them. */ ?>
+    <?php if ($page->trailerUrl()->isNotEmpty()):
+        $trailerHost = preg_replace(
+            '/^(www|m|player)\./',
+            '',
+            strtolower((string) parse_url($page->trailerUrl()->value(), PHP_URL_HOST))
+        );
+        $trailerPlatform = match (true) {
+            in_array($trailerHost, ['youtube.com', 'youtu.be', 'youtube-nocookie.com'], true) => 'YouTube',
+            $trailerHost === 'vimeo.com' => 'Vimeo',
+            default => null,
+        };
+    ?>
+      <p class="fp-trailer">
+        <a class="btn" href="<?= $page->trailerUrl()->esc() ?>" rel="noopener noreferrer"><?= html(t('kinemathek.film.trailer', 'Trailer') . ($trailerPlatform !== null ? ' (' . $trailerPlatform . ')' : '')) ?></a>
+      </p>
+    <?php endif ?>
+
     <section class="fp-shows">
       <?php /* "Kommende Vorstellungen" with its "keine Termine" empty state
                only when it carries information: with no upcoming showing but

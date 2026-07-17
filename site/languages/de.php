@@ -80,6 +80,7 @@ return [
         'kinemathek.film.directors'     => 'Regie',
         'kinemathek.film.synopsis'      => 'Inhalt',
         'kinemathek.film.stills'        => 'Szenenbilder',
+        'kinemathek.film.trailer'       => 'Trailer',
         'kinemathek.film.upcoming'      => 'Kommende Vorstellungen',
         'kinemathek.film.past'          => 'Frühere Vorstellungen',
         'kinemathek.film.events'        => 'Veranstaltungen mit diesem Film',

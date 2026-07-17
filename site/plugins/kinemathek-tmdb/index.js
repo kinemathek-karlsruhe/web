@@ -523,8 +523,8 @@ panel.plugin("kinemathek/tmdb", {
               <k-icon type="search" />
               <span>
                 Titel oben eingeben und „Suchen“ — übernommene Treffer füllen
-                Titel, Inhalt, Jahr, Laufzeit, Regie, Besetzung, Poster und
-                Szenenbilder.
+                Titel, Inhalt, Jahr, Laufzeit, Regie, Besetzung, Trailer,
+                Poster und Szenenbilder.
                 <template v-if="linked">
                   Die bestehende Verknüpfung bleibt erhalten, bis ein neuer
                   Treffer übernommen wird.

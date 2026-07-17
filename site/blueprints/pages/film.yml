@@ -45,7 +45,7 @@ tabs:
                 help: >
                   Zuerst hier suchen, dann beim richtigen Treffer „Übernehmen“
                   (füllt nur leere Felder: Titel, Inhalt, Jahr, Laufzeit,
-                  Regie, Besetzung, Poster, Szenenbilder) oder „Überschreiben“
+                  Regie, Besetzung, Trailer, Poster, Szenenbilder) oder „Überschreiben“
                   (ersetzt auch Vorhandenes). Danach hält die Suchleiste den
                   verknüpften Film fest — neu verknüpfen über „Lösen & neu
                   suchen“. Ist „Manuell kuratiert“ aktiv, werden nur noch
@@ -233,6 +233,23 @@ tabs:
                 help: >
                   Beim TMDB-Sync wird das Poster serverseitig heruntergeladen und
                   hier first-party abgelegt (nie direkt von image.tmdb.org).
+
+          trailer:
+            type: fields
+            fields:
+              trailerUrl:
+                label: Trailer
+                type: url
+                icon: video
+                # One trailer per film, shared across languages.
+                translate: false
+                placeholder: https://www.youtube.com/watch?v=…
+                help: >
+                  Wird beim TMDB-Sync automatisch gefüllt (bester offizieller
+                  Trailer, wenn vorhanden) — kann hier jederzeit durch einen
+                  eigenen Link ersetzt werden (YouTube oder Vimeo). Erscheint
+                  auf der Filmseite als einfacher Link „Trailer (YouTube)" bzw.
+                  „Trailer (Vimeo)" (keine Einbettung, wie bei den Ticket-Links).
       stills:
         width: 2/3
         sections:

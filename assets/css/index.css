@@ -991,6 +991,9 @@ body {
   height: auto;
   border: 1px solid var(--line);
 }
+
+/* Trailer — plain external navigation (like the ticket links), no embed */
+.fp-trailer { margin: .9rem 0 0; }
 .fp-shows { margin-top: 1.4rem; }
 .fp-shows .daybar { margin-top: 1rem; }
 .show-list { list-style: none; margin: 0; padding: 0; }

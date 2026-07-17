@@ -72,6 +72,7 @@ return [
         'kinemathek.film.directors'     => 'Directed by',
         'kinemathek.film.synopsis'      => 'Synopsis',
         'kinemathek.film.stills'        => 'Stills',
+        'kinemathek.film.trailer'       => 'Trailer',
         'kinemathek.film.upcoming'      => 'Upcoming screenings',
         'kinemathek.film.past'          => 'Past screenings',
         'kinemathek.film.events'        => 'Events featuring this film',

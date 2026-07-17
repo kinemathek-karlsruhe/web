@@ -69,7 +69,9 @@ The TMDB sync (`mapToFilm`), faceting, ICS, and templates all key off these exac
 `directors`(structure: `name`+`tmdbpersonid`), `cast`(structure: `name`+`role`+`tmdbpersonid`),
 `synopsis`(textarea), `year`(number), `runtime`(number, mins — drives ICS DTEND),
 `country`/`language`/`genre`/`series`/`keywords`(tags), `tmdbId`(number,disabled),
-`manualOverride`(toggle), `poster`(files,max1), `stills`(files).
+`manualOverride`(toggle), `trailerUrl`(url — YouTube oder Vimeo; TMDB-Sync füllt den
+besten offiziellen Trailer; public ein **einfacher externer Link** wie die Ticket-Links
+— nie ein Embed; Label nennt die Zielplattform), `poster`(files,max1), `stills`(files).
 
 **Showing** (`showing.yml` / `ShowingPage`): `film`(pages,req,max1), `title`(text,optional
 override), `date`(date,time:true,req), `venue`(text), `sonderinfo`(textarea), `ticketUrl`(url),
@@ -99,8 +101,8 @@ keep blueprint, TMDB sync and this list in agreement): TRANSLATABLE are Film
 `title/sonderinfo/text/keywords`, file `alt/caption`. Everything else is `translate: false`
 (invariant, default language only): dates, numbers, `directors`/`cast`, `originalTitle`,
 `country`/`language` (codes), `subtitles`/`categories` (option keys), `venue`,
-`ticketUrl`, `tmdbId`, `manualOverride`, `poster`/`stills`/`image` (file refs),
-`relatedFilm` (page ref), `source`.
+`ticketUrl`, `tmdbId`, `manualOverride`, `trailerUrl`,
+`poster`/`stills`/`image` (file refs), `relatedFilm` (page ref), `source`.
 The TMDB sync writes `Client::TRANSLATABLE = title/synopsis/genre` into non-default
 languages — keep that const in sync with this contract.
 
@@ -249,6 +251,10 @@ No cookies, no third-party tracking, no consent banner. All assets vendored loca
 fetched server-side + cached; posters downloaded to local files; thumbnails via a first-party
 proxy. Ticket (Mars EDV) and TMDB attribution links are plain `<a>` navigations
 (`rel="noopener noreferrer"`). No iframes. Don't introduce any client-side third-party request.
+The film trailer follows the same rule: `trailerUrl` renders as a plain external link to
+YouTube (a navigation like the ticket links). A Zwei-Klick embed was built and then
+deliberately REVERTED (2026-07: it would have required touching the Datenschutzerklärung)
+— don't reintroduce an embed, even a click-to-load one, without an explicit decision.
 
 ---
 
