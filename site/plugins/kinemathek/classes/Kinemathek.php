@@ -56,6 +56,33 @@ class Kinemathek
         return site()->index()->filterBy('intendedTemplate', 'showing');
     }
 
+    /** Per-request memo for showingsByFilm() (static, like seriesPage()). */
+    protected static ?array $showingsByFilm = null;
+
+    /**
+     * All showings grouped by their film's page id — ONE pass over the
+     * showings, each resolving its `film` ref once. The former per-film
+     * reverse scan made the films archive O(films × showings) (365 films
+     * × 77 showings ≈ 28k toPage() calls ≈ 1s); this map costs O(showings)
+     * once and every FilmPage::showings() after it is a hash lookup.
+     *
+     * @return array<string,Page[]> film id => its showing pages (index order)
+     */
+    public static function showingsByFilm(): array
+    {
+        if (static::$showingsByFilm !== null) {
+            return static::$showingsByFilm;
+        }
+
+        $map = [];
+        foreach (static::showings() as $showing) {
+            if (($film = $showing->film()) !== null) {
+                $map[$film->id()][] = $showing;
+            }
+        }
+        return static::$showingsByFilm = $map;
+    }
+
     /** Every standalone (non-film) event page. */
     public static function events(): Pages
     {

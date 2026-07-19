@@ -25,15 +25,11 @@ class FilmPage extends Page
     /** All showings that reference this film, regardless of date. */
     public function showings(): Pages
     {
-        if ($this->showingsCache !== null) {
-            return $this->showingsCache;
-        }
-
-        $id = $this->id();
-        return $this->showingsCache = Kinemathek::showings()->filter(function (Page $showing) use ($id) {
-            $film = $showing->film();
-            return $film !== null && $film->id() === $id;
-        });
+        // Looked up in the shared film-id => showings map (built once per
+        // request) instead of scanning all showings per film — the archive
+        // renders hundreds of films, and the per-film scan was its bottleneck.
+        return $this->showingsCache ??=
+            new Pages(Kinemathek::showingsByFilm()[$this->id()] ?? []);
     }
 
     /** Upcoming showings — clickable, soonest first (SPEC §3). Includes today. */
