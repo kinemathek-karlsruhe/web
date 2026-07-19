@@ -52,6 +52,20 @@ App::plugin('kinemathek/core', [
 
     'hooks' => [
         /**
+         * Page-cache lifetime: the program boundary, "Demnächst" tags and
+         * upcoming/past splits all depend on "today", but Kirby's pages cache
+         * only invalidates on content changes. Expire every cached page at the
+         * next midnight (venue time zone, pinned above) so date-driven state
+         * rolls over on its own. expires() only ever *reduces* a lifetime, and
+         * it is not serialized into the HTTP response — server-cache only.
+         * No-op while the pages cache is off (e.g. local dev).
+         */
+        'page.render:before' => function (string $contentType, array $data, $page) {
+            kirby()->response()->expires('tomorrow');
+            return $data;
+        },
+
+        /**
          * Editors write "(image: … width: 100px)" — but the HTML width/height
          * attribute is a bare number, so browsers ignore "100px" and render
          * the image at its natural size (a small inline logo suddenly blows up

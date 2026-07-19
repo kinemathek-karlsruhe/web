@@ -68,5 +68,11 @@ return [
 	// name with a slash, matching kirby()->cache('kinemathek/tmdb').
 	"cache" => [
 		"kinemathek/tmdb" => true,
+		// Full-page cache for the public site. Kirby flushes it on every
+		// content change (Panel edits show up immediately), skips requests
+		// with query strings (facet filters stay live), and the kinemathek
+		// plugin expires every page at midnight so date-dependent listings
+		// ("Demnächst", Spielplan boundary) roll over without an edit.
+		"pages" => true,
 	],
 ];
