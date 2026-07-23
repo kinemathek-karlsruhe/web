@@ -193,9 +193,9 @@ usort($allSeries, 'strcasecmp');
     $left = array_filter($entries, fn ($e) => $e['venueKey'] !== 'box');
     $box  = array_filter($entries, fn ($e) => $e['venueKey'] === 'box');
     ?>
-    <section class="day<?= $key === $todayKey ? ' today' : '' ?>" data-date="<?= $key ?>" id="tag-<?= $key ?>">
+    <section class="day<?= $key === $todayKey ? ' today' : '' ?>" data-date="<?= $key ?>" data-month="<?= html($meta['month']) ?>" id="tag-<?= $key ?>">
       <h2 class="daybar">
-        <?php if ($meta['month']): ?><span class="month"><?= html($meta['month']) ?>/</span><?php endif ?>
+        <span class="month"<?= $meta['monthStart'] ? '' : ' hidden' ?>><?= html($meta['month']) ?>/</span>
         <span class="dow"><?= html($meta['dow']) ?></span>
         <span class="num"><?= $meta['num'] ?>.</span>
         <?php if ($key === $todayKey): ?><span class="today-tag"><?= html(t('kinemathek.mb.today')) ?></span><?php endif ?>

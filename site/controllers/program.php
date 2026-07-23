@@ -68,8 +68,11 @@ return function ($site, $page, $kirby) {
         $dayMeta[$key] = [
             'dow'        => rtrim(Kinemathek::localDate($ts, 'dow'), '.'),
             'num'        => (int)date('j', $ts),
-            // month marker on the first day and on every month transition
-            'month'      => $prevMonth === $month ? null : Kinemathek::localDate($ts, 'month'),
+            // month name is always carried (client filtering re-picks the first
+            // visible day per month); monthStart marks the full-list transition
+            // so the no-JS view still shows one marker per month.
+            'month'      => Kinemathek::localDate($ts, 'month'),
+            'monthStart' => $prevMonth !== $month,
             'detailDate' => Kinemathek::localDate($ts, 'detail'),
         ];
         $prevMonth = $month;
