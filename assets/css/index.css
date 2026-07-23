@@ -1096,6 +1096,94 @@ body {
   height: auto;
   border: 1px solid var(--line);
 }
+/* Reihen-Übersicht: Katalog als zeilenweises Karten-Raster (Reihe 1
+   oben-links, Reihe 2 oben-rechts, Reihe 3 Zeile darunter links …). Nutzt
+   die volle Blattbreite; das Intro bleibt in schmaler Lesebreite. Auf
+   Tablet/Handy einspaltig. Jede Karte ist ein .prose-mb-Block (Bild +
+   Überschriftsbalken + Kurztext) und bleibt als Ganzes zusammen. */
+.text-reihen { max-width: none; }
+.text-reihen .intro { max-width: 44rem; }
+.reihen-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  /* mehr Luft ZWISCHEN den Karten als innerhalb, damit Überschrift + Bild
+     als Einheit lesen (Karten-Innenabstand siehe .reihe-card gap) */
+  gap: 1.5rem 2.6rem;
+  align-items: start;
+}
+@media (min-width: 720px) {
+  .reihen-grid { grid-template-columns: 1fr 1fr; }
+}
+.reihe-card { min-width: 0; position: relative; }
+.reihe-card > :first-child { margin-top: 0; }
+/* Ganze Karte klickbar ("stretched link"): der Link in der Reihen-
+   Überschrift wird unsichtbar über die gesamte Karte gespannt. Damit eine
+   neue Reihe klickbar ist, muss ihre ##-Überschrift auf die Reihenseite
+   verlinken (Link-Werkzeug im Panel) — genau wie bei den bestehenden. */
+.reihe-card :is(h1, h2, h3) a {
+  color: inherit;
+  text-decoration: none;
+}
+.reihe-card :is(h1, h2, h3) a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+.reihe-card:hover :is(h1, h2, h3) a { text-decoration: underline; text-underline-offset: .14em; }
+.reihe-card:hover figure { border-color: var(--ink); }
+.reihe-card :is(h1, h2, h3) a:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+/* Gerahmter Bildkasten: feste 3:2-Fläche, Bild ohne Beschnitt eingepasst
+   (contain), Rest ist Passepartout — so laufen die Zeilen bündig und die
+   Motive bleiben vollständig. Der Rand wandert vom Bild auf den Kasten. */
+.reihe-card figure {
+  margin: 0 0 .5rem;
+  aspect-ratio: 3 / 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--wash);
+}
+.reihe-card figure img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border: 0;
+}
+/* CTA-Zeile („→ Zur Reihe") — rein visuell, die ganze Karte ist verlinkt. */
+.reihe-cta {
+  margin: .35rem 0 0;
+  font-weight: 500;
+  font-size: .9rem;
+  color: var(--ink-soft);
+}
+.reihe-cta::before { content: "→ "; }
+
+/* Karten-Innenlayout ab Tablet/Desktop: Überschrift oben über die volle
+   Breite, darunter Bild links (3:2) und Kurztext rechts (vertikal
+   zentriert), „→ Zur Reihe" unten rechts bündig mit der Bildunterkante.
+   Auf dem Handy bleiben die Bausteine schlicht untereinander. */
+@media (min-width: 720px) {
+  .reihe-card {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+      "head head"
+      "img  text"
+      "img  cta";
+    gap: .3rem 1.3rem;
+  }
+  .reihe-card > :is(h1, h2, h3) { grid-area: head; margin: 0; }
+  .reihe-card > figure { grid-area: img; margin: 0; align-self: start; }
+  .reihe-card > p:not(.reihe-cta) { grid-area: text; align-self: center; margin: 0; }
+  .reihe-card > .reihe-cta { grid-area: cta; align-self: end; margin: 0; }
+}
+
 .collection-intro { padding-bottom: 0; }
 .collection-none {
   max-width: 44rem;
