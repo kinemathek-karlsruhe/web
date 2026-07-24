@@ -200,9 +200,17 @@ class Kinemathek
      * skipped, so callers can pass the whole query-param set and only present
      * facets narrow the result. Returns ALL matches (no pagination here).
      *
+     * $lang forces which content language the item's facet values are read in.
+     * The public Spielplan leaves it null (current language: its facet chips and
+     * ?genre=… links are per-language, so match must be too). The Bereichsseite
+     * pre-filter passes the DEFAULT language, because its filter values are
+     * default-language routing config — a translatable facet field (series/
+     * genre/keywords) can sit materialized-empty in an .en.txt and would
+     * otherwise never match the German pre-filter value on /en.
+     *
      * @param array<string,string|array|null> $facets facet => requested value(s)
      */
-    public static function filterByFacets(Pages $pages, array $facets): Pages
+    public static function filterByFacets(Pages $pages, array $facets, ?string $lang = null): Pages
     {
         foreach (static::FACETS as $name => $config) {
             $requested = static::normaliseValues($facets[$name] ?? null);
@@ -210,8 +218,8 @@ class Kinemathek
                 continue; // facet not active — does not constrain the result
             }
 
-            $pages = $pages->filter(function (Page $item) use ($name, $config, $requested) {
-                $actual = static::facetValues($item, $name, $config);
+            $pages = $pages->filter(function (Page $item) use ($name, $config, $requested, $lang) {
+                $actual = static::facetValues($item, $name, $config, $lang);
                 // OR within a facet: match if the item carries ANY requested value.
                 return count(array_intersect($actual, $requested)) > 0;
             });
@@ -302,29 +310,31 @@ class Kinemathek
      * Reihen, e.g. Maschenkino, scope their page by keyword so that non-film
      * events can join the listing). Lets templates link a series label to the
      * curated series page without storing a relation anywhere.
-     * Case-insensitive; memoised per content language (both filter fields are
-     * translatable).
+     * Case-insensitive; memoised once. Both filter fields are translate: false
+     * (editorial routing config), so they are read from the DEFAULT language —
+     * an /en request must resolve the same Reihe -> page map as /de, and a
+     * translation file may carry a stale empty copy that would otherwise shadow
+     * the German value on read.
      */
     public static function seriesPage(string $series): ?Page
     {
-        static $maps = [];
+        static $map = null;
 
-        $lang = kirby()->language()?->code() ?? 'default';
-        if (isset($maps[$lang]) === false) {
-            $map   = [];
-            $pages = site()->index()->filterBy('intendedTemplate', 'collection');
+        if ($map === null) {
+            $map      = [];
+            $default  = kirby()->defaultLanguage()?->code();
+            $pages    = site()->index()->filterBy('intendedTemplate', 'collection');
             // two passes: an explicit Reihe filter always beats a keyword one
             foreach (['filterSeries', 'filterKeywords'] as $field) {
                 foreach ($pages as $page) {
-                    foreach (static::listValues($page->{$field}()) as $value) {
+                    foreach (static::listValues($page->content($default)->get($field)) as $value) {
                         $map[$value] ??= $page; // first page wins on duplicates
                     }
                 }
             }
-            $maps[$lang] = $map;
         }
 
-        return $maps[$lang][mb_strtolower(trim($series))] ?? null;
+        return $map[mb_strtolower(trim($series))] ?? null;
     }
 
     /**
@@ -336,9 +346,12 @@ class Kinemathek
      *            a Film page (no film() method) reads itself
      *   both  -> union of self and film
      *
+     * $lang forces the content language the value is read in (null = current
+     * request language, the normal Spielplan behaviour). See filterByFacets().
+     *
      * @return string[] lower-cased, trimmed, de-duplicated values
      */
-    protected static function facetValues(Page $item, string $name, array $config): array
+    protected static function facetValues(Page $item, string $name, array $config, ?string $lang = null): array
     {
         $on      = $config['on'];
         $sources = [];
@@ -361,7 +374,8 @@ class Kinemathek
 
         $values = [];
         foreach ($sources as $source) {
-            $values = array_merge($values, static::listValues($source->{$name}()));
+            $field   = $lang === null ? $source->{$name}() : $source->content($lang)->get($name);
+            $values  = array_merge($values, static::listValues($field));
         }
 
         return array_values(array_unique($values));
