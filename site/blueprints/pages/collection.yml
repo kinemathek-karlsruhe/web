@@ -51,9 +51,13 @@ columns:
       # showings/films. Read generically in the controller by facet name
       # (filterSeries -> the "series"/Reihe facet in Kinemathek::FACETS), then
       # run through the same filterByFacets() as the Spielplan's query-string
-      # facets. AND across fields, OR within one. translate: mirrors the field
-      # contract — series/genre/keywords are translatable,
-      # country/language/subtitles/discussion are invariant (codes).
+      # facets. AND across fields, OR within one. ALL pre-filters are
+      # translate: false: they are editorial routing config, not descriptive
+      # content, so one value governs both languages. (The matching facet
+      # fields on the film/showing stay translatable and fall back to German
+      # when untranslated, so a German filter value still matches on /en.)
+      # A translatable pre-filter used to shadow the German value with an empty
+      # string in the .en.txt and silently emptied the /en listing.
       vorfilter:
         type: fields
         fields:
@@ -67,6 +71,7 @@ columns:
           filterSeries:
             label: Reihe
             type: tags
+            translate: false
             icon: layers
             width: 1/1
             options:
@@ -75,6 +80,7 @@ columns:
           filterGenre:
             label: Genre
             type: tags
+            translate: false
             icon: tag
             width: 1/2
             options:
@@ -83,6 +89,7 @@ columns:
           filterKeywords:
             label: Schlagworte
             type: tags
+            translate: false
             icon: tag
             width: 1/2
             options:
