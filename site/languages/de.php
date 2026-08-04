@@ -124,6 +124,7 @@ return [
         'kinemathek.mb.legend.talk'      => 'Vorstellung mit Einführung/Filmgespräch',
         'kinemathek.mb.legend.saal'      => 'Veranstaltung im Saal',
         'kinemathek.mb.legend.box'       => 'Veranstaltung in der Box',
+        'kinemathek.mb.legend.foyer'     => 'Veranstaltung im Foyer',
         'kinemathek.mb.legend.unterwegs' => 'Open Air & andere Orte',
         'kinemathek.mb.collection.none'  => 'Zurzeit nichts im Spielplan — sobald hier etwas ansteht, erscheint das Programm automatisch an dieser Stelle.',
         'kinemathek.mb.reihen'           => 'Aktuelle Reihen',

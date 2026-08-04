@@ -114,6 +114,7 @@ return [
         'kinemathek.mb.legend.talk'      => 'Screening with introduction/film talk',
         'kinemathek.mb.legend.saal'      => 'Held in the Saal',
         'kinemathek.mb.legend.box'       => 'Held in the Box',
+        'kinemathek.mb.legend.foyer'     => 'Held in the Foyer',
         'kinemathek.mb.legend.unterwegs' => 'open air & other venues',
         'kinemathek.mb.collection.none'  => 'Nothing scheduled right now — as soon as something is coming up, the programme appears here automatically.',
         'kinemathek.mb.reihen'           => 'Current series',

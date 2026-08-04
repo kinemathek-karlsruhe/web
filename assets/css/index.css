@@ -354,6 +354,7 @@ body {
 .hs-event .vtag { align-self: center; }
 .hs-event .vtag.saal { border-color: var(--paper); }
 .hs-event .vtag.box { background: var(--paper); color: var(--ink); border-color: var(--paper); }
+.hs-event .vtag.foyer { background: var(--ink-soft); color: var(--paper); border-color: var(--ink-soft); }
 .hs-event .vtag.unterwegs { border-color: var(--paper); }
 
 /* phones: the strip easily wraps to two or three rows and eats the photo —
@@ -652,6 +653,9 @@ body {
 }
 .vtag.saal { border: 1.5px solid var(--ink); }
 .vtag.box  { background: var(--ink); color: var(--paper); border: 1.5px solid var(--ink); }
+/* foyer: filled like the Box, one step softer — a room in the house, so it must
+   NOT borrow the dashes that mean "off-site" */
+.vtag.foyer { background: var(--ink-soft); color: var(--paper); border: 1.5px solid var(--ink-soft); }
 /* unterwegs: dashed — outside the house (Open Air, Stadtbibliothek, …) */
 .vtag.unterwegs { border: 1.5px dashed var(--ink); }
 .event .head .vtag { margin-left: auto; }
