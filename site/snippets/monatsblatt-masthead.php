@@ -107,6 +107,8 @@ if (!in_array($active, array_column($pivotItems, 'key'), true)) {
       <span class="sep">|</span>
       <span class="vtag box">Box</span> <?= html(t('kinemathek.mb.legend.box')) ?>
       <span class="sep">|</span>
+      <span class="vtag foyer">Foyer</span> <?= html(t('kinemathek.mb.legend.foyer')) ?>
+      <span class="sep">|</span>
       <span class="vtag unterwegs"><?= html(t('kinemathek.venue.unterwegs', 'Unterwegs')) ?></span> <?= html(t('kinemathek.mb.legend.unterwegs')) ?>
     </p>
   </div>

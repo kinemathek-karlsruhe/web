@@ -33,10 +33,12 @@ trait OccurrenceTrait
     }
 
     /**
-     * Venue classification from the free-text `venue` field:
-     * 'box' when it names the Box, 'saal' when it names the Saal or is empty
-     * (the house default), 'unterwegs' for everything else — Open Air on the
-     * Kronenplatz, Stadtbibliothek, any pop-up location.
+     * Venue classification from the free-text `venue` field: the three rooms in
+     * the house get their own key ('box', 'foyer', 'saal' — the latter also for
+     * an empty field, the house default), 'unterwegs' means OUTSIDE the house
+     * (Open Air on the Kronenplatz, Stadtbibliothek, any pop-up location).
+     * Keep it that way: the Foyer used to fall into 'unterwegs' and read as an
+     * off-site date.
      */
     public function venueKey(): string
     {
@@ -44,17 +46,21 @@ trait OccurrenceTrait
         if (stripos($venue, 'box') !== false) {
             return 'box';
         }
+        if (stripos($venue, 'foyer') !== false) {
+            return 'foyer';
+        }
         if ($venue === '' || stripos($venue, 'saal') !== false) {
             return 'saal';
         }
         return 'unterwegs';
     }
 
-    /** Display label for the venue tag (Saal/Box are proper names). */
+    /** Display label for the venue tag (Saal/Box/Foyer are proper names). */
     public function venueLabel(): string
     {
         return match ($this->venueKey()) {
             'box'       => 'Box',
+            'foyer'     => 'Foyer',
             'unterwegs' => t('kinemathek.venue.unterwegs', 'Unterwegs'),
             default     => 'Saal',
         };

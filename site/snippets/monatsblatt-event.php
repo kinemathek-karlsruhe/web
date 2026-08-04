@@ -6,7 +6,7 @@
  * full-width row of the day grid; this entry references it via data-detail.
  *
  * @var string $detailId
- * @var string $venueKey  'saal'|'box'
+ * @var string $venueKey  'saal'|'box'|'foyer'|'unterwegs'
  * @var string $timeH     hour, no leading zero
  * @var string $timeM     minutes, two digits
  * @var string $series

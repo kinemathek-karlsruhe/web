@@ -140,10 +140,11 @@ usort($allSeries, 'strcasecmp');
 ?>
 <nav class="filters" aria-label="<?= html(t('kinemathek.filters.by', 'Filtern nach')) ?>">
   <span class="label"><?= html(t('kinemathek.mb.filter')) ?></span>
-  <div class="seg" role="group" aria-label="Saal / Box / <?= html(t('kinemathek.venue.unterwegs', 'Unterwegs')) ?>">
+  <div class="seg" role="group" aria-label="Saal / Box / Foyer / <?= html(t('kinemathek.venue.unterwegs', 'Unterwegs')) ?>">
     <button type="button" data-venue="alle" aria-pressed="true"><?= html(t('kinemathek.mb.all')) ?></button>
     <button type="button" data-venue="saal" aria-pressed="false">Saal</button>
     <button type="button" data-venue="box" aria-pressed="false">Box</button>
+    <button type="button" data-venue="foyer" aria-pressed="false">Foyer</button>
     <button type="button" data-venue="unterwegs" aria-pressed="false"><?= html(t('kinemathek.venue.unterwegs', 'Unterwegs')) ?></button>
   </div>
   <button type="button" class="chip" data-flag="omu" aria-pressed="false">
@@ -188,7 +189,7 @@ usort($allSeries, 'strcasecmp');
     <?php
     $meta = $dayMeta[$key];
     $entries = $dayEntries[$key];
-    // left column = Saal + Unterwegs (print put open-air entries left),
+    // left column = Saal + Foyer + Unterwegs (print put open-air entries left),
     // right column = Box
     $left = array_filter($entries, fn ($e) => $e['venueKey'] !== 'box');
     $box  = array_filter($entries, fn ($e) => $e['venueKey'] === 'box');
