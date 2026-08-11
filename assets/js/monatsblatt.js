@@ -239,12 +239,25 @@
     }, { passive: true });
   }
 
+  /* the page this document was served as: its pivot item is whatever the
+     server marked active — on detail pages that is the section item
+     ('films' on a film page) or the href-less self item, neither of which
+     matches the current path below */
+  var homePath = location.pathname.replace(/\/$/, '');
+  var homeItem = activeItem;
+
   window.addEventListener('popstate', function () {
     var path = location.pathname.replace(/\/$/, '');
     var item = pivotItems.filter(function (i) {
       /* the self-title item is a plain span without href */
       return i.href && new URL(i.href).pathname.replace(/\/$/, '') === path;
-    })[0] || pivotItems[0];
+    })[0];
+    if (!item && path === homePath) item = homeItem;
+    /* anything else is a history entry we don't own: Fancybox pushes a
+       '#slide' hash when a lightbox opens and pops it back on close, and
+       the old fallback to pivotItems[0] swapped the Spielplan in over the
+       detail page the visitor was still looking at */
+    if (!item) return;
     goPivot(item, false);
   });
 
