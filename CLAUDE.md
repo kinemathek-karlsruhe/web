@@ -11,6 +11,17 @@ only; `monatsblatt-*` snippets are the shell; behaviour split across `assets/js/
 Read this file before editing — it encodes the field contract and the gotchas that have
 already bitten us.
 
+**Masthead navigation** — two pieces, deliberately: the pivot strip is a panorama and only
+ever shows two or three of the ~9 sections (that's the design), and the `.section-index`
+band under the eyebrow is the "show me everything" answer. The „Alle Bereiche"-Schalter
+(`.nav-toggle`) unfolds it; it lists the SAME `$pivotItems` and hands its clicks to the
+strip's `goPivot()`, so a pick swaps sections exactly like a tap on the headline. Closed it
+costs zero height (`grid-template-rows: 0fr` + delayed `visibility`, the `.event-detail >
+.clip` pattern) and the page looks untouched. Both the toggle and the band are revealed by
+JS (`hidden` in the markup) — without JS there is nothing to open, so no dead control. The
+band carries the grey `--bar` fill on phones only; on the desktop the single airy line
+keeps just its hairline.
+
 ---
 
 ## Commands

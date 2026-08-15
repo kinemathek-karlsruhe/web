@@ -103,6 +103,7 @@ return [
         'kinemathek.mb.allSeries'        => 'All series',
         'kinemathek.mb.close'            => 'Close',
         'kinemathek.mb.nav'              => 'Sections',
+        'kinemathek.mb.nav.all'          => 'All sections',
         'kinemathek.mb.nav.program'      => 'Programme',
         'kinemathek.mb.nav.films'        => 'Films',
         'kinemathek.mb.nav.events'       => 'Events',

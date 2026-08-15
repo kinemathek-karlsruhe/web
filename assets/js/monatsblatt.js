@@ -13,6 +13,11 @@
   var pivotContent = document.getElementById('pivot-content');
   if (!strip || !pivotContent) return;
   var masthead = document.querySelector('.masthead');
+  var navToggle = document.querySelector('.nav-toggle');
+  var sectionIndex = document.getElementById('section-index');
+  var indexItems = sectionIndex
+    ? Array.prototype.slice.call(sectionIndex.querySelectorAll('.si-item'))
+    : [];
 
   var pivotItems = Array.prototype.slice.call(strip.querySelectorAll('.pivot-item'));
   var activeItem = strip.querySelector('.pivot-item.is-active') || pivotItems[0];
@@ -122,6 +127,12 @@
       if (on) i.setAttribute('aria-current', 'page');
       else i.removeAttribute('aria-current');
     });
+    indexItems.forEach(function (i) {
+      var on = i.dataset.pivot === key;
+      i.classList.toggle('is-active', on);
+      if (on) i.setAttribute('aria-current', 'page');
+      else i.removeAttribute('aria-current');
+    });
     var candidates = allPivotItems.filter(function (i) { return i.dataset.pivot === key; });
     var next = candidates.filter(function (i) { return i.offsetLeft >= stripX - 1; })[0];
     if (!next) { /* ran past the clone set (e.g. reduced motion): wrap first */
@@ -184,6 +195,53 @@
       location.href = item.href; /* graceful fallback: plain navigation */
     });
   };
+
+  /* Übersichts-Band: the strip only ever shows two or three sections, so
+     "Alle Bereiche" unfolds a band listing every one of them. It is a
+     JS-only affordance (nothing to open without JS), hence revealed here.
+     Picking an entry goes through the normal pivot swap. */
+  var setIndexOpen = function (open) {
+    sectionIndex.classList.toggle('is-open', open);
+    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  };
+  var indexIsOpen = function () {
+    return navToggle.getAttribute('aria-expanded') === 'true';
+  };
+
+  if (navToggle && sectionIndex) {
+    sectionIndex.hidden = false;
+    navToggle.hidden = false;
+
+    navToggle.addEventListener('click', function () { setIndexOpen(!indexIsOpen()); });
+
+    sectionIndex.addEventListener('click', function (e) {
+      var link = e.target.closest('.si-item');
+      if (!link) return;
+      setIndexOpen(false);
+      /* the strip twin carries the pivot machinery; without one (shouldn't
+         happen) the link just navigates normally */
+      var twin = pivotItems.filter(function (i) {
+        return i.href && i.dataset.pivot === link.dataset.pivot;
+      })[0];
+      if (!twin) return;
+      e.preventDefault();
+      goPivot(twin, true);
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape' || !indexIsOpen()) return;
+      setIndexOpen(false);
+      navToggle.focus();
+    });
+
+    /* a click anywhere else shuts it — an open band over the program would
+       otherwise sit there until the visitor finds the toggle again */
+    document.addEventListener('click', function (e) {
+      if (!indexIsOpen()) return;
+      if (e.target.closest('#section-index') || e.target.closest('.nav-toggle')) return;
+      setIndexOpen(false);
+    });
+  }
 
   strip.addEventListener('click', function (e) {
     var item = e.target.closest('.pivot-item');

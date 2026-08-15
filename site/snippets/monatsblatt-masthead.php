@@ -50,17 +50,42 @@ if (!in_array($active, array_column($pivotItems, 'key'), true)) {
 
 <div class="eyebrow">
   <p><?= html(t('kinemathek.mb.eyebrow')) ?></p>
-  <nav class="eyebrow-lang" aria-label="Sprache / Language">
-    <?php $first = true; foreach ($kirby->languages() as $lang): ?>
-      <?php if (!$first): ?><span class="sep" aria-hidden="true">|</span><?php endif; $first = false; ?>
-      <?php if ($kirby->language()?->code() === $lang->code()): ?>
-        <span aria-current="true"><?= html($lang->name()) ?></span>
-      <?php else: ?>
-        <a href="<?= $page->url($lang->code()) ?>"
-           hreflang="<?= $lang->code() ?>" lang="<?= $lang->code() ?>"><?= html($lang->name()) ?></a>
-      <?php endif ?>
-    <?php endforeach ?>
-  </nav>
+  <div class="eyebrow-tools">
+    <?php /* JS reveals this (and the band) — without JS there is nothing to
+             open, so an inert control would only mislead */ ?>
+    <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="section-index" hidden>
+      <span class="nav-toggle-text"><?= html(t('kinemathek.mb.nav.all')) ?></span>
+      <span class="nav-toggle-plus" aria-hidden="true">+</span>
+    </button>
+    <nav class="eyebrow-lang" aria-label="Sprache / Language">
+      <?php $first = true; foreach ($kirby->languages() as $lang): ?>
+        <?php if (!$first): ?><span class="sep" aria-hidden="true">|</span><?php endif; $first = false; ?>
+        <?php if ($kirby->language()?->code() === $lang->code()): ?>
+          <span aria-current="true"><?= html($lang->name()) ?></span>
+        <?php else: ?>
+          <a href="<?= $page->url($lang->code()) ?>"
+             hreflang="<?= $lang->code() ?>" lang="<?= $lang->code() ?>"><?= html($lang->name()) ?></a>
+        <?php endif ?>
+      <?php endforeach ?>
+    </nav>
+  </div>
+</div>
+
+<?php /* The pivot strip is a panorama by design: only two or three sections
+         are ever on screen. This band is the additive "show me everything"
+         answer — closed it costs no height and looks like it isn't there;
+         open it lists every section at once. Clicks are handed to the same
+         pivot swap the strip uses (monatsblatt.js). */ ?>
+<div class="section-index" id="section-index" hidden>
+  <div class="si-inner">
+    <nav class="si-nav" aria-label="<?= html(t('kinemathek.mb.nav')) ?>">
+      <?php foreach ($pivotItems as $item): ?>
+        <a class="si-item<?= $selfTitle === null && $item['key'] === $active ? ' is-active' : '' ?>"
+           href="<?= $item['url'] ?>" data-pivot="<?= $item['key'] ?>"
+           <?= $selfTitle === null && $item['key'] === $active ? 'aria-current="page"' : '' ?>><?= html($item['label']) ?></a>
+      <?php endforeach ?>
+    </nav>
+  </div>
 </div>
 
 <?php /* data-section drives per-section masthead extras (the legend shows
