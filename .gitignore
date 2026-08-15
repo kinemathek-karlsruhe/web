@@ -40,6 +40,9 @@ Icon
 *.sublime-workspace
 /.vscode
 /.idea
+# Claude Code's local setup (dev-server launch config with machine-specific
+# PHP paths) — per-machine, not project data.
+/.claude
 
 # Kirby runtime / sensitive — NEVER commit
 # ----------------------------------------
