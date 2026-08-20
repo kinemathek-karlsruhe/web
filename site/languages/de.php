@@ -116,7 +116,7 @@ return [
         'kinemathek.mb.nav.all'          => 'Alle Bereiche',
         'kinemathek.mb.nav.program'      => 'Programm',
         'kinemathek.mb.nav.films'        => 'Filme',
-        'kinemathek.mb.nav.events'       => 'Events',
+        'kinemathek.mb.nav.events'       => 'Sonderveranstaltungen',
         'kinemathek.mb.talk'             => 'Filmgespräch',
         'kinemathek.mb.filmpage'         => 'Zur Filmseite',
         'kinemathek.mb.eventpage'        => 'Eventdetails',

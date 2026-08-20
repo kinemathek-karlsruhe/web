@@ -1,4 +1,4 @@
-title: Veranstaltungen
+title: Sonderveranstaltungen
 icon: megaphone
 
 # Container for standalone, non-film events (SPEC §2.3). Separate template +
@@ -11,8 +11,8 @@ options:
 
 sections:
   events:
-    headline: Veranstaltungen (chronologisch)
-    label: Veranstaltungen
+    headline: Sonderveranstaltungen (chronologisch)
+    label: Sonderveranstaltungen
     type: pages
     template: event
     create: event
