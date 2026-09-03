@@ -30,7 +30,8 @@ Unterseite ein Kartenbild hat. Die Wahl trifft die Seiten-Methode `cardImage()`:
 Koop-Seiten wäre das regelmäßig ein Partnerlogo. Karten **ohne** Bild sind kein Sonderfall,
 sondern der zweite gleichberechtigte Zustand (gleicher Rahmen, gleiches Raster, kein Band) —
 der Bildbestand ist lückenhaft, eine graue Ersatzfläche würde neben den Bildkarten kaputt
-aussehen. `cardImage()` liest alle drei Felder aus der **Default-Sprache**:
+aussehen. Sie bekommen dafür die längere Kurzvorschau (280 statt 120 Zeichen) — den Platz,
+den sonst das Bildband frisst. `cardImage()` liest alle drei Felder aus der **Default-Sprache**:
 Dateireferenzen sind `translate: false`, und eine leer geschriebene EN-Kopie überlagert im
 Content-Merge sonst den deutschen Wert (dieselbe Falle wie beim Reihen-Vorfilter, s.
 `controllers/collection.php` — sie ist hier real zugeschlagen, MaschenKino verlor auf /en sein

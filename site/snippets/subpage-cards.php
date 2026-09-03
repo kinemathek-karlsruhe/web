@@ -5,7 +5,9 @@
  * und Kurzvorschau. Seiten ohne Bild bleiben reine Textkarten und stehen im
  * selben Raster: der Bildbestand ist lückenhaft (viele Unterseiten haben gar
  * kein Foto), eine Cover-Karte mit grauer Ersatzfläche würde daneben
- * kaputt aussehen.
+ * kaputt aussehen. Dafür bekommt die Textkarte die längere Vorschau: das
+ * Bildband kostet gut die halbe Kartenhöhe, ohne Bild steht der Platz dem
+ * Text zur Verfügung — so füllen beide Kartenarten ihre Zeile gleich gut.
  *
  * @var \Kirby\Cms\Pages  $pages   die anzuzeigenden Unterseiten
  * @var string            $label   aria-label der Liste
@@ -14,6 +16,10 @@ $pages ??= null;
 if ($pages === null || $pages->count() === 0) {
     return;
 }
+
+// Zeichen der Kurzvorschau — mit Bildband bleibt weniger Platz als ohne.
+$excerptWithImage = 120;
+$excerptTextOnly  = 280;
 ?>
 <nav class="subpage-list" aria-label="<?= html($label ?? '') ?>">
   <?php foreach ($pages as $child): ?>
@@ -36,7 +42,9 @@ if ($pages === null || $pages->count() === 0) {
       <span class="sp-body">
         <span class="sp-title"><?= html($child->title()) ?></span>
         <?php if ($child->intro()->isNotEmpty()): ?>
-          <span class="sp-intro"><?= $child->intro()->excerpt(120) ?></span>
+          <span class="sp-intro"><?= $child->intro()->excerpt(
+              $bild ? $excerptWithImage : $excerptTextOnly
+          ) ?></span>
         <?php endif ?>
       </span>
     </a>
