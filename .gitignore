@@ -56,3 +56,7 @@ Icon
 
 # Licensed font masters (source OTFs) — only the subsetted WOFF2 in assets/font are served/committed
 /fonts-src/
+
+# One-time migration backups (scripts/migrate-*.php) — local safety copies of
+# editorial content, not project data.
+/scripts/.backup/
