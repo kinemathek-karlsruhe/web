@@ -22,6 +22,21 @@ JS (`hidden` in the markup) — without JS there is nothing to open, so no dead 
 band carries the grey `--bar` fill on phones only; on the desktop the single airy line
 keeps just its hairline.
 
+**Unterseiten-Karteikarten** — die Kästen unter dem Inhalt einer Bereichs- oder Textseite
+(`subpage-cards` snippet, aus `collection.php`) tragen ein Bildband, sobald die
+Unterseite ein Kartenbild hat. Die Wahl trifft die Seiten-Methode `cardImage()`: Feld `cover`
+(„Kartenbild", `collection.yml`/`text.yml`, `translate: false`) → erstes `bilder`-Bild mit
+`groesse: gross` → `mainimage`. Bewusst KEIN „sonst das erste beliebige Bild": auf den
+Koop-Seiten wäre das regelmäßig ein Partnerlogo. Karten **ohne** Bild sind kein Sonderfall,
+sondern der zweite gleichberechtigte Zustand (gleicher Rahmen, gleiches Raster, kein Band) —
+der Bildbestand ist lückenhaft, eine graue Ersatzfläche würde neben den Bildkarten kaputt
+aussehen. `cardImage()` liest alle drei Felder aus der **Default-Sprache**:
+Dateireferenzen sind `translate: false`, und eine leer geschriebene EN-Kopie überlagert im
+Content-Merge sonst den deutschen Wert (dieselbe Falle wie beim Reihen-Vorfilter, s.
+`controllers/collection.php` — sie ist hier real zugeschlagen, MaschenKino verlor auf /en sein
+Bild). `/reihen` baut sein Kartenraster weiterhin von Hand im Kirbytext (`text.php`,
+`$reihenCards`) und ist von alldem unberührt.
+
 ---
 
 ## Commands

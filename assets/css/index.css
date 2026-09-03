@@ -1316,6 +1316,10 @@ body {
 .prose-mb img { max-width: 100%; height: auto; border: 1px solid var(--line); }
 .prose-mb hr { border: 0; border-top: 1px solid var(--line); margin: 1.2em 0; }
 
+/* Unterseiten-Karteikarten (snippet `subpage-cards`): Bildband oben, Text
+   darunter. Nicht jede Unterseite hat ein Bild — die reine Textkarte ist
+   deshalb kein Sonderfall, sondern der zweite gleichberechtigte Zustand:
+   gleicher Rahmen, gleiches Raster, nur ohne Band. */
 .subpage-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
@@ -1323,13 +1327,35 @@ body {
   padding-block: .4rem 1.2rem;
 }
 .subpage-link {
-  display: block;
+  display: flex;
+  flex-direction: column;
   border: 1.5px solid var(--ink);
-  padding: .7rem .8rem .8rem;
   color: inherit;
   text-decoration: none;
+  overflow: hidden;            /* hält das Bild im Rahmen */
 }
 .subpage-link:hover .sp-title { text-decoration: underline; text-underline-offset: .12em; }
+.subpage-link .sp-media {
+  display: block;
+  aspect-ratio: 16 / 9;
+  background: var(--wash);     /* Platzhalterfläche, solange das Bild lädt */
+  border-bottom: 1.5px solid var(--ink);
+}
+.subpage-link .sp-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* SVG/Logo: nicht beschneiden, sondern einpassen */
+.subpage-link .sp-media.is-contain img {
+  object-fit: contain;
+  padding: .6rem;
+}
+.subpage-link .sp-body {
+  display: block;
+  padding: .7rem .8rem .8rem;
+}
 .subpage-link .sp-title {
   display: block;
   font-size: 1.05rem;

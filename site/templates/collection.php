@@ -90,18 +90,10 @@ $bilder = $page->bilder()->toFiles();
     <p class="collection-none"><?= html(t('kinemathek.mb.collection.none')) ?></p>
   <?php endif ?>
 
-  <?php if ($page->children()->listed()->count() > 0): ?>
-    <nav class="subpage-list" aria-label="<?= $page->title()->esc() ?>">
-      <?php foreach ($page->children()->listed() as $child): ?>
-        <a class="subpage-link" href="<?= $child->url() ?>">
-          <span class="sp-title"><?= html($child->title()) ?></span>
-          <?php if ($child->intro()->isNotEmpty()): ?>
-            <span class="sp-intro"><?= $child->intro()->excerpt(120) ?></span>
-          <?php endif ?>
-        </a>
-      <?php endforeach ?>
-    </nav>
-  <?php endif ?>
+  <?php snippet('subpage-cards', [
+      'pages' => $page->children()->listed(),
+      'label' => $page->title()->value(),
+  ]) ?>
 
   <?php /* ── Ab hier: Text links, Bilder rechts (nur wenn Bilder da) ── */ ?>
 

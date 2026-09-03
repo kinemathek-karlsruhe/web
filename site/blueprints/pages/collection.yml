@@ -141,6 +141,21 @@ columns:
       bilder:
         type: fields
         fields:
+          kartenbildHeadline:
+            label: Kartenbild
+            type: headline
+          cover:
+            label: Kartenbild
+            type: files
+            multiple: false
+            translate: false
+            query: page.images
+            uploads:
+              template: bild
+            help: >-
+              Optional: das Bild, mit dem diese Seite auf der Bereichsseite als
+              Karte erscheint. Leer lassen = automatisch das erste Bild mit der
+              Darstellung „Groß“.
           bilderHeadline:
             label: Bilder
             type: headline

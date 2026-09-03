@@ -131,6 +131,37 @@ App::plugin('kinemathek/core', [
     // carry a `date` field, so these work uniformly on either.
     'pageMethods' => [
         /**
+         * Das Bild, mit dem diese Seite als Karteikarte auf ihrer
+         * Bereichsseite erscheint (snippet `subpage-cards`). Reihenfolge:
+         *   1. das Feld `cover` ("Kartenbild") — die redaktionelle Wahl,
+         *   2. das erste `bilder`-Bild mit Darstellung "Groß" (`groesse`) —
+         *      also ein Foto/Plakat, nie eine der kleinen Logo-Kacheln,
+         *   3. `mainimage` (Textseiten haben kein `bilder`-Feld).
+         * Kein Treffer -> null, die Karte bleibt eine reine Textkarte.
+         * Bewusst KEIN "sonst das erste beliebige Bild": das wäre auf den
+         * Kooperations-Seiten regelmäßig ein Partnerlogo.
+         */
+        'cardImage' => function (): ?\Kirby\Cms\File {
+            // Dateireferenzen sind translate: false, also IMMER aus der
+            // DEFAULT-Sprache lesen — nie aus der Anfragesprache. Eine
+            // Übersetzungsdatei kann eine leer geschriebene Kopie des Feldes
+            // enthalten, und der Content-Merge legt diesen leeren String beim
+            // Lesen über den deutschen Wert: auf /en verschwand das Bild
+            // (gleiche Falle wie beim Reihen-Vorfilter, s. collection.php).
+            $content = $this->content(kirby()->defaultLanguage()?->code());
+
+            if ($cover = $content->get('cover')->toFile()) {
+                return $cover;
+            }
+            foreach ($content->get('bilder')->toFiles() as $bild) {
+                if ($bild->groesse()->value() === 'gross') {
+                    return $bild;
+                }
+            }
+            return $content->get('mainimage')->toFile();
+        },
+
+        /**
          * Stable, globally-unique UID for an ICS VEVENT — anchored on the page
          * UUID (falls back to id) so re-downloading an edited screening updates
          * the existing calendar entry instead of duplicating it.
