@@ -60,3 +60,7 @@ Icon
 # One-time migration backups (scripts/migrate-*.php) — local safety copies of
 # editorial content, not project data.
 /scripts/.backup/
+
+# Aufgabenliste aus dem Postfach — enthält Namen, Adressen und Telefonnummern
+# von Privatpersonen (Saalanfragen). Persönliche Arbeitsdaten, kein Projektinhalt.
+/TASKS.md
