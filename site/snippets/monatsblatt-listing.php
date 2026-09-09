@@ -4,8 +4,8 @@ use Kinemathek\Kinemathek;
 
 /**
  * Monatsblatt listing — the filter bar + day-grouped chronological listing
- * (grey day bars, Saal/Box venue columns, slide-down detail panels). Shared
- * by the Spielplan and the Events page; behaviour in assets/js/program.js.
+ * (grey day bars, one time-ordered column per day, slide-down detail panels).
+ * Shared by the Spielplan and the Events page; behaviour in assets/js/program.js.
  *
  * Usage: snippet('monatsblatt-listing', [
  *   'days'     => $days,      // day key (Y-m-d) => Page[] (Showings/Events)
@@ -189,10 +189,6 @@ usort($allSeries, 'strcasecmp');
     <?php
     $meta = $dayMeta[$key];
     $entries = $dayEntries[$key];
-    // left column = Saal + Foyer + Unterwegs (print put open-air entries left),
-    // right column = Box
-    $left = array_filter($entries, fn ($e) => $e['venueKey'] !== 'box');
-    $box  = array_filter($entries, fn ($e) => $e['venueKey'] === 'box');
     ?>
     <section class="day<?= $key === $todayKey ? ' today' : '' ?>" data-date="<?= $key ?>" data-month="<?= html($meta['month']) ?>" id="tag-<?= $key ?>">
       <h2 class="daybar">
@@ -201,14 +197,17 @@ usort($allSeries, 'strcasecmp');
         <span class="num"><?= $meta['num'] ?>.</span>
         <?php if ($key === $todayKey): ?><span class="today-tag"><?= html(t('kinemathek.mb.today')) ?></span><?php endif ?>
       </h2>
-      <div class="day-events<?= $left !== [] && $box !== [] ? ' duo' : '' ?>">
-        <?php foreach ([$left, $box] as $list): ?>
-          <?php if ($list === []) continue ?>
-          <div class="venue-col">
-            <?php foreach ($list as $entry) snippet('monatsblatt-event', $entry) ?>
-          </div>
+      <?php /* One chronological column per day — the room is carried by the
+               entry's Saal/Box tag, exactly like the printed sheet. Side-by-side
+               venue columns broke the time order (the right column could start
+               earlier than the left) and squeezed the titles. Each detail panel
+               sits right behind its own entry so it slides open where the reader
+               just clicked. */ ?>
+      <div class="day-events">
+        <?php foreach ($entries as $entry): ?>
+          <?php snippet('monatsblatt-event', $entry) ?>
+          <?php snippet('monatsblatt-detail', $entry) ?>
         <?php endforeach ?>
-        <?php foreach ($entries as $entry) snippet('monatsblatt-detail', $entry) ?>
       </div>
     </section>
   <?php endforeach ?>

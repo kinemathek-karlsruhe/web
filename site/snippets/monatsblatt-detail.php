@@ -1,9 +1,9 @@
 <?php
 /**
  * The slide-down detail panel for one Monatsblatt entry. Rendered collapsed
- * (grid-template-rows: 0fr) as a full-width row of its day grid;
- * assets/js/program.js toggles .open. Same entry-data array as
- * monatsblatt-event.php.
+ * (grid-template-rows: 0fr) directly behind its own entry in the day column,
+ * so it opens where the reader clicked; assets/js/program.js toggles .open.
+ * Same entry-data array as monatsblatt-event.php.
  *
  * @var \Kirby\Cms\Page  $item
  * @var ?\Kirby\Cms\Page $film

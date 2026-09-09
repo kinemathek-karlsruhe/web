@@ -664,22 +664,17 @@ body {
   align-self: center;
 }
 
+/* One column per day, in time order (the room lives in the entry's Saal/Box
+   tag). Entry and its detail panel alternate as children, so the row gap is 0
+   and the spacing rides on the entries themselves: every entry that FOLLOWS a
+   visible one gets the gap, which keeps it correct when the filter hides the
+   first entries of a day. */
 .day-events {
   display: grid;
   grid-template-columns: 1fr;
-  gap: .65rem .9rem;
+  row-gap: 0;
 }
-.day-events.duo { grid-template-columns: 1fr 1fr; }
-.day-events.duo:has(.venue-col.empty) { grid-template-columns: 1fr; }
-.venue-col {
-  display: grid;
-  gap: .6rem;
-  align-content: start;
-}
-.venue-col.empty { display: none; }
-@media (max-width: 430px) {
-  .day-events.duo { grid-template-columns: 1fr; }
-}
+.day-events > .event:not(.hidden) ~ .event:not(.hidden) { margin-top: .65rem; }
 
 /* ---------- Event entry ---------- */
 
@@ -795,7 +790,6 @@ body {
 }
 
 .event-detail {
-  grid-column: 1 / -1;
   display: grid;
   grid-template-rows: 0fr;
   transition: grid-template-rows .3s cubic-bezier(.22, .8, .25, 1);

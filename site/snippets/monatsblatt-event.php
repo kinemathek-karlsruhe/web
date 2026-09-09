@@ -2,8 +2,8 @@
 /**
  * One Monatsblatt program entry (Showing or Event). Receives the precomputed
  * entry-data array from templates/program.php ($entryData). The matching
- * slide-down panel is rendered separately (monatsblatt-detail) as a
- * full-width row of the day grid; this entry references it via data-detail.
+ * slide-down panel (monatsblatt-detail) follows immediately after this entry
+ * in the day column; this entry references it via data-detail.
  *
  * @var string $detailId
  * @var string $venueKey  'saal'|'box'|'foyer'|'unterwegs'

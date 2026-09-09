@@ -89,9 +89,6 @@
          month (see monatsblatt-listing.php: every day carries data-month). */
       var prevMonth = null;
       days.forEach(function (day) {
-        day.querySelectorAll('.venue-col').forEach(function (col) {
-          col.classList.toggle('empty', !col.querySelector('.event:not(.hidden)'));
-        });
         var dayVisible = !!day.querySelector('.event:not(.hidden)');
         day.classList.toggle('hidden', !dayVisible);
         var marker = day.querySelector('.daybar .month');

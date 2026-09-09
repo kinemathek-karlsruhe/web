@@ -22,6 +22,17 @@ JS (`hidden` in the markup) — without JS there is nothing to open, so no dead 
 band carries the grey `--bar` fill on phones only; on the desktop the single airy line
 keeps just its hairline.
 
+**Tagesliste im Monatsblatt** — ein Tag ist EINE chronologische Spalte (`monatsblatt-listing.php`),
+der Raum steckt allein im `SAAL`/`BOX`/`FOYER`/`UNTERWEGS`-Schild des Eintrags — genau wie im
+gedruckten Blatt. Die frühere Saal-/Box-Doppelspalte ist bewusst weg (2026-09): sie brach die
+Zeitachse (der rechte Eintrag konnte früher anfangen als der linke, die Uhrzeit klebte am
+Nachbartext) und quetschte die Titel über drei Zeilen — einspaltig sind die Tagesblöcke sogar
+~25 % NIEDRIGER. Jedes `.event-detail` steht direkt hinter seinem `.event`, klappt also dort auf,
+wo geklickt wurde. Deshalb hat `.day-events` `row-gap: 0` und der Abstand hängt an
+`.event:not(.hidden) ~ .event:not(.hidden)`: Einträge und (im Ruhezustand 0 hohe) Panels wechseln
+sich als Grid-Kinder ab, und die `~`-Regel bleibt auch dann richtig, wenn der Filter die ersten
+Einträge eines Tages ausblendet.
+
 **Unterseiten-Karteikarten** — die Kästen unter dem Inhalt einer Bereichs- oder Textseite
 (`subpage-cards` snippet, aus `collection.php` UND `text.php`) tragen ein Bildband, sobald die
 Unterseite ein Kartenbild hat. Die Wahl trifft die Seiten-Methode `cardImage()`: Feld `cover`
