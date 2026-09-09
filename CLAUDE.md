@@ -31,7 +31,9 @@ Nachbartext) und quetschte die Titel über drei Zeilen — einspaltig sind die T
 wo geklickt wurde. Deshalb hat `.day-events` `row-gap: 0` und der Abstand hängt an
 `.event:not(.hidden) ~ .event:not(.hidden)`: Einträge und (im Ruhezustand 0 hohe) Panels wechseln
 sich als Grid-Kinder ab, und die `~`-Regel bleibt auch dann richtig, wenn der Filter die ersten
-Einträge eines Tages ausblendet.
+Einträge eines Tages ausblendet. Im Archiv (`?past=1`) laufen die TAGE rückwärts, die Termine
+INNERHALB eines Tages aber vorwärts — `controllers/program.php` dreht die `desc`-Sortierung von
+`Kinemathek::program(past)` pro Tag wieder um (der Helper selbst bleibt „most-recent first").
 
 **Unterseiten-Karteikarten** — die Kästen unter dem Inhalt einer Bereichs- oder Textseite
 (`subpage-cards` snippet, aus `collection.php` UND `text.php`) tragen ein Bildband, sobald die

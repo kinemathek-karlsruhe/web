@@ -59,6 +59,15 @@ return function ($site, $page, $kirby) {
     }
     // Future: oldest-first (soonest screening at the top). Past: newest-first.
     $past ? krsort($days) : ksort($days);
+    // …but WITHIN a past day the afternoon still came before the evening, and
+    // the listing shows one time-ordered column per day — so undo the desc
+    // sort of Kinemathek::program() per day (the day ORDER stays reversed).
+    if ($past === true) {
+        foreach ($days as $key => $items) {
+            usort($items, fn ($a, $b) => $a->timestamp() <=> $b->timestamp());
+            $days[$key] = $items;
+        }
+    }
 
     $dayMeta   = [];
     $prevMonth = null;
