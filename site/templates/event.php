@@ -32,7 +32,7 @@ $relatedFilm = $page->relatedFilm();
         <?php if ($isPast): ?><span class="past-tag"><?= html(t('kinemathek.past', '(vergangen)')) ?></span><?php endif ?>
       </header>
       <?php
-      $series    = Kinemathek::splitField($page->keywords())[0] ?? '';
+      $series    = $page->seriesLabel();
       $seriesUrl = $series !== '' ? Kinemathek::seriesPage($series)?->url() : null;
       ?>
       <?php if ($series !== ''): ?>

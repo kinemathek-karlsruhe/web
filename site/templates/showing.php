@@ -49,7 +49,7 @@ $still = $film ? ($film->stills()->toFiles()->first() ?? $film->posterFile()) : 
         <?php if ($isPast): ?><span class="past-tag"><?= html(t('kinemathek.past', '(vergangen)')) ?></span><?php endif ?>
       </header>
       <?php
-      $series    = $film ? (Kinemathek::splitField($film->series())[0] ?? '') : '';
+      $series    = $page->seriesLabel();
       $seriesUrl = $series !== '' ? Kinemathek::seriesPage($series)?->url() : null;
       ?>
       <?php if ($series !== ''): ?>

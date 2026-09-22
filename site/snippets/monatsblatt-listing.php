@@ -49,13 +49,8 @@ $entryData = function (\Kirby\Cms\Page $item, string $detailDate) use ($markMap,
         $omu = $omu || $markMap[$key]['omu'];
     }
 
-    // Series / Reihe label (from the film; events fall back to their keywords)
-    $series = '';
-    if ($film && $film->series()->isNotEmpty()) {
-        $series = Kinemathek::splitField($film->series())[0] ?? '';
-    } elseif ($isEvent) {
-        $series = Kinemathek::splitField($item->keywords())[0] ?? '';
-    }
+    // Series / Reihe label (from the film, else the item's own keywords)
+    $series = $item->seriesLabel();
     // Detail-panel link target: the Bereichsseite curated for this Reihe, if any
     $seriesUrl = $series !== '' ? Kinemathek::seriesPage($series)?->url() : null;
 

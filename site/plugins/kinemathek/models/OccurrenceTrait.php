@@ -25,6 +25,20 @@ trait OccurrenceTrait
         return $date->isEmpty() ? null : $date->toDate();
     }
 
+    /**
+     * The Reihe label printed above the title: the film's first `series` entry,
+     * else the occurrence's own first `keywords` entry (so a Showing whose film
+     * has no Reihe, and every Event, still gets one). '' when neither is set.
+     */
+    public function seriesLabel(): string
+    {
+        $film = $this->film();
+        if ($film && $film->series()->isNotEmpty()) {
+            return Kinemathek::splitField($film->series())[0] ?? '';
+        }
+        return Kinemathek::splitField($this->keywords())[0] ?? '';
+    }
+
     /** Has this occurrence already happened? */
     public function isPast(bool $includeToday = true): bool
     {
