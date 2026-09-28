@@ -59,12 +59,33 @@
     <?php endif ?>
   </figure>
 
-  <?php /* Mobile start (phones only, CSS-gated): curated Reihen tiles in the
-           hero's visual language, then the reveal button. The listing below
-           stays in the markup for desktop, no-JS and search engines — the
-           .mb-fold wrapper is collapsed on phones until the button (or a
-           Heute-Strip/deep link) opens it via program.js. */ ?>
-  <?php if ($reihen !== []): ?>
+  <?php /* Mobile start (phones only, CSS-gated): the reveal button sits right
+           under the hero so the Spielplan is one tap away without scrolling
+           past the Reihen tiles. The listing stays in the markup for desktop,
+           no-JS and search engines — the .mb-fold wrapper is collapsed on
+           phones until the button (or a Heute-Strip/deep link) opens it via
+           program.js, and then unfolds exactly where the button was. */ ?>
+  <button class="mb-reveal" type="button" aria-expanded="false">
+    <?= html(t('kinemathek.mb.showProgram', 'Spielplan anzeigen')) ?>
+    <svg class="icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 5l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+  </button>
+  <?php endif /* !$past */ ?>
+
+  <div class="mb-fold<?= $past ? ' open' : '' ?>"><?php /* archive: never folded */ ?>
+
+  <?php snippet('monatsblatt-listing', [
+      'days'          => $days,
+      'dayMeta'       => $dayMeta,
+      'todayKey'      => $todayKey,
+      'past'          => $past,
+      'archiveToggle' => true,  // the Archiv button lives in the filter row (Spielplan only)
+  ]) ?>
+
+  </div><?php /* /.mb-fold */ ?>
+
+  <?php /* curated Reihen tiles in the hero's visual language (phones only):
+           below the button while folded, below the listing once opened */ ?>
+  <?php if (!$past && $reihen !== []): ?>
     <nav class="reihen" aria-label="<?= html(t('kinemathek.mb.reihen', 'Aktuelle Reihen')) ?>">
       <p class="reihen-label"><?= html(t('kinemathek.mb.reihen', 'Aktuelle Reihen')) ?></p>
       <?php foreach ($reihen as $reihe): ?>
@@ -84,25 +105,7 @@
     </nav>
   <?php endif ?>
 
-  <button class="mb-reveal" type="button" aria-expanded="false">
-    <?= html(t('kinemathek.mb.showProgram', 'Spielplan anzeigen')) ?>
-    <svg class="icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 5l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></svg>
-  </button>
-  <?php endif /* !$past */ ?>
-
-  <div class="mb-fold<?= $past ? ' open' : '' ?>"><?php /* archive: never folded */ ?>
-
-  <?php snippet('monatsblatt-listing', [
-      'days'          => $days,
-      'dayMeta'       => $dayMeta,
-      'todayKey'      => $todayKey,
-      'past'          => $past,
-      'archiveToggle' => true,  // the Archiv button lives in the filter row (Spielplan only)
-  ]) ?>
-
   <?php snippet('monatsblatt-colophon') ?>
-
-  </div><?php /* /.mb-fold */ ?>
 
   </div><?php /* /#pivot-content */ ?>
 
