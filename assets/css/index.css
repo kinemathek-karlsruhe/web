@@ -449,8 +449,10 @@ body {
 @media (max-width: 760px) {
   .heute-strip { gap: .2rem 1rem; padding: .35rem .7rem .4rem; }
   .hs-label { font-size: .68rem; }
-  .hs-time { font-size: .9rem; }
-  .hs-title { font-size: 1rem; }
+  .hs-time { font-size: .8rem; }
+  /* same size as the hero's photo caption — the strip is a pointer into the
+     listing, not a headline, and must not outshout the picture */
+  .hs-title { font-size: .72rem; }
   /* .vtag keeps its base .6rem — already the floor for legible uppercase */
 }
 
