@@ -38,6 +38,15 @@ return [
 	// Its children keep their /program/<slug> URLs; content/home is unused.
 	"home" => "program",
 
+	// Old WordPress URLs -> 301 to the homepage (= the Spielplan), so bookmarks,
+	// printed links and search results keep working.
+	"routes" => [
+		[
+			"pattern" => ["spielplan", "spielplan/(:all)"],
+			"action" => fn () => go(site()->url(), 301),
+		],
+	],
+
 	"kinemathek" => [
 		// TMDB integration (site/plugins/kinemathek-tmdb). Credentials come from
 		// .env: TMDB_KEY for a v3 key, or TMDB_TOKEN for a v4 bearer token.
