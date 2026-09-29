@@ -120,16 +120,22 @@ return function ($site, $page, $kirby) {
     }
 
     // Mobile start tiles: editor-curated Bereichsseiten (the `reihen` pages
-    // field on the Spielplan page). Tile image = the Bereichsseite's first
-    // `bilder` file, caption = its title; pages without an image still render
-    // (striped placeholder, like the hero). Shown on phones only.
+    // field on the Spielplan page). Tile image = the page's Kartenbild
+    // (`cardImage()`: cover → "Groß"-Bild → mainimage, same as the
+    // subpage cards), else its first `bilder`/any image as before; caption =
+    // its title; pages without an image still render (striped placeholder,
+    // like the hero). Shown on phones only.
     $reihen = [];
     if (!$past) {
         foreach ($page->reihen()->toPages() as $reihePage) {
+            // file refs are translate: false — read the fallback from the
+            // default language too (see cardImage())
+            $content = $reihePage->content($kirby->defaultLanguage()?->code());
             $reihen[] = [
                 'url'   => $reihePage->url(),
                 'title' => $reihePage->title()->value(),
-                'file'  => $reihePage->bilder()->toFiles()->first()
+                'file'  => $reihePage->cardImage()
+                    ?? $content->get('bilder')->toFiles()->first()
                     ?? $reihePage->images()->first(),
             ];
         }
