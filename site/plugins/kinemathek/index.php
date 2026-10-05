@@ -27,6 +27,7 @@ date_default_timezone_set((string) (option('kinemathek.ics.timezone') ?? 'Europe
 load([
     'Kinemathek\\Kinemathek'      => __DIR__ . '/classes/Kinemathek.php',
     'Kinemathek\\Ics'             => __DIR__ . '/src/Ics.php',
+    'Kinemathek\\ShowingCreateDialog' => __DIR__ . '/src/ShowingCreateDialog.php',
     'Kinemathek\\OccurrenceTrait' => __DIR__ . '/models/OccurrenceTrait.php',
     'Kinemathek\\FilmPage'        => __DIR__ . '/models/FilmPage.php',
     'Kinemathek\\ShowingPage'     => __DIR__ . '/models/ShowingPage.php',
@@ -47,6 +48,40 @@ App::plugin('kinemathek/core', [
         'ics' => [
             'mime' => 'text/calendar',
             'type' => 'document',
+        ],
+    ],
+
+    // Panel: die Vorstellungs-Listen am Film (Tab „Vorführungen"). Eine
+    // normale `pages`-Sektion, nur dass ihr Plus nicht Kirbys Anlege-Dialog
+    // öffnet (der würde UNTER dem Film anlegen), sondern den eigenen Dialog
+    // unten — Gegenstück im Panel: index.js.
+    'sections' => [
+        'filmshowings' => [
+            'extends'  => 'pages',
+            'computed' => [
+                'add' => function () {
+                    if ($this->create === false) {
+                        return false;
+                    }
+                    return kirby()->page('program')?->permissions()->can('create') === true;
+                },
+            ],
+        ],
+    ],
+
+    'areas' => [
+        'site' => fn () => [
+            'dialogs' => [
+                'kinemathek.showing.create' => [
+                    'pattern' => 'kinemathek/showings/create',
+                    'load'    => fn () => (new Kinemathek\ShowingCreateDialog(
+                        (string) kirby()->request()->get('film')
+                    ))->load(),
+                    'submit'  => fn () => (new Kinemathek\ShowingCreateDialog(
+                        (string) kirby()->request()->get('filmPath')
+                    ))->submit(kirby()->request()->get()),
+                ],
+            ],
         ],
     ],
 

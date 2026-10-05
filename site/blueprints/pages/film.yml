@@ -288,35 +288,39 @@ tabs:
                 label: Vorführungen
                 text: >
                   Diese Listen werden automatisch aus dem Programm ermittelt
-                  (umgekehrte Verknüpfung). Neue Vorstellungen werden **nicht
-                  hier**, sondern unter *Programm (Spielplan)* angelegt — dort
-                  den Film verknüpfen. Ein Klick öffnet die jeweilige Vorstellung.
+                  (umgekehrte Verknüpfung). Über **Hinzufügen** bei „Kommende
+                  Vorstellungen" lässt sich direkt hier ein neuer Termin für
+                  diesen Film anlegen — er landet wie gewohnt unter
+                  *Programm (Spielplan)*. Ein Klick öffnet die jeweilige
+                  Vorstellung für alle weiteren Angaben.
       upcoming:
         width: 1/2
         sections:
           upcomingShowings:
-            type: pages
+            type: filmshowings
             label: Kommende Vorstellungen
             headline: Kommende Vorstellungen
-            # Reverse lookup from the showings under program/ (SPEC §3). These
-            # pages live under program/, not here, so creating one from this
-            # section makes no sense — disable the Add button explicitly. A
-            # query-based section also has manual sorting disabled by Kirby.
+            # Reverse lookup from the showings under program/ (SPEC §3). The
+            # `filmshowings` section is a pages section whose Add button opens
+            # the plugin's own dialog: it creates the showing under program/
+            # with this film already linked (ShowingCreateDialog).
             query: page.upcomingShowings
             layout: list
-            create: false
             sortable: false
             search: false
             image:
               icon: calendar
               back: light
-            info: "{{ page.date.toDate('d.m.Y H:i') }} Uhr"
+            # Alle Einträge gehören zu DIESEM Film — der Titel (sonst der Slug)
+            # sagt nichts, also trägt der Termin die Zeile und der Raum die Info.
+            text: "{{ page.date.toDate('d.m.Y H:i') }} Uhr"
+            info: "{{ page.venueLabel }}"
             empty: Aktuell keine kommenden Vorstellungen dieses Films.
       past:
         width: 1/2
         sections:
           pastShowings:
-            type: pages
+            type: filmshowings
             label: Frühere Vorstellungen
             headline: Frühere Vorstellungen
             query: page.pastShowings
@@ -327,7 +331,8 @@ tabs:
             image:
               icon: clock
               back: light
-            info: "{{ page.date.toDate('d.m.Y H:i') }} Uhr"
+            text: "{{ page.date.toDate('d.m.Y H:i') }} Uhr"
+            info: "{{ page.venueLabel }}"
             empty: Noch keine vergangenen Vorstellungen archiviert.
       events:
         width: 1/1

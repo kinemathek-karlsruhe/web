@@ -219,6 +219,14 @@ Facet routing (`Kinemathek::FACETS`): `country/language/genre/series` → on the
 - `num:` must encode **date+time** (`YmdHi`), or two same-day showings collide.
 - `info:`/header templates have **no inline conditionals** — single plain placeholders only.
 
+- **Vorstellung direkt am Film anlegen**: die Listen im Film-Tab „Vorführungen" sind
+  `type: filmshowings` — eine `pages`-Sektion (`kinemathek/core`, `index.php` + no-build
+  `index.js`), deren „Hinzufügen" statt Kirbys Anlege-Dialog (der UNTER dem Film anlegen
+  würde) `Kinemathek\ShowingCreateDialog` öffnet: Showing unter `program/`, Film verknüpft,
+  sofort `listed`, Slug `{film-slug}-{Ymd}-{Hi}`; der Editor bleibt auf der Filmseite.
+  Dialog-Query-Parameter gehen beim Absenden NICHT mit — nur der Formularwert; deshalb reist
+  der Film als verstecktes Feld `filmPath` mit.
+
 **Config, secrets, cache (TMDB)**
 - **Do NOT register `'options' => ['cache' => true]` on the tmdb plugin.** It stores a flat
   `kinemathek.tmdb` option key that **shadows the nested credentials** in config.php, so
