@@ -148,12 +148,18 @@
 	"error.form.notSaved": "表單無法儲存，請檢查是否有錯誤",
 
 	"error.language.code": "語言代碼無效",
+	"error.language.create.default": "\"{name}\" ({code}) is already set as the default language",
 	"error.language.create.permission": "你沒有新增語言的權限",
 	"error.language.delete.permission": "你沒有刪除語言的權限",
 	"error.language.duplicate": "語言已經存在",
 	"error.language.name": "語言名稱無效",
 	"error.language.notFound": "找不到語言",
 	"error.language.update.permission": "你沒有變更語言設定的權限",
+	"error.language.variable.core": "\"{key}\" is one of Kirby's own translation strings and cannot be overwritten by a language variable",
+	"error.language.variable.duplicate": "A variable for \"{key}\" already exists",
+	"error.language.variable.key": "Please enter a valid key for the variable",
+	"error.language.variable.notFound": "找不到指定的語言變數",
+	"error.language.variable.numeric": "The variable key must not be numeric",
 
 	"error.layout.validation.block": "在版面組態第 {layoutIndex} 區塊中，使用「{fieldset}」區塊類型的第 {blockIndex} 區塊內，欄位「{field}」發生錯誤",
 	"error.layout.validation.settings": "第 {index} 個版面組態的設定有誤",
@@ -304,6 +310,7 @@
 	"error.version.discard.permission": "You are not allowed to discard this version",
 	"error.version.publish.permission": "You are not allowed to publish this version",
 	"error.version.save.permission": "You are not allowed to change this version",
+	"error.version.unlock.permission": "You are not allowed to unlock this version",
 
 	"expand": "展開",
 	"expand.all": "Expand all",
@@ -390,6 +397,8 @@
 	"field.structure.delete.confirm.selected": "Do you really want to delete the selected entries?",
 	"field.structure.empty": "尚未加入任何資料",
 
+	"field.tags.placeholder": "Add tag",
+
 	"field.users.empty": "沒有選取任何使用者",
 	"field.users.empty.single": "尚未選取使用者",
 
@@ -413,6 +422,7 @@
 
 	"form.discard": "放棄變更",
 	"form.discard.confirm": "你確定要放棄未儲存的變更嗎？",
+	"form.discard.confirm.editor": "Do you really want to <strong>discard the unsaved changes</strong> made by <strong>{editor}</strong>?",
 	"form.locked": "此表單已鎖定，無法編輯",
 	"form.unsaved": "尚有未儲存的變更",
 	"form.preview": "預覽內容",
@@ -467,7 +477,6 @@
 	"language.variable.multiple": "Countable?",
 	"language.variable.multiple.text": "Use different translation strings",
 	"language.variable.multiple.help": "You can use different values depending on a count you pass along with the language variable, allowing you to create dynamic translations, e.g. singular and plural.",
-	"language.variable.notFound": "找不到指定的語言變數",
 	"language.variable.value": "變數內容",
 
 	"languages": "語言清單",
@@ -478,17 +487,23 @@
 
 	"license": "Kirby \u6191\u8b49",
 	"license.activate": "啟用授權",
-	"license.activate.label": "輸入您的授權碼以啟用 Kirby",
+	"license.activate.label": "安裝",
 	"license.activate.domain": "你的授權將會啟用於 {host}",
-	"license.activate.local": "你即將為本機網域 {host} 啟用你的 Kirby 授權。\n如果這個網站將部署到公開網域，請改為在公開網域上啟用授權。\n如果 {host} 就是你要使用授權的網域，請繼續操作。",
+	"license.activate.local": "You are about to activate your Kirby license for your local domain <strong>{host}</strong>. If this site will be deployed to a public domain and this is a copy for local development, please activate it as development installation.",
+	"license.activate.public": "You are about to activate a free development license for your public domain <strong>{host}</strong>. You must ensure that your installation is in a private network or password protected. We may verify that development installations remain protected.",
+	"license.activate.acknowledge.label": "請勾選此選項",
+	"license.activate.acknowledge.text": "Installation is purely for development",
+	"license.activate.acknowledge.help": "See our <a href=\"{url}\" target=\"_blank\">license terms</a> for details on the allowed use cases. Knowingly false classifications will be challenged.",
 	"license.activated": "授權已啟用",
 	"license.buy": "購買授權",
 	"license.code": "授權碼",
 	"license.code.help": "您可以在購買確認信中找到授權碼",
-	"license.code.label": "輸入授權碼",
+	"license.code.label": "License code",
 	"license.remove.text": "<p>Removing the license will irreversibly delete the license file from this site. You can then activate this site with a different license key or re-register the same license key if the domain remains the same.</p><p>To change the domain associated with the license, please contact the Kirby team. <a href='https://getkirby.com/license'>Read more &rarr;</a></p>",
 	"license.status.active.info": "包含至 {date} 前的新主要版本",
 	"license.status.active.label": "已啟用",
+	"license.status.acknowledged.info": "You confirmed to comply with the <a href=\"https://getkirby.com/license/free-licenses\">free license requirements</a>",
+	"license.status.acknowledged.label": "Active free license",
 	"license.status.demo.info": "此為試用版安裝，僅供開發或測試使用",
 	"license.status.demo.label": "試用中",
 	"license.status.inactive.info": "此網站尚未啟用授權",
@@ -502,8 +517,12 @@
 	"license.status.unknown.info": "無法確認授權狀態，請檢查您的網路連線",
 	"license.status.unknown.label": "未知狀態",
 	"license.manage": "管理授權",
+	"license.manage.hub": "Manage your licenses on our <a href=\"{url}\" target=\"_blank\">license hub</a>",
 	"license.purchased": "您已購買授權",
 	"license.success": "授權啟用成功",
+	"license.success.free": "Activated as development site",
+	"license.regular.label": "Regular",
+	"license.free.label": "Development",
 	"license.unregistered.label": "未註冊",
 
 	"link": "\u9023\u7d50",
@@ -642,6 +661,8 @@
 	"preview": "預覽",
 	"preview.browser.scroll": "Sync scroll",
 
+	"protected": "Protected",
+
 	"publish": "發佈",
 	"published": "已發佈",
 
@@ -693,6 +714,8 @@
 	"system.info.copy": "複製系統資訊",
 	"system.info.copied": "系統資訊已複製",
 	"system.issues.content": "無法寫入 /content 資料夾",
+	"system.issues.content.salt": "The content salt has not been changed from its default value",
+	"system.issues.cookie.key": "The cookie signing key has not been changed from its default value",
 	"system.issues.eol.kirby": "你正在使用已終止維護的 Kirby 版本",
 	"system.issues.eol.plugin": "你安裝的 {plugin} 外掛已達到生命週期終點，將不再收到安全性更新。",
 	"system.issues.eol.php": "你安裝的 PHP 版本 {release} 已達生命週期終點，將不再收到安全性更新。",

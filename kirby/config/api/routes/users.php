@@ -1,6 +1,7 @@
 <?php
 
 use Kirby\Cms\Find;
+use Kirby\Exception\PermissionException;
 use Kirby\Filesystem\F;
 
 /**
@@ -87,7 +88,8 @@ return [
 		'method'  => 'POST',
 		'action'  => function (string $id) {
 			return $this->upload(
-				function ($source, $filename) use ($id) {
+				single: true,
+				callback: function ($source, $filename) use ($id) {
 					$user   = Find::user($id);
 					$method = $user->avatar() === null ? 'createAvatar' : 'replaceAvatar';
 
@@ -97,7 +99,16 @@ return [
 						move: true
 					)->avatar();
 				},
-				single: true
+				preflight: function () use ($id) {
+					$user = Find::user($id);
+
+					if ($user->permissions()->can('update') !== true) {
+						throw new PermissionException(
+							key: 'user.update.permission',
+							data: ['name' => $user->username()]
+						);
+					}
+				},
 			);
 		}
 	],
@@ -174,7 +185,10 @@ return [
 
 			// validate password of acting user unless they have logged in to reset it;
 			// always validate password of acting user when changing password of other users
-			if ($this->session()->get('kirby.resetPassword') !== true || $user->is($currentUser) !== true) {
+			if (
+				$this->kirby()->auth()->isResettingPassword($this->session()) !== true ||
+				$user->is($currentUser) !== true
+			) {
 				$currentUser->validatePassword($this->requestBody('currentPassword'));
 			}
 

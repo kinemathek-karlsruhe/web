@@ -17,10 +17,11 @@ use Kirby\Toolkit\Html;
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <meta name="referrer" content="same-origin">
+  <meta name="robots" content="noindex, nofollow">
 
   <title>Kirby Panel</title>
 
-	<script type="importmap">
+	<script type="importmap" nonce="<?= $nonce ?>">
 	{
 	  "imports": <?= json_encode($assets['import-maps'] ?? []) ?>
 	}

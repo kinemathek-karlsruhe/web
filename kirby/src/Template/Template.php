@@ -5,6 +5,7 @@ namespace Kirby\Template;
 use Exception;
 use Kirby\Cms\App;
 use Kirby\Filesystem\F;
+use Kirby\Toolkit\Str;
 use Kirby\Toolkit\Tpl;
 use Stringable;
 
@@ -180,7 +181,7 @@ class Template implements Stringable
 
 		// no slots have been defined, but the template code
 		// should be used as default slot
-		if (Snippet::$current->slots()->count() === 0) {
+		if (Snippet::$current->hasSlots() === false) {
 			return Snippet::$current->render($data, [
 				'default' => $template
 			]);
@@ -196,6 +197,18 @@ class Template implements Stringable
 	public function root(): string
 	{
 		return App::instance()->root($this->store());
+	}
+
+	/**
+	 * Sanitizes a template name to prevent path traversal,
+	 * as the name is used to build the content file name;
+	 * dots are kept for representations, but slashes are removed;
+	 * can return an empty string, it's up to the caller to decide
+	 * whether to fall back to a default template name
+	 */
+	public static function sanitizeName(string|null $name): string
+	{
+		return Str::slug($name, allowed: 'a-z0-9._-');
 	}
 
 	/**

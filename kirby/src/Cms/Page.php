@@ -485,7 +485,7 @@ class Page extends ModelWithContent
 
 		$kirby = $this->kirby();
 
-		return $this->inventory = Dir::inventory(
+		return $this->inventory = Inventory::for(
 			$this->root(),
 			$kirby->contentExtension(),
 			$kirby->contentIgnore(),
@@ -1025,9 +1025,12 @@ class Page extends ModelWithContent
 			$versionId = VersionId::latest();
 		}
 
-		// authenticated requests can always be trusted
-		$expectedToken = $this->version($versionId)->previewToken();
-		if ($token !== '' && hash_equals($expectedToken, $token) === true) {
+		// authenticated requests can always be trusted;
+		// only resolve the expected token when one was sent
+		if (
+			$token !== '' &&
+			hash_equals($this->version($versionId)->previewToken(), $token) === true
+		) {
 			return $versionId;
 		}
 

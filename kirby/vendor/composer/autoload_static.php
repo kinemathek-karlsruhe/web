@@ -117,6 +117,17 @@ class ComposerStaticInit0bf5c8a9cfa251a218fc581ac888fe35
                 0 => __DIR__ . '/..' . '/claviska/simpleimage/src',
             ),
         ),
+        'P' =>
+        array (
+            'ParsedownExtra' =>
+            array (
+                0 => __DIR__ . '/..' . '/erusev/parsedown-extra',
+            ),
+            'Parsedown' =>
+            array (
+                0 => __DIR__ . '/..' . '/erusev/parsedown',
+            ),
+        ),
         'M' =>
         array (
             'Michelf' =>
@@ -198,6 +209,7 @@ class ComposerStaticInit0bf5c8a9cfa251a218fc581ac888fe35
         'Kirby\\Cms\\Helpers' => __DIR__ . '/../..' . '/src/Cms/Helpers.php',
         'Kirby\\Cms\\Html' => __DIR__ . '/../..' . '/src/Cms/Html.php',
         'Kirby\\Cms\\Ingredients' => __DIR__ . '/../..' . '/src/Cms/Ingredients.php',
+        'Kirby\\Cms\\Inventory' => __DIR__ . '/../..' . '/src/Cms/Inventory.php',
         'Kirby\\Cms\\Item' => __DIR__ . '/../..' . '/src/Cms/Item.php',
         'Kirby\\Cms\\Items' => __DIR__ . '/../..' . '/src/Cms/Items.php',
         'Kirby\\Cms\\Language' => __DIR__ . '/../..' . '/src/Cms/Language.php',
@@ -285,6 +297,7 @@ class ComposerStaticInit0bf5c8a9cfa251a218fc581ac888fe35
         'Kirby\\Content\\VersionRules' => __DIR__ . '/../..' . '/src/Content/VersionRules.php',
         'Kirby\\Content\\Versions' => __DIR__ . '/../..' . '/src/Content/Versions.php',
         'Kirby\\Data\\Data' => __DIR__ . '/../..' . '/src/Data/Data.php',
+        'Kirby\\Data\\Frontmatter' => __DIR__ . '/../..' . '/src/Data/Frontmatter.php',
         'Kirby\\Data\\Handler' => __DIR__ . '/../..' . '/src/Data/Handler.php',
         'Kirby\\Data\\Json' => __DIR__ . '/../..' . '/src/Data/Json.php',
         'Kirby\\Data\\PHP' => __DIR__ . '/../..' . '/src/Data/PHP.php',
@@ -573,8 +586,8 @@ class ComposerStaticInit0bf5c8a9cfa251a218fc581ac888fe35
         'PHPMailer\\PHPMailer\\PHPMailer' => __DIR__ . '/..' . '/phpmailer/phpmailer/src/PHPMailer.php',
         'PHPMailer\\PHPMailer\\POP3' => __DIR__ . '/..' . '/phpmailer/phpmailer/src/POP3.php',
         'PHPMailer\\PHPMailer\\SMTP' => __DIR__ . '/..' . '/phpmailer/phpmailer/src/SMTP.php',
-        'Parsedown' => __DIR__ . '/../..' . '/dependencies/parsedown/Parsedown.php',
-        'ParsedownExtra' => __DIR__ . '/../..' . '/dependencies/parsedown-extra/ParsedownExtra.php',
+        'Parsedown' => __DIR__ . '/..' . '/erusev/parsedown/Parsedown.php',
+        'ParsedownExtra' => __DIR__ . '/..' . '/erusev/parsedown-extra/ParsedownExtra.php',
         'Psr\\Log\\AbstractLogger' => __DIR__ . '/..' . '/psr/log/src/AbstractLogger.php',
         'Psr\\Log\\InvalidArgumentException' => __DIR__ . '/..' . '/psr/log/src/InvalidArgumentException.php',
         'Psr\\Log\\LogLevel' => __DIR__ . '/..' . '/psr/log/src/LogLevel.php',

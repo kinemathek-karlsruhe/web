@@ -148,12 +148,18 @@
 	"error.form.notSaved": "Form kaydedilemedi",
 
 	"error.language.code": "Lütfen dil için geçerli bir kod girin",
+	"error.language.create.default": "\"{name}\" ({code}) zaten varsayılan dil olarak ayarlanmış",
 	"error.language.create.permission": "Bir dil oluşturmanıza izin verilmiyor",
 	"error.language.delete.permission": "Dili silmenize izin verilmiyor",
 	"error.language.duplicate": "Bu dil zaten var",
 	"error.language.name": "Lütfen dil için geçerli bir isim girin",
 	"error.language.notFound": "Dil bulunamadı",
 	"error.language.update.permission": "Dili güncellemenize izin verilmiyor",
+	"error.language.variable.core": "\"{key}\", Kirby'nin kendi çeviri dizelerinden biridir ve bir dil değişkeniyle üzerine yazılamaz",
+	"error.language.variable.duplicate": "\"{key}\" için bir değişken zaten mevcut",
+	"error.language.variable.key": "Lütfen değişken için geçerli bir anahtar girin",
+	"error.language.variable.notFound": "Değişken bulunamadı",
+	"error.language.variable.numeric": "Değişken anahtarı sayısal olmamalıdır",
 
 	"error.layout.validation.block": "{layoutIndex}. sıradaki düzende \"{fieldset}\" blok türünü kullanan {blockIndex}. bloktaki \"{field}\" alanında bir hata var",
 	"error.layout.validation.settings": "{index}. düzen ayarlarında bir hata var",
@@ -304,6 +310,7 @@
 	"error.version.discard.permission": "Bu sürümü silmenize izin verilmiyor.",
 	"error.version.publish.permission": "Bu sürümü yayınlamanıza izin verilmiyor.",
 	"error.version.save.permission": "Bu sürümü değiştirmenize izin verilmiyor.",
+	"error.version.unlock.permission": "Bu sürümün kilidini açmanıza izin verilmiyor.",
 
 	"expand": "Genişlet",
 	"expand.all": "Tümünü genişlet",
@@ -390,6 +397,8 @@
 	"field.structure.delete.confirm.selected": "Seçili girdileri gerçekten silmek istiyor musunuz?",
 	"field.structure.empty": "Hen\u00fcz bir girdi yok",
 
+	"field.tags.placeholder": "Etiket ekle",
+
 	"field.users.empty": "Henüz kullanıcı seçilmedi",
 	"field.users.empty.single": "Henüz kullanıcı seçilmedi",
 
@@ -413,6 +422,7 @@
 
 	"form.discard": "Değişiklikleri iptal et",
 	"form.discard.confirm": "Gerçekten <strong>tüm değişikliklerinizi silmek</strong> istiyor musunuz?",
+	"form.discard.confirm.editor": "<strong>{editor}</strong> tarafından yapılan kaydedilmemiş değişiklikleri gerçekten <strong>silmek</strong> istiyor musunuz?",
 	"form.locked": "Bu içerik şu anda başka bir kullanıcı tarafından düzenlendiği için sizin için devre dışı bırakıldı",
 	"form.unsaved": "Mevcut değişiklikler henüz kaydedilmedi",
 	"form.preview": "Değişiklikleri önizle",
@@ -467,7 +477,6 @@
 	"language.variable.multiple": "Sayılabilir mi?",
 	"language.variable.multiple.text": "Farklı çeviri dizeleri kullanın",
 	"language.variable.multiple.help": "Dil değişkeniyle birlikte ilettiğiniz sayıma bağlı olarak farklı değerler kullanabilir, böylece tekil ve çoğul gibi dinamik çeviriler oluşturabilirsiniz.",
-	"language.variable.notFound": "Değişken bulunamadı",
 	"language.variable.value": "Değer",
 
 	"languages": "Diller",
@@ -478,17 +487,23 @@
 
 	"license": "Lisans",
 	"license.activate": "Şimdi etkinleştirin",
-	"license.activate.label": "Lütfen lisansınızı etkinleştirin",
+	"license.activate.label": "Kurulum",
 	"license.activate.domain": "Lisansınız <strong>{host}</strong> için etkinleştirilecektir.",
-	"license.activate.local": "Yerel etki alanınız <strong>{host}</strong> için Kirby lisansınızı etkinleştirmek üzeresiniz. Bu site genel bir etki alanına kurulacaksa, lütfen bunun yerine orada etkinleştirin. Eğer lisansınızı kullanmak istediğiniz alan adı {host} ise lütfen devam edin.",
+	"license.activate.local": "Yerel alan adınız <strong>{host}</strong> için Kirby lisansınızı etkinleştirmek üzeresiniz. Bu site herkese açık bir alana dağıtılacaksa ve bu yerel geliştirme için bir kopyaysa, lütfen geliştirme kurulumu olarak etkinleştirin.",
+	"license.activate.public": "<strong>{host}</strong> adlı herkese açık alan adınız için ücretsiz bir geliştirme lisansını etkinleştirmek üzeresiniz. Kurulumunuzun özel bir ağda veya parola korumalı olduğundan emin olmalısınız. Geliştirme kurulumlarının korunduğunu doğrulayabiliriz.",
+	"license.activate.acknowledge.label": "Lütfen onaylayın",
+	"license.activate.acknowledge.text": "Kurulum tamamen geliştirme amaçlıdır.",
+	"license.activate.acknowledge.help": "İzin verilen kullanım durumları hakkında ayrıntılı bilgi için <a href=\"{url}\" target=\"_blank\">lisans koşullarımıza</a> bakın. Bilerek yanlış sınıflandırmalar sorgulanacaktır.",
 	"license.activated": "Etkinleştirildi",
 	"license.buy": "Bir lisans satın al",
 	"license.code": "Kod",
 	"license.code.help": "Lisans kodunuzu satın alma işleminden sonra e-posta yoluyla aldınız. Lütfen kopyalayıp buraya yapıştırın.",
-	"license.code.label": "Lütfen lisans kodunu giriniz",
+	"license.code.label": "Lisans kodu",
 	"license.remove.text": "<p>Lisansın kaldırılması, lisans dosyasını bu siteden geri alınamaz bir şekilde silecektir. Daha sonra bu siteyi farklı bir lisans anahtarıyla etkinleştirebilir veya alan adı aynı kalırsa aynı lisans anahtarını yeniden kaydedebilirsiniz.</p> <p>Lisansla ilişkili alan adını değiştirmek için lütfen Kirby ekibiyle iletişime geçin. <a href='https://getkirby.com/license'>Devamını okuyun &rarr;</a></p>",
 	"license.status.active.info": "{date} tarihine kadar yeni ana sürümleri içerir",
 	"license.status.active.label": "Geçerli lisans",
+	"license.status.acknowledged.info": "<a href=\"https://getkirby.com/license/free-licenses\">Ücretsiz lisans şartlarına</a> uyacağınızı onayladınız.",
+	"license.status.acknowledged.label": "Aktif ücretsiz lisans",
 	"license.status.demo.info": "Bu bir demo kurulumudur",
 	"license.status.demo.label": "Demo",
 	"license.status.inactive.info": "Yeni ana sürümlere güncellemek için lisansı yenileyin",
@@ -502,8 +517,12 @@
 	"license.status.unknown.info": "Lisans durumu bilinmiyor",
 	"license.status.unknown.label": "Bilinmiyor",
 	"license.manage": "Lisanslarınızı yönetin",
+	"license.manage.hub": "Lisanslarınızı <a href=\"{url}\" target=\"_blank\">lisans merkezimizden</a> yönetin",
 	"license.purchased": "Satın alındı",
 	"license.success": "Kirby'yi desteklediğiniz için teşekkürler",
+	"license.success.free": "Geliştirme alanı olarak aktif hale getirildi.",
+	"license.regular.label": "Normal",
+	"license.free.label": "Geliştirme",
 	"license.unregistered.label": "Kayıtsız",
 
 	"link": "Ba\u011flant\u0131",
@@ -642,6 +661,8 @@
 	"preview": "Önizle",
 	"preview.browser.scroll": "Senkronize kaydırma",
 
+	"protected": "Korumalı",
+
 	"publish": "Yayınla",
 	"published": "Yayınlandı",
 
@@ -693,6 +714,8 @@
 	"system.info.copy": "Bilgileri kopyala",
 	"system.info.copied": "Sistem bilgisi kopyalandı",
 	"system.issues.content": "İçerik klasörü açığa çıkmış görünüyor",
+	"system.issues.content.salt": "İçerik tuzu (content salt) varsayılan değerden farklı bir değerle yapılandırılmamış.",
+	"system.issues.cookie.key": "Çerez imzalama anahtarı varsayılan değerinden değiştirilmemiştir.",
 	"system.issues.eol.kirby": "Yüklü Kirby sürümünüz kullanım ömrünün sonuna ulaştı ve daha fazla güvenlik güncellemesi almayacak",
 	"system.issues.eol.plugin": "{ plugin } eklentisinin yüklü sürümü kullanım ömrünün sonuna ulaştı ve daha fazla güvenlik güncellemesi almayacak",
 	"system.issues.eol.php": "Yüklü PHP sürümünüz { release } kullanım ömrünün sonuna ulaşmıştır ve başka güvenlik güncellemeleri almayacaktır",

@@ -148,12 +148,18 @@
 	"error.form.notSaved": "Forma se ne može spremiti",
 
 	"error.language.code": "Unesi važeći kod za jezik",
+	"error.language.create.default": "\"{name}\" ({code}) is already set as the default language",
 	"error.language.create.permission": "Nemate dozvolu da kreirate jezik",
 	"error.language.delete.permission": "Nemate dozvolu da obrišete jezik",
 	"error.language.duplicate": "Jezik već postoji",
 	"error.language.name": "Unesi važeći naziv za jezik",
 	"error.language.notFound": "Jezik nije pronađen",
 	"error.language.update.permission": "Nemate dozvolu da ažurirate jezik",
+	"error.language.variable.core": "\"{key}\" is one of Kirby's own translation strings and cannot be overwritten by a language variable",
+	"error.language.variable.duplicate": "A variable for \"{key}\" already exists",
+	"error.language.variable.key": "Please enter a valid key for the variable",
+	"error.language.variable.notFound": "Varijablu nije moguće pronaći",
+	"error.language.variable.numeric": "The variable key must not be numeric",
 
 	"error.layout.validation.block": "Postoji greška kod \"{field}\" polja, u bloku {blockIndex}, pri korištenju bloka tipa \"{fieldset}\" u rasporedu {layoutIndex}",
 	"error.layout.validation.settings": "Postoji greška u postavkama rasporeda {index}",
@@ -304,6 +310,7 @@
 	"error.version.discard.permission": "Nemate dozvolu da odbacite ovu verziju",
 	"error.version.publish.permission": "Nemate dozvolu da objavite ovu verziju",
 	"error.version.save.permission": "Nemate dozvolu da promenite ovu verziju",
+	"error.version.unlock.permission": "You are not allowed to unlock this version",
 
 	"expand": "Proširi",
 	"expand.all": "Proširi sve",
@@ -390,6 +397,8 @@
 	"field.structure.delete.confirm.selected": "Da li stvarno želite obrisati izabrane unose?",
 	"field.structure.empty": "Još nema unosa",
 
+	"field.tags.placeholder": "Add tag",
+
 	"field.users.empty": "Niti jedan korisnik još nije odabran",
 	"field.users.empty.single": "Korisnik još nije odabran",
 
@@ -413,6 +422,7 @@
 
 	"form.discard": "Odbaci promjene",
 	"form.discard.confirm": "Da li stvarno želite <strong>odbaciti sve promjene</strong>?",
+	"form.discard.confirm.editor": "Do you really want to <strong>discard the unsaved changes</strong> made by <strong>{editor}</strong>?",
 	"form.locked": "Ovaj sadržaj je vama onemogućen jer ga trenutno uređuje drugi korisnik",
 	"form.unsaved": "Trenutne promjene još uvijek nisu spremljene",
 	"form.preview": "Pregledaj izmjene",
@@ -467,7 +477,6 @@
 	"language.variable.multiple": "Brojivo?",
 	"language.variable.multiple.text": "Koristite različite stringove za prevođenje",
 	"language.variable.multiple.help": "Možete koristiti različite vrijednosti ovisno o broju koji prosljeđujete zajedno s varijablom jezika, što vam omogućava kreiranje dinamičkih prijevoda, npr. jednine i množine.",
-	"language.variable.notFound": "Varijablu nije moguće pronaći",
 	"language.variable.value": "Vrijednost",
 
 	"languages": "Jezici",
@@ -478,17 +487,23 @@
 
 	"license": "Licenca",
 	"license.activate": "Aktivirajte odmah",
-	"license.activate.label": "Aktivirajte vašu licencu",
+	"license.activate.label": "Instalacija",
 	"license.activate.domain": "Vaša licenca će biti aktivirana za <strong>{host}</strong>.",
-	"license.activate.local": "Upravo ćete aktivirati svoju Kirby licencu za vašu lokalnu domenu {host}. Ako će ova stranica biti postavljena na javnu domenu, molimo vas da je tamo aktivirate. Ako je {host} domena za koju želite koristiti svoju licencu, molimo vas da nastavite.",
+	"license.activate.local": "You are about to activate your Kirby license for your local domain <strong>{host}</strong>. If this site will be deployed to a public domain and this is a copy for local development, please activate it as development installation.",
+	"license.activate.public": "You are about to activate a free development license for your public domain <strong>{host}</strong>. You must ensure that your installation is in a private network or password protected. We may verify that development installations remain protected.",
+	"license.activate.acknowledge.label": "Potvrdi",
+	"license.activate.acknowledge.text": "Installation is purely for development",
+	"license.activate.acknowledge.help": "See our <a href=\"{url}\" target=\"_blank\">license terms</a> for details on the allowed use cases. Knowingly false classifications will be challenged.",
 	"license.activated": "Aktivirano",
 	"license.buy": "Kupite licencu",
 	"license.code": "Kod",
 	"license.code.help": "Primili ste vašu licencu nakon kupovine putem e-maila. Molimo da je kopirate i zalijepite ovdje.",
-	"license.code.label": "Unesite vašu licencu",
+	"license.code.label": "License code",
 	"license.remove.text": "<p>Uklanjanje licence će nepovratno izbrisati datoteku licence sa ove stranice. Zatim možete aktivirati ovu stranicu s drugim licencnim ključem ili ponovo registrirati isti licencni ključ ako domena ostane ista.</p><p>Za promjenu domene povezane s licencom, obratite se Kirby timu. <a href='https://getkirby.com/license'>Pročitajte više &rarr;</a></p>",
 	"license.status.active.info": "Uključuje nove glavne verzije do {date}",
 	"license.status.active.label": "Važeća licenca",
+	"license.status.acknowledged.info": "You confirmed to comply with the <a href=\"https://getkirby.com/license/free-licenses\">free license requirements</a>",
+	"license.status.acknowledged.label": "Active free license",
 	"license.status.demo.info": "Ovo je demo instalacija",
 	"license.status.demo.label": "Demo",
 	"license.status.inactive.info": "Obnovi licencu da bi se ažuriralo na nove glavne verzije",
@@ -502,8 +517,12 @@
 	"license.status.unknown.info": "Status licence je nepoznat",
 	"license.status.unknown.label": "Nepoznato",
 	"license.manage": "Upravljanje vašim licencama",
+	"license.manage.hub": "Manage your licenses on our <a href=\"{url}\" target=\"_blank\">license hub</a>",
 	"license.purchased": "Kupljeno",
 	"license.success": "Hvala što podržavate Kirby",
+	"license.success.free": "Activated as development site",
+	"license.regular.label": "Regular",
+	"license.free.label": "Development",
 	"license.unregistered.label": "Neregistrovano",
 
 	"link": "Link",
@@ -642,6 +661,8 @@
 	"preview": "Pregled",
 	"preview.browser.scroll": "Sinhronizacija skrolanja",
 
+	"protected": "Protected",
+
 	"publish": "Objavi",
 	"published": "Javno",
 
@@ -693,6 +714,8 @@
 	"system.info.copy": "Kopiraj info",
 	"system.info.copied": "Sistemske info kopirane",
 	"system.issues.content": "Čini se da je content folder izložen",
+	"system.issues.content.salt": "The content salt has not been changed from its default value",
+	"system.issues.cookie.key": "The cookie signing key has not been changed from its default value",
 	"system.issues.eol.kirby": "Vaša instalirana Kirby verzija je dostigla end-of-life i neće primati daljnja sigurnosna ažuriranja",
 	"system.issues.eol.plugin": "Vaša instalirana verzija plugina { plugin } je dostigla end-of-life i neće primati daljnja sigurnosna ažuriranja",
 	"system.issues.eol.php": "Vaša instalirana PHP verzija { release } je dostigla end-of-life i neće primati daljnja sigurnosna ažuriranja",
