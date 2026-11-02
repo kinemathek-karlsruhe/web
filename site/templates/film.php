@@ -102,11 +102,11 @@ $showRow = function (\Kirby\Cms\Page $showing, bool $clickable) use ($markMap) {
   <article class="film-page">
     <div class="fp-head">
       <div class="fp-text">
-        <?php if ($page->series()->isNotEmpty()): ?>
+        <?php if ($page->seriesValues() !== []): ?>
           <p class="d-series"><?php
             // each Reihe links to its Bereichsseite, when one is curated for it
             $reihen = [];
-            foreach (Kinemathek::splitField($page->series()) as $reihe) {
+            foreach ($page->seriesValues() as $reihe) {
                 $target   = Kinemathek::seriesPage($reihe);
                 $reihen[] = $target
                     ? '<a href="' . $target->url() . '">' . html($reihe) . '</a>'

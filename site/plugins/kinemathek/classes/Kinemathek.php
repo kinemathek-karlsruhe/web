@@ -310,6 +310,8 @@ class Kinemathek
      * Reihen, e.g. Maschenkino, scope their page by keyword so that non-film
      * events can join the listing). Lets templates link a series label to the
      * curated series page without storing a relation anywhere.
+     * When several pages carry the value, the deepest wins: a Reihe's own
+     * subpage beats a Bereich that merely lists it too (Junge Kinemathek).
      * Case-insensitive; memoised once. Both filter fields are translate: false
      * (editorial routing config), so they are read from the DEFAULT language —
      * an /en request must resolve the same Reihe -> page map as /de, and a
@@ -323,12 +325,13 @@ class Kinemathek
         if ($map === null) {
             $map      = [];
             $default  = kirby()->defaultLanguage()?->code();
-            $pages    = site()->index()->filterBy('intendedTemplate', 'collection');
+            $pages    = site()->index()->filterBy('intendedTemplate', 'collection')->data();
+            usort($pages, fn (Page $a, Page $b) => $b->depth() <=> $a->depth());
             // two passes: an explicit Reihe filter always beats a keyword one
             foreach (['filterSeries', 'filterKeywords'] as $field) {
                 foreach ($pages as $page) {
                     foreach (static::listValues($page->content($default)->get($field)) as $value) {
-                        $map[$value] ??= $page; // first page wins on duplicates
+                        $map[$value] ??= $page; // same depth: first page wins
                     }
                 }
             }

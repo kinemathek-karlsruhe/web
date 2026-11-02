@@ -29,14 +29,14 @@ trait OccurrenceTrait
      * The Reihe label printed above the title: the film's first `series` entry,
      * else the occurrence's own first `keywords` entry (so a Showing whose film
      * has no Reihe, and every Event, still gets one). '' when neither is set.
+     * Empty `keywords` fall back to the default language, see FilmPage::seriesValues().
      */
     public function seriesLabel(): string
     {
-        $film = $this->film();
-        if ($film && $film->series()->isNotEmpty()) {
-            return Kinemathek::splitField($film->series())[0] ?? '';
-        }
-        return Kinemathek::splitField($this->keywords())[0] ?? '';
+        return $this->film()?->seriesValues()[0]
+            ?? Kinemathek::splitField($this->keywords())[0]
+            ?? Kinemathek::splitField($this->content(kirby()->defaultLanguage()?->code())->get('keywords'))[0]
+            ?? '';
     }
 
     /** Has this occurrence already happened? */

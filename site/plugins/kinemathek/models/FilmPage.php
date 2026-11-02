@@ -104,6 +104,20 @@ class FilmPage extends Page
     }
 
     /**
+     * The film's Reihen for display. `series` is translatable, but /en usually
+     * has no translation of its own — and a materialized EN file carries an
+     * EMPTY copy that overlays the German value on read — so an empty value
+     * falls back to the default language. A real EN value stays in charge.
+     *
+     * @return string[]
+     */
+    public function seriesValues(): array
+    {
+        return Kinemathek::splitField($this->series())
+            ?: Kinemathek::splitField($this->content(kirby()->defaultLanguage()?->code())->get('series'));
+    }
+
+    /**
      * Directors stored structurally (SPEC §2.1) to enable director search later.
      * Each entry exposes a `name` field (+ optional tmdbpersonid).
      */

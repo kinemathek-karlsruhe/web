@@ -53,6 +53,13 @@ Bild). `/reihen` baute dieses Raster früher von Hand im Kirbytext (`##`-Übersc
 `scripts/migrate-reihen-cards.php` — einmal pro Umgebung mit `--apply`, danach den
 Seiten-Cache leeren.
 
+**Reihe → Bereichsseite** — der Link von Film, Vorstellung und Event entsteht automatisch,
+ohne gespeicherte Relation: `Kinemathek::seriesPage()` sucht die Bereichsseite, deren
+`filterSeries` (vorrangig) oder `filterKeywords` den Reihennamen trägt. Bei mehreren Treffern
+gewinnt die tiefste Seite (`filmbildung/junge-kinemathek` schlägt `filmbildung`). Für die
+Anzeige `FilmPage::seriesValues()` / `seriesLabel()` nehmen, nie `$film->series()` direkt:
+eine leere EN-Kopie überdeckt sonst den deutschen Wert, die Reihe fehlt auf /en samt Link.
+
 ---
 
 ## Commands
