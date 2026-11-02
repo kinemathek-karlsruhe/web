@@ -59,6 +59,10 @@ ohne gespeicherte Relation: `Kinemathek::seriesPage()` sucht die Bereichsseite, 
 gewinnt die tiefste Seite (`filmbildung/junge-kinemathek` schlägt `filmbildung`). Für die
 Anzeige `FilmPage::seriesValues()` / `seriesLabel()` nehmen, nie `$film->series()` direkt:
 eine leere EN-Kopie überdeckt sonst den deutschen Wert, die Reihe fehlt auf /en samt Link.
+Der Hinweis „Teil der Reihe …" (`.fp-series`, Festivals: „Teil von …") auf der Filmseite kommt
+aus `FilmPage::seriesPages()`: eigene Reihen PLUS `keywords` der Vorstellungen und verbundenen
+Events, denn die Redaktion trägt die Reihe oft nur am Termin ein. Nur Reihen ohne Bereichsseite
+bleiben als kleines `.d-series`-Schild über dem Titel.
 
 ---
 

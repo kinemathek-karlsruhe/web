@@ -76,6 +76,8 @@ return [
         'kinemathek.film.upcoming'      => 'Upcoming screenings',
         'kinemathek.film.past'          => 'Past screenings',
         'kinemathek.film.events'        => 'Events featuring this film',
+        'kinemathek.film.partOfSeries'  => 'Part of the series',
+        'kinemathek.film.partOfFestival' => 'Part of',
 
         // Single showing / event
         'kinemathek.showing.version'    => 'Version',

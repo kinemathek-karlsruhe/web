@@ -102,18 +102,11 @@ $showRow = function (\Kirby\Cms\Page $showing, bool $clickable) use ($markMap) {
   <article class="film-page">
     <div class="fp-head">
       <div class="fp-text">
-        <?php if ($page->seriesValues() !== []): ?>
-          <p class="d-series"><?php
-            // each Reihe links to its Bereichsseite, when one is curated for it
-            $reihen = [];
-            foreach ($page->seriesValues() as $reihe) {
-                $target   = Kinemathek::seriesPage($reihe);
-                $reihen[] = $target
-                    ? '<a href="' . $target->url() . '">' . html($reihe) . '</a>'
-                    : html($reihe);
-            }
-            echo implode(', ', $reihen);
-          ?></p>
+        <?php // Reihen without a Bereichsseite; the others get the .fp-series note below
+        $plainSeries = array_filter($page->seriesValues(), fn ($reihe) => Kinemathek::seriesPage($reihe) === null);
+        ?>
+        <?php if ($plainSeries !== []): ?>
+          <p class="d-series"><?= html(implode(', ', $plainSeries)) ?></p>
         <?php endif ?>
         <h2 class="fp-title"><?= html($page->title()) ?></h2>
         <?php if ($credits !== ''): ?><p class="fp-credits"><?= html($credits) ?></p><?php endif ?>
@@ -128,6 +121,14 @@ $showRow = function (\Kirby\Cms\Page $showing, bool $clickable) use ($markMap) {
             <span><?= html(t('kinemathek.film.language', 'Sprache')) ?>: <?= html(strtoupper($page->language()->commaList())) ?></span>
           <?php endif ?>
         </p>
+        <?php foreach ($page->seriesPages() as $target): ?>
+          <p class="fp-series">
+            <?= html($target->parent()?->id() === 'festivals'
+                ? t('kinemathek.film.partOfFestival', 'Teil von')
+                : t('kinemathek.film.partOfSeries', 'Teil der Reihe')) ?>
+            <a href="<?= $target->url() ?>"><?= html($target->title()) ?></a>
+          </p>
+        <?php endforeach ?>
         <?php if ($page->synopsis()->isNotEmpty()): ?>
           <div class="fp-syn"><?= $page->synopsis()->kt() ?></div>
         <?php endif ?>

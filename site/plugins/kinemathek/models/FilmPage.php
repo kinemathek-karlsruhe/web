@@ -118,6 +118,37 @@ class FilmPage extends Page
     }
 
     /**
+     * The Bereichsseiten this film belongs to, for the note on the film page:
+     * its own Reihen plus the `keywords` of its showings and related events —
+     * editors often tag the Reihe on the screening only, and those keywords
+     * already place it in the Reihe's listing. Keywords without a page stay
+     * descriptive and are ignored. They are matched in the default language,
+     * like the pre-filters seriesPage() compares them with.
+     *
+     * @return array<string, \Kirby\Cms\Page> keyed by page id
+     */
+    public function seriesPages(): array
+    {
+        $default = kirby()->defaultLanguage()?->code();
+        $names   = $this->seriesValues();
+
+        foreach ([$this->showings(), $this->relatedEvents()] as $occurrences) {
+            foreach ($occurrences as $occurrence) {
+                array_push($names, ...Kinemathek::splitField($occurrence->content($default)->get('keywords')));
+            }
+        }
+
+        $pages = [];
+        foreach ($names as $name) {
+            if ($target = Kinemathek::seriesPage($name)) {
+                $pages[$target->id()] = $target;
+            }
+        }
+
+        return $pages;
+    }
+
+    /**
      * Directors stored structurally (SPEC §2.1) to enable director search later.
      * Each entry exposes a `name` field (+ optional tmdbpersonid).
      */

@@ -84,6 +84,8 @@ return [
         'kinemathek.film.upcoming'      => 'Kommende Vorstellungen',
         'kinemathek.film.past'          => 'Frühere Vorstellungen',
         'kinemathek.film.events'        => 'Veranstaltungen mit diesem Film',
+        'kinemathek.film.partOfSeries'  => 'Teil der Reihe',
+        'kinemathek.film.partOfFestival' => 'Teil von',
 
         // Single showing / event
         'kinemathek.showing.version'    => 'Fassung',

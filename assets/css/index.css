@@ -1055,6 +1055,21 @@ body {
   flex-wrap: wrap;
   gap: .15rem 1.1rem;
 }
+/* Reihe note: the day bar's grey band, so it reads as a sign, not as fine print */
+.fp-series {
+  margin: 0 0 .7rem;
+  padding: .35rem .6rem .4rem;
+  max-width: 44rem;
+  background: var(--bar);
+  font-size: .95rem;
+}
+.fp-series a {
+  font-weight: 700;
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .18em;
+}
 .fp-syn { font-size: .95rem; line-height: 1.5; max-width: 44rem; }
 .fp-syn p { margin: 0 0 .6em; }
 .fp-poster { margin: 0; }
