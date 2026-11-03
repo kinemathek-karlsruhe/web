@@ -9,6 +9,13 @@
  * Bildband kostet gut die halbe Kartenhöhe, ohne Bild steht der Platz dem
  * Text zur Verfügung — so füllen beide Kartenarten ihre Zeile gleich gut.
  *
+ * Bereichsseiten (Template `collection`), die eingegrenzt sind, aber gerade
+ * nichts im Programm haben (`collectionProgram()` leer), rutschen in eine
+ * zweite Gruppe unter einem Vermerk „Aktuell keine Termine" — auf /reihen
+ * stehen so die laufenden Reihen oben. Unkonfigurierte Bereichsseiten und
+ * Textseiten bleiben in der ersten Gruppe: von ihnen weiß man nicht, ob sie
+ * überhaupt Termine haben sollten.
+ *
  * @var \Kirby\Cms\Pages  $pages   die anzuzeigenden Unterseiten
  * @var string            $label   aria-label der Liste
  */
@@ -20,9 +27,25 @@ if ($pages === null || $pages->count() === 0) {
 // Zeichen der Kurzvorschau — mit Bildband bleibt weniger Platz als ohne.
 $excerptWithImage = 120;
 $excerptTextOnly  = 280;
+
+$idle   = $pages->filter(function ($child) {
+    if ($child->intendedTemplate()->name() !== 'collection') {
+        return false;
+    }
+    $program = $child->collectionProgram();
+    return $program !== null && $program->count() === 0;
+});
+$groups = array_filter([
+    'active' => $pages->not($idle),
+    'idle'   => $idle,
+], fn ($group) => $group->count() > 0);
 ?>
-<nav class="subpage-list" aria-label="<?= html($label ?? '') ?>">
-  <?php foreach ($pages as $child): ?>
+<?php foreach ($groups as $state => $group): ?>
+<?php if ($state === 'idle'): ?>
+<p class="subpage-idle-note"><?= html(t('kinemathek.mb.subpages.idle', 'Aktuell keine Termine')) ?></p>
+<?php endif ?>
+<nav class="subpage-list<?= $state === 'idle' ? ' is-idle' : '' ?>" aria-label="<?= html(($label ?? '') . ($state === 'idle' ? ' — ' . t('kinemathek.mb.subpages.idle', 'Aktuell keine Termine') : '')) ?>">
+  <?php foreach ($group as $child): ?>
     <?php
     $bild = $child->cardImage();
     // SVG-Logos (und alles, was keine echte Bildfläche hat) nicht beschneiden:
@@ -50,3 +73,4 @@ $excerptTextOnly  = 280;
     </a>
   <?php endforeach ?>
 </nav>
+<?php endforeach ?>

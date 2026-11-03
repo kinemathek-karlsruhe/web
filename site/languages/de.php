@@ -130,6 +130,7 @@ return [
         'kinemathek.mb.legend.foyer'     => 'Veranstaltung im Foyer',
         'kinemathek.mb.legend.unterwegs' => 'Open Air & andere Orte',
         'kinemathek.mb.collection.none'  => 'Zurzeit nichts im Spielplan — sobald hier etwas ansteht, erscheint das Programm automatisch an dieser Stelle.',
+        'kinemathek.mb.subpages.idle'    => 'Aktuell keine Termine',
         'kinemathek.mb.reihen'           => 'Aktuelle Reihen',
         'kinemathek.mb.showProgram'      => 'Spielplan anzeigen',
         'kinemathek.venue.unterwegs'     => 'Unterwegs',

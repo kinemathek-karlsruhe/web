@@ -51,7 +51,12 @@ Content-Merge sonst den deutschen Wert (dieselbe Falle wie beim Reihen-Vorfilter
 Bild). `/reihen` baute dieses Raster früher von Hand im Kirbytext (`##`-Überschrift +
 `(image:)` + Kurztext je Reihe, zerlegt in `text.php`); der Umbau auf die Automatik ist
 `scripts/migrate-reihen-cards.php` — einmal pro Umgebung mit `--apply`, danach den
-Seiten-Cache leeren.
+Seiten-Cache leeren. Bereichsseiten-Karten, deren Seite eingegrenzt ist, aber gerade nichts
+im Programm hat, stehen in einer zweiten Gruppe unter „Aktuell keine Termine"
+(`kinemathek.mb.subpages.idle`). Gezählt wird mit der Seiten-Methode `collectionProgram()`
+— derselben, die der Controller `collection.php` für die Liste nutzt (`null` = gar nicht
+eingegrenzt → bleibt oben). Der Seiten-Cache läuft um Mitternacht ab, so rutscht eine Reihe
+am Tag nach ihrem letzten Termin ohne Panel-Edit nach unten.
 
 **Reihe → Bereichsseite** — der Link von Film, Vorstellung und Event entsteht automatisch,
 ohne gespeicherte Relation: `Kinemathek::seriesPage()` sucht die Bereichsseite, deren

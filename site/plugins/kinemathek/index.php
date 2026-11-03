@@ -197,6 +197,56 @@ App::plugin('kinemathek/core', [
         },
 
         /**
+         * Das kommende Programm einer Bereichsseite: Spielplan eingeschränkt
+         * auf ihre `categories` UND die redaktionellen Vorfilter
+         * (filter<Facet>, gespiegelt aus Kinemathek::FACETS). `null`, wenn die
+         * Seite gar nicht eingegrenzt ist — eine unkonfigurierte Bereichsseite
+         * zeigt nichts (statt den ganzen Kalender), und „nichts konfiguriert"
+         * ist etwas anderes als „gerade nichts im Programm".
+         * Genutzt vom Controller `collection.php` und von den Karteikarten
+         * (`subpage-cards`: Reihen ohne Termine rutschen nach unten).
+         */
+        'collectionProgram' => function (): ?Pages {
+            // Categories und Vorfilter sind redaktionelle Routing-Konfiguration
+            // (alle translate: false), also aus der DEFAULT-Sprache lesen — nie
+            // aus der Anfragesprache. Auf /en kann die Übersetzungsdatei eine
+            // leer geschriebene Kopie eines (früher übersetzbaren) Filterfelds
+            // tragen, die der Content-Merge beim Lesen über den deutschen Wert
+            // legt — die /en-Liste wäre still leer.
+            $lang       = kirby()->defaultLanguage()?->code();
+            $cfg        = $this->content($lang);
+            $categories = Kinemathek\Kinemathek::splitField($cfg->get('categories'));
+
+            // filterSeries/filterGenre/… per Facettenname; leere Felder
+            // ergeben [] und schränken nichts ein.
+            $presetFacets = [];
+            foreach (array_keys(Kinemathek\Kinemathek::FACETS) as $facet) {
+                $values = Kinemathek\Kinemathek::splitField($cfg->get('filter' . ucfirst($facet)));
+                if ($values !== []) {
+                    $presetFacets[$facet] = $values;
+                }
+            }
+            // Boolean-Facette: nur Termine mit Filmgespräch.
+            if ($cfg->get('filterDiscussion')->toBool() === true) {
+                $presetFacets['discussion'] = '1';
+            }
+
+            if ($categories === [] && $presetFacets === []) {
+                return null;
+            }
+
+            // Nur Vorfilter gesetzt -> Programm ohne Kategorie-Einschränkung,
+            // dann auf die Facetten verengt. Die deutschen Vorfilterwerte gegen
+            // die DEFAULT-Sprach-Facetten der Filme/Termine abgleichen (s.
+            // filterByFacets()), sonst fiele auf /en jedes Ergebnis weg.
+            return Kinemathek\Kinemathek::filterByFacets(
+                Kinemathek\Kinemathek::program(['categories' => $categories ?: null]),
+                $presetFacets,
+                $lang
+            );
+        },
+
+        /**
          * Stable, globally-unique UID for an ICS VEVENT — anchored on the page
          * UUID (falls back to id) so re-downloading an edited screening updates
          * the existing calendar entry instead of duplicating it.

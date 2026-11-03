@@ -1292,6 +1292,18 @@ body {
   color: var(--ink-soft);
   line-height: 1.4;
 }
+/* Vermerk über den Bereichsseiten ohne kommende Termine (zweite Gruppe des
+   Snippets): Hairline + kleine Versalzeile, wie ein Rubrikkopf im Blatt. */
+.subpage-idle-note {
+  margin: .8rem 0 0;
+  padding-top: .5rem;
+  border-top: 1px solid var(--line);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
 
 .custom-page { padding-block: 1.2rem; }
 .custom-bare { padding: 0; }

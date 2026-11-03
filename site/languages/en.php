@@ -120,6 +120,7 @@ return [
         'kinemathek.mb.legend.foyer'     => 'Held in the Foyer',
         'kinemathek.mb.legend.unterwegs' => 'open air & other venues',
         'kinemathek.mb.collection.none'  => 'Nothing scheduled right now — as soon as something is coming up, the programme appears here automatically.',
+        'kinemathek.mb.subpages.idle'    => 'Nothing scheduled at the moment',
         'kinemathek.mb.reihen'           => 'Current series',
         'kinemathek.mb.showProgram'      => 'Show programme',
         'kinemathek.venue.unterwegs'     => 'Out & about',
