@@ -1038,7 +1038,7 @@ body {
   gap: 1.2rem 2.4rem;
   align-items: start;
 }
-@media (max-width: 720px) { .fp-head { grid-template-columns: 1fr; } .fp-poster { order: -1; max-width: 14rem; } }
+@media (max-width: 720px) { .fp-head { grid-template-columns: 1fr; } .fp-poster { order: -1; max-width: 14rem; justify-self: center; } }
 .fp-title {
   margin: .1rem 0 .25rem;
   font-size: clamp(1.8rem, 3.6vw, 2.6rem);
