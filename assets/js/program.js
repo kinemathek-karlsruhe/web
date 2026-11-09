@@ -236,8 +236,13 @@
 
     function layoutColumns() {
       if (days.length === 0 || !program.isConnected) return;
-      /* breakpoints must match the .program media queries in assets/css/index.css */
-      var n = window.innerWidth >= 1080 ? 3 : window.innerWidth >= 720 ? 2 : 1;
+      /* column count comes from the CSS (.program media queries, plus the
+         narrower .has-poster override in collection.php); the viewport
+         fallback only runs if the track list can't be read */
+      var tracks = getComputedStyle(program).gridTemplateColumns;
+      var n = tracks && tracks !== 'none' && tracks.indexOf('(') === -1
+        ? tracks.trim().split(/\s+/).length
+        : (window.innerWidth >= 1080 ? 3 : window.innerWidth >= 720 ? 2 : 1);
       if (pcols.length !== n) {
         pcols.forEach(function (c) { c.remove(); });
         pcols = [];

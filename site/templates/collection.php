@@ -4,8 +4,13 @@
  * upcoming program filtered to the page's categories (day-grouped, same
  * listing as the Spielplan), subpage links, optional closing text.
  *
- * Zwei-Spalten-Layout: Inhalt links (2/3), Bilder rechts (1/3) — aber nur,
- * wenn Bilder hochgeladen sind; sonst volle Breite wie bisher.
+ * Bilder-Layout, zwei Fälle — beide automatisch, ohne Panel-Schalter:
+ *  - mind. ein Bild „Groß" (Plakat/Foto): die Bildspalte (1/3) läuft ab dem
+ *    Intro NEBEN der ganzen Seite mit (Intro, Termine, Karten, Text links).
+ *    Ist es genau ein großes Bild ohne Logos, bleibt es beim Scrollen
+ *    stehen (sticky) — sonst könnte eine lange Bildspalte unerreichbar werden.
+ *  - nur kleine Bilder (Logo-Kacheln): Text + Logos erst unter den Terminen,
+ *    wie bisher. Ohne Bilder: alles volle Breite.
  *
  * @var \Kirby\Cms\Page $page
  * @var array  $days
@@ -14,6 +19,31 @@
  * @var bool   $configured  page is scoped by category and/or a pre-filter
  */
 $bilder = $page->bilder()->toFiles();
+$gross  = $bilder->filter(fn ($b) => $b->groesse()->value() === 'gross');
+$poster = $gross->count() > 0;
+$sticky = $gross->count() === 1 && $bilder->count() === 1;
+
+$bilderAside = function () use ($bilder, $sticky) { ?>
+    <aside class="tc-side<?= $sticky ? ' is-sticky' : '' ?>">
+      <?php foreach ($bilder as $bild): ?>
+        <?php $caption = $bild->alt()->or($bild->filename())->esc() ?>
+        <?php $isGross = $bild->groesse()->value() === 'gross' ?>
+        <figure class="tc-img<?= $isGross ? ' is-large' : '' ?>">
+          <?php if ($bild->link()->isNotEmpty()): /* eigener Link → öffnet die Adresse */ ?>
+            <a href="<?= $bild->link()->esc() ?>" rel="noopener noreferrer" target="_blank">
+          <?php else: /* kein Link → Lightbox */ ?>
+            <a href="<?= $bild->url() ?>" data-fancybox="collection-bilder" data-caption="<?= $caption ?>">
+          <?php endif ?>
+            <img
+              src="<?= $bild->resize($isGross ? 900 : 300)->url() ?>"
+              alt="<?= $caption ?>"
+              loading="lazy"
+            >
+          </a>
+        </figure>
+      <?php endforeach ?>
+    </aside>
+<?php };
 ?>
 <?php snippet('header', ['languageNav' => false]) ?>
 <style>
@@ -62,8 +92,21 @@ $bilder = $page->bilder()->toFiles();
   }
   .tc-img.is-large a { display: block; height: auto; }
   .tc-img.is-large img { width: 100%; max-height: none; }
+  /* Variante „Plakat": Bildspalte neben der ganzen Seite */
+  .two-cols.has-poster { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); }
+  .has-poster .tc-side { margin-top: 1.4rem; }   /* auf Höhe des Intro-Texts */
+  .has-poster .tc-side.is-sticky { position: sticky; top: 1rem; }
+  .has-poster .tc-side.is-sticky .tc-img.is-large img {
+    width: auto;
+    max-width: 100%;
+    max-height: calc(100vh - 2rem);   /* hohe Plakate passen ganz ins Fenster */
+  }
+  /* die Termine teilen sich nur 2/3 der Breite → eine Spalte weniger */
+  @media (min-width: 720px)  { .has-poster .program { grid-template-columns: 1fr; } }
+  @media (min-width: 1080px) { .has-poster .program { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 720px) {
-    .two-cols { grid-template-columns: 1fr; }
+    .two-cols, .two-cols.has-poster { grid-template-columns: 1fr; }
+    .has-poster .tc-side.is-sticky { position: static; }
   }
 </style>
 <div class="sheet">
@@ -72,7 +115,10 @@ $bilder = $page->bilder()->toFiles();
 
   <div id="pivot-content">
 
-  <?php /* ── Oberer Teil: ganzspaltig ──────────────────────────────── */ ?>
+  <?php if ($poster): /* ── Plakat: Bildspalte läuft ab hier neben allem mit ── */ ?>
+  <div class="two-cols has-poster">
+  <div class="tc-main">
+  <?php endif ?>
 
   <article class="text-page collection-intro">
     <?php if ($page->intro()->isNotEmpty()): ?>
@@ -95,9 +141,17 @@ $bilder = $page->bilder()->toFiles();
       'label' => $page->title()->value(),
   ]) ?>
 
-  <?php /* ── Ab hier: Text links, Bilder rechts (nur wenn Bilder da) ── */ ?>
+  <?php if ($poster): ?>
+    <?php if ($page->text()->isNotEmpty()): ?>
+      <article class="text-page">
+        <div class="prose-mb"><?= $page->text()->kt() ?></div>
+      </article>
+    <?php endif ?>
+  </div><?php /* /.tc-main */ ?>
+  <?php $bilderAside() ?>
+  </div><?php /* /.two-cols.has-poster */ ?>
 
-  <?php if ($bilder->count() > 0): ?>
+  <?php elseif ($bilder->count() > 0): /* nur Logos → Text links, Logos rechts, unter den Terminen */ ?>
   <div class="two-cols">
     <div class="tc-main">
       <?php if ($page->text()->isNotEmpty()): ?>
@@ -106,25 +160,7 @@ $bilder = $page->bilder()->toFiles();
         </article>
       <?php endif ?>
     </div><?php /* /.tc-main */ ?>
-    <aside class="tc-side">
-      <?php foreach ($bilder as $bild): ?>
-        <?php $caption = $bild->alt()->or($bild->filename())->esc() ?>
-        <?php $gross = $bild->groesse()->value() === 'gross' ?>
-        <figure class="tc-img<?= $gross ? ' is-large' : '' ?>">
-          <?php if ($bild->link()->isNotEmpty()): /* eigener Link → öffnet die Adresse */ ?>
-            <a href="<?= $bild->link()->esc() ?>" rel="noopener noreferrer" target="_blank">
-          <?php else: /* kein Link → Lightbox */ ?>
-            <a href="<?= $bild->url() ?>" data-fancybox="collection-bilder" data-caption="<?= $caption ?>">
-          <?php endif ?>
-            <img
-              src="<?= $bild->resize($gross ? 900 : 300)->url() ?>"
-              alt="<?= $caption ?>"
-              loading="lazy"
-            >
-          </a>
-        </figure>
-      <?php endforeach ?>
-    </aside>
+    <?php $bilderAside() ?>
   </div><?php /* /.two-cols */ ?>
   <?php elseif ($page->text()->isNotEmpty()): /* keine Bilder → Text ganzspaltig */ ?>
     <article class="text-page">

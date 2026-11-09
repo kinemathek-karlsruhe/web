@@ -58,6 +58,14 @@ im Programm hat, stehen in einer zweiten Gruppe unter „Aktuell keine Termine"
 eingegrenzt → bleibt oben). Der Seiten-Cache läuft um Mitternacht ab, so rutscht eine Reihe
 am Tag nach ihrem letzten Termin ohne Panel-Edit nach unten.
 
+**Bereichsseite mit Plakat** — hat eine Bereichsseite (`collection.php`) mindestens ein
+`bilder`-Bild mit `groesse: gross`, läuft die Bildspalte (1/3) ab dem Intro neben der GANZEN
+Seite mit (Intro, Termine, Karten, Text links; die Tagesliste hat dort eine Spalte weniger).
+Genau ein großes Bild ohne Logos → sticky, auf Fensterhöhe begrenzt; sonst nicht sticky,
+weil eine lange Bildspalte unerreichbar würde. Nur Logo-Kacheln → altes Layout (Text + Logos
+unter den Terminen). `program.js` liest die Spaltenzahl der Tagesliste aus dem berechneten
+`grid-template-columns` — Spalten-Overrides also nur in CSS ändern, nie zusätzlich im JS.
+
 **Reihe → Bereichsseite** — der Link von Film, Vorstellung und Event entsteht automatisch,
 ohne gespeicherte Relation: `Kinemathek::seriesPage()` sucht die Bereichsseite, deren
 `filterSeries` (vorrangig) oder `filterKeywords` den Reihennamen trägt. Bei mehreren Treffern

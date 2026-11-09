@@ -610,7 +610,7 @@ body {
   gap: 0 2.4rem;
   padding-block: 1.1rem 1.6rem;
 }
-/* breakpoints must match layoutColumns() in assets/js/program.js */
+/* layoutColumns() in assets/js/program.js reads the column count from here */
 @media (min-width: 720px)  { .program { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 1080px) { .program { grid-template-columns: repeat(3, 1fr); } }
 .pcol { min-width: 0; }
