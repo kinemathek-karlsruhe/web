@@ -100,6 +100,7 @@ $bilderAside = function () use ($bilder, $sticky) { ?>
     width: auto;
     max-width: 100%;
     max-height: calc(100vh - 2rem);   /* hohe Plakate passen ganz ins Fenster */
+    margin-inline: auto;              /* schmaler als die Spalte → mittig */
   }
   /* die Termine teilen sich nur 2/3 der Breite → eine Spalte weniger */
   @media (min-width: 720px)  { .has-poster .program { grid-template-columns: 1fr; } }
