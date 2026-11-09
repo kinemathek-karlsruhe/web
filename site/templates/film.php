@@ -145,8 +145,17 @@ $showRow = function (\Kirby\Cms\Page $showing, bool $clickable) use ($markMap) {
     </div>
 
     <?php $stills = $page->stills()->toFiles() ?>
-    <?php if ($stills->count() > 0): ?>
-      <ul class="fp-stills">
+    <?php if ($stills->count() > 0 || $poster): ?>
+      <?php /* on phones the poster leaves the head and joins the stills as
+               their first image (.fp-stills-poster, hidden on the desktop) */ ?>
+      <ul class="fp-stills<?= $stills->count() === 0 ? ' is-poster-only' : '' ?>">
+        <?php if ($poster): ?>
+          <li class="fp-stills-poster">
+            <a href="<?= $poster->url() ?>" data-fancybox="film-stills" data-caption="<?= html($page->title()) ?>">
+              <img src="<?= $poster->resize(560)->url() ?>" alt="<?= $poster->alt()->or($page->title())->esc() ?>" loading="lazy">
+            </a>
+          </li>
+        <?php endif ?>
         <?php foreach ($stills as $still): ?>
           <li>
             <a href="<?= $still->url() ?>" data-fancybox="film-stills" data-caption="<?= html($still->caption()) ?>">
