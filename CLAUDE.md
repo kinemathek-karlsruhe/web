@@ -285,6 +285,11 @@ Facet routing (`Kinemathek::FACETS`): `country/language/genre/series` → on the
   per-request `$showingsCache` memo.
 
 **Asset pipeline**
+- **Every local `css()`/`js()` URL gets `?v={mtime}`** (the `css`/`js` components in
+  `kinemathek/core`). The server sends no `Cache-Control` for `/assets`, so browsers cache
+  heuristically for days — without the version a deploy showed new HTML with stale CSS.
+  Always include assets via `css()`/`js()`, never a hand-written `<link>`/`<script>`. The
+  cached HTML carries the old `?v`, so the page cache must still be flushed after a deploy.
 - Tailwind v4 uses `@import "tailwindcss" source(none)` + `@source "../../site"` **on purpose**
   — automatic detection would scan the committed `kirby/` core. If classes start living outside
   `site/`, add another `@source`.

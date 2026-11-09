@@ -34,7 +34,27 @@ load([
     'Kinemathek\\EventPage'       => __DIR__ . '/models/EventPage.php',
 ]);
 
+/**
+ * Cache-busting for our own assets: every css()/js() call for a local file
+ * gets `?v={mtime}`. The server sends no Cache-Control for /assets, so
+ * browsers cache heuristically — for days on a long-unchanged file — and a
+ * deploy that changes HTML + CSS together showed new markup with stale CSS
+ * (2026-11: synopsis pushed below the poster on the film page).
+ */
+$versionAsset = function (App $kirby, string $url): string {
+    if (preg_match('#^(https?:)?//#', $url) === 1 || str_contains($url, '?')) {
+        return $url;
+    }
+    $file = $kirby->root('index') . '/' . ltrim($url, '/');
+    return is_file($file) ? $url . '?v=' . filemtime($file) : $url;
+};
+
 App::plugin('kinemathek/core', [
+
+    'components' => [
+        'css' => fn (App $kirby, string $url, $options = null): string => $versionAsset($kirby, $url),
+        'js'  => fn (App $kirby, string $url, $options = null): string => $versionAsset($kirby, $url),
+    ],
 
     // Behaviour intrinsic to each content type lives on its model.
     'pageModels' => [
