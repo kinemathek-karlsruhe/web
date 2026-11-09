@@ -1032,13 +1032,24 @@ body {
 .backlink:hover { text-decoration: underline; text-underline-offset: .18em; }
 
 .film-page { padding-block: 1.2rem .4rem; }
+/* desktop: title block + synopsis left, poster spans both rows on the right
+   (the 1fr row soaks up a tall poster, so the synopsis stays right under the
+   title block); phone: title block → poster → synopsis, in source order */
 .fp-head {
   display: grid;
   grid-template-columns: 1fr minmax(11rem, 16rem);
-  gap: 1.2rem 2.4rem;
+  grid-template-rows: auto 1fr;
+  gap: 0 2.4rem;
   align-items: start;
 }
-@media (max-width: 720px) { .fp-head { grid-template-columns: 1fr; } .fp-poster { order: -1; max-width: 14rem; justify-self: center; } }
+.fp-text   { grid-column: 1; grid-row: 1; }
+.fp-syn    { grid-column: 1; grid-row: 2; }
+.fp-poster { grid-column: 2; grid-row: 1 / span 2; }
+@media (max-width: 720px) {
+  .fp-head { grid-template-columns: 1fr; grid-template-rows: none; row-gap: 1.2rem; }
+  .fp-text, .fp-syn, .fp-poster { grid-column: auto; grid-row: auto; }
+  .fp-poster { max-width: 14rem; justify-self: center; }
+}
 .fp-title {
   margin: .1rem 0 .25rem;
   font-size: clamp(1.8rem, 3.6vw, 2.6rem);

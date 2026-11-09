@@ -129,9 +129,6 @@ $showRow = function (\Kirby\Cms\Page $showing, bool $clickable) use ($markMap) {
             <a href="<?= $target->url() ?>"><?= html($target->title()) ?></a>
           </p>
         <?php endforeach ?>
-        <?php if ($page->synopsis()->isNotEmpty()): ?>
-          <div class="fp-syn"><?= $page->synopsis()->kt() ?></div>
-        <?php endif ?>
       </div>
       <?php if ($poster = $page->posterFile()): ?>
         <figure class="fp-poster">
@@ -139,6 +136,11 @@ $showRow = function (\Kirby\Cms\Page $showing, bool $clickable) use ($markMap) {
             <img src="<?= $poster->resize(560)->url() ?>" alt="<?= $poster->alt()->or($page->title())->esc() ?>">
           </a>
         </figure>
+      <?php endif ?>
+      <?php /* outside .fp-text on purpose: on phones the poster sits between
+               the title block and the synopsis (grid areas in index.css) */ ?>
+      <?php if ($page->synopsis()->isNotEmpty()): ?>
+        <div class="fp-syn"><?= $page->synopsis()->kt() ?></div>
       <?php endif ?>
     </div>
 
